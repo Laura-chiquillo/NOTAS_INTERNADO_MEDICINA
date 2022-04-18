@@ -5,29 +5,36 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.Getter;
 import lombok.Setter;
 
-@Document("Admin")
+@Document("Estudiante")
 @Getter @Setter // para no tener que colocar los getters and setters
-public class Admin {
+public class Estudiante {
 
         @Id
-        private String idAdmin;
+        private String idEstudiante;
+        private String foto;
         private String primerNombre;
         private String segundoNombre;
         private String primerApellido;
         private String segundoApellido;
+        private String semestre;
         private String correo;
-        private String contraseña;
+        private String idInstitucion;
+        private String estado;
         
 
-    public Admin(String idAdmin, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido, String correo, String contraseña) {
-        this.idAdmin = idAdmin;
+    public Estudiante(String idEstudiante, String foto, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido, String semestre, String correo, String idInstitucion, String estado) {
+        this.idEstudiante = idEstudiante;
+        this.foto = foto;
         this.primerNombre = primerNombre;
         this.segundoNombre = segundoNombre;
         this.primerApellido = primerApellido;
         this.segundoApellido = segundoApellido;
+        this.semestre = semestre;
         this.correo = correo;
-        this.contraseña = contraseña;
+        this.idInstitucion = idInstitucion;
+        this.estado = estado;
     }
     
         
 }
+
