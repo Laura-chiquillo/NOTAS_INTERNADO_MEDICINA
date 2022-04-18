@@ -10,6 +10,7 @@ import lombok.Setter;
 public class CoordinadorInsti {
 
     @Id
+    
     private String idCoordinador;
     private String primerNombre;
     private String segundoNombre;
