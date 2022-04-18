@@ -10,7 +10,7 @@ import lombok.Setter;
 public class CoordinadorInsti {
 
     @Id
-    
+
     private String idCoordinador;
     private String primerNombre;
     private String segundoNombre;
@@ -26,7 +26,7 @@ public class CoordinadorInsti {
         this.segundoNombre = segundoNombre;
         this.primerApellido = primerApellido;
         this.segundoApellido = segundoApellido;
-        this.idInstitucion = idInstitucion
+        this.idInstitucion = idInstitucion;
         this.correo = correo;
         this.contraseña = contraseña;
     }
