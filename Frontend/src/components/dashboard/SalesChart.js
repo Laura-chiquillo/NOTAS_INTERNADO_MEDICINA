@@ -27,7 +27,7 @@ const Forms = () => {
           <CardBody>
             <Form>
               <FormGroup>
-                <Label for="exampleEmail">Correo Electrónico</Label>
+                <Label for="exampleEmail">Correo Electrnico</Label>
                 <Input
                   id="exampleEmail"
                   name="email"
