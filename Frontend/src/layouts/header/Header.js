@@ -55,17 +55,17 @@ const Header = ({ showMobmenu }) => {
         <Nav className="me-auto" navbar>
           <NavItem>
             <Link href="/">
-              <a className="nav-link">Starter</a>
+              <a className="nav-link">Inicio de sesion</a>
             </Link>
           </NavItem>
           <NavItem>
             <Link href="/about">
-              <a className="nav-link">About</a>
+              <a className="nav-link">Lista de estudiantes</a>
             </Link>
           </NavItem>
           <UncontrolledDropdown inNavbar nav>
             <DropdownToggle caret nav>
-              DD Menu
+              Lista de Hospitales
             </DropdownToggle>
             <DropdownMenu end>
               <DropdownItem>Option 1</DropdownItem>
