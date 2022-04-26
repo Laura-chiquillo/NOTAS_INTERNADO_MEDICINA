@@ -1,84 +1,56 @@
-import { Card, CardBody, CardSubtitle, CardTitle } from "reactstrap";
-import dynamic from "next/dynamic";
+import {
+  Card,
+  Row,
+  Col,
+  CardTitle,
+  CardBody,
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  FormText,
+} from 'reactstrap';
 
-const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
-
-const SalesChart = () => {
-  const options = {
-    chart: {
-      toolbar: {
-        show: false,
-      },
-      stacked: false,
-    },
-    dataLabels: {
-      enabled: false,
-    },
-    stroke: {
-      show: true,
-      width: 4,
-      colors: ["transparent"],
-    },
-    legend: {
-      show: true,
-    },
-    plotOptions: {
-      bar: {
-        horizontal: false,
-        columnWidth: "30%",
-        borderRadius: 2,
-      },
-    },
-    colors: ["#0d6efd", "#009efb", "#6771dc"],
-    xaxis: {
-      categories: [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-      ],
-    },
-    responsive: [
-      {
-        breakpoint: 1024,
-        options: {
-          plotOptions: {
-            bar: {
-              columnWidth: "30%",
-              borderRadius: 7,
-            },
-          },
-        },
-      },
-    ],
-  };
-  const series = [
-    {
-      name: "2020",
-      data: [20, 40, 50, 30, 40, 50, 30, 30, 40],
-    },
-    {
-      name: "2022",
-      data: [10, 20, 40, 60, 20, 40, 60, 60, 20],
-    },
-  ];
-
+const Forms = () => {
   return (
-    <Card>
-      <CardBody>
-        <CardTitle tag="h5">Sales Summary</CardTitle>
-        <CardSubtitle className="text-muted" tag="h6">
-          Yearly Sales Report
-        </CardSubtitle>
-        <Chart options={options} series={series} type="bar" height="379" />
-      </CardBody>
-    </Card>
+    <Row>
+      <Col>
+        {/* --------------------------------------------------------------------------------*/}
+        {/* Card-1*/}
+        {/* --------------------------------------------------------------------------------*/}
+        <Card>
+          <CardTitle tag="h6" className="border-bottom p-3 mb-0">
+            <i className="bi bi-bell me-2"> </i>
+            Ingresar sesion
+              </CardTitle>
+          <CardBody>
+            <Form>
+              <FormGroup>
+                <Label for="exampleEmail">Correo Electrnico</Label>
+                <Input
+                  id="exampleEmail"
+                  name="email"
+                  placeholder="Ingrese correo"
+                  type="email"
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="examplePassword">Contraseña</Label>
+                <Input
+                  id="examplePassword"
+                  name="password"
+                  placeholder="ingrese contraseña"
+                  type="password"
+                />
+              </FormGroup>          
+              <Button>Ingresar</Button>
+            </Form>
+          </CardBody>
+        </Card>
+      </Col>
+    </Row>
   );
 };
 
-export default SalesChart;
+export default Forms;

@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 import FullLayoutClient from "../src/layouts/FullLayoutClient";
 import Head from "next/head"
+=======
+import Head from "next/head";
+>>>>>>> Farid
 import "../styles/style.scss";
 
 const layouts = {
@@ -21,10 +25,14 @@ function MyApp({ Component, pageProps }) {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+<<<<<<< HEAD
 
       <Layout>
         <Component {...pageProps} />
       </Layout>
+=======
+      <Component {...pageProps} />
+>>>>>>> Farid
     </>
   );
 }
