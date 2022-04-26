@@ -54,26 +54,15 @@ const Header = ({ showMobmenu }) => {
       <Collapse navbar isOpen={isOpen}>
         <Nav className="me-auto" navbar>
           <NavItem>
-            <Link href="/">
-              <a className="nav-link">Inicio de sesion</a>
-            </Link>
-          </NavItem>
-          <NavItem>
-            <Link href="/about">
+            <Link href="/ui/estudiantes">
               <a className="nav-link">Lista de estudiantes</a>
             </Link>
           </NavItem>
-          <UncontrolledDropdown inNavbar nav>
-            <DropdownToggle caret nav>
-              Lista de Hospitales
-            </DropdownToggle>
-            <DropdownMenu end>
-              <DropdownItem>Option 1</DropdownItem>
-              <DropdownItem>Option 2</DropdownItem>
-              <DropdownItem divider />
-              <DropdownItem>Reset</DropdownItem>
-            </DropdownMenu>
-          </UncontrolledDropdown>
+          <NavItem>
+            <Link href="/ui/hospitales">
+              <a className="nav-link">Lista de hospitales</a>
+            </Link>
+          </NavItem>
         </Nav>
         <Dropdown isOpen={dropdownOpen} toggle={toggle}>
           <DropdownToggle color="primary">
@@ -88,18 +77,15 @@ const Header = ({ showMobmenu }) => {
             </div>
           </DropdownToggle>
           <DropdownMenu>
-            <DropdownItem header>Info</DropdownItem>
-            <DropdownItem>My Account</DropdownItem>
-            <DropdownItem>Edit Profile</DropdownItem>
-            <DropdownItem divider />
-            <DropdownItem>My Balance</DropdownItem>
-            <DropdownItem>Inbox</DropdownItem>
-            <DropdownItem>Logout</DropdownItem>
+            <DropdownItem header><Link href="/ui/login">cerrar sesión</Link></DropdownItem>
+            
           </DropdownMenu>
         </Dropdown>
       </Collapse>
     </Navbar>
   );
 };
+
+
 
 export default Header;

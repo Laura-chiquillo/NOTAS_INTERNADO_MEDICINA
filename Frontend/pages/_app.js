@@ -1,21 +1,15 @@
-<<<<<<< HEAD
-import FullLayoutClient from "../src/layouts/FullLayoutClient";
-import Head from "next/head"
-=======
 import Head from "next/head";
->>>>>>> Farid
 import "../styles/style.scss";
+import FullLayoutClient from "../src/layouts/FullLayoutClient";
 
 const layouts = {
-  'ClientLayout' : FullLayoutClient,
-  // 'AdminLayout' : En caso de que quieran un layout diferente
+  "MenuLayout" : FullLayoutClient
 }
+
 
 function MyApp({ Component, pageProps }) {
 
   const Layout = layouts[Component.layout] || (({children}) => <>{children}</>)
-  if (Component.layout != undefined) {
-
 
   return (
     <>
@@ -27,14 +21,9 @@ function MyApp({ Component, pageProps }) {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-<<<<<<< HEAD
-
       <Layout>
-        <Component {...props}/>
+        <Component {...pageProps}/>
       </Layout>
-=======
-      <Component {...pageProps} />
->>>>>>> Farid
     </>
   );
 }

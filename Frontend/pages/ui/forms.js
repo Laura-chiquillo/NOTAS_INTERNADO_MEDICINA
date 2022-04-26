@@ -40,5 +40,5 @@ const About = () => {
     </Row>
   );
 };
-
+About.layout = "MenuLayout"
 export default About;
