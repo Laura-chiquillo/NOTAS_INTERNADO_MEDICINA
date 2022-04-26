@@ -1,8 +1,16 @@
-import FullLayout from "../src/layouts/FullLayout";
-import Head from "next/head";
+import FullLayoutClient from "../src/layouts/FullLayoutClient";
+import Head from "next/head"
 import "../styles/style.scss";
 
+const layouts = {
+  'ClientLayout' : FullLayoutClient,
+  // 'AdminLayout' : En caso de que quieran un layout diferente
+}
+
 function MyApp({ Component, pageProps }) {
+
+  const Layout = layouts[Component.layout] || (({children}) => <>{children}</>)
+
   return (
     <>
       <Head>
@@ -14,9 +22,9 @@ function MyApp({ Component, pageProps }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <FullLayout>
+      <Layout>
         <Component {...pageProps} />
-      </FullLayout>
+      </Layout>
     </>
   );
 }

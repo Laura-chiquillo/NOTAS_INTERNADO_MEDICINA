@@ -127,5 +127,6 @@ const Grid = () => {
     </div>
   );
 };
+Grid.layout = 'ClientLayout'
 
 export default Grid;
