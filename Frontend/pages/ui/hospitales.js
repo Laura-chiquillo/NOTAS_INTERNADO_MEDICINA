@@ -39,20 +39,17 @@ const Buttons = () => {
             <CardTitle tag="h6" className="border-bottom p-0 mb-0">
               
             </CardTitle>
+            <Link href={'/ui/estudiantes'}><Button className="btn" color="primary">
+                  Lista estudiantes
+                </Button></Link>
+                <Link href={'/ui/hospitales'}><Button className="btn" color="primary">
+                  Lista hospitales
+                </Button></Link>
             <CardBody className="">
               <div className="button-group">
-              <Link href={'/ui/forms'}><Button className="btn" color="primary">
-                  +
-                </Button></Link>
-                <FormText>
-                  Agregar estudiantes
-                  </FormText>
+              
                   <input placeholder='Buscar'></input>
-                <Button className="btn btn-success btn-sm" color="danger"><FormGroup check>
-                Eliminar                
-                <Input type="checkbox" /> <Label check></Label>
-              </FormGroup>
-              </Button>
+            
                 <FormGroup>
                 <Label for="exampleSelect"></Label>
                 <Input id="exampleSelect" name="select" type="select">

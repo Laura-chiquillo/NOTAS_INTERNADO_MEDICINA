@@ -43,7 +43,7 @@ import {
                     type="password"
                   />
                 </FormGroup>          
-                <Link href={'/ui/buttons'}><Button>Ingresar</Button></Link>
+                <Link href={'/ui/estudiantes'}><Button>Ingresar</Button></Link>
               </Form>
             </CardBody>
           </Card>
