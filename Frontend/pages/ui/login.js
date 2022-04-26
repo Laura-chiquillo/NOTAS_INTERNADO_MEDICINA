@@ -12,7 +12,8 @@ import {
     Input,
     FormText,
   } from 'reactstrap';
-  
+ import Link from 'next/link';
+
   const Forms = () => {
     return (
       <Row> 
@@ -42,8 +43,7 @@ import {
                     type="password"
                   />
                 </FormGroup>          
-                
-                <Button onclick = './ui/forms.js'>Ingresar</Button>
+                <Link href={'/ui/forms'}><Button>Ingresar</Button></Link>
               </Form>
             </CardBody>
           </Card>
