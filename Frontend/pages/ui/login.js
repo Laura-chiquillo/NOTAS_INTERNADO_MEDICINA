@@ -1,3 +1,4 @@
+
 import {
     Card,
     Row,
@@ -28,7 +29,7 @@ import {
                   <Input
                     id="exampleEmail"
                     name="email"
-                    placeholder="with a placeholder"
+                    placeholder="Introducir correo"
                     type="email"
                   />
                 </FormGroup>
@@ -37,11 +38,12 @@ import {
                   <Input
                     id="examplePassword"
                     name="password"
-                    placeholder="password placeholder"
+                    placeholder="Introducir contraseña"
                     type="password"
                   />
                 </FormGroup>          
-                <Button>Ingresar</Button>
+                
+                <Button onclick = './ui/forms.js'>Ingresar</Button>
               </Form>
             </CardBody>
           </Card>
