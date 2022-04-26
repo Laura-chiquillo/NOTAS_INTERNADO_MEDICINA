@@ -14,6 +14,8 @@ const layouts = {
 function MyApp({ Component, pageProps }) {
 
   const Layout = layouts[Component.layout] || (({children}) => <>{children}</>)
+  if (Component.layout != undefined) {
+
 
   return (
     <>
@@ -28,7 +30,7 @@ function MyApp({ Component, pageProps }) {
 <<<<<<< HEAD
 
       <Layout>
-        <Component {...pageProps} />
+        <Component {...props}/>
       </Layout>
 =======
       <Component {...pageProps} />
