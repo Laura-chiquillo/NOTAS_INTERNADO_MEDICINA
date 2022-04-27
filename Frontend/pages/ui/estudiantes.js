@@ -45,8 +45,8 @@ const Buttons = () => {
                   +
                 </Button></Link>
                 <FormText>
-                  Agregar estudiantes
-                  </FormText>
+                  Agregar estudiantes 
+                  </FormText>&nbsp;
                   <input placeholder='Buscar'></input>
                 <Button className="btn btn-success btn-sm" color="danger">Eliminar</Button>
                 <FormGroup>
@@ -66,15 +66,15 @@ const Buttons = () => {
         </Col>
         <FormGroup>
                 <Label for="exampleText"></Label>
-                <textarea rows="13.5" cols="165" ></textarea>
+                <textarea rows="12" cols="154" ></textarea>
               </FormGroup>
        
-        <Col xs="12" md="6">
+        <Col xs="0" md="0">
           {/* --------------------------------------------------------------------------------*/}
           {/* Card-3*/}
           {/* --------------------------------------------------------------------------------*/}
           <Card>
-            <CardTitle tag="h6" className="border-bottom p-3 mb-0">
+            <CardTitle tag="h0" className="border-bottom p-0 mb-0">
             </CardTitle>
             <CardBody className="">
               <div className="button-group">

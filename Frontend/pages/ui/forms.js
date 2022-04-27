@@ -31,8 +31,7 @@ const About = () => {
             </Row>
             <Button className="btn" color="primary" >
                Ingresar Datos Estudiantes
-               <Input type="checkbox" /> <Label check></Label>
-               </Button>
+            </Button>
           </CardBody>
         </Card>
         
