@@ -1,23 +1,17 @@
 import {
   Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-  CardGroup,
-  Button,
   Row,
   Col,
-} from "reactstrap";
-import Blog from "../../src/components/dashboard/Blog";
-import bg1 from "../../src/assets/images/bg/bg1.jpg";
-import bg2 from "../../src/assets/images/bg/bg2.jpg";
-import bg3 from "../../src/assets/images/bg/bg3.jpg";
-import bg4 from "../../src/assets/images/bg/bg4.jpg";
-import Image from "next/image";
-
-
+  CardTitle,
+  CardBody,
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  FormText,
+} from 'reactstrap';
+import Link from 'next/link';
 const Registro = () => {
 
   return (
@@ -28,87 +22,89 @@ const Registro = () => {
         {/* --------------------------------------------------------------------------------*/}
         <Card>
           <CardTitle tag="h6" className="border-bottom p-3 mb-0">
-            <i className="bi bi-bell me-2"> </i>
-            Form Example
+            Registrar hospital
           </CardTitle>
           <CardBody>
             <Form>
               <FormGroup>
-                <Label for="exampleEmail">Email</Label>
+                <Label>IPS</Label>
                 <Input
-                  id="exampleEmail"
+                  type="text"
+                  id='IPS'
+                  name='ips'
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>Nombres</Label>
+                <div class="input-group">
+                  <Input
+                    type="text"
+                    id='Nombre1'
+                    name='nombre1'
+                  />
+                  <span class="input-group-addon">-</span>
+                  <Input
+                    type="text"
+                    id='Nombre2'
+                    name='nombre2'
+                  />
+                </div>
+              </FormGroup>
+              <FormGroup>
+                <Label>Apellidos</Label>
+                <div class="input-group">
+                  <Input
+                    type="text"
+                    id='Apellido1'
+                    name='apellido1'
+                  />
+                  <span class="input-group-addon">-</span>
+                  <Input
+                    type="text"
+                    id='Apellido2'
+                    name='Apellido2'
+                  />
+                </div>
+              </FormGroup>
+              <FormGroup>
+                <Label>Teléfono</Label>
+                <Input
+                  id="Telefono"
+                  name="telefono"
+                  type="number"
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="eEmail">Correo</Label>
+                <Input
+                  id="Email"
                   name="email"
-                  placeholder="with a placeholder"
                   type="email"
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="examplePassword">Password</Label>
+                <Label>Cargo</Label>
                 <Input
-                  id="examplePassword"
-                  name="password"
-                  placeholder="password placeholder"
-                  type="password"
+                  type="text"
+                  id='Cargo'
+                  name='Cargo'
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="exampleSelect">Select</Label>
-                <Input id="exampleSelect" name="select" type="select">
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                </Input>
+                <Label>Dirección</Label>
+                <Input
+                  type="text"
+                  id='direcion'
+                  name='direccion'
+                />
               </FormGroup>
-              <FormGroup>
-                <Label for="exampleSelectMulti">Select Multiple</Label>
-                <Input id="exampleSelectMulti" multiple name="selectMulti" type="select">
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                </Input>
-              </FormGroup>
-              <FormGroup>
-                <Label for="exampleText">Text Area</Label>
-                <Input id="exampleText" name="text" type="textarea" />
-              </FormGroup>
-              <FormGroup>
-                <Label for="exampleFile">File</Label>
-                <Input id="exampleFile" name="file" type="file" />
-                <FormText>
-                  This is some placeholder block-level help text for the above input. Its a bit
-                  lighter and easily wraps to a new line.
-                </FormText>
-              </FormGroup>
-              <FormGroup tag="fieldset">
-                <legend>Radio Buttons</legend>
-                <FormGroup check>
-                  <Input name="radio1" type="radio" />{' '}
-                  <Label check>Option one is this and that—be sure to include why its great</Label>
-                </FormGroup>
-                <FormGroup check>
-                  <Input name="radio1" type="radio" />{' '}
-                  <Label check>
-                    Option two can be something else and selecting it will deselect option one
-                  </Label>
-                </FormGroup>
-                <FormGroup check disabled>
-                  <Input disabled name="radio1" type="radio" />{' '}
-                  <Label check>Option three is disabled</Label>
-                </FormGroup>
-              </FormGroup>
-              <FormGroup check>
-                <Input type="checkbox" /> <Label check>Check me out</Label>
-              </FormGroup>
-              <Button>Submit</Button>
+              <Link href={'/ui/hospitales'}><Button>Guardar</Button></Link>
             </Form>
           </CardBody>
         </Card>
       </Col>
     </Row>
-  )};
+  )
+};
 Registro.layout = "MenuLayout"
 export default Registro;
