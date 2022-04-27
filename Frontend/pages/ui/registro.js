@@ -1,28 +1,110 @@
 import {
   Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-  CardGroup,
-  Button,
   Row,
   Col,
-} from "reactstrap";
-import Blog from "../../src/components/dashboard/Blog";
-import bg1 from "../../src/assets/images/bg/bg1.jpg";
-import bg2 from "../../src/assets/images/bg/bg2.jpg";
-import bg3 from "../../src/assets/images/bg/bg3.jpg";
-import bg4 from "../../src/assets/images/bg/bg4.jpg";
-import Image from "next/image";
-
-
+  CardTitle,
+  CardBody,
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  FormText,
+} from 'reactstrap';
+import Link from 'next/link';
 const Registro = () => {
 
   return (
-    <></>
-  );
+    <Row>
+      <Col>
+        {/* --------------------------------------------------------------------------------*/}
+        {/* Card-1*/}
+        {/* --------------------------------------------------------------------------------*/}
+        <Card>
+          <CardTitle tag="h6" className="border-bottom p-3 mb-0">
+            Registrar hospital
+          </CardTitle>
+          <CardBody>
+            <Form>
+              <FormGroup>
+                <Label>IPS</Label>
+                <Input
+                  type="text"
+                  id='IPS'
+                  name='ips'
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>Nombres</Label>
+                <div class="input-group">
+                  <Input
+                    type="text"
+                    id='Nombre1'
+                    name='nombre1'
+                  />
+                  <span class="input-group-addon">-</span>
+                  <Input
+                    type="text"
+                    id='Nombre2'
+                    name='nombre2'
+                  />
+                </div>
+              </FormGroup>
+              <FormGroup>
+                <Label>Apellidos</Label>
+                <div class="input-group">
+                  <Input
+                    type="text"
+                    id='Apellido1'
+                    name='apellido1'
+                  />
+                  <span class="input-group-addon">-</span>
+                  <Input
+                    type="text"
+                    id='Apellido2'
+                    name='Apellido2'
+                  />
+                </div>
+              </FormGroup>
+              <FormGroup>
+                <Label>Teléfono</Label>
+                <Input
+                  id="Telefono"
+                  name="telefono"
+                  type="number"
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="eEmail">Correo</Label>
+                <Input
+                  id="Email"
+                  name="email"
+                  type="email"
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>Cargo</Label>
+                <Input
+                  type="text"
+                  id='Cargo'
+                  name='Cargo'
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>Dirección</Label>
+                <Input
+                  type="text"
+                  id='direcion'
+                  name='direccion'
+                />
+              </FormGroup>
+              <Link href={'/ui/hospitales'}><Button>Guardar</Button></Link>
+            </Form>
+          </CardBody>
+        </Card>
+      </Col>
+    </Row>
+  )
 };
 Registro.layout = "MenuLayout"
 export default Registro;
