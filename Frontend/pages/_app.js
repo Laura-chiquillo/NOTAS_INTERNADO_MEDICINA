@@ -1,7 +1,16 @@
 import Head from "next/head";
 import "../styles/style.scss";
+import FullLayoutClient from "../src/layouts/FullLayoutClient";
+
+const layouts = {
+  "MenuLayout" : FullLayoutClient
+}
+
 
 function MyApp({ Component, pageProps }) {
+
+  const Layout = layouts[Component.layout] || (({children}) => <>{children}</>)
+
   return (
     <>
       <Head>
@@ -12,7 +21,9 @@ function MyApp({ Component, pageProps }) {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps}/>
+      </Layout>
     </>
   );
 }

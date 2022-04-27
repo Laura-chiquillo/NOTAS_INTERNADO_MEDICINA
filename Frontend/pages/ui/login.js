@@ -43,7 +43,7 @@ import {
                     type="password"
                   />
                 </FormGroup>          
-                <Link href={'/ui/forms'}><Button>Ingresar</Button></Link>
+                <Link href={'/ui/estudiantes'}><Button>Ingresar</Button></Link>
               </Form>
             </CardBody>
           </Card>
@@ -51,6 +51,7 @@ import {
       </Row>
     );
   };
+  
   
   export default Forms;
   
