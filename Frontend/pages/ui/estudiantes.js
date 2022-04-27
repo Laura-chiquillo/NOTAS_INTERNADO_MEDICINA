@@ -78,9 +78,7 @@ const Buttons = () => {
             </CardTitle>
             <CardBody className="">
               <div className="button-group">
-                <Button className="btn" color="primary" size="lg">
-                  Ver informes 
-                </Button>
+              <Link href={'/ui/ListaEstudiantes'}><Button  color="primary"size="lg">Ver informes</Button></Link>
                 <Button className="btn" color="secondary" size="lg">
                  Descargar lista
                 </Button>

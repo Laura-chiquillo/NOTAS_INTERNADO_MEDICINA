@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Button, ButtonGroup, Card,  FormText,FormGroup, Label,Input, CardBody, CardTitle, Row, Col } from 'reactstrap';
 import Link from 'next/link';
@@ -31,7 +32,8 @@ const Buttons = () => {
       {/* Row*/}
       {/* --------------------------------------------------------------------------------*/}
       <Row>
-        <Col xs="12" md="15">
+      
+          <Col xs="12" md="15">
           {/* --------------------------------------------------------------------------------*/}
           {/* Card-1*/}
           {/* --------------------------------------------------------------------------------*/}
@@ -39,18 +41,17 @@ const Buttons = () => {
             <CardTitle tag="h6" className="border-bottom p-0 mb-0">
               
             </CardTitle>
-            
             <CardBody className="">
-              <div className="button-group">    
-                <FormGroup>
-                <Link href={'/ui/registro'}><Button className="btn" color="primary">
+              <div className="button-group">
+              <Link href={'/ui/registro'}><Button className="btn" color="primary">
                   +
                 </Button></Link>
                 <FormText>
-                  Agregar Hospital
-                  </FormText>
+                  Agregar Hospitales 
+                  </FormText>&nbsp;
                   <input placeholder='Buscar'></input>
                 <Button className="btn btn-success btn-sm" color="danger">Eliminar</Button>
+                <FormGroup>
                 <Label for="exampleSelect"></Label>
                 <Input id="exampleSelect" name="select" type="select">
                   <option>Ordenar por</option>
@@ -67,15 +68,15 @@ const Buttons = () => {
         </Col>
         <FormGroup>
                 <Label for="exampleText"></Label>
-                <textarea rows="13.5" cols="165" ></textarea>
+                <textarea rows="12" cols="154" ></textarea>
               </FormGroup>
        
-        <Col xs="12" md="6">
+        <Col xs="0" md="0">
           {/* --------------------------------------------------------------------------------*/}
           {/* Card-3*/}
           {/* --------------------------------------------------------------------------------*/}
           <Card>
-            <CardTitle tag="h6" className="border-bottom p-3 mb-0">
+          <CardTitle tag="h0" className="border-bottom p-0 mb-0">
             </CardTitle>
             <CardBody className="">
               <div className="button-group">
@@ -91,9 +92,6 @@ const Buttons = () => {
         </Col>
        
              
-      
-        
-        
       </Row>
       {/* --------------------------------------------------------------------------------*/}
       {/* Row*/}
