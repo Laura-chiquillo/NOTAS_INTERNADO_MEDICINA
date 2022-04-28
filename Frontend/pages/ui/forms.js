@@ -12,7 +12,7 @@ import {
   FormText,
   CardSubtitle,
 } from "reactstrap";
-
+import Link from 'next/link';
 const About = () => {
   return (
     <Row>
@@ -29,10 +29,7 @@ const About = () => {
               <Input id="exampleFile" name="file" type="file" />
             </FormGroup>
             </Row>
-            <Button className="btn" color="primary" >
-               Ingresar Datos Estudiantes
-               <Input type="checkbox" /> <Label check></Label>
-               </Button>
+             <Link href={'/ui/registroEstudiantes'}><Button color="primary">Ingresar Datos Estudiantes</Button></Link>
           </CardBody>
         </Card>
         
