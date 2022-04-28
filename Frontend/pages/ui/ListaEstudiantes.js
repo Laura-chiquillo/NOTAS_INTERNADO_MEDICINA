@@ -8,7 +8,9 @@ import {
   ModalHeader,
   ModalBody,
   FormGroup,
+  Card,
   ModalFooter,
+  Row, Col,CardTitle, CardBody,
 } from "reactstrap";
 
 const data = [
@@ -146,11 +148,32 @@ class ListaEstudiantes extends React.Component {
                       Editar
                     </Button>{" "}
                     <Button color="danger" onClick={()=> this.eliminar(dato)}>Eliminar</Button>
+                    
                   </td>
                 </tr>
               ))}
             </tbody>
+            
           </Table>
+          <Col xs="0" md="0">
+          {/* --------------------------------------------------------------------------------*/}
+          {/* Card-3*/}
+          {/* --------------------------------------------------------------------------------*/}
+          <Card>
+          <CardTitle tag="h0" className="border-bottom p-0 mb-0">
+            </CardTitle>
+            <CardBody className="">
+              <div className="button-group">
+                <Button className="btn" color="primary" size="lg">
+                  Ver Graficas
+                </Button>
+                <Button className="btn" color="secondary" size="lg">
+                 Descargar lista
+                </Button>
+              </div>
+            </CardBody>
+          </Card>
+        </Col>
         </Container>
 
         <Modal isOpen={this.state.modalActualizar}>
@@ -367,10 +390,13 @@ class ListaEstudiantes extends React.Component {
             >
               Cancelar
             </Button>
+        
           </ModalFooter>
         </Modal>
       </>
+      
     );
   }
 }
+ListaEstudiantes.layout = "MenuLayout"
 export default ListaEstudiantes;
