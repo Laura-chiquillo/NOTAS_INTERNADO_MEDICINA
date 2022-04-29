@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from "reactstrap";
 import Link from "next/link";
-
+import ProfileCard from "../../src/components/ProfileCard";
 const Perfil = () => {
   // For Dismiss Button with Alert
   const [visible, setVisible] = useState(true);
@@ -21,7 +21,7 @@ const Perfil = () => {
     <div>
   
       <Card>
-          <h1>hola</h1>
+          <ProfileCard></ProfileCard>
       </Card>
     
     </div>
