@@ -12,7 +12,10 @@ import {
   FormText,
 } from 'reactstrap';
 import Link from 'next/link';
+import { useColors } from '../../hooks/useColor';
+
 const Registro = () => {
+  const { color } = useColors();
 
   return (
     <Row>
@@ -98,7 +101,9 @@ const Registro = () => {
                   name='direccion'
                 />
               </FormGroup>
-              <Link href={'/ui/hospitales'}><Button>Guardar</Button></Link>
+              <Link href={'/ui/hospitales'}>
+                <Button style={{backgroundColor: color, color:"black"}} >Guardar</Button>
+                </Link>
             </Form>
           </CardBody>
         </Card>

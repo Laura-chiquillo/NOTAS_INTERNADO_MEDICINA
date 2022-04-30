@@ -12,6 +12,7 @@ import {
   ModalFooter,
   Row, Col,CardTitle, CardBody,
 } from "reactstrap";
+import Link from "next/link";
 
 const data = [
   { id: 1, Cedula: "9120928122", Nombres: "Naruto", Apellido:  "Naruto" , Correo: "pepito@unbosque.edu.co", Semestre: "10", Direccion: "Cra 8h #167-87", },
@@ -164,9 +165,11 @@ class ListaEstudiantes extends React.Component {
             </CardTitle>
             <CardBody className="">
               <div className="button-group">
+                <Link href={'/ui/graficas'}>
                 <Button className="btn" color="primary" size="lg">
                   Ver Graficas
                 </Button>
+                </Link>
                 <Button className="btn" color="secondary" size="lg">
                  Descargar lista
                 </Button>

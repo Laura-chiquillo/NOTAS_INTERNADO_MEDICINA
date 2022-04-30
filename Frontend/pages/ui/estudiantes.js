@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Button, ButtonGroup, Card,  FormText,FormGroup, Label,Input, CardBody, CardTitle, Row, Col } from 'reactstrap';
 import Link from 'next/link';
+import { useColors } from '../../hooks/useColor';
 
 
  
 const Buttons = () => {
   const [cSelected, setCSelected] = useState([]);
   const [rSelected, setRSelected] = useState(null);
+  const { color } = useColors();
 
   const onRadioBtnClick = (vSelected) => {
     setRSelected(vSelected);
@@ -41,9 +43,11 @@ const Buttons = () => {
             </CardTitle>
             <CardBody className="">
               <div className="button-group">
-              <Link href={'/ui/forms'}><Button className="btn" color="primary">
+              <Link href={'/ui/forms'}>
+                <Button className="btn" style={{backgroundColor: color, color:"black"}} >
                   +
-                </Button></Link>
+                </Button>
+                </Link>
                 <FormText>
                   Agregar estudiantes 
                   </FormText>&nbsp;
@@ -78,7 +82,9 @@ const Buttons = () => {
             </CardTitle>
             <CardBody className="">
               <div className="button-group">
-              <Link href={'/ui/ListaEstudiantes'}><Button  color="primary"size="lg">Ver informes</Button></Link>
+              <Link href={'/ui/ListaEstudiantes'}>
+                <Button style={{backgroundColor: color, color:"black"}}  size="lg">Ver informes</Button>
+              </Link>
                 <Button className="btn" color="secondary" size="lg">
                  Descargar lista
                 </Button>
