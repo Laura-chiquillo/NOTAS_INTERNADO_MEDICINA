@@ -43,9 +43,11 @@ const Buttons = () => {
             </CardTitle>
             <CardBody className="">
               <div className="button-group">
-              <Link href={'/ui/forms'}><Button className="btn" color="primary">
+              <Link href={'/ui/forms'}>
+                <Button className="btn" style={{backgroundColor: color, color:"black"}} >
                   +
-                </Button></Link>
+                </Button>
+                </Link>
                 <FormText>
                   Agregar estudiantes 
                   </FormText>&nbsp;
@@ -81,7 +83,7 @@ const Buttons = () => {
             <CardBody className="">
               <div className="button-group">
               <Link href={'/ui/ListaEstudiantes'}>
-                <Button style={{backgroundColor: color}}  size="lg">Ver informes</Button>
+                <Button style={{backgroundColor: color, color:"black"}}  size="lg">Ver informes</Button>
               </Link>
                 <Button className="btn" color="secondary" size="lg">
                  Descargar lista
