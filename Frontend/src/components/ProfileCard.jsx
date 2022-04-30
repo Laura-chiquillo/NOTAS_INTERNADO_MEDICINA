@@ -3,8 +3,18 @@ import styles from '../../styles/ProfileCard.module.scss'
 import User3 from '../assets/images/users/user3.jpg'
 
 import Image from 'next/image'
+import { useColors } from '../../hooks/useColor'
 
 export default function ProfileCard() {
+
+  const { setColor } = useColors()
+
+  const changeColor = (color) => {
+    setColor(color)
+    localStorage.setItem('color', color)
+  }
+
+
   return (
     <div className={styles.container}>
       <Image src={User3} width={150} height={150} className={styles.perfil__img} />
@@ -35,9 +45,9 @@ export default function ProfileCard() {
 
 
       <div className={styles.chosenColor}>
-        <div className={styles.bola1}></div>
-        <div className={styles.bola2}></div>
-        <div className={styles.bola3}></div>
+        <button onClick={() => changeColor("yellow")} className={styles.bola1}></button>
+        <button onClick={() => changeColor("green")} className={styles.bola2}></button>
+        <button onClick={() => changeColor("orange")} className={styles.bola3}></button>
       </div>
       
 
