@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Button, ButtonGroup, Card,  FormText,FormGroup, Label,Input, CardBody, CardTitle, Row, Col } from 'reactstrap';
+import { Button, ButtonGroup, Card, FormText, FormGroup, Label, Input, CardBody, CardTitle, Row, Col } from 'reactstrap';
 import Link from 'next/link';
 import { useColors } from '../../hooks/useColor';
+import Accordion from 'react-bootstrap/Accordion';
 
 
- 
 const Buttons = () => {
   const [cSelected, setCSelected] = useState([]);
   const [rSelected, setRSelected] = useState(null);
@@ -39,40 +39,64 @@ const Buttons = () => {
           {/* --------------------------------------------------------------------------------*/}
           <Card>
             <CardTitle tag="h6" className="border-bottom p-0 mb-0">
-              
+
             </CardTitle>
             <CardBody className="">
               <div className="button-group">
-              <Link href={'/ui/forms'}>
-                <Button className="btn" style={{backgroundColor: color, color:"black"}} >
-                  +
-                </Button>
+                <Link href={'/ui/forms'}>
+                  <Button className="btn" style={{ backgroundColor: color, color: "black" }} >
+                    +
+                  </Button>
                 </Link>
                 <FormText>
-                  Agregar estudiantes 
-                  </FormText>&nbsp;
-                  <input placeholder='Buscar'></input>
+                  Agregar estudiantes
+                </FormText>&nbsp;
+                <input placeholder='Buscar'></input>
                 <Button className="btn btn-success btn-sm" color="danger">Eliminar</Button>
                 <FormGroup>
-                <Label for="exampleSelect"></Label>
-                <Input id="exampleSelect" name="select" type="select">
-                  <option>Ordenar por</option>
-                  <option>Orden alfabetico</option>
-                  <option>Notas subidas</option>
-                  <option>Notas no subidas</option>
-                  <option>Mes</option>
-                </Input>
-              </FormGroup>
-                  
+                  <Label for="exampleSelect"></Label>
+                  <Input id="exampleSelect" name="select" type="select">
+                    <option>Ordenar por</option>
+                    <option>Orden alfabetico</option>
+                    <option>Notas subidas</option>
+                    <option>Notas no subidas</option>
+                    <option>Mes</option>
+                  </Input>
+                </FormGroup>
+
               </div>
             </CardBody>
           </Card>
         </Col>
-        <FormGroup>
-                <Label for="exampleText"></Label>
-                <textarea rows="12" cols="154" ></textarea>
-              </FormGroup>
-       
+        <CardBody>
+          <FormGroup>
+            <Label for="exampleText"></Label>
+            <Accordion>
+              <Accordion.Item eventKey="0">
+                <Accordion.Header>Jenifer Acosta
+                </Accordion.Header>
+                <Accordion.Body>
+                  <li>Documento: 10000000</li>
+                  <li>semestre actual: 11</li>
+                  <li>Hospital actual: curitas del saber</li>
+                  <li>fecha inicio actual: 21/02/22</li>
+                  <li>Fecha finalización actual: 21/04/2022</li>
+                </Accordion.Body>
+              </Accordion.Item>
+              <Accordion.Item eventKey="1">
+                <Accordion.Header>Juan Andres Perez</Accordion.Header>
+                <Accordion.Body>
+                  <li>Documento: 10000000</li>
+                  <li>semestre actual: 12</li>
+                  <li>Hospital actual: curitas del saber</li>
+                  <li>fecha inicio actual: 21/02/22</li>
+                  <li>Fecha finalización actual: 21/04/2022</li>
+                </Accordion.Body>
+              </Accordion.Item>
+            </Accordion>
+          </FormGroup>
+        </CardBody>
+
         <Col xs="0" md="0">
           {/* --------------------------------------------------------------------------------*/}
           {/* Card-3*/}
@@ -82,21 +106,21 @@ const Buttons = () => {
             </CardTitle>
             <CardBody className="">
               <div className="button-group">
-              <Link href={'/ui/ListaEstudiantes'}>
-                <Button style={{backgroundColor: color, color:"black"}}  size="lg">Ver informes</Button>
-              </Link>
+                <Link href={'/ui/ListaEstudiantes'}>
+                  <Button style={{ backgroundColor: color, color: "black" }} size="lg">Ver informes</Button>
+                </Link>
                 <Button className="btn" color="secondary" size="lg">
-                 Descargar lista
+                  Descargar lista
                 </Button>
               </div>
             </CardBody>
           </Card>
         </Col>
-       
-             
-      
-        
-        
+
+
+
+
+
       </Row>
       {/* --------------------------------------------------------------------------------*/}
       {/* Row*/}

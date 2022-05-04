@@ -3,6 +3,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearSca
 import { Bar } from 'react-chartjs-2';
 import { Row } from 'react-bootstrap';
 import {Button} from 'reactstrap';
+import { useColors } from '../../hooks/useColor';
 
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement);
 
@@ -68,6 +69,7 @@ const datas = {
 };
 
 const Badges = () => {
+  const { color } = useColors();
   return (
     <>
       {/*se crea una etiqueta para poder meter mas etiquetas adentro y poder retornarlo*/}
@@ -80,7 +82,7 @@ const Badges = () => {
         <Doughnut data={data} style={{ maxHeight: 500, maxWidth: 500 }} />
         <Bar options={options} data={datas} style={{ maxHeight: 500, maxWidth: 500 }} />
       </Row>
-        <Button className="btn" color="primary" size="lg">
+        <Button className="btn" style={{backgroundColor: color, color:"black"}} size="lg">
           Descargar
         </Button>
     </>
