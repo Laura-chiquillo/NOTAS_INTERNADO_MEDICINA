@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
+<<<<<<< HEAD
 import { Button, ButtonGroup, Card, FormText, FormGroup, Label, Input, CardBody, CardTitle, Row, Col } from 'reactstrap';
 import Link from 'next/link';
 import { useColors } from '../../hooks/useColor';
 import Accordion from 'react-bootstrap/Accordion';
 
+=======
+import { Button, ButtonGroup,Form, Card,  FormText,FormGroup, Label,Input, CardBody, CardTitle, Row, Col } from 'reactstrap';
+import Link from 'next/link';
+import { useColors } from '../../hooks/useColor';
+import Modal  from 'react-bootstrap/Modal';
+>>>>>>> Yuli
 
 const Buttons = () => {
   const [cSelected, setCSelected] = useState([]);
@@ -23,6 +30,9 @@ const Buttons = () => {
     }
     setCSelected([...cSelected]);
   };
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
     <div>

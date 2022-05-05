@@ -15,12 +15,12 @@ import {
 import Link from "next/link";
 
 const data = [
-  { id: 1, Cedula: "9120928122", Nombres: "Naruto", Apellido:  "Naruto" , Correo: "pepito@unbosque.edu.co", Semestre: "10", Direccion: "Cra 8h #167-87", },
-  { id: 2, Cedula: "9120928122", Nombres: "Catalina", Apellido: "Naruto", Correo: "pepito@unbosque.edu.co", Semestre: "10", Direccion: "Cra 8h #167-87",  },
-  { id: 3, Cedula: "9120928122", Nombres: "Dario", Apellido: "Naruto"   , Correo: "pepito@unbosque.edu.co", Semestre: "10", Direccion: "Cra 8h #167-87",  },
-  { id: 4, Cedula: "9120928122", Nombres: "Ana" ,Apellido: "Naruto"     , Correo: "pepito@unbosque.edu.co", Semestre: "10", Direccion: "Cra 8h #167-87",  },
-  { id: 5, Cedula: "9120928122", Nombres: "Tatiana", Apellido: "Naruto" , Correo: "pepito@unbosque.edu.co", Semestre: "10", Direccion: "Cra 8h #167-87",   },
-  { id: 6, Cedula: "9120928122", Nombres: "Jenny", Apellido:  "Naruto"  , Correo: "pepito@unbosque.edu.co", Semestre: "10", Direccion: "Cra 8h #167-87",   },
+  { No: 1, Cedula: "9120928122", Nombres: "Naruto", Apellido:  "Naruto" , Promedio: "4.4", SitioPractica: "Los Cobos", Nota: "4.4",Mes:"Febrero" },
+  { No: 2, Cedula: "9120928122", Nombres: "Alejandro", Apellido:  "Ruiz" , Promedio: "4.4", SitioPractica: "Los Cobos", Nota: "4.4",Mes:"Febrero" },
+  { No: 3, Cedula: "9120928122", Nombres: "Alejandro", Apellido:  "Ruiz" , Promedio: "4.4", SitioPractica: "Los Cobos", Nota: "4.4",Mes:"Febrero" },
+  { No: 1, Cedula: "9120928122", Nombres: "Alejandro", Apellido:  "Ruiz" , Promedio: "4.4", SitioPractica: "Los Cobos", Nota: "4.4",Mes:"Febrero" },
+  { No: 1, Cedula: "9120928122", Nombres: "Alejandro", Apellido:  "Ruiz" , Promedio: "4.4", SitioPractica: "Los Cobos", Nota: "4.4",Mes:"Febrero" },
+  
 ];
 
 class ListaEstudiantes extends React.Component {
@@ -33,9 +33,11 @@ class ListaEstudiantes extends React.Component {
       Cedula: "",
       Nombres: "",
       Apellido: "",
-      Correo: "",
-      Semestre: "",
-      Direccion: "",
+      Promedio: "",
+      SitioPractica: "",
+      Nota: "",
+      Mes: "",
+      
     },
   };
 
@@ -64,13 +66,14 @@ class ListaEstudiantes extends React.Component {
     var contador = 0;
     var arreglo = this.state.data;
     arreglo.map((registro) => {
-      if (dato.id == registro.id) {
+      if (dato.id == registro.No) {
         arreglo[contador].Cedula = dato.Cedula;
         arreglo[contador].Nombres= dato.Nombres;
         arreglo[contador].Apellido= dato.Apellido;
-        arreglo[contador].Correo = dato.Correo;
-        arreglo[contador].Semestre= dato.Semestre;
-        arreglo[contador].Direccion = dato.Direccion;
+        arreglo[contador].Promedio = dato.promedio;
+        arreglo[contador].SitioPractica= dato.SitioPractica;
+        arreglo[contador].Nota = dato.Nota;
+        arreglo[contador].Mes = dato.Mes;
       }
       contador++;
     });
@@ -83,7 +86,7 @@ class ListaEstudiantes extends React.Component {
       var contador = 0;
       var arreglo = this.state.data;
       arreglo.map((registro) => {
-        if (dato.id == registro.id) {
+        if (dato.id == registro.No) {
           arreglo.splice(contador, 1);
         }
         contador++;
@@ -115,7 +118,7 @@ class ListaEstudiantes extends React.Component {
       <>
         <Container>
         <br />
-          <Button color="success" onClick={()=>this.mostrarModalInsertar()}>Crear</Button>
+          
           <br />
           <br />
           <Table>
@@ -125,31 +128,26 @@ class ListaEstudiantes extends React.Component {
                 <th>Cedula</th>
                 <th>Nombres</th>
                 <th>Apellido</th>
-                <th>Correo</th>
-                <th>Semestre</th>
-                <th>Direccion</th>
+                <th>Promedio</th>
+                <th>Sitio de Practica</th>
+                <th>Nota</th>
+                <th>Mes</th>
               </tr>
             </thead>
 
             <tbody>
               {this.state.data.map((dato) => (
-                <tr key={dato.id}>
-                  <td>{dato.id}</td>
+                <tr key={dato.No}>
+                  <td>{dato.No}</td>
                   <td>{dato.Cedula}</td>
                   <td>{dato.Nombres}</td>
                   <td>{dato.Apellido}</td>
-                  <td>{dato.Correo}</td>
-                  <td>{dato.Semestre}</td>
-                  <td>{dato.Direccion}</td>
+                  <td>{dato.Promedio}</td>
+                  <td>{dato.SitioPractica}</td>
+                  <td>{dato.Nota}</td>
+                  <td>{dato.Mes}</td>
                   <td>
-                    <Button
-                      color="primary"
-                      onClick={() => this.mostrarModalActualizar(dato)}
-                    >
-                      Editar
-                    </Button>{" "}
-                    <Button color="danger" onClick={()=> this.eliminar(dato)}>Eliminar</Button>
-                    
+                   
                   </td>
                 </tr>
               ))}

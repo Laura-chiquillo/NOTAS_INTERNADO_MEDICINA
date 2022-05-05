@@ -10,17 +10,21 @@ import {
     FormGroup,
     Label,
     Input,
-    FormText,
+    
   } from 'reactstrap';
  import Link from 'next/link';
 
   const Forms = () => {
     return (
-      <Row> 
-        <Col>
+      <div >
+      
+      
+      <Row className="justify-content-md-center">
+      <Col xs="0" md="5">
           {/* --------------------------------------------------------------------------------*/}
           {/* Card-1*/}
           {/* --------------------------------------------------------------------------------*/}
+
           <Card>
             
             <CardBody>
@@ -50,6 +54,10 @@ import {
           </Card>
         </Col>
       </Row>
+       
+      </div>
+      
+          
     );
   };
   
