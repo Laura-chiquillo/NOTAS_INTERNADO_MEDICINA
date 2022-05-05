@@ -44,6 +44,7 @@ import {
                   />
                 </FormGroup>          
                 <Link href={'/ui/estudiantes'}><Button>Ingresar</Button></Link>
+                <Link href={'/ui/vistaHospitales'}><Button>Ingresar como hospital (boton temporal xd)</Button></Link>
               </Form>
             </CardBody>
           </Card>
