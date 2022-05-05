@@ -112,34 +112,6 @@ const Buttons = () => {
                       </Row>
                     </Accordion.Body>
                   </Accordion.Item>
-                  <Accordion.Item eventKey="1">
-                    <Accordion.Header>Juan Andres Perez</Accordion.Header>
-                    <Accordion.Body>
-                      <li>Documento: 10000000</li>
-                      <li>semestre actual: 12</li>
-                      <li>Hospital actual: curitas del saber</li>
-                      <li>fecha inicio actual: 21/02/22</li>
-                      <li>Fecha finalización actual: 21/04/2022</li>
-                      <Accordion>
-                        <Accordion.Item eventKey="0">
-                          <Accordion.Header>Rotación 1
-                          </Accordion.Header>
-                          <Accordion.Body>
-                            <li>Pediatria: 4.8</li>
-                          </Accordion.Body>
-                        </Accordion.Item>
-                      </Accordion>
-                      <Accordion>
-                        <Accordion.Item eventKey="0">
-                          <Accordion.Header>Rotación 2
-                          </Accordion.Header>
-                          <Accordion.Body>
-                            <li>psicologia: 4.5</li>
-                          </Accordion.Body>
-                        </Accordion.Item>
-                      </Accordion>
-                    </Accordion.Body>
-                  </Accordion.Item>
                 </Accordion>
               </Col>
               <Col className="p-1" xs={1}>
