@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Button, ButtonGroup, Card,  FormText,FormGroup, Label,Input, CardBody, CardTitle, Row, Col } from 'reactstrap';
+import { Button, ButtonGroup,Form, Card,  FormText,FormGroup, Label,Input, CardBody, CardTitle, Row, Col } from 'reactstrap';
 import Link from 'next/link';
 import { useColors } from '../../hooks/useColor';
-
+import Modal  from 'react-bootstrap/Modal';
 
  
 const Buttons = () => {
@@ -23,6 +23,9 @@ const Buttons = () => {
     }
     setCSelected([...cSelected]);
   };
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
     <div>
@@ -43,11 +46,37 @@ const Buttons = () => {
             </CardTitle>
             <CardBody className="">
               <div className="button-group">
-              <Link href={'/ui/forms'}>
-                <Button className="btn" style={{backgroundColor: color, color:"black"}} >
+              
+                <Button className="btn"  onClick={handleShow} style={{backgroundColor: color, color:"black"}} >
                   +
                 </Button>
-                </Link>
+                <Modal show={show} onHide={handleClose} animation={false}>
+        <Modal.Header closeButton>
+          <Modal.Title>Agregar Estudiantes</Modal.Title>
+        </Modal.Header>
+        <Card>
+          <CardBody>
+
+            <Row>
+               <FormGroup>
+              <Label for="exampleFile">Cargar Archivo</Label>
+              <Input id="exampleFile" name="file" type="file" />
+            </FormGroup>
+            </Row>
+             <Link href={'/ui/registroEstudiantes'}><Button color="primary">Ingresar Datos Estudiantes</Button></Link>
+          </CardBody>
+        </Card>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Cerrar
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Guardar
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+
                 <FormText>
                   Agregar estudiantes 
                   </FormText>&nbsp;
