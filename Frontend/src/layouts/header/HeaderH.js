@@ -66,7 +66,6 @@ const HeaderH = ({ showMobmenu }) => {
             </div>
           </DropdownToggle>
           <DropdownMenu>
-            <DropdownItem header><Link href="/ui/perfil">Perfil</Link></DropdownItem>
             <DropdownItem header><Link href="/ui/login">cerrar sesión</Link></DropdownItem>
           </DropdownMenu>
         </Dropdown>
