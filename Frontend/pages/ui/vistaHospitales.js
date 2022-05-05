@@ -110,5 +110,5 @@ const Buttons = () => {
     </div>
   );
 };
-Buttons.layout = "MenuLayout"
+Buttons.layout = "MenuLayoutH"
 export default Buttons;

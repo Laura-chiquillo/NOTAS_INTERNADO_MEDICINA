@@ -11,7 +11,8 @@ import {
   Input,
   FormText,
 } from 'reactstrap';
-import Link from 'next/link'; 
+import Link from 'next/link';   
+
 const generarNota = () => {
 
   return (
@@ -21,187 +22,53 @@ const generarNota = () => {
         {/* Card-1*/}
         {/* --------------------------------------------------------------------------------*/}
         <Card>
-          <CardTitle tag="h6" className="border-bottom p-3 mb-0">
-            Generar Nota
-          </CardTitle>
+          <h1>Generar Nota</h1>
+            
           <CardBody>
             <Form>
-              <FormGroup>
-                <Label>Nombres estudiante</Label>
-                <div class="input-group">
-                  <Input
-                    type="text"
-                    id='Nombre1'
-                    name='nombre1'
-                  />
-                  <span class="input-group-addon">-</span>
-                  <Input
-                    type="text"
-                    id='Nombre2'
-                    name='nombre2'
-                  />
-                </div>
-              </FormGroup>
-              <FormGroup>
-                <Label>Apellidos estudiante</Label>
-                <div class="input-group">
-                  <Input
-                    type="text"
-                    id='Apellido1'
-                    name='apellido1'
-                  />
-                  <span class="input-group-addon">-</span>
-                  <Input
-                    type="text"
-                    id='Apellido2'
-                    name='Apellido2'
-                  />
-                </div>
-              </FormGroup>
 
-              <FormGroup>
-                <Label>Nombre del hospital</Label>
-                <Input
-                  type="text"
-                  id='Semestre'
-                  name='Semestre'
-                />
-              </FormGroup>
-
-              <FormGroup>
-                <Label>Rotacion</Label>
-                <Input id="exampleSelect" name="select" type="select">
-                  <option>Rotacion</option>
-                  <option>Cirugia general</option>
-                  <option>Pediatria</option>
-                  <option>Ginecologia</option>
-                </Input>
+            <FormGroup>
+                  <img src="/../src/assets/images/users/user3.jpg"
+                    className="rounded-circle"
+                    width="100"
+                    height="100"/>
               </FormGroup>
               
               <FormGroup>
-                <Label>Historia clinica (0-100 pts)</Label>
-                <Input
-                  type="number"
-                  id='historia'
-                  name='historia'
-                />
+                <Label>Nombres: Jennifer Acosta</Label><br></br>
+                <Label>Documento: 10000000</Label><br></br>
+                <Label>Semestre actual: 11</Label><br></br>
+                <Label>Fecha de inicio actual: 21/02/2022</Label><br></br>
+                <Label>Fecha de finalizacion actual: 21/04/2022</Label><br></br>
               </FormGroup>
 
               <FormGroup>
-                <Label>Responsabilidad (0-100 pts)</Label>
-                <Input
-                  type="number"
-                  id='responsabilidad'
-                  name='responsabilidad'
-                />
-              </FormGroup>
-
-              <FormGroup>
-                <Label>Practica (0-200 pts)</Label>
-                <Input
-                  type="number"
-                  id='practica'
-                  name='practica'
-                />
-              </FormGroup>
-
-              <FormGroup>
-                <Label>Conocimientos y actualizaciones cientificas (0-100 pts)</Label>
-                <Input
-                  type="number"
-                  id='cac'
-                  name='cac'
-                />
-              </FormGroup>
-
-              <FormGroup>
-                <Label>Calificacion (0-500 pts)</Label>
-                <Input
-                  type="number"
-                  id='calificacion'
-                  name='calificacion'
-                />
-              </FormGroup>
-
-              <FormGroup>
-                <Label>Observaciones</Label>
-                <Input
-                  type="text"
-                  id='observaciones'
-                  name='observaciones'
-                />
-              </FormGroup>
-
-              
-              <br></br><Label>Evaluador 1</Label><br></br>
-              <FormGroup>
-                  <Label>Nombres</Label>
-                  <div class="input-group">
-                  <Input
-                    type="text"
-                    id='NombreE1-1'
-                    name='nombreE1-1'
-                  />
-                  <span class="input-group-addon">-</span>
-                  <Input
-                    type="text"
-                    id='NombreE1-2'
-                    name='nombreE1-2'
-                  />
-                  </div>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Practica clinica</th>
+                      <th>Pediatria Practica</th>
+                      <th>Medicina interna</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="item in lista">
+                      <td contentEditable="true">
+                        0,0
+                      </td>
+                      <td contentEditable="true">
+                        0,0
+                      </td>
+                      <td contentEditable="true">
+                        0,0
+                      </td>
+                    </tr>
+                  </tbody>
+                  
+                </table>
               </FormGroup>
                 
-              <FormGroup>
-                <Label>Apellidos</Label>
-                <div class="input-group">
-                  <Input
-                    type="text"
-                    id='ApellidoE1-1'
-                    name='apellidoE1-1'
-                  />
-                  <span class="input-group-addon">-</span>
-                  <Input
-                    type="text"
-                    id='ApellidoE1-2'
-                    name='ApellidoE1-2'
-                  />
-                </div>
-              </FormGroup>
-
-              <br></br><Label>Evaluador 2</Label><br></br>
-              <FormGroup>
-                  <Label>Nombres</Label>
-                  <div class="input-group">
-                  <Input
-                    type="text"
-                    id='NombreE2-1'
-                    name='nombreE2-1'
-                  />
-                  <span class="input-group-addon">-</span>
-                  <Input
-                    type="text"
-                    id='NombreE2-2'
-                    name='nombreE2-2'
-                  />
-                  </div>
-              </FormGroup>
-                
-              <FormGroup>
-                <Label>Apellidos</Label>
-                <div class="input-group">
-                  <Input
-                    type="text"
-                    id='ApellidoE2-1'
-                    name='apellidoE2-1'
-                  />
-                  <span class="input-group-addon">-</span>
-                  <Input
-                    type="text"
-                    id='ApellidoE2-2'
-                    name='ApellidoE2-2'
-                  />
-                </div>
-              </FormGroup>
 
               <Link href={'/ui/vistaHospitales'}><Button  color="primary">Guardar</Button></Link>
             </Form>
@@ -211,5 +78,5 @@ const generarNota = () => {
     </Row>
   )
 };
-generarNota.layout = "MenuLayout"
+generarNota.layout = "MenuLayoutH"
 export default generarNota;
