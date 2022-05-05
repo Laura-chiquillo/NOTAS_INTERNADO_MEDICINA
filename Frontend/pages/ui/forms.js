@@ -24,15 +24,16 @@ const About = () => {
           <CardBody>
 
             <Row>
-               <FormGroup>
-              <Label for="exampleFile">Cargar Archivo</Label>
-              <Input id="exampleFile" name="file" type="file" />
-            </FormGroup>
+              <FormGroup>
+                <Label for="exampleFile">Cargar Archivo</Label>
+                <Input id="exampleFile" name="file" type="file" />
+              </FormGroup>
             </Row>
-             <Link href={'/ui/registroEstudiantes'}><Button color="primary">Ingresar Datos Estudiantes</Button></Link>
+            <Button color="primary">Guardar</Button>
+            <Link href={'/ui/registroEstudiantes'}><Button color="primary">Ingresar Datos Estudiantes</Button></Link>
           </CardBody>
         </Card>
-        
+
       </Col>
     </Row>
   );

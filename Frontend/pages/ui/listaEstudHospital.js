@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, ButtonGroup, Card, FormText, FormGroup, Label, Input, CardBody, CardTitle, Row, Col } from 'reactstrap';
+import { Button, Card, FormGroup, Label, CardBody, CardTitle, Row, Col } from 'reactstrap';
 import Link from 'next/link';
 import { useColors } from '../../hooks/useColor';
 import Accordion from 'react-bootstrap/Accordion';

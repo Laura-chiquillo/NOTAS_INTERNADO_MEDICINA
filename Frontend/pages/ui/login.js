@@ -26,7 +26,7 @@ import {
             <CardBody>
               <Form>
                 <FormGroup>
-                  <Label for="exampleEmail">Correo Electronico</Label>
+                  <Label for="exampleEmail">Correo Electrónico</Label>
                   <Input
                     id="exampleEmail"
                     name="email"

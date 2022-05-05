@@ -1,11 +1,10 @@
 
 import React, { useState } from 'react';
-import { Button, ButtonGroup, Card, FormText, FormGroup, Label, Input, CardBody, CardTitle, Row, Col } from 'reactstrap';
+import { Button, Card, FormText, FormGroup, Label, Input, CardBody, CardTitle, Row, Col } from 'reactstrap';
 import Link from 'next/link';
 import { useColors } from '../../hooks/useColor';
 import Accordion from 'react-bootstrap/Accordion';
 import Modal from 'react-bootstrap/Modal';
-import { Form } from 'reactstrap';
 const Buttons = () => {
 
   const [cSelected, setCSelected] = useState([]);
@@ -82,6 +81,7 @@ const Buttons = () => {
                 <Accordion.Header>Curitas del saber
                 </Accordion.Header>
                 <Accordion.Body>
+                  
                   <Button variant="primary" onClick={handleShow}>
                     Agregar lista de estudiante
                   </Button>
