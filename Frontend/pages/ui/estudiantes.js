@@ -1,38 +1,16 @@
 import React, { useState } from 'react';
-<<<<<<< HEAD
 import { Button, ButtonGroup, Card, FormText, FormGroup, Label, Input, CardBody, CardTitle, Row, Col } from 'reactstrap';
 import Link from 'next/link';
 import { useColors } from '../../hooks/useColor';
 import Accordion from 'react-bootstrap/Accordion';
-
-=======
-import { Button, ButtonGroup,Form, Card,  FormText,FormGroup, Label,Input, CardBody, CardTitle, Row, Col } from 'reactstrap';
-import Link from 'next/link';
-import { useColors } from '../../hooks/useColor';
-import Modal  from 'react-bootstrap/Modal';
->>>>>>> Yuli
+import Modal from 'react-bootstrap/Modal';
 
 const Buttons = () => {
-  const [cSelected, setCSelected] = useState([]);
-  const [rSelected, setRSelected] = useState(null);
-  const { color } = useColors();
 
-  const onRadioBtnClick = (vSelected) => {
-    setRSelected(vSelected);
-  };
-
-  const onCheckboxBtnClick = (selected) => {
-    const index = cSelected.indexOf(selected);
-    if (index < 0) {
-      cSelected.push(selected);
-    } else {
-      cSelected.splice(index, 1);
-    }
-    setCSelected([...cSelected]);
-  };
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const { color } = useColors();
 
   return (
     <div>
@@ -53,11 +31,34 @@ const Buttons = () => {
             </CardTitle>
             <CardBody className="">
               <div className="button-group">
-                <Link href={'/ui/forms'}>
-                  <Button className="btn" style={{ backgroundColor: color, color: "black" }} >
-                    +
-                  </Button>
-                </Link>
+                <Button className="btn" onClick={handleShow} style={{ backgroundColor: color, color: "black" }} >
+                  +
+                </Button>
+                <Modal show={show} onHide={handleClose} animation={false}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Agregar Estudiantes</Modal.Title>
+                  </Modal.Header>
+                  <Card>
+                    <CardBody>
+
+                      <Row>
+                        <FormGroup>
+                          <Label for="exampleFile">Cargar Archivo</Label>
+                          <Input id="exampleFile" name="file" type="file" />
+                        </FormGroup>
+                      </Row>
+                      <Link href={'/ui/registroEstudiantes'}><Button color="primary">Ingresar Datos Estudiantes</Button></Link>
+                    </CardBody>
+                  </Card>
+                  <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                      Cerrar
+                    </Button>
+                    <Button variant="primary" onClick={handleClose}>
+                      Guardar
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
                 <FormText>
                   Agregar estudiantes
                 </FormText>&nbsp;
@@ -128,7 +129,7 @@ const Buttons = () => {
                 <ButtonGroup aria-label="Basic example">
                   <Button variant="primary" onClick={() => console.log('waaad')}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil-fill" viewBox="0 0 16 16">
-                      <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                      <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
                     </svg>
                   </Button>
                   <Button variant="secondary">
