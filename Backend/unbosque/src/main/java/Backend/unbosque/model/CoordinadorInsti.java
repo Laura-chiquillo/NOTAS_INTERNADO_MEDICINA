@@ -2,16 +2,13 @@ package Backend.unbosque.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import lombok.Getter;
-import lombok.Setter;
 
 @Document("CoordinadorInsti")
-@Getter @Setter
 public class CoordinadorInsti {
 
     @Id
     private Long idCoordinador;
-    private String idInstitucion;
+    private Long idInstitucion;
     private String primerNombre;
     private String segundoNombre;
     private String primerApellido;
@@ -21,7 +18,7 @@ public class CoordinadorInsti {
     private String contraseña;
     private String cargo;
     
-    public CoordinadorInsti(Long idCoordinador, String idInstitucion, String primerNombre, String segundoNombre,
+    public CoordinadorInsti(Long idCoordinador, Long idInstitucion, String primerNombre, String segundoNombre,
             String primerApellido, String segundoApellido, String telefono, String correo, String contraseña,
             String cargo) {
         this.idCoordinador = idCoordinador;
@@ -44,11 +41,11 @@ public class CoordinadorInsti {
         this.idCoordinador = idCoordinador;
     }
 
-    public String getIdInstitucion() {
+    public Long getIdInstitucion() {
         return idInstitucion;
     }
 
-    public void setIdInstitucion(String idInstitucion) {
+    public void setIdInstitucion(Long idInstitucion) {
         this.idInstitucion = idInstitucion;
     }
 

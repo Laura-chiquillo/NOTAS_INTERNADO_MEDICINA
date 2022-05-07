@@ -2,57 +2,73 @@ package Backend.unbosque.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import lombok.Getter;
-import lombok.Setter;
 
 @Document("Rotaciones")
-@Getter @Setter // para no tener que colocar los getters and setters
 public class Rotacion {
 
         @Id
         private Long idRotacion;
-        private String nombre;
-        private String horaFechaInicio;
-        private String horaFechaCierre;
-
-        public Rotacion(Long idRotacion, String nombre, String horaFechaInicio, String horaFechaCierre) {
+        private Long idEstudiante;
+        private double nota;
+        private String mes;
+        private String fechaInicio;
+        private String fechaCierre;
+        
+        public Rotacion(Long idRotacion, Long idEstudiante, double nota, String mes, String fechaInicio,
+                String fechaCierre) {
             this.idRotacion = idRotacion;
-            this.nombre = nombre;
-            this.horaFechaInicio = horaFechaInicio;
-            this.horaFechaCierre = horaFechaCierre;
+            this.idEstudiante = idEstudiante;
+            this.nota = nota;
+            this.mes = mes;
+            this.fechaInicio = fechaInicio;
+            this.fechaCierre = fechaCierre;
         }
 
         public Long getIdRotacion() {
-            return this.idRotacion;
+            return idRotacion;
         }
 
         public void setIdRotacion(Long idRotacion) {
             this.idRotacion = idRotacion;
         }
 
-        public String getNombre() {
-            return this.nombre;
+        public Long getIdEstudiante() {
+            return idEstudiante;
         }
 
-        public void setNombre(String nombre) {
-            this.nombre = nombre;
+        public void setIdEstudiante(Long idEstudiante) {
+            this.idEstudiante = idEstudiante;
         }
 
-        public String getHoraFechaInicio() {
-            return this.horaFechaInicio;
+        public double getNota() {
+            return nota;
         }
 
-        public void setHoraFechaInicio(String horaFechaInicio) {
-            this.horaFechaInicio = horaFechaInicio;
+        public void setNota(double nota) {
+            this.nota = nota;
         }
 
-        public String getHoraFechaCierre() {
-            return this.horaFechaCierre;
+        public String getMes() {
+            return mes;
         }
 
-        public void setHoraFechaCierre(String horaFechaCierre) {
-            this.horaFechaCierre = horaFechaCierre;
-        }    
-        
+        public void setMes(String mes) {
+            this.mes = mes;
+        }
+
+        public String getFechaInicio() {
+            return fechaInicio;
+        }
+
+        public void setFechaInicio(String fechaInicio) {
+            this.fechaInicio = fechaInicio;
+        }
+
+        public String getFechaCierre() {
+            return fechaCierre;
+        }
+
+        public void setFechaCierre(String fechaCierre) {
+            this.fechaCierre = fechaCierre;
+        }       
 }
-

@@ -18,5 +18,4 @@ public class UnbosqueApplication {
 		SpringApplication.run(UnbosqueApplication.class, args);
 	
 	}
-
 }

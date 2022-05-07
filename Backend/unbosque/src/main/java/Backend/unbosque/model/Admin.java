@@ -2,11 +2,8 @@ package Backend.unbosque.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import lombok.Getter;
-import lombok.Setter;
 
 @Document("Admin")
-@Getter @Setter // para no tener que colocar los getters and setters
 public class Admin {
 
         @Id
@@ -83,5 +80,4 @@ public class Admin {
         public void setContraseñA(String contraseña) {
             this.contraseña = contraseña;
         }
-        
 }
