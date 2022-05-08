@@ -111,7 +111,7 @@ const Buttons = () => {
             </CardTitle>
             <CardBody className="">
               <div className="button-group">
-              <Link href={'/ui/ListaEstudiantes'}>
+              <Link href={'/ui/MenuNotas'}>
                 <Button style={{backgroundColor: color, color:"black"}}  size="lg">Ver informes</Button>
               </Link>
                 <Button className="btn" color="secondary" size="lg">

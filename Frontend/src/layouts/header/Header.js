@@ -60,7 +60,7 @@ const Header = ({ showMobmenu }) => {
           </NavItem>
           <NavItem>
             <Link href="/ui/hospitales">
-              <a className="nav-link" style={{color: 'black'}} >Lista de hospitales</a>
+              <a className="nav-link" style={{color: 'black'}} >Sitios de Practica</a>
             </Link>
           </NavItem>
         </Nav>
