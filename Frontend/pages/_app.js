@@ -2,9 +2,11 @@ import Head from "next/head";
 import "../styles/style.scss";
 import FullLayoutClient from "../src/layouts/FullLayoutClient";
 import { ColorWrapper } from "../hooks/useColor";
+import FullLayoutCoor from "../src/layouts/FullLayoutCoor";
 
 const layouts = {
   "MenuLayout" : FullLayoutClient,
+  "MenuLayoutH" : FullLayoutCoor,
 }
 
 

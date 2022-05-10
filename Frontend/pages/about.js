@@ -12,7 +12,9 @@ import {
   FormText,
   CardSubtitle,
 } from "reactstrap";
-import Link from 'next/link';
+import Image from "next/image";
+import simg from "../src/assets/images/background/icons2.jpg";
+
 const About = () => {
   return (
     <Row>
@@ -24,19 +26,21 @@ const About = () => {
           <CardBody>
 
             <Row>
-              <FormGroup>
-                <Label for="exampleFile">Cargar Archivo</Label>
-                <Input id="exampleFile" name="file" type="file" />
-              </FormGroup>
-            </Row>
-            <Button color="primary">Guardar</Button>
-            <Link href={'/ui/registroEstudiantes'}><Button color="primary">Ingresar Datos Estudiantes</Button></Link>
+               <FormGroup>
+              <Label for="exampleFile">File</Label>
+              <Input id="exampleFile" name="file" type="file" />
+              <FormText>
+                This is some placeholder block-level help text for the above input. Its a bit
+                lighter and easily wraps to a new line.
+              </FormText>
+            </FormGroup>
+                      </Row>
           </CardBody>
         </Card>
-
+        
       </Col>
     </Row>
   );
 };
-About.layout = "MenuLayout"
+
 export default About;

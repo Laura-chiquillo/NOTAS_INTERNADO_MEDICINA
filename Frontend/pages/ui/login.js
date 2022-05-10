@@ -30,7 +30,7 @@ import {
             <CardBody>
               <Form>
                 <FormGroup>
-                  <Label for="exampleEmail">Correo Electronico</Label>
+                  <Label for="exampleEmail">Correo Electrónico</Label>
                   <Input
                     id="exampleEmail"
                     name="email"
@@ -48,6 +48,7 @@ import {
                   />
                 </FormGroup>          
                 <Link href={'/ui/estudiantes'}><Button>Ingresar</Button></Link>
+                <Link href={'/ui/vistaHospitales'}><Button>Ingresar como hospital (boton temporal xd)</Button></Link>
               </Form>
             </CardBody>
           </Card>
