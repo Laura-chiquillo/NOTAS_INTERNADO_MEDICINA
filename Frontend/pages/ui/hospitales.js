@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { Button, ButtonGroup, Card,  FormText,FormGroup, Label,Input, CardBody, CardTitle, Row, Col } from 'reactstrap';
 import Link from 'next/link';
 import { useColors } from '../../hooks/useColor';
-
-
+import {Form} from 'react-bootstrap';
+import Modal  from 'react-bootstrap/Modal';
  
 const Buttons = () => {
   const [cSelected, setCSelected] = useState([]);
@@ -23,6 +23,9 @@ const Buttons = () => {
     }
     setCSelected([...cSelected]);
   };
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
     <div>
@@ -44,15 +47,42 @@ const Buttons = () => {
             </CardTitle>
             <CardBody className="">
               <div className="button-group">
-              <Link href={'/ui/registro'}>
-                <Button className="btn" style={{backgroundColor: color, color:"black"}}>
+              <Form className="d-flex">
+              
+                <Button className="btn"onClick={handleShow} style={{backgroundColor: color, color:"black"}}>
                   +
-                </Button></Link>
+                </Button>
+                <Modal show={show} onHide={handleClose} animation={false}>
+        <Modal.Header closeButton>
+          <Modal.Title>Insertar Sitios de Practica</Modal.Title>
+        </Modal.Header>
+        <Card>
+          <CardBody>
+
+            <Row>
+               <FormGroup>
+              <Label for="exampleFile">Cargar Archivo</Label>
+              <Input id="exampleFile" name="file" type="file" />
+            </FormGroup>
+            </Row>
+             <Link href={'/ui/registro'}><Button color="primary">Ingresar Datos de Sitios de Practica</Button></Link>
+          </CardBody>
+        </Card>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Cerrar
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Guardar
+          </Button>
+        </Modal.Footer>
+      </Modal>
                 <FormText>
                   Agregar Hospitales 
                   </FormText>&nbsp;
-                  <input placeholder='Buscar'></input>
+                  <input placeholder='Buscar' className='form-control' ></input>
                 <Button className="btn btn-success btn-sm" color="danger">Eliminar</Button>
+                </Form>
                 <FormGroup>
                 <Label for="exampleSelect"></Label>
                 <Input id="exampleSelect" name="select" type="select">

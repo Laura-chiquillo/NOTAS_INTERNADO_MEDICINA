@@ -1,25 +1,33 @@
 
 import Nav from 'react-bootstrap/Nav'
-
-import { useColors } from '../../hooks/useColor';
-
+import {FormControl,Form, Button} from 'react-bootstrap';
 const MenuNotas = () => {
 
+  
+
   return (
+    
     <Nav justify variant="tabs" defaultActiveKey="/home">
   <Nav.Item>
   <Nav.Link href="/ui/ListaEstudiantes">Rotacion Mes Hospital </Nav.Link>
   </Nav.Item>
   <Nav.Item>
-  <Nav.Link href="/ui/ListaEstudiantes">Notas de sala</Nav.Link>
+  <Nav.Link href="/ui/NotasFinales">Notas de sala</Nav.Link>
   </Nav.Item>
   <Nav.Item>
-  <Nav.Link href="/ui/ListaEstudiantes">Notas Meraki</Nav.Link>
-  </Nav.Item>
-  <Nav.Item>
-  <Nav.Link href="/ui/ListaEstudiantes">Saber Pro</Nav.Link>
-  </Nav.Item>
+  <Form className="d-flex">
+        <FormControl
+          type="search"
+          placeholder="Search"
+          className="me-2"
+          aria-label="Buscador"
+        />
+        <Button variant="outline-success">Buscador</Button>
+      </Form>
+        </Nav.Item>
 </Nav>
+
+
     
      
   );

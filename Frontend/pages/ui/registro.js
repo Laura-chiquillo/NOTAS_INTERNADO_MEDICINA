@@ -26,7 +26,7 @@ const Registro = () => {
         {/* --------------------------------------------------------------------------------*/}
         <Card>
           <CardTitle tag="h6" className="border-bottom p-3 mb-0">
-            Registrar hospital
+            Registrar Sitios de Practica
           </CardTitle>
           <CardBody>
             <Form>

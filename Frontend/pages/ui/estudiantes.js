@@ -46,6 +46,7 @@ const Buttons = () => {
             </CardTitle>
             <CardBody className="">
               <div className="button-group">
+              <Form className="d-flex">
               
                 <Button className="btn"  onClick={handleShow} style={{backgroundColor: color, color:"black"}} >
                   +
@@ -80,8 +81,9 @@ const Buttons = () => {
                 <FormText>
                   Agregar estudiantes 
                   </FormText>&nbsp;
-                  <input placeholder='Buscar'></input>
+                  <input placeholder='Buscar' className='form-control'></input>
                 <Button className="btn btn-success btn-sm" color="danger">Eliminar</Button>
+                </Form>
                 <FormGroup>
                 <Label for="exampleSelect"></Label>
                 <Input id="exampleSelect" name="select" type="select">
@@ -111,7 +113,7 @@ const Buttons = () => {
             </CardTitle>
             <CardBody className="">
               <div className="button-group">
-              <Link href={'/ui/MenuNotas'}>
+              <Link href={'/ui/ListaEstudiantes'}>
                 <Button style={{backgroundColor: color, color:"black"}}  size="lg">Ver informes</Button>
               </Link>
                 <Button className="btn" color="secondary" size="lg">
