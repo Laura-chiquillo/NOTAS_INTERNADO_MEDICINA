@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useColors } from '../../hooks/useColor';
 import Accordion from 'react-bootstrap/Accordion';
 import Modal from 'react-bootstrap/Modal';
+import { Form } from 'react-bootstrap';
 
 const Buttons = () => {
 
@@ -11,15 +12,19 @@ const Buttons = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  {/* para la ventana de editar estudiante */ }
   const [shows, setShows] = useState(false);
   const close = () => setShows(false);
   const handShow = () => setShows(true);
 
+  {/* para la ventana de editar notas */ }
+  const [show2, setShows2] = useState(false);
+  const close2 = () => setShows2(false);
+  const handShow2 = () => setShows2(true);
   const { color } = useColors();
 
   return (
     <div>
-      {/* --------------------------------------------------------------------------------*/}
       {/* Start Inner Div*/}
       {/* --------------------------------------------------------------------------------*/}
       {/* --------------------------------------------------------------------------------*/}
@@ -106,24 +111,123 @@ const Buttons = () => {
                           </ul>
                         </Col>
                         <Col>
-                          <Accordion>
-                            <Accordion.Item eventKey="0">
-                              <Accordion.Header>Rotación 1
-                              </Accordion.Header>
-                              <Accordion.Body>
-                                <li>Pediatria: 4.8</li>
-                              </Accordion.Body>
-                            </Accordion.Item>
-                          </Accordion>
-                          <Accordion>
-                            <Accordion.Item eventKey="0">
-                              <Accordion.Header>Rotación 2
-                              </Accordion.Header>
-                              <Accordion.Body>
-                                <li>psicologia: 4.5</li>
-                              </Accordion.Body>
-                            </Accordion.Item>
-                          </Accordion>
+                        {/*  Notas */}
+                          <Row>
+                            <Col>
+                              <Accordion>
+                                <Accordion.Item eventKey="0">
+                                  <Accordion.Header> Asignatura 1
+                                  </Accordion.Header>
+                                  <Accordion.Body>
+                                    <li>Pediatria: 4.8</li>
+                                  </Accordion.Body>
+                                </Accordion.Item>
+                              </Accordion>
+                            </Col>
+                            <Col className="p-1" xs={2}>
+                              <ButtonGroup aria-label="Basic example">
+
+                                <Button style={{ backgroundColor: color, color: "black" }} onClick={handShow2}>
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                    <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+                                  </svg>
+                                </Button>
+
+                                <Modal
+                                  show={show2}
+                                  onHide={close2}
+                                  backdrop="static"
+                                  keyboard={false}
+                                >
+                                  <Modal.Header closeButton>
+                                    <Modal.Title>Editar Nota</Modal.Title>
+                                  </Modal.Header>
+                                  <Modal.Body>
+                                    <Form>
+                                      <FormGroup>
+                                        <Label>Nota</Label>
+                                        <Input
+                                          type="text"
+                                          id='IPS'
+                                          name='ips'
+                                        />
+                                      </FormGroup>
+                                    </Form>
+                                  </Modal.Body>
+                                  <Modal.Footer>
+                                    <Button variant="secondary" onClick={close2}>
+                                      Cancelar
+                                    </Button>
+                                    <Button variant="primary">
+                                      Guardar
+                                    </Button>
+                                  </Modal.Footer>
+                                </Modal>
+
+                                <Button className="btn" onClick={handleShow} style={{ backgroundColor: color, color: "black" }} >
+                                  +
+                                </Button>
+                              </ButtonGroup>
+                            </Col>
+                          </Row>
+                          <Row>
+                            <Col>
+                              <Accordion>
+                                <Accordion.Item eventKey="0">
+                                  <Accordion.Header> Asignatura 2
+                                  </Accordion.Header>
+                                  <Accordion.Body>
+                                    <li>Cirugía: 4.8</li>
+                                  </Accordion.Body>
+                                </Accordion.Item>
+                              </Accordion>
+                            </Col>
+                            <Col className="p-1" xs={2}>
+                              <ButtonGroup aria-label="Basic example">
+
+                                <Button style={{ backgroundColor: color, color: "black" }} onClick={handShow2}>
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                    <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+                                  </svg>
+                                </Button>
+
+                                <Modal
+                                  show={show2}
+                                  onHide={close2}
+                                  backdrop="static"
+                                  keyboard={false}
+                                >
+                                  <Modal.Header closeButton>
+                                    <Modal.Title>Editar Nota</Modal.Title>
+                                  </Modal.Header>
+                                  <Modal.Body>
+                                    <Form>
+                                      <FormGroup>
+                                        <Label>Nota</Label>
+                                        <Input
+                                          type="text"
+                                          id='IPS'
+                                          name='ips'
+                                        />
+                                      </FormGroup>
+                                    </Form>
+                                  </Modal.Body>
+                                  <Modal.Footer>
+                                    <Button variant="secondary" onClick={close2}>
+                                      Cancelar
+                                    </Button>
+                                    <Button variant="primary">
+                                      Guardar
+                                    </Button>
+                                  </Modal.Footer>
+                                </Modal>
+
+                                <Button className="btn" onClick={handleShow} style={{ backgroundColor: color, color: "black" }} >
+                                  +
+                                </Button>
+                              </ButtonGroup>
+                            </Col>
+                          </Row>
                         </Col>
                       </Row>
                     </Accordion.Body>
@@ -132,35 +236,109 @@ const Buttons = () => {
               </Col>
               <Col className="p-1" xs={1}>
                 <ButtonGroup aria-label="Basic example">
-                  
-                    <Button variant="primary" onClick={handShow}>
+
+                  <Button style={{ backgroundColor: color, color: "black" }} onClick={handShow}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil-fill" viewBox="0 0 16 16">
                       <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
                     </svg>
-                    </Button>
+                  </Button>
 
-                    <Modal
-                      show={shows}
-                      onHide={close}
-                      backdrop="static"
-                      keyboard={false}
-                    >
-                      <Modal.Header closeButton>
-                        <Modal.Title>Modal title</Modal.Title>
-                      </Modal.Header>
-                      <Modal.Body>
-                        I will not close if you click outside me. Don't even try to press
-                        escape key.
-                      </Modal.Body>
-                      <Modal.Footer>
-                        <Button variant="secondary" onClick={close}>
-                          Close
-                        </Button>
-                        <Button variant="primary">Understood</Button>
-                      </Modal.Footer>
-                    </Modal>
-                
-                  <Button variant="secondary">
+                  <Modal
+                    show={shows}
+                    onHide={close}
+                    backdrop="static"
+                    keyboard={false}
+                  >
+                    <Modal.Header closeButton>
+                      <Modal.Title>Editar estudiante</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <Form>
+                        <FormGroup>
+                          <Label>Cédula de ciudadanía</Label>
+                          <Input
+                            type="text"
+                            id='IPS'
+                            name='ips'
+                          />
+                        </FormGroup>
+                        <FormGroup>
+                          <Label>Nombres</Label>
+                          <div class="input-group">
+                            <Input
+                              type="text"
+                              id='Nombre1'
+                              name='nombre1'
+                            />
+                            <span class="input-group-addon">-</span>
+                            <Input
+                              type="text"
+                              id='Nombre2'
+                              name='nombre2'
+                            />
+                          </div>
+                        </FormGroup>
+                        <FormGroup>
+                          <Label>Apellidos</Label>
+                          <div class="input-group">
+                            <Input
+                              type="text"
+                              id='Apellido1'
+                              name='apellido1'
+                            />
+                            <span class="input-group-addon">-</span>
+                            <Input
+                              type="text"
+                              id='Apellido2'
+                              name='Apellido2'
+                            />
+                          </div>
+                        </FormGroup>
+                        <FormGroup>
+                          <Label>Teléfono</Label>
+                          <Input
+                            id="Telefono"
+                            name="telefono"
+                            type="number"
+                          />
+                        </FormGroup>
+                        <FormGroup>
+                          <Label for="eEmail">Correo</Label>
+                          <Input
+                            id="Email"
+                            name="email"
+                            type="email"
+                          />
+                        </FormGroup>
+                        <FormGroup>
+                          <Label>Semestre</Label>
+                          <Input
+                            type="text"
+                            id='Semestre'
+                            name='Semestre'
+                          />
+                        </FormGroup>
+                        <FormGroup>
+                          <Label>Dirección</Label>
+                          <Input
+                            type="text"
+                            id='direcion'
+                            name='direccion'
+                          />
+                        </FormGroup>
+                      </Form>
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button variant="secondary" onClick={close}>
+                        Cancelar
+                      </Button>
+                      <Button variant="primary">
+                        Guardar
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>
+
+                  <Button style={{ backgroundColor: color, color: "black" }}>
                     <input type="checkbox"></input>
                   </Button>
                 </ButtonGroup>
@@ -188,11 +366,6 @@ const Buttons = () => {
             </CardBody>
           </Card>
         </Col>
-
-
-
-
-
       </Row>
       {/* --------------------------------------------------------------------------------*/}
       {/* Row*/}
