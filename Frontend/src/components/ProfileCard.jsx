@@ -46,7 +46,7 @@ export default function ProfileCard() {
 
       <div className={styles.chosenColor}>
         <button onClick={() => changeColor("yellow")} className={styles.bola1}></button>
-        <button onClick={() => changeColor("green")} className={styles.bola2}></button>
+        <button onClick={() => changeColor("#90EE90")} className={styles.bola2}></button>
         <button onClick={() => changeColor("orange")} className={styles.bola3}></button>
       </div>
       

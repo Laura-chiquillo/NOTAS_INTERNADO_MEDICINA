@@ -90,6 +90,9 @@ const Buttons = () => {
                     <Modal.Header closeButton>
                       <Modal.Title>Lista estudiantes</Modal.Title>
                     </Modal.Header>
+                    <div>
+                    <input placeholder='Buscar'></input>
+                    </div>
                     <Modal.Body>
                         <div className="topping">
                           <input type="checkbox" id="topping" name="topping" value="Paneer" />Andrea Camacho
