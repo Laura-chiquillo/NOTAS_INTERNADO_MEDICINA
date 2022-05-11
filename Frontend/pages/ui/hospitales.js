@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useColors } from '../../hooks/useColor';
 import {Form} from 'react-bootstrap';
 import Modal  from 'react-bootstrap/Modal';
- 
+import Accordion from 'react-bootstrap/Accordion';
 const Buttons = () => {
 
   const [cSelected, setCSelected] = useState([]);
@@ -28,6 +28,12 @@ const Buttons = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+
+  const [show1, setShow1] = useState(false);
+  const handleClose1 = () => setShow1(false);
+  const handleShow1 = () => setShow1(true);
+
 
   return (
     <div>
@@ -80,17 +86,10 @@ const Buttons = () => {
         </Modal.Footer>
       </Modal>
                 <FormText>
-                  Agregar Hospitales 
+                  Ingresar sitios de Practica
                   </FormText>&nbsp;
                   <input placeholder='Buscar' className='form-control' ></input>
-                <Link href={'/ui/registro'}>
-                  <Button className="btn" style={{ backgroundColor: color, color: "black" }}>
-                    +
-                  </Button></Link>
-                <FormText>
-                  Agregar Hospitales
-                </FormText>&nbsp;
-                <input placeholder='Buscar'></input>
+             
                 <Button className="btn btn-success btn-sm" color="danger">Eliminar</Button>
                 </Form>
                 <FormGroup>
@@ -118,11 +117,11 @@ const Buttons = () => {
                 </Accordion.Header>
                 <Accordion.Body>
                   
-                  <Button variant="primary" onClick={handleShow}>
+                  <Button variant="primary" onClick={handleShow1}>
                     Agregar lista de estudiante
                   </Button>
 
-                  <Modal show={show} onHide={handleClose}>
+                  <Modal show={show1} onHide={handleClose1}>
                     <Modal.Header closeButton>
                       <Modal.Title>Lista estudiantes</Modal.Title>
                     </Modal.Header>
@@ -141,10 +140,10 @@ const Buttons = () => {
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
-                      <Button variant="secondary" onClick={handleClose}>
+                      <Button variant="secondary" onClick={handleClose1}>
                         Cancelar
                       </Button>
-                      <Button variant="primary" onClick={handleClose}>
+                      <Button variant="primary" onClick={handleClose1}>
                         Guardar
                       </Button>
                     </Modal.Footer>

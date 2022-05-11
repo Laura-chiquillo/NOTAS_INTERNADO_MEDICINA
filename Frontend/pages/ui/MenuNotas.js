@@ -1,9 +1,12 @@
 
 import Nav from 'react-bootstrap/Nav'
 import {FormControl,Form, Button} from 'react-bootstrap';
-const MenuNotas = () => {
+import { ButtonGroup, Card, FormText, FormGroup, Label, Input, CardBody, CardTitle, Row, Col } from 'reactstrap';
+import { useState } from 'react';
 
-  
+const MenuNotas = (ListaEstudiantes) => {
+
+const [search,setSearch]= useState("")
 
   return (
     
@@ -12,19 +15,27 @@ const MenuNotas = () => {
   <Nav.Link href="/ui/ListaEstudiantes">Rotacion Mes Hospital </Nav.Link>
   </Nav.Item>
   <Nav.Item>
-  <Nav.Link href="/ui/NotasFinales">Notas de sala</Nav.Link>
+  <Nav.Link href="/ui/NotasFinalescopy">Notas de sala</Nav.Link>
   </Nav.Item>
   <Nav.Item>
-  <Form className="d-flex">
+  <Form className="d-fl ex">
         <FormControl
+         
           type="search"
           placeholder="Search"
           className="me-2"
           aria-label="Buscador"
         />
-        <Button variant="outline-success">Buscador</Button>
-      </Form>
+       
+      </Form>     
         </Nav.Item>
+  <Nav.Item>
+        <Input id="exampleSelect" name="select" type="select">
+                    <option>Ordenar por</option>
+                    <option>Orden alfabetico</option>
+                    <option>Orden alfabetico inverso</option>
+                  </Input>
+                  </Nav.Item>
 </Nav>
 
 
@@ -34,3 +45,4 @@ const MenuNotas = () => {
 };
 MenuNotas.layout = "MenuLayout"
 export default MenuNotas;
+

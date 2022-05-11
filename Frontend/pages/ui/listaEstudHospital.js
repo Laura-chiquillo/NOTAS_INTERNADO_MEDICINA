@@ -19,7 +19,7 @@ const Lista = () => {
             </CardTitle>
             <CardBody className="">
               <div className="button-group">
-                <input placeholder='Buscar'></input>
+              <input placeholder='Buscar' className='form-control'></input>
               </div>
             </CardBody>
           </Card>
