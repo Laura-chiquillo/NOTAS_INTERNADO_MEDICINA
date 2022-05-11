@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +20,9 @@ public class AdminServiceImpl implements AdminService{
 
     @Autowired
     private AdminRepository adminRepository;
+
+    @Autowired
+    private MongoOperations mongoOperations;
 
     @Override
     public List<Admin> getAdmins() {
@@ -46,6 +52,13 @@ public class AdminServiceImpl implements AdminService{
     public void deleteAdmin(Long id) {
         adminRepository.deleteById(id);
         
+    }
+
+    @Override
+    public boolean verificarCredenciales(Admin admin) {
+        Query findUser = new Query(Criteria.where("correo").is(admin.getCorreo()).and("contraseña").is(admin.getContraseña()));
+        List<Admin> user = mongoOperations.find(findUser, Admin.class);
+        return !user.isEmpty();
     }
     
 }
