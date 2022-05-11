@@ -37,7 +37,7 @@ const Lista = () => {
                   <li>Hospital actual: curitas del saber</li>
                   <li>fecha inicio actual: 21/02/22</li>
                   <li>Fecha finalización actual: 21/04/2022</li>
-                  <li>Nota: Subida</li>
+                  <li>Nota: Registrada</li>
                   <button>Generar Nota</button>
                 </Accordion.Body>
               </Accordion.Item>
@@ -49,7 +49,7 @@ const Lista = () => {
                   <li>Hospital actual: curitas del saber</li>
                   <li>fecha inicio actual: 21/02/22</li>
                   <li>Fecha finalización actual: 21/04/2022</li>
-                  <li>Nota: Subida</li>
+                  <li>Nota: Registrada</li>
                   <button>Generar Nota</button>
                 </Accordion.Body>
               </Accordion.Item>
