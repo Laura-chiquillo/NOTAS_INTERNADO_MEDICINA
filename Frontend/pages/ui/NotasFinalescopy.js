@@ -73,12 +73,12 @@ export default function DenseTable() {
       
       <>
         <Container>
-        
+        <MenuNotas></MenuNotas>
         <br />
           
           <br />
           <br />
-          <MenuNotas></MenuNotas>
+        
           
           <TableContainer component={Paper}>
       <Table className={classes.table} size="small" aria-label="a dense table">
