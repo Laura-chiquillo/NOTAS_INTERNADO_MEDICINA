@@ -39,6 +39,40 @@ public class CoordinadorInstiServiceImpl implements CoordinadorInstiService{
     @Override
     public void updateCoordinadorInsti(Long id, CoordinadorInsti coordinadorInsti) {
         // TODO Auto-generated method stub
+
+        CoordinadorInsti upCoordinadorInsti = coordinadorInstiRepository.findById(id).get();
+
+        if (coordinadorInsti.getPrimerNombre() != null){
+            upCoordinadorInsti.setPrimerNombre(coordinadorInsti.getPrimerNombre());
+        }
+
+        if(coordinadorInsti.getSegundoNombre() != null){
+            upCoordinadorInsti.setSegundoNombre(coordinadorInsti.getSegundoNombre());
+        }
+
+        if(coordinadorInsti.getPrimerApellido() != null){
+            upCoordinadorInsti.setPrimerApellido(coordinadorInsti.getPrimerApellido());
+        }
+
+        if(coordinadorInsti.getSegundoApellido() != null){
+            upCoordinadorInsti.setSegundoApellido(coordinadorInsti.getSegundoApellido());
+        }
+
+        if(coordinadorInsti.getTelefono() != null){
+            upCoordinadorInsti.setTelefono(coordinadorInsti.getTelefono());
+        }
+
+        if(coordinadorInsti.getCorreo() != null){
+            upCoordinadorInsti.setCorreo(coordinadorInsti.getCorreo());
+        }
+
+        if(coordinadorInsti.getContraseña() != null){
+            upCoordinadorInsti.setContraseña(coordinadorInsti.getContraseña());
+        }
+
+        if(coordinadorInsti.getCargo() != null){
+            upCoordinadorInsti.setCargo(coordinadorInsti.getCargo());
+        }
         
     }
 

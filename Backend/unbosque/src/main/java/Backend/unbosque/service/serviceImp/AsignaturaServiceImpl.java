@@ -36,10 +36,20 @@ public class AsignaturaServiceImpl implements AsignaturaService{
         return asignaturaRepository.insert(asignatura);
     }
 
+    //private Long idAsignatura;
+    //private String semestreA;
+    //private String descripcion;
+    //private int creditoMes;
+    //private int tiempoMes;
+    //private int creditosTotales;
+    //private double definitiva;
     @Override
     public void updateAsignatura(Long id, Asignatura asignatura) {
         // TODO Auto-generated method stub
-        
+
+        Asignatura upAsignatura = asignaturaRepository.findById(id).get();
+
+        if(NOSEQUEHACERCONESTEAIUDA)
     }
 
     @Override

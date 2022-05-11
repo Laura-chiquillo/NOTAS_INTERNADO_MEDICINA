@@ -39,7 +39,23 @@ public class RotacionServiceImpl implements RotacionService{
     @Override
     public void updateRotacion(Long id, Rotacion rotacion) {
         // TODO Auto-generated method stub
-        
+        Rotacion upRotacion = rotacionRepository.findById(id).get();
+
+        if (rotacion.getNota() != null){
+            upRotacion.setNota(rotacion.getNota());
+        }
+
+        if (rotacion.getMes() != null){
+            upRotacion.setMes(rotacion.getMes());
+        }
+
+        if (rotacion.getFechaInicio() != null){
+            upRotacion.setFechaInicio(rotacion.getFechaInicio());
+        }
+
+        if (rotacion.getFechaCierre() != null){
+            upRotacion.setFechaCierre(rotacion.getFechaCierre());
+        }
     }
 
     @Override

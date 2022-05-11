@@ -35,11 +35,35 @@ public class AdminServiceImpl implements AdminService{
     public Admin createAdmin(Admin admin) {
         return adminRepository.insert(admin);
     }
-    
+
     @Override
     public void updateAdmin(Long id, Admin admin) {
         // TODO Auto-generated method stub
-        
+        Admin upAdmin = adminRepository.findById(id).get();
+
+        if(admin.getPrimerNombre() != null){
+            upAdmin.setPrimerNombre(admin.getPrimerNombre());
+        }
+
+        if(admin.getSegundoNombre() != null){
+            upAdmin.setSegundoNombre(admin.getSegundoNombre());
+        }
+
+        if(admin.getPrimerApellido() != null){
+            upAdmin.setPrimerApellido(admin.getPrimerApellido());
+        }
+
+        if(admin.getSegundoApellido() != null){
+            upAdmin.setSegundoApellido(admin.getSegundoApellido());
+        }
+
+        if(admin.getCorreo() != null){
+            upAdmin.setCorreo(admin.getCorreo());
+        }
+
+        if(admin.getContraseñA() != null){
+            upAdmin.setContraseñA(admin.getContraseñA());
+        }
     }
 
     @Override
