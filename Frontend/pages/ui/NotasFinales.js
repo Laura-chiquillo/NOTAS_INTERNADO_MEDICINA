@@ -16,30 +16,47 @@ import Link from "next/link";
 import MenuNotas from "./MenuNotas";
 
 const data = [
-  { No: 1, Cedula: "9120928122", Nombres: "Naruto", Apellido:  "Naruto" , Promedio: "4.4", SitioPractica: "Los Cobos", Nota: "4.4",Mes:"Febrero" },
-  { No: 2, Cedula: "9120928122", Nombres: "Alejandro", Apellido:  "Ruiz" , Promedio: "4.4", SitioPractica: "Los Cobos", Nota: "4.4",Mes:"Febrero" },
-  { No: 3, Cedula: "9120928122", Nombres: "Alejandro", Apellido:  "Ruiz" , Promedio: "4.4", SitioPractica: "Los Cobos", Nota: "4.4",Mes:"Febrero" },
-  { No: 4, Cedula: "9120928122", Nombres: "Alejandro", Apellido:  "Ruiz" , Promedio: "4.4", SitioPractica: "Los Cobos", Nota: "4.4",Mes:"Febrero" },
-  { No: 5, Cedula: "9120928122", Nombres: "Alejandro", Apellido:  "Ruiz" , Promedio: "4.4", SitioPractica: "Los Cobos", Nota: "4.4",Mes:"Febrero" },
-
+  { id: "1",
+  Cedula: "10931039",
+  Nombres: "Juan",
+  Apellido: "Abadia",
+  SitiodePractica: "Los cobos",
+  NotaDefinitiva:"4.6",
+  ochenta:"4.4",
+  Curso:"4.3",
+  PALSACLS:"4.7",
+  setenta:"4.5",
+  SaberPro:"3.8",
+  treinta:"4.3",
+  Definitiva:"4.1",
+  veinte:"4.3",
+  Definitiva100 :"4.4",
+},
+ 
 ];
 
-
-class ListaEstudiantes extends React.Component {
+class NotasFinales extends React.Component {
   
   state = {
     data: data,
     modalActualizar: false,
     modalInsertar: false,
     form: {
-      id: "",
-      Cedula: "",
-      Nombres: "",
-      Apellido: "",
-      Promedio: "",
-      SitioPractica: "",
-      Nota: "",
-      Mes: "",
+        id: "",
+        Cedula: "",
+        Nombres: "",
+        Apellido: "",
+        SitiodePractica: "",
+        NotaDefinitiva:"",
+        ochenta:"",
+        Curso:"",
+        PALSACLS:"",
+        setenta:"",
+        SaberPro:"",
+        treinta:"",
+        Definitiva:"",
+        veinte:"",
+        Definitiva100 :"",
       
     },
   };
@@ -58,31 +75,48 @@ class ListaEstudiantes extends React.Component {
           <br />
           <br />
           
-          <Table>
+          <Table text-align ="center" >
             <thead>
               <tr>
                 <th>ID</th>
                 <th>Cedula</th>
                 <th>Nombres</th>
                 <th>Apellido</th>
-                <th>Promedio</th>
                 <th>Sitio de Practica</th>
-                <th>Nota</th>
-                <th>Mes</th>
+                <th>Nota Definitiva</th>
+                <th>80%</th>
+                <th>Curso</th>
+                <th>PALS ACLS</th>
+                <th>70%</th>
+                <th>Saber Pro</th>
+                <th>30%</th>
+                <th>Definitiva</th>
+                <th>20%</th>
+                <th>Definitiva 100%</th>
+                
+                
               </tr>
             </thead>
 
             <tbody>
               {this.state.data.map((dato) => (
                 <tr key={dato.No}>
-                  <td>{dato.No}</td>
-                  <td>{dato.Cedula}</td>
+                  <td>{dato.id}</td>
+                  <td>{dato. Cedula}</td>
                   <td>{dato.Nombres}</td>
                   <td>{dato.Apellido}</td>
-                  <td>{dato.Promedio}</td>
-                  <td>{dato.SitioPractica}</td>
-                  <td>{dato.Nota}</td>
-                  <td>{dato.Mes}</td>
+                  <td>{dato.SitiodePractica}</td>
+                  <td>{dato.NotaDefinitiva}</td>
+                  <td>{dato.ochenta}</td>
+                  <td>{dato.Curso}</td>
+                  <td>{dato.PALSACLS}</td>
+                  <td>{dato.setenta}</td>
+                  <td>{dato.SaberPro}</td>
+                  <td>{dato.treinta}</td>
+                  <td>{dato.Definitiva}</td>
+                  <td>{dato.veinte}</td>
+                  <td>{dato.Definitiva100}</td>
+                  
                   <td>
                    
                   </td>
@@ -121,5 +155,5 @@ class ListaEstudiantes extends React.Component {
     );
   }
 }
-ListaEstudiantes.layout = "MenuLayout"
-export default ListaEstudiantes;
+NotasFinales.layout = "MenuLayout"
+export default NotasFinales;

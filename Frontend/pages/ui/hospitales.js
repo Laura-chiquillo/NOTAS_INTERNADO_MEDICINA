@@ -3,8 +3,9 @@ import React, { useState } from 'react';
 import { Button, Card, FormText, FormGroup, Label, Input, CardBody, CardTitle, Row, Col } from 'reactstrap';
 import Link from 'next/link';
 import { useColors } from '../../hooks/useColor';
+import {Form} from 'react-bootstrap';
+import Modal  from 'react-bootstrap/Modal';
 import Accordion from 'react-bootstrap/Accordion';
-import Modal from 'react-bootstrap/Modal';
 const Buttons = () => {
 
   const [cSelected, setCSelected] = useState([]);
@@ -28,6 +29,12 @@ const Buttons = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+
+  const [show1, setShow1] = useState(false);
+  const handleClose1 = () => setShow1(false);
+  const handleShow1 = () => setShow1(true);
+
+
   return (
     <div>
       {/* --------------------------------------------------------------------------------*/}
@@ -48,15 +55,43 @@ const Buttons = () => {
             </CardTitle>
             <CardBody className="">
               <div className="button-group">
-                <Link href={'/ui/registro'}>
-                  <Button className="btn" style={{ backgroundColor: color, color: "black" }}>
-                    +
-                  </Button></Link>
+              <Form className="d-flex">
+              
+                <Button className="btn"onClick={handleShow} style={{backgroundColor: color, color:"black"}}>
+                  +
+                </Button>
+                <Modal show={show} onHide={handleClose} animation={false}>
+        <Modal.Header closeButton>
+          <Modal.Title>Insertar Sitios de Practica</Modal.Title>
+        </Modal.Header>
+        <Card>
+          <CardBody>
+
+            <Row>
+               <FormGroup>
+              <Label for="exampleFile">Cargar Archivo</Label>
+              <Input id="exampleFile" name="file" type="file" />
+            </FormGroup>
+            </Row>
+             <Link href={'/ui/registro'}><Button color="primary">Ingresar Datos de Sitios de Practica</Button></Link>
+          </CardBody>
+        </Card>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Cerrar
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Guardar
+          </Button>
+        </Modal.Footer>
+      </Modal>
                 <FormText>
-                  Agregar Hospitales
-                </FormText>&nbsp;
-                <input placeholder='Buscar'></input>
+                  Ingresar sitios de Practica
+                  </FormText>&nbsp;
+                  <input placeholder='Buscar' className='form-control' ></input>
+             
                 <Button className="btn btn-success btn-sm" color="danger">Eliminar</Button>
+                </Form>
                 <FormGroup>
                   <Label for="exampleSelect"></Label>
                   <Input id="exampleSelect" name="select" type="select">
@@ -82,11 +117,11 @@ const Buttons = () => {
                 </Accordion.Header>
                 <Accordion.Body>
                   
-                  <Button variant="primary" onClick={handleShow}>
+                  <Button variant="primary" onClick={handleShow1}>
                     Agregar lista de estudiante
                   </Button>
 
-                  <Modal show={show} onHide={handleClose}>
+                  <Modal show={show1} onHide={handleClose1}>
                     <Modal.Header closeButton>
                       <Modal.Title>Lista estudiantes</Modal.Title>
                     </Modal.Header>
@@ -105,10 +140,10 @@ const Buttons = () => {
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
-                      <Button variant="secondary" onClick={handleClose}>
+                      <Button variant="secondary" onClick={handleClose1}>
                         Cancelar
                       </Button>
-                      <Button variant="primary" onClick={handleClose}>
+                      <Button variant="primary" onClick={handleClose1}>
                         Guardar
                       </Button>
                     </Modal.Footer>

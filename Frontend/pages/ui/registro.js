@@ -18,14 +18,15 @@ const Registro = () => {
   const { color } = useColors();
 
   return (
+    
     <Row>
-      <Col>
+       <Col>
         {/* --------------------------------------------------------------------------------*/}
         {/* Card-1*/}
         {/* --------------------------------------------------------------------------------*/}
         <Card>
           <CardTitle tag="h6" className="border-bottom p-3 mb-0">
-            Registrar hospital
+            Registrar Sitios de Practica
           </CardTitle>
           <CardBody>
             <Form>
@@ -112,6 +113,7 @@ const Registro = () => {
         </Card>
       </Col>
     </Row>
+    
   )
 };
 Registro.layout = "MenuLayout"

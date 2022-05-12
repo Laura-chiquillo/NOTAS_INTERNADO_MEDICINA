@@ -41,7 +41,9 @@ const Buttons = () => {
             </CardTitle>
             <CardBody className="">
               <div className="button-group">
-                <Button className="btn" onClick={handleShow} style={{ backgroundColor: color, color: "black" }} >
+              <Form className="d-flex">
+              
+                <Button className="btn"  onClick={handleShow} style={{backgroundColor: color, color:"black"}} >
                   +
                 </Button>
                 <Modal show={show} onHide={handleClose} animation={false}>
@@ -70,10 +72,11 @@ const Buttons = () => {
                   </Modal.Footer>
                 </Modal>
                 <FormText>
-                  Agregar estudiantes
-                </FormText>&nbsp;
-                <input placeholder='Buscar'></input>
+                  Agregar estudiantes 
+                  </FormText>&nbsp;
+                  <input placeholder='Buscar' className='form-control'></input>
                 <Button className="btn btn-success btn-sm" color="danger">Eliminar</Button>
+                </Form>
                 <FormGroup>
                   <Label for="exampleSelect"></Label>
                   <Input id="exampleSelect" name="select" type="select">
