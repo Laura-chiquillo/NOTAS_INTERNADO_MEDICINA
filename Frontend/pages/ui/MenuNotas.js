@@ -15,7 +15,7 @@ const [search,setSearch]= useState("")
   <Nav.Link href="/ui/ListaEstudiantes">Rotacion Mes Hospital </Nav.Link>
   </Nav.Item>
   <Nav.Item>
-  <Nav.Link href="/ui/NotasFinalescopy">Notas de sala</Nav.Link>
+  <Nav.Link href="/ui/NotasFinales">Notas de sala</Nav.Link>
   </Nav.Item>
   <Nav.Item>
   <Form className="d-fl ex">
