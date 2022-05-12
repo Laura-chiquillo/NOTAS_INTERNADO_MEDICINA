@@ -105,6 +105,9 @@ const Registro = () => {
               <Link href={'/ui/hospitales'}>
                 <Button style={{backgroundColor: color, color:"black"}} >Guardar</Button>
                 </Link>
+                <Link href={'/ui/hospitales'}>
+                <Button style={{backgroundColor: color, color:"black"}} >Atras</Button>
+                </Link>
             </Form>
           </CardBody>
         </Card>

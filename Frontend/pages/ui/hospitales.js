@@ -97,8 +97,8 @@ const Buttons = () => {
                   <Input id="exampleSelect" name="select" type="select">
                     <option>Ordenar por</option>
                     <option>Orden alfabetico</option>
-                    <option>Notas subidas</option>
-                    <option>Notas no subidas</option>
+                    <option>Notas registradas</option>
+                    <option>Notas no registradas</option>
                     <option>Mes</option>
                   </Input>
                 </FormGroup>
