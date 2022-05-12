@@ -17,7 +17,7 @@ import {
 import user1 from "../../assets/images/users/user1.jpg";
 import { useColors } from "../../../hooks/useColor";
 
-const Header = ({ showMobmenu }) => {
+const HeaderH = ({ showMobmenu }) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [dropdownOpen, setDropdownOpen] = React.useState(false);
   const { color } = useColors();
@@ -52,18 +52,7 @@ const Header = ({ showMobmenu }) => {
       </div>
 
       <Collapse navbar isOpen={isOpen}>
-        <Nav className="me-auto" navbar>
-          <NavItem>
-            <Link href="/ui/estudiantes">
-              <a className="nav-link" style={{color: 'black'}}>Lista de estudiantes</a>
-            </Link>
-          </NavItem>
-          <NavItem>
-            <Link href="/ui/hospitales">
-              <a className="nav-link" style={{color: 'black'}} >Sitios de Practica</a>
-            </Link>
-          </NavItem>
-        </Nav>
+        
         <Dropdown isOpen={dropdownOpen} toggle={toggle}>
           <DropdownToggle style={{backgroundColor: color}}>
             <div style={{ lineHeight: "0px" }}>
@@ -77,7 +66,6 @@ const Header = ({ showMobmenu }) => {
             </div>
           </DropdownToggle>
           <DropdownMenu>
-            <DropdownItem header><Link href="/ui/perfil">Perfil</Link></DropdownItem>
             <DropdownItem header><Link href="/ui/login">cerrar sesión</Link></DropdownItem>
           </DropdownMenu>
         </Dropdown>
@@ -86,6 +74,4 @@ const Header = ({ showMobmenu }) => {
   );
 };
 
-
-
-export default Header;
+export default HeaderH;
