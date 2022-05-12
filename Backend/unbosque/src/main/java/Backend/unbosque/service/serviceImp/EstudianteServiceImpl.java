@@ -76,9 +76,8 @@ public class EstudianteServiceImpl implements EstudianteService{
         }
 
         if (estudiante.getEstado() != null){
-            upestudiante.setEstado(estudiante.getEstado());
+            upEstudiante.setEstado(estudiante.getEstado());
         }
-
         
     }
 
