@@ -2,30 +2,62 @@ package Backend.unbosque.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import lombok.Getter;
-import lombok.Setter;
 
 @Document("Institucion")
-@Getter @Setter // para no tener que colocar los getters and setters
 public class Institucion {
 
         @Id
-        private String idInstitucion;
-        private String idPais;
+        private Long idInstitucion;
+        private Long idPais;
         private String nombre;
         private String direccion;
-        private String correo;
         private String estado;
-        
 
-    public Institucion(String idInstitucion, String idPais, String nombre, String direccion, String correo, String estado) {
-        this.idInstitucion = idInstitucion;
-        this.idPais = idPais;
-        this.nombre = nombre;
-        this.direccion = direccion;
-        this.correo = correo;
-        this.estado = estado;
-    }
-    
-        
+        public Institucion(Long idInstitucion, Long idPais, String nombre, String direccion, String estado) {
+            this.idInstitucion = idInstitucion;
+            this.idPais = idPais;
+            this.nombre = nombre;
+            this.direccion = direccion;
+            this.estado = estado;
+        }
+
+        public Long getIdInstitucion() {
+            return idInstitucion;
+        }
+
+        public void setIdInstitucion(Long idInstitucion) {
+            this.idInstitucion = idInstitucion;
+        }
+
+        public Long getIdPais() {
+            return idPais;
+        }
+
+        public void setIdPais(Long idPais) {
+            this.idPais = idPais;
+        }
+
+        public String getNombre() {
+            return nombre;
+        }
+
+        public void setNombre(String nombre) {
+            this.nombre = nombre;
+        }
+
+        public String getDireccion() {
+            return direccion;
+        }
+
+        public void setDireccion(String direccion) {
+            this.direccion = direccion;
+        }
+
+        public String getEstado() {
+            return estado;
+        }
+
+        public void setEstado(String estado) {
+            this.estado = estado;
+        }    
 }
