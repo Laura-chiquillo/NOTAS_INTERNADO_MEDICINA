@@ -24,13 +24,13 @@ public class CoordinadorInstiController {
     @Autowired
     private CoordinadorInstiService coordinadorInstiService;
 
-    @GetMapping
+    @GetMapping("/todos")
     public ResponseEntity<List<CoordinadorInsti>> getAllCoordinadores() {
         List<CoordinadorInsti> coordinadores = coordinadorInstiService.getCoordinadorInstis();
         return new ResponseEntity<>(coordinadores, HttpStatus.OK);
     }
     @GetMapping({"/{id}"})
-    public ResponseEntity<CoordinadorInsti> getCoordinador(@PathVariable Long id) {
+    public ResponseEntity<CoordinadorInsti> getCoordinador(@PathVariable String id) {
         CoordinadorInsti coordinadorInsti = coordinadorInstiService.getCoordinadorInstiById(id);
         return new ResponseEntity<>(coordinadorInsti, HttpStatus.OK);
     }
@@ -42,13 +42,13 @@ public class CoordinadorInstiController {
     }
 
     @PatchMapping("/editar/{id}")
-    public ResponseEntity<CoordinadorInsti> updateCoordinador(@PathVariable Long id, @RequestBody CoordinadorInsti coordinadorInsti) {
+    public ResponseEntity<CoordinadorInsti> updateCoordinador(@PathVariable String id, @RequestBody CoordinadorInsti coordinadorInsti) {
         coordinadorInstiService.updateCoordinadorInsti(id, coordinadorInsti);
         return new ResponseEntity<>(coordinadorInstiService.getCoordinadorInstiById(id), HttpStatus.OK);
     }
 
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<CoordinadorInsti> deleteCoordinador(@PathVariable Long id) {
+    public ResponseEntity<CoordinadorInsti> deleteCoordinador(@PathVariable String id) {
         coordinadorInstiService.deleteCoordinadorInsti(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }   

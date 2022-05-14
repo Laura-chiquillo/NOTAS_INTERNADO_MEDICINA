@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import Backend.unbosque.model.Asignatura;
 
 @Repository
-public interface AsignaturaRepository extends MongoRepository<Asignatura, Long>{
+public interface AsignaturaRepository extends MongoRepository<Asignatura, String>{
     
 }

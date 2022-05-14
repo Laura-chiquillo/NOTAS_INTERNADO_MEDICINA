@@ -32,7 +32,7 @@ public class AdminServiceImpl implements AdminService{
     }
 
     @Override
-    public Admin getAdminById(Long id) {
+    public Admin getAdminById(String id) {
         Admin admin = adminRepository.findById(id).get();
         return admin;
     }
@@ -43,7 +43,7 @@ public class AdminServiceImpl implements AdminService{
     }
 
     @Override
-    public void updateAdmin(Long id, Admin admin) {
+    public void updateAdmin(String id, Admin admin) {
         // TODO Auto-generated method stub
         Admin upAdmin = adminRepository.findById(id).get();
 
@@ -75,7 +75,7 @@ public class AdminServiceImpl implements AdminService{
     }
 
     @Override
-    public void deleteAdmin(Long id) {
+    public void deleteAdmin(String id) {
         adminRepository.deleteById(id);
         
     }

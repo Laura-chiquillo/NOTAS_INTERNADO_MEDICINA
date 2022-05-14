@@ -24,14 +24,14 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
     
-    @GetMapping
+    @GetMapping("/todos")
     public ResponseEntity<List<Admin>> getAllAdmins(){
         List<Admin> admins = adminService.getAdmins();
         return new ResponseEntity<>(admins, HttpStatus.OK);
     }
 
     @GetMapping({"/{id}"})
-    public ResponseEntity<Admin> getAdmin(@PathVariable(value = "id") Long id){
+    public ResponseEntity<Admin> getAdmin(@PathVariable(value = "id") String id){
         Admin admin = adminService.getAdminById(id);
         return new ResponseEntity<>(admin, HttpStatus.OK);
     }
@@ -43,13 +43,13 @@ public class AdminController {
     }
 
     @PatchMapping("/editar/{id}")
-    public ResponseEntity<Admin> updateAdmin(@PathVariable Long id, @RequestBody Admin admin) {
+    public ResponseEntity<Admin> updateAdmin(@PathVariable String id, @RequestBody Admin admin) {
         adminService.updateAdmin(id, admin);
         return new ResponseEntity<>(adminService.getAdminById(id), HttpStatus.OK);
     }
 
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<Admin> deleteAdmin(@PathVariable Long id) {
+    public ResponseEntity<Admin> deleteAdmin(@PathVariable String id) {
         adminService.deleteAdmin(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

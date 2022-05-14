@@ -24,14 +24,14 @@ public class AsignaturaController {
     @Autowired
     private AsignaturaService asignaturaService;
 
-    @GetMapping
+    @GetMapping("/todos")
     public ResponseEntity<List<Asignatura>> getAllAsignaturas() {
         List<Asignatura> asignaturas = asignaturaService.getAsignatura();
         return new ResponseEntity<>(asignaturas, HttpStatus.OK);
     }
     
     @GetMapping({"/{id}"})
-    public ResponseEntity<Asignatura> getAsignatura(@PathVariable Long id) {
+    public ResponseEntity<Asignatura> getAsignatura(@PathVariable String id) {
         Asignatura asignatura = asignaturaService.getAsignaturaById(id);
         return new ResponseEntity<>(asignatura, HttpStatus.OK);
     }
@@ -43,13 +43,13 @@ public class AsignaturaController {
     }
 
     @PatchMapping("/editar/{id}")
-    public ResponseEntity<Asignatura> updateAsignatura(@PathVariable Long id, @RequestBody Asignatura asignatura) {
+    public ResponseEntity<Asignatura> updateAsignatura(@PathVariable String id, @RequestBody Asignatura asignatura) {
         asignaturaService.updateAsignatura(id, asignatura);
         return new ResponseEntity<>(asignaturaService.getAsignaturaById(id), HttpStatus.OK);
     }
 
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<Asignatura> deleteAsignatura(@PathVariable Long id) {
+    public ResponseEntity<Asignatura> deleteAsignatura(@PathVariable String id) {
         asignaturaService.deleteAsignatura(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

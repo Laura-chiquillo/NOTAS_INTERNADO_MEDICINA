@@ -7,9 +7,9 @@ import Backend.unbosque.model.Estudiante;
 public interface EstudianteService {
 
     List<Estudiante> getEstudiantes();
-    Estudiante getEstudianteById(Long id);
+    Estudiante getEstudianteById(String id);
     Estudiante createEstudiante(Estudiante estudiante);
-    void updateEstudiante(Long id, Estudiante estudiante);
-    void deleteEstudiante(Long id);
+    void updateEstudiante(String id, Estudiante estudiante);
+    void deleteEstudiante(String id);
     
 }

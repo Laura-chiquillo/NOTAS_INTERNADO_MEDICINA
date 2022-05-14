@@ -7,8 +7,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class CoordinadorInsti {
 
     @Id
-    private Long idCoordinador;
-    private Long idInstitucion;
+    private String idCoordinador;
+    private String idInstitucion;
     private String primerNombre;
     private String segundoNombre;
     private String primerApellido;
@@ -18,7 +18,7 @@ public class CoordinadorInsti {
     private String contraseña;
     private String cargo;
     
-    public CoordinadorInsti(Long idCoordinador, Long idInstitucion, String primerNombre, String segundoNombre,
+    public CoordinadorInsti(String idCoordinador, String idInstitucion, String primerNombre, String segundoNombre,
             String primerApellido, String segundoApellido, String telefono, String correo, String contraseña,
             String cargo) {
         this.idCoordinador = idCoordinador;
@@ -33,19 +33,19 @@ public class CoordinadorInsti {
         this.cargo = cargo;
     }
 
-    public Long getIdCoordinador() {
+    public String getIdCoordinador() {
         return idCoordinador;
     }
 
-    public void setIdCoordinador(Long idCoordinador) {
+    public void setIdCoordinador(String idCoordinador) {
         this.idCoordinador = idCoordinador;
     }
 
-    public Long getIdInstitucion() {
+    public String getIdInstitucion() {
         return idInstitucion;
     }
 
-    public void setIdInstitucion(Long idInstitucion) {
+    public void setIdInstitucion(String idInstitucion) {
         this.idInstitucion = idInstitucion;
     }
 

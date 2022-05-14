@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Asignatura {
 
     @Id
-    private Long idAsignatura;
+    private String idAsignatura;
     private String semestreA;
     private String descripcion;
     private int creditoMes;
@@ -15,7 +15,7 @@ public class Asignatura {
     private int creditosTotales;
     private double definitiva;
     
-    public Asignatura(Long idAsignatura, String semestreA, String descripcion, int creditoMes, int tiempoMes,
+    public Asignatura(String idAsignatura, String semestreA, String descripcion, int creditoMes, int tiempoMes,
             int creditosTotales, double definitiva) {
         this.idAsignatura = idAsignatura;
         this.semestreA = semestreA;
@@ -26,11 +26,11 @@ public class Asignatura {
         this.definitiva = definitiva;
     }
 
-    public Long getIdAsignatura() {
+    public String getIdAsignatura() {
         return idAsignatura;
     }
 
-    public void setIdAsignatura(Long idAsignatura) {
+    public void setIdAsignatura(String idAsignatura) {
         this.idAsignatura = idAsignatura;
     }
 

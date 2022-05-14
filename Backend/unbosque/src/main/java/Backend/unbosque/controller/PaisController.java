@@ -24,14 +24,14 @@ public class PaisController {
     @Autowired
     private PaisService paisService;
 
-    @GetMapping
+    @GetMapping("/todos")
     public ResponseEntity<List<Pais>> getAllPaises(){
         List<Pais> paises = paisService.getPais();
         return new ResponseEntity<>(paises, HttpStatus.OK);
     }
 
     @GetMapping({"/{id}"})
-    public ResponseEntity<Pais> getPais(@PathVariable Long id){
+    public ResponseEntity<Pais> getPais(@PathVariable String id){
         Pais pais = paisService.getPaisById(id);
         return new ResponseEntity<>(pais, HttpStatus.OK);
     }
@@ -43,13 +43,13 @@ public class PaisController {
     }
 
     @PatchMapping("/editar/{id}")
-    public ResponseEntity<Pais> updatePais(@PathVariable Long id, @RequestBody Pais pais) {
+    public ResponseEntity<Pais> updatePais(@PathVariable String id, @RequestBody Pais pais) {
         paisService.updatePais(id, pais);
         return new ResponseEntity<>(paisService.getPaisById(id), HttpStatus.OK);
     }
 
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<Pais> deletePais(@PathVariable Long id) {
+    public ResponseEntity<Pais> deletePais(@PathVariable String id) {
         paisService.deletePais(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

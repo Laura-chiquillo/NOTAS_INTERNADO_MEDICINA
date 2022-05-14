@@ -7,9 +7,9 @@ import Backend.unbosque.model.Institucion;
 public interface InstitucionService {
 
     List<Institucion> getInstitucion();
-    Institucion getInstitucionById(Long id);
+    Institucion getInstitucionById(String id);
     Institucion createInstitucion(Institucion institucion);
-    void updateInstitucion(Long id, Institucion institucion);
-    void deleteInstitucion(Long id);
+    void updateInstitucion(String id, Institucion institucion);
+    void deleteInstitucion(String id);
     
 }

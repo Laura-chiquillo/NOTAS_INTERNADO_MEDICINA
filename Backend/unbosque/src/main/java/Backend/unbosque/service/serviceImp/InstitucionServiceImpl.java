@@ -26,7 +26,7 @@ public class InstitucionServiceImpl implements InstitucionService{
     }
 
     @Override
-    public Institucion getInstitucionById(Long id) {
+    public Institucion getInstitucionById(String id) {
         Institucion institucion = institucionRepository.findById(id).get();
         return institucion;
     }
@@ -37,7 +37,7 @@ public class InstitucionServiceImpl implements InstitucionService{
     }
 
     @Override
-    public void updateInstitucion(Long id, Institucion institucion) {
+    public void updateInstitucion(String id, Institucion institucion) {
         // TODO Auto-generated method stub
         
         Institucion upInstitucion = institucionRepository.findById(id).get();
@@ -58,7 +58,7 @@ public class InstitucionServiceImpl implements InstitucionService{
     }
 
     @Override
-    public void deleteInstitucion(Long id) {
+    public void deleteInstitucion(String id) {
         institucionRepository.deleteById(id);
         
     }

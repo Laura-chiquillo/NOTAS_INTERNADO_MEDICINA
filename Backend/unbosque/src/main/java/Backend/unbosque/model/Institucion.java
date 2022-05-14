@@ -7,13 +7,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Institucion {
 
         @Id
-        private Long idInstitucion;
-        private Long idPais;
+        private String idInstitucion;
+        private String idPais;
         private String nombre;
         private String direccion;
         private String estado;
 
-        public Institucion(Long idInstitucion, Long idPais, String nombre, String direccion, String estado) {
+        public Institucion(String idInstitucion, String idPais, String nombre, String direccion, String estado) {
             this.idInstitucion = idInstitucion;
             this.idPais = idPais;
             this.nombre = nombre;
@@ -21,19 +21,19 @@ public class Institucion {
             this.estado = estado;
         }
 
-        public Long getIdInstitucion() {
+        public String getIdInstitucion() {
             return idInstitucion;
         }
 
-        public void setIdInstitucion(Long idInstitucion) {
+        public void setIdInstitucion(String idInstitucion) {
             this.idInstitucion = idInstitucion;
         }
 
-        public Long getIdPais() {
+        public String getIdPais() {
             return idPais;
         }
 
-        public void setIdPais(Long idPais) {
+        public void setIdPais(String idPais) {
             this.idPais = idPais;
         }
 

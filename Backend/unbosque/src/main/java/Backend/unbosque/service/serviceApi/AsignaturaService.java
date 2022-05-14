@@ -7,9 +7,9 @@ import Backend.unbosque.model.Asignatura;
 public interface AsignaturaService {
 
     List<Asignatura> getAsignatura();    
-    Asignatura getAsignaturaById(Long id);
+    Asignatura getAsignaturaById(String id);
     Asignatura createAsignatura(Asignatura asignatura);
-    void updateAsignatura(Long id, Asignatura asignatura);
-    void deleteAsignatura(Long id);
+    void updateAsignatura(String id, Asignatura asignatura);
+    void deleteAsignatura(String id);
     
 }

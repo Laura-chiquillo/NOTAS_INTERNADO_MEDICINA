@@ -24,14 +24,14 @@ public class RotacionController {
     @Autowired
     private RotacionService rotacionService;
 
-    @GetMapping
+    @GetMapping("/todos")
     public ResponseEntity<List<Rotacion>> getAllRotaciones(){
         List<Rotacion> rotaciones = rotacionService.getRotaciones();
         return new ResponseEntity<>(rotaciones, HttpStatus.OK);
     }
 
     @GetMapping({"/{id}"})
-    public ResponseEntity<Rotacion> getRotacion(@PathVariable Long id){
+    public ResponseEntity<Rotacion> getRotacion(@PathVariable String id){
         Rotacion rotacion = rotacionService.getRotacionById(id);
         return new ResponseEntity<>(rotacion, HttpStatus.OK);
     }
@@ -43,13 +43,13 @@ public class RotacionController {
     }
 
     @PatchMapping("/editar/{id}")
-    public ResponseEntity<Rotacion> updateRotacion(@PathVariable Long id, @RequestBody Rotacion rotacion) {
+    public ResponseEntity<Rotacion> updateRotacion(@PathVariable String id, @RequestBody Rotacion rotacion) {
         rotacionService.updateRotacion(id, rotacion);
         return new ResponseEntity<>(rotacionService.getRotacionById(id), HttpStatus.OK);
     }
 
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<Rotacion> deleteRotacion(@PathVariable Long id) {
+    public ResponseEntity<Rotacion> deleteRotacion(@PathVariable String id) {
         rotacionService.deleteRotacion(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

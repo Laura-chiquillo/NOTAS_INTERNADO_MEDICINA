@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import Backend.unbosque.model.Rotacion;
 
 @Repository
-public interface RotacionRepository extends MongoRepository<Rotacion, Long>{
+public interface RotacionRepository extends MongoRepository<Rotacion, String>{
     
 }

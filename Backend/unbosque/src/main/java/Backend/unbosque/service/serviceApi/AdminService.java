@@ -7,10 +7,10 @@ import Backend.unbosque.model.Admin;
 public interface AdminService {
 
     List<Admin> getAdmins();    
-    Admin getAdminById(Long id);
+    Admin getAdminById(String id);
     Admin createAdmin(Admin admin);
-    void updateAdmin(Long id, Admin admin);
-    void deleteAdmin(Long id);
+    void updateAdmin(String id, Admin admin);
+    void deleteAdmin(String id);
     boolean verificarCredenciales(Admin admin);                             
     
 }

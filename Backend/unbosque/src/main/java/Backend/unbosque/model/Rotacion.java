@@ -7,14 +7,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Rotacion {
 
         @Id
-        private Long idRotacion;
-        private Long idEstudiante;
+        private String idRotacion;
+        private String idEstudiante;
         private double nota;
         private String mes;
         private String fechaInicio;
         private String fechaCierre;
         
-        public Rotacion(Long idRotacion, Long idEstudiante, double nota, String mes, String fechaInicio,
+        public Rotacion(String idRotacion, String idEstudiante, double nota, String mes, String fechaInicio,
                 String fechaCierre) {
             this.idRotacion = idRotacion;
             this.idEstudiante = idEstudiante;
@@ -24,19 +24,19 @@ public class Rotacion {
             this.fechaCierre = fechaCierre;
         }
 
-        public Long getIdRotacion() {
+        public String getIdRotacion() {
             return idRotacion;
         }
 
-        public void setIdRotacion(Long idRotacion) {
+        public void setIdRotacion(String idRotacion) {
             this.idRotacion = idRotacion;
         }
 
-        public Long getIdEstudiante() {
+        public String getIdEstudiante() {
             return idEstudiante;
         }
 
-        public void setIdEstudiante(Long idEstudiante) {
+        public void setIdEstudiante(String idEstudiante) {
             this.idEstudiante = idEstudiante;
         }
 

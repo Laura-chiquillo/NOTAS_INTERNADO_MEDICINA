@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import Backend.unbosque.model.Pais;
 
 @Repository
-public interface PaisRepository extends MongoRepository<Pais,Long>{
+public interface PaisRepository extends MongoRepository<Pais,String>{
     
 }
