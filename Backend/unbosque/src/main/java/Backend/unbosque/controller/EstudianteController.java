@@ -30,7 +30,7 @@ public class EstudianteController {
         return new ResponseEntity<>(estudiantes, HttpStatus.OK);
     }
 
-    @GetMapping({"/id"})
+    @GetMapping({"/{id}"})
     public ResponseEntity<Estudiante> getEstudiante(@PathVariable String id) {
         Estudiante estudiante = estudianteService.getEstudianteById(id);
         return new ResponseEntity<>(estudiante, HttpStatus.OK);
