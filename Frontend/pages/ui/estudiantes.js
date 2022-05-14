@@ -7,6 +7,14 @@ import Modal from 'react-bootstrap/Modal';
 import { Form } from 'react-bootstrap';
 
 const Buttons = () => {
+  
+  /* crear la variable que contiene la lista de los estudiantes */
+  /* se inicia con una lista vacia*/ 
+  const [listEstudiantes, setListaEstudiantes] = useState([])
+
+  /* Llamar la api en una función */ 
+
+  
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);

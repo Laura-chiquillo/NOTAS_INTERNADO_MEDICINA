@@ -24,13 +24,13 @@ public class EstudianteController {
     @Autowired
     private EstudianteService estudianteService;
 
-    @GetMapping
+    @GetMapping({"/todos"})
     public ResponseEntity<List<Estudiante>> getAllEstudiantes() {
         List<Estudiante> estudiantes = estudianteService.getEstudiantes();
         return new ResponseEntity<>(estudiantes, HttpStatus.OK);
     }
 
-    @GetMapping({"/id"})
+    @GetMapping({"/{id}"})
     public ResponseEntity<Estudiante> getEstudiante(@PathVariable Long id) {
         Estudiante estudiante = estudianteService.getEstudianteById(id);
         return new ResponseEntity<>(estudiante, HttpStatus.OK);

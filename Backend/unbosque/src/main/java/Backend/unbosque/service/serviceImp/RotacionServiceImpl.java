@@ -41,7 +41,7 @@ public class RotacionServiceImpl implements RotacionService{
         // TODO Auto-generated method stub
         Rotacion upRotacion = rotacionRepository.findById(id).get();
 
-        if (rotacion.getNota() != null){
+        if (rotacion.getNota() != 0){
             upRotacion.setNota(rotacion.getNota());
         }
 
