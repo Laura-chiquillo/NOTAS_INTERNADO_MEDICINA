@@ -40,6 +40,19 @@ public class InstitucionServiceImpl implements InstitucionService{
     public void updateInstitucion(Long id, Institucion institucion) {
         // TODO Auto-generated method stub
         
+        Institucion upInstitucion = institucionRepository.findById(id).get();
+
+        if (institucion.getNombre() != null){
+            upInstitucion.setNombre(institucion.getNombre());
+        }
+
+        if (institucion.getDireccion() != null){
+            upInstitucion.setDireccion(institucion.getDireccion());
+        }
+
+        if (institucion.getEstado() != null){
+            upInstitucion.setEstado(institucion.getEstado());
+        }
     }
 
     @Override

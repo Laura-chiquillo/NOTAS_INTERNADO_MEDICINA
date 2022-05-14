@@ -39,7 +39,15 @@ public class PaisServiceImpl  implements PaisService{
     @Override
     public void updatePais(Long id, Pais pais) {
         // TODO Auto-generated method stub
-        
+        Pais upPais = paisRepository.findById(id).get();
+
+        if (pais.getNombre() != null){
+            upPais.setNombre(pais.getNombre());
+        }
+
+        if (pais.getCiudad() != null){
+            upPais.setCiudad(pais.getCiudad());
+        }
     }
 
     @Override

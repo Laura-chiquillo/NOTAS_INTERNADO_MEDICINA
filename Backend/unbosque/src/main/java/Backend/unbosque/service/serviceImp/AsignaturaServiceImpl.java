@@ -36,10 +36,42 @@ public class AsignaturaServiceImpl implements AsignaturaService{
         return asignaturaRepository.insert(asignatura);
     }
 
+    //private String semestreA;
+    //private String descripcion;
+    //private int creditoMes;
+    //private int tiempoMes;
+    //private int creditosTotales;
+    //private double definitiva
+
     @Override
     public void updateAsignatura(Long id, Asignatura asignatura) {
-        // TODO Auto-generated method stub
-        
+    
+        Asignatura upAsignatura = asignaturaRepository.findById(id).get();
+
+        if (asignatura.getSemestreA() != null){
+            upAsignatura.setSemestreA(asignatura.getSemestreA());
+        }
+
+        if (asignatura.getDescripcion() != null){
+            upAsignatura.setDescripcion(asignatura.getDescripcion());
+        }
+
+        if (asignatura.getCreditoMes() != 0){
+            upAsignatura.setCreditoMes(asignatura.getCreditoMes());
+        }
+
+        if (asignatura.getTiempoMes() != 0){
+            upAsignatura.setTiempoMes(asignatura.getTiempoMes());
+        }
+
+        if (asignatura.getCreditosTotales() != 0){
+            upAsignatura.setCreditosTotales(asignatura.getCreditosTotales());
+        }
+
+        if (asignatura.getDefinitiva() != 0.0){
+            upAsignatura.setDefinitiva(asignatura.getDefinitiva());
+        }
+
     }
 
     @Override
