@@ -73,6 +73,8 @@ public class CoordinadorInstiServiceImpl implements CoordinadorInstiService{
         if(coordinadorInsti.getCargo() != null){
             upCoordinadorInsti.setCargo(coordinadorInsti.getCargo());
         }
+
+        coordinadorInstiRepository.save(upCoordinadorInsti);
         
     }
 

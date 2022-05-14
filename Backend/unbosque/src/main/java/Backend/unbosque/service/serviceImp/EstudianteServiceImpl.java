@@ -81,6 +81,7 @@ public class EstudianteServiceImpl implements EstudianteService{
             upEstudiante.setEstado(estudiante.getEstado());
         }
         
+        estudianteRepository.save(upEstudiante);
     }
 
     @Override

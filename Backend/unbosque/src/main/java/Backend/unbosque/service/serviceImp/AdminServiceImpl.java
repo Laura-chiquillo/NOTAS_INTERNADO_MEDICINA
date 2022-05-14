@@ -70,6 +70,8 @@ public class AdminServiceImpl implements AdminService{
         if(admin.getContraseña() != null){
             upAdmin.setContraseña(admin.getContraseña());
         }
+
+        adminRepository.save(upAdmin);
     }
 
     @Override

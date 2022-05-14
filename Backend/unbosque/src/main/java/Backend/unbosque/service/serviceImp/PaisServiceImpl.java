@@ -48,6 +48,8 @@ public class PaisServiceImpl  implements PaisService{
         if (pais.getCiudad() != null){
             upPais.setCiudad(pais.getCiudad());
         }
+
+        paisRepository.save(upPais);
     }
 
     @Override
