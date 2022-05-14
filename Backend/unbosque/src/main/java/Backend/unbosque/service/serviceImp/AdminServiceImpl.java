@@ -67,8 +67,8 @@ public class AdminServiceImpl implements AdminService{
             upAdmin.setCorreo(admin.getCorreo());
         }
 
-        if(admin.getContraseñA() != null){
-            upAdmin.setContraseñA(admin.getContraseñA());
+        if(admin.getContraseña() != null){
+            upAdmin.setContraseña(admin.getContraseña());
         }
     }
 
