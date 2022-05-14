@@ -56,6 +56,8 @@ public class RotacionServiceImpl implements RotacionService{
         if (rotacion.getFechaCierre() != null){
             upRotacion.setFechaCierre(rotacion.getFechaCierre());
         }
+
+        rotacionRepository.save(upRotacion);
     }
 
     @Override

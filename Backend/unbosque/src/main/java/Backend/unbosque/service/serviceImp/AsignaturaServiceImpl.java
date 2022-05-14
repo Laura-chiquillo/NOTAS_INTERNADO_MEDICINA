@@ -72,6 +72,8 @@ public class AsignaturaServiceImpl implements AsignaturaService{
             upAsignatura.setDefinitiva(asignatura.getDefinitiva());
         }
 
+        asignaturaRepository.save(upAsignatura);
+
     }
 
     @Override
