@@ -1,5 +1,6 @@
 package Backend.unbosque.service.serviceImp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,9 @@ public class EstudianteServiceImpl implements EstudianteService{
 
     @Override
     public List<Estudiante> getEstudiantes() {
-        // TODO Auto-generated method stub
-        return null;
+        List<Estudiante> estudiantes = new ArrayList<>();
+        estudianteRepository.findAll().forEach(estudiantes::add);
+        return estudiantes;
     }
     
     @Override
@@ -79,6 +81,7 @@ public class EstudianteServiceImpl implements EstudianteService{
             upEstudiante.setEstado(estudiante.getEstado());
         }
         
+        estudianteRepository.save(upEstudiante);
     }
 
     @Override

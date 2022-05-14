@@ -11,5 +11,6 @@ public interface AdminService {
     Admin createAdmin(Admin admin);
     void updateAdmin(Long id, Admin admin);
     void deleteAdmin(Long id);
+    boolean verificarCredenciales(Admin admin);                             
     
 }

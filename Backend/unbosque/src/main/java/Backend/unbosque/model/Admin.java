@@ -73,11 +73,11 @@ public class Admin {
             this.correo = correo;
         }
 
-        public String getContraseñA() {
+        public String getContraseña() {
             return this.contraseña;
         }
 
-        public void setContraseñA(String contraseña) {
+        public void setContraseña(String contraseña) {
             this.contraseña = contraseña;
         }
 }

@@ -53,6 +53,8 @@ public class InstitucionServiceImpl implements InstitucionService{
         if (institucion.getEstado() != null){
             upInstitucion.setEstado(institucion.getEstado());
         }
+
+        institucionRepository.save(upInstitucion);
     }
 
     @Override
