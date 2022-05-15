@@ -13,7 +13,7 @@ import Backend.unbosque.model.Admin;
 import Backend.unbosque.service.serviceApi.AdminService;
 
 @RestController
-@CrossOrigin(origins = {"https://localhost:3000", "https://mondsinc.vercel.app", "http://localhost:3000"})
+@CrossOrigin(origins = {"https://localhost:3000", "http://localhost:3000"})
 @RequestMapping({"/admin/auth"})
 public class AuthAdminController {
 

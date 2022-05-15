@@ -19,7 +19,7 @@ import Backend.unbosque.model.Pais;
 import Backend.unbosque.service.serviceApi.PaisService;
 
 @RestController
-@CrossOrigin(origins = {"https://localhost:3000", "https://mondsinc.vercel.app", "http://localhost:3000"})
+@CrossOrigin(origins = {"https://localhost:3000", "http://localhost:3000"})
 @RequestMapping({"/pais"})
 public class PaisController {
 

@@ -19,7 +19,7 @@ import Backend.unbosque.model.Asignatura;
 import Backend.unbosque.service.serviceApi.AsignaturaService;
 
 @RestController
-@CrossOrigin(origins = {"https://localhost:3000", "https://mondsinc.vercel.app", "http://localhost:3000"})
+@CrossOrigin(origins = {"https://localhost:3000", "http://localhost:3000"})
 @RequestMapping({"/asignatura"})
 public class AsignaturaController {
 
