@@ -13,11 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 import Backend.unbosque.model.Estudiante;
 import Backend.unbosque.service.serviceApi.EstudianteService;
 
 @RestController
+@CrossOrigin(origins = {"https://localhost:3000/", "http://localhost:3000/"})
 @RequestMapping({"/estudiante"})
 public class EstudianteController {
     
