@@ -26,7 +26,7 @@ public class EstudianteServiceImpl implements EstudianteService{
     }
     
     @Override
-    public Estudiante getEstudianteById(Long id) {
+    public Estudiante getEstudianteById(String id) {
         Estudiante estudiante = estudianteRepository.findById(id).get();
         return estudiante;
     }
@@ -37,7 +37,7 @@ public class EstudianteServiceImpl implements EstudianteService{
     }
 
     @Override
-    public void updateEstudiante(Long id, Estudiante estudiante) {
+    public void updateEstudiante(String id, Estudiante estudiante) {
         // TODO Auto-generated method stub
         Estudiante upEstudiante =estudianteRepository.findById(id).get();
 
@@ -85,7 +85,7 @@ public class EstudianteServiceImpl implements EstudianteService{
     }
 
     @Override
-    public void deleteEstudiante(Long id) {
+    public void deleteEstudiante(String id) {
         estudianteRepository.deleteById(id);
         
     }

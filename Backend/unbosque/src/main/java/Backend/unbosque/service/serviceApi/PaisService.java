@@ -7,9 +7,9 @@ import Backend.unbosque.model.Pais;
 public interface PaisService {
 
     List<Pais> getPais();
-    Pais getPaisById(Long id);
+    Pais getPaisById(String id);
     Pais createPais(Pais pais);
-    void updatePais(Long id, Pais pais);
-    void deletePais(Long id);
+    void updatePais(String id, Pais pais);
+    void deletePais(String id);
     
 }

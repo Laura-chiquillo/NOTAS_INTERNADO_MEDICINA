@@ -26,7 +26,7 @@ public class PaisServiceImpl  implements PaisService{
     }
 
     @Override
-    public Pais getPaisById(Long id) {
+    public Pais getPaisById(String id) {
         Pais pais = paisRepository.findById(id).get();
         return pais;
     }
@@ -37,7 +37,7 @@ public class PaisServiceImpl  implements PaisService{
     }
 
     @Override
-    public void updatePais(Long id, Pais pais) {
+    public void updatePais(String id, Pais pais) {
         // TODO Auto-generated method stub
         Pais upPais = paisRepository.findById(id).get();
 
@@ -53,7 +53,7 @@ public class PaisServiceImpl  implements PaisService{
     }
 
     @Override
-    public void deletePais(Long id) {
+    public void deletePais(String id) {
         paisRepository.deleteById(id);
         
     }

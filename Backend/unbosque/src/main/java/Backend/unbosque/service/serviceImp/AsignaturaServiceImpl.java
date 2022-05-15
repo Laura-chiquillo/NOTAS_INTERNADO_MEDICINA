@@ -26,7 +26,7 @@ public class AsignaturaServiceImpl implements AsignaturaService{
     }
 
     @Override
-    public Asignatura getAsignaturaById(Long id) {
+    public Asignatura getAsignaturaById(String id) {
         Asignatura asignatura = asignaturaRepository.findById(id).get();
         return asignatura;
     }
@@ -44,7 +44,7 @@ public class AsignaturaServiceImpl implements AsignaturaService{
     //private double definitiva
 
     @Override
-    public void updateAsignatura(Long id, Asignatura asignatura) {
+    public void updateAsignatura(String id, Asignatura asignatura) {
     
         Asignatura upAsignatura = asignaturaRepository.findById(id).get();
 
@@ -77,7 +77,7 @@ public class AsignaturaServiceImpl implements AsignaturaService{
     }
 
     @Override
-    public void deleteAsignatura(Long id) {
+    public void deleteAsignatura(String id) {
         asignaturaRepository.deleteById(id);
         
     }

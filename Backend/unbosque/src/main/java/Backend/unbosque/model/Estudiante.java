@@ -7,9 +7,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Estudiante {
 
         @Id
-        private Long idEstudiante;
-        private Long idAsignatura;
-        private Long idInstitucion;
+        private String idEstudiante;
+        private String idAsignatura;
+        private String idInstitucion;
         private String foto;
         private String documento;
         private String primerNombre;
@@ -22,7 +22,7 @@ public class Estudiante {
         private String telefono;
         private String estado;
 
-        public Estudiante(Long idEstudiante, Long idAsignatura, Long idInstitucion, String foto, String documento,
+        public Estudiante(String idEstudiante, String idAsignatura, String idInstitucion, String foto, String documento,
                 String primerNombre, String segundoNombre, String primerApellido, String segundoApellido,
                 double promedio, String semestreE, String correo, String telefono, String estado) {
             this.idEstudiante = idEstudiante;
@@ -41,27 +41,27 @@ public class Estudiante {
             this.estado = estado;
         }
 
-        public Long getIdEstudiante() {
+        public String getIdEstudiante() {
             return idEstudiante;
         }
 
-        public void setIdEstudiante(Long idEstudiante) {
+        public void setIdEstudiante(String idEstudiante) {
             this.idEstudiante = idEstudiante;
         }
 
-        public Long getIdAsignatura() {
+        public String getIdAsignatura() {
             return idAsignatura;
         }
 
-        public void setIdAsignatura(Long idAsignatura) {
+        public void setIdAsignatura(String idAsignatura) {
             this.idAsignatura = idAsignatura;
         }
 
-        public Long getIdInstitucion() {
+        public String getIdInstitucion() {
             return idInstitucion;
         }
 
-        public void setIdInstitucion(Long idInstitucion) {
+        public void setIdInstitucion(String idInstitucion) {
             this.idInstitucion = idInstitucion;
         }
 

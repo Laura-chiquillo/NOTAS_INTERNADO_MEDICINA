@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import Backend.unbosque.model.CoordinadorInsti;
 
 @Repository
-public interface CoordinadorInstiRepository extends MongoRepository<CoordinadorInsti, Long> {
+public interface CoordinadorInstiRepository extends MongoRepository<CoordinadorInsti, String> {
     
 }

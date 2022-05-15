@@ -26,7 +26,7 @@ public class RotacionServiceImpl implements RotacionService{
     }
 
     @Override
-    public Rotacion getRotacionById(Long id) {
+    public Rotacion getRotacionById(String id) {
         Rotacion rotaciones = rotacionRepository.findById(id).get();
         return rotaciones;
     }
@@ -37,7 +37,7 @@ public class RotacionServiceImpl implements RotacionService{
     }
 
     @Override
-    public void updateRotacion(Long id, Rotacion rotacion) {
+    public void updateRotacion(String id, Rotacion rotacion) {
         // TODO Auto-generated method stub
         Rotacion upRotacion = rotacionRepository.findById(id).get();
 
@@ -61,7 +61,7 @@ public class RotacionServiceImpl implements RotacionService{
     }
 
     @Override
-    public void deleteRotacion(Long id) {
+    public void deleteRotacion(String id) {
         rotacionRepository.deleteById(id);
         
     }

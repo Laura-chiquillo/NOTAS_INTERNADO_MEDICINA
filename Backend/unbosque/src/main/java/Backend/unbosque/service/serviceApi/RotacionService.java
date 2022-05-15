@@ -7,9 +7,9 @@ import Backend.unbosque.model.Rotacion;
 public interface RotacionService {
 
     List<Rotacion> getRotaciones();
-    Rotacion getRotacionById(Long id);
+    Rotacion getRotacionById(String id);
     Rotacion createRotacion(Rotacion rotacion);
-    void updateRotacion(Long id, Rotacion rotacion);
-    void deleteRotacion(Long id);
+    void updateRotacion(String id, Rotacion rotacion);
+    void deleteRotacion(String id);
     
 }

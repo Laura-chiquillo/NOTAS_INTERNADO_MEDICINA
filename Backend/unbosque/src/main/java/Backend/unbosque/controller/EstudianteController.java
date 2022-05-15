@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -32,7 +33,7 @@ public class EstudianteController {
     }
 
     @GetMapping({"/{id}"})
-    public ResponseEntity<Estudiante> getEstudiante(@PathVariable Long id) {
+    public ResponseEntity<Estudiante> getEstudiante(@PathVariable String id) {
         Estudiante estudiante = estudianteService.getEstudianteById(id);
         return new ResponseEntity<>(estudiante, HttpStatus.OK);
     }
@@ -44,13 +45,13 @@ public class EstudianteController {
     }
 
     @PatchMapping("/editar/{id}")
-    public ResponseEntity<Estudiante> updateEstudiante(@PathVariable Long id, @RequestBody Estudiante estudiante) {
+    public ResponseEntity<Estudiante> updateEstudiante(@PathVariable String id, @RequestBody Estudiante estudiante) {
         estudianteService.updateEstudiante(id, estudiante);
         return new ResponseEntity<>(estudianteService.getEstudianteById(id), HttpStatus.OK);
     }
 
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<Estudiante> deleteEstudiante(@PathVariable Long id) {
+    public ResponseEntity<Estudiante> deleteEstudiante(@PathVariable String id) {
         estudianteService.deleteEstudiante(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

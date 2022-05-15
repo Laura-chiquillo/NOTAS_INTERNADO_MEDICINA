@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import Backend.unbosque.model.Institucion;
 
 @Repository
-public interface InstitucionRepository extends MongoRepository<Institucion, Long>{
+public interface InstitucionRepository extends MongoRepository<Institucion, String>{
     
 }

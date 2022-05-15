@@ -26,7 +26,7 @@ public class CoordinadorInstiServiceImpl implements CoordinadorInstiService{
     }
 
     @Override
-    public CoordinadorInsti getCoordinadorInstiById(Long id) {
+    public CoordinadorInsti getCoordinadorInstiById(String id) {
         CoordinadorInsti coordinadorInsti = coordinadorInstiRepository.findById(id).get();
         return coordinadorInsti;
     }
@@ -37,7 +37,7 @@ public class CoordinadorInstiServiceImpl implements CoordinadorInstiService{
     }
 
     @Override
-    public void updateCoordinadorInsti(Long id, CoordinadorInsti coordinadorInsti) {
+    public void updateCoordinadorInsti(String id, CoordinadorInsti coordinadorInsti) {
         // TODO Auto-generated method stub
 
         CoordinadorInsti upCoordinadorInsti = coordinadorInstiRepository.findById(id).get();
@@ -79,7 +79,7 @@ public class CoordinadorInstiServiceImpl implements CoordinadorInstiService{
     }
 
     @Override
-    public void deleteCoordinadorInsti(Long id) {
+    public void deleteCoordinadorInsti(String id) {
         coordinadorInstiRepository.deleteById(id);
         
     }

@@ -7,21 +7,21 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Pais {
 
         @Id
-        private Long idPais;
+        private String idPais;
         private String nombre;
         private String ciudad;
 
-        public Pais(Long idPais, String nombre, String ciudad) {
+        public Pais(String idPais, String nombre, String ciudad) {
             this.idPais = idPais;
             this.nombre = nombre;
             this.ciudad = ciudad;
         }
 
-        public Long getIdPais() {
+        public String getIdPais() {
             return this.idPais;
         }
 
-        public void setIdPais(Long idPais) {
+        public void setIdPais(String idPais) {
             this.idPais = idPais;
         }
 
