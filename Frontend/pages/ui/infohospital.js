@@ -32,9 +32,31 @@ const InfoHospital = () => {
                 <Accordion.Header>Curitas del saber
                 </Accordion.Header>
                 <Accordion.Body>
-                  <li>1. Ricardo Arjona  Nota: No subida</li>
-                  <li>1. Jenifer Acosta  Nota:subida</li>
-                  <li>1. Juan Andres Camacho  Nota: No subida</li>
+                  <li>1. Ricardo Arjona <br></br> 
+                  Nota: No reportada <br></br>
+                  Fecha inicial rotación: <br></br>
+                  Fecha final rotación: <br></br>
+                  Rotacion:  <br></br>
+                  Semestre actual:  <br></br>
+                  </li>
+                </Accordion.Body>
+                <Accordion.Body>
+                  <li>2. Jenifer Acosta <br></br>
+                   Nota: Reportada<br></br>
+                  Fecha inicial rotación: <br></br>
+                  Fecha final rotación: <br></br>
+                  Rotacion:  <br></br>
+                  Semestre actual:  <br></br>
+                 </li>
+                </Accordion.Body>
+                <Accordion.Body>
+                  <li>3. Juan Andres Camacho <br></br>
+                   Nota: No Reportada<br></br>
+                  Fecha inicial rotación: <br></br>
+                  Fecha final rotación: <br></br>
+                  Rotacion:  <br></br>
+                  Semestre actual:  <br></br>
+                 </li>
                 </Accordion.Body>
               </Accordion.Item>
             </Accordion>
