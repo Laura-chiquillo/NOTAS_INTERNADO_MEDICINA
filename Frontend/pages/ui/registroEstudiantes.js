@@ -1,3 +1,5 @@
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router'
 import {
   Card,
   Row,
@@ -12,8 +14,38 @@ import {
   FormText,
 } from 'reactstrap';
 import Link from 'next/link'; 
-const registroEstudiantes = () => {
 
+import { getApiEstudiantes, crearApiEstudiante } from '../../api/estudiantes'
+
+
+
+const registroEstudiantes = () => {
+  const router = useRouter()
+  const [listEstudiantes, setListaEstudiantes] = useState([])
+
+  /* Llamar la función de la api mostrar estudiante*/
+  useEffect(() => {
+    getApiEstudiantes().then((Datos) => setListaEstudiantes(Datos)).catch((Error) => {
+      alert(Error.toString())
+    })
+  }, [])
+  const [estudianteSeleccionado, setEstudianteSeleccionado] = useState({})
+
+   const nuevoEstudiante =()=>{
+      crearApiEstudiante(estudianteSeleccionado).then( () =>{
+        router.push("/ui/estudiantes")
+      })
+   }
+   const actualizarEditEstudiante = (e) => {
+    setEstudianteSeleccionado(
+      {...estudianteSeleccionado, 
+      [e.target.name]: e.target.value}
+    )    
+  }
+
+  
+  
+  
   return (
     <Row>
       <Col>
@@ -25,13 +57,13 @@ const registroEstudiantes = () => {
             Registrar Estudiantes
           </CardTitle>
           <CardBody>
-            <Form>
+            <Form onChange={actualizarEditEstudiante}>
               <FormGroup>
                 <Label>Cédula de ciudadanía</Label>
                 <Input
                   type="text"
                   id='IPS'
-                  name='ips'
+                  name='documento'
                 />
               </FormGroup>
               <FormGroup>
@@ -40,13 +72,13 @@ const registroEstudiantes = () => {
                   <Input
                     type="text"
                     id='Nombre1'
-                    name='nombre1'
+                    name='primerNombre'
                   />
                   <span class="input-group-addon">-</span>
                   <Input
                     type="text"
                     id='Nombre2'
-                    name='nombre2'
+                    name='segundoNombre'
                   />
                 </div>
               </FormGroup>
@@ -56,13 +88,13 @@ const registroEstudiantes = () => {
                   <Input
                     type="text"
                     id='Apellido1'
-                    name='apellido1'
+                    name='primerApellido'
                   />
                   <span class="input-group-addon">-</span>
                   <Input
                     type="text"
                     id='Apellido2'
-                    name='Apellido2'
+                    name='segundoApellido'
                   />
                 </div>
               </FormGroup>
@@ -78,7 +110,7 @@ const registroEstudiantes = () => {
                 <Label for="eEmail">Correo</Label>
                 <Input
                   id="Email"
-                  name="email"
+                  name="correo"
                   type="email"
                 />
               </FormGroup>
@@ -87,18 +119,11 @@ const registroEstudiantes = () => {
                 <Input
                   type="text"
                   id='Semestre'
-                  name='Semestre'
+                  name='semestreE'
                 />
               </FormGroup>
-              <FormGroup>
-                <Label>Dirección</Label>
-                <Input
-                  type="text"
-                  id='direcion'
-                  name='direccion'
-                />
-              </FormGroup>
-              <Link href={'/ui/estudiantes'}><Button  color="primary">Guardar</Button></Link>
+              
+        <Button onClick={nuevoEstudiante} color="primary">Guardar</Button>
             </Form>
           </CardBody>
         </Card>
