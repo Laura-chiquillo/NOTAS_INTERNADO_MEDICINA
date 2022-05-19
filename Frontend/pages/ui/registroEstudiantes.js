@@ -33,7 +33,7 @@ const registroEstudiantes = () => {
 
    const nuevoEstudiante =()=>{
       crearApiEstudiante(estudianteSeleccionado).then( () =>{
-        router.push("/ui/estudiantes")
+        router.push("/ui/estudiantes") 
       })
    }
    const actualizarEditEstudiante = (e) => {
