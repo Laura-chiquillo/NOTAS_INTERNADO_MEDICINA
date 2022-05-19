@@ -5,8 +5,8 @@ import { useColors } from '../../hooks/useColor';
 import Accordion from 'react-bootstrap/Accordion';
 import Modal from 'react-bootstrap/Modal';
 import { Form } from 'react-bootstrap';
-import { getApiEstudiantes, editApiEstudiante } from '../../api/estudiantes'
-
+import { getApiEstudiantes, editApiEstudiante, agregarApiEstudiante } from '../../api/estudiantes'
+import * as XLSX from "xlsx";
 
 const Buttons = () => {
 
@@ -58,6 +58,55 @@ const Buttons = () => {
   const handShow2 = () => setShows2(true);
   const { color } = useColors();
 
+  /*Para subir un archivo excel y pasar a JSON */
+  const [jsonExcel, setJsonExcel] = useState(0)
+
+  const readExcel = (file) => {
+
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsArrayBuffer(file);
+
+      fileReader.onload = (e) => {
+        const bufferArray = e.target.result;
+
+        const wb = XLSX.read(bufferArray, { type: "buffer" });
+        /*La posición 0 es la primera hoja del excel*/
+        const wsname = wb.SheetNames[0];
+
+        const ws = wb.Sheets[wsname];
+
+        const data = XLSX.utils.sheet_to_json(ws);
+
+        resolve(data);
+      };
+
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };
+
+  const guardarDatos = () => {
+    readExcel(jsonExcel).then((d) => {
+      const estud = {};
+      const subirDatos = d.map((n) => {
+        console.log(n)
+        estud.documento = n["Documento"],
+        estud.primerNombre = n["PrimerNombre"],
+        estud.segundoNombre = n["Segundo Nombre"],
+        estud.primerApellido = n["Primer Apellido"],
+        estud.segundoApellido = n["Segundo Apellido"],
+        estud.semestreE = n["Semestre"],
+        estud.correo = n["Correo"],
+        estud.telefono = n["Telefono"],
+        agregarApiEstudiante(estud)
+        handleClose()
+      });
+    });
+
+  };
+
   return (
     <div>
       {/* Start Inner Div*/}
@@ -91,7 +140,9 @@ const Buttons = () => {
                         <Row>
                           <FormGroup>
                             <Label for="exampleFile">Cargar Archivo</Label>
-                            <Input id="exampleFile" name="file" type="file" />
+                            <Input id="exampleFile" name="file" type="file" onChange={(e) => {
+          setJsonExcel(e.target.files[0]) 
+        }} />
                           </FormGroup>
                         </Row>
                         <Link href={'/ui/registroEstudiantes'}><Button color="primary">Ingresar Datos Estudiantes</Button></Link>
@@ -101,7 +152,7 @@ const Buttons = () => {
                       <Button variant="secondary" onClick={handleClose}>
                         Cerrar
                       </Button>
-                      <Button variant="primary" onClick={handleClose}>
+                      <Button variant="primary" onClick={guardarDatos} >
                         Guardar
                       </Button>
                     </Modal.Footer>
