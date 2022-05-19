@@ -47,11 +47,17 @@ import {
 
                 <FormGroup>
 
-                    <table class="table">
-                      
+                    <table class="table" border="2">
+                      <thead>
+                        <tr>
+                          <th>*</th>
+                          <th>*</th>
+                          <th>Calificaciones</th>
+                        </tr>
+                      </thead>
                       <tbody>
                         <tr ng-repeat="item in lista">
-                        <td>I</td>
+                        <td border="2">I</td>
                           <td><b>Historia clinica</b><br></br>
                           Presentacion, calidad y evoluciones<br></br>
                           Justificacion de laboratorio con el diagnostico. epicrisis

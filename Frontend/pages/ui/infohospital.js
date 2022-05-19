@@ -32,31 +32,83 @@ const InfoHospital = () => {
                 <Accordion.Header>Curitas del saber
                 </Accordion.Header>
                 <Accordion.Body>
-                  <li>1. Ricardo Arjona <br></br> 
-                  Nota: No reportada <br></br>
-                  Fecha inicial rotación: <br></br>
-                  Fecha final rotación: <br></br>
-                  Rotacion:  <br></br>
-                  Semestre actual:  <br></br>
-                  </li>
-                </Accordion.Body>
-                <Accordion.Body>
-                  <li>2. Jenifer Acosta <br></br>
-                   Nota: Reportada<br></br>
-                  Fecha inicial rotación: <br></br>
-                  Fecha final rotación: <br></br>
-                  Rotacion:  <br></br>
-                  Semestre actual:  <br></br>
-                 </li>
-                </Accordion.Body>
-                <Accordion.Body>
-                  <li>3. Juan Andres Camacho <br></br>
-                   Nota: No Reportada<br></br>
-                  Fecha inicial rotación: <br></br>
-                  Fecha final rotación: <br></br>
-                  Rotacion:  <br></br>
-                  Semestre actual:  <br></br>
-                 </li>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Estudiante</th>
+                      <th>Nota</th>
+                      <th>Fecha inicial rotacion</th>
+                      <th>Fecha final rotacion</th>
+                      <th>Rotacion</th>
+                      <th>Semestre actual</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="item in lista">
+                        <td>
+                        <Link href={'/ui/nota'}>Ricardo Arjona</Link>
+                        
+                        </td>
+                        <td>
+                        No reportada
+                        </td>
+                        <td>
+                          ???
+                        </td>
+                        <td>
+                          ???
+                        </td>
+                        <td>
+                          ???
+                        </td>
+                        <td>
+                          11
+                        </td>
+                    </tr>
+                    <tr ng-repeat="item in lista">
+                        <td >
+                        <Link href={'/ui/nota'}>Jenifer Acosta</Link>
+                        </td>
+                        <td>
+                        Reportada
+                        </td>
+                        <td>
+                          ???
+                        </td>
+                        <td>
+                          ???
+                        </td>
+                        <td>
+                          ???
+                        </td>
+                        <td>
+                          11
+                        </td>
+                    </tr>
+                    <tr ng-repeat="item in lista">
+                        <td >
+                        <Link href={'/ui/nota'}>Juan Andres Camacho</Link>
+                        </td>
+                        <td>
+                        No reportada
+                        </td>
+                        <td>
+                          ???
+                        </td>
+                        <td>
+                          ???
+                        </td>
+                        <td>
+                          ???
+                        </td>
+                        <td>
+                          11
+                        </td>
+                    </tr>
+                  </tbody>
+                  
+                </table>
                 </Accordion.Body>
               </Accordion.Item>
             </Accordion>

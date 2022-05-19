@@ -70,9 +70,7 @@ const nota = () => {
               </FormGroup>
                 
 
-              <Link href={'/ui/generarNota'}><Button  color="primary">Generar Nota</Button></Link>
-
-              <Link href={'/ui/vistaHospitales'}><Button  color="primary">Atras</Button></Link>
+              <Link href={'/ui/infohospital'}><Button  color="primary">Atras</Button></Link>
 
             </Form>
           </CardBody>
@@ -81,5 +79,5 @@ const nota = () => {
     </Row>
   )
 };
-nota.layout = "MenuLayoutH"
+nota.layout = "MenuLayout"
 export default nota;

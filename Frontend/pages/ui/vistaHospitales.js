@@ -75,9 +75,9 @@ const Buttons = () => {
               <li>fecha inicio actual: 21/02/22</li>
               <li>Fecha finalización actual: 21/04/2022</li>
               <li>Nota: Subida</li>
-              <Link href={'/ui/nota'}>
+              <Link href={'/ui/generarNota'}>
                 <Button className="btnReal" color="secondary" size="lg">
-                Promedio de Notas
+                  Generar Nota
                 </Button>
                 </Link>
             </Accordion.Body>
@@ -91,9 +91,9 @@ const Buttons = () => {
               <li>fecha inicio actual: 21/02/22</li>
               <li>Fecha finalización actual: 21/04/2022</li>
               <li>Nota: Subida</li>
-              <Link href={'/ui/nota'}>
+              <Link href={'/ui/generarNota'}>
                 <Button className="btnReal" color="secondary" size="lg">
-                  Promedio de Notas
+                  Generar Nota
                 </Button>
                 </Link>
             </Accordion.Body>
