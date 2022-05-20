@@ -151,5 +151,16 @@ public class Estudiante {
 
         public void setEstado(String estado) {
             this.estado = estado;
+        }
+
+        @Override
+        public String toString() {
+            return "Estudiante [correo=" + correo + ", documento=" + documento + ", estado=" + estado + ", foto=" + foto
+                    + ", idAsignatura=" + idAsignatura + ", idEstudiante=" + idEstudiante + ", idInstitucion="
+                    + idInstitucion + ", primerApellido=" + primerApellido + ", primerNombre=" + primerNombre
+                    + ", promedio=" + promedio + ", segundoApellido=" + segundoApellido + ", segundoNombre="
+                    + segundoNombre + ", semestreE=" + semestreE + ", telefono=" + telefono + "]";
         }     
+
+        
 }

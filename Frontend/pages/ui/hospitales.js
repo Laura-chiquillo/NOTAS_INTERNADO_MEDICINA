@@ -1,12 +1,51 @@
 
-import React, { useState } from 'react';
-import { Button, Card, FormText, FormGroup, Label, Input, CardBody, CardTitle, Row, Col } from 'reactstrap';
+import React, { useState, useEffect } from 'react';
+import { Button, ButtonGroup, Card, FormText, FormGroup, Label, Input, CardBody, CardTitle, Row, Col } from 'reactstrap';
 import Link from 'next/link';
 import { useColors } from '../../hooks/useColor';
 import {Form} from 'react-bootstrap';
 import Modal  from 'react-bootstrap/Modal';
 import Accordion from 'react-bootstrap/Accordion';
+import { getApiInstituciones, editApiInstitucion } from '../../api/instituciones';
+
+
 const Buttons = () => {
+
+  /* mostrar lista */
+
+  const [listaInstituciones, setListaInstituciones] = useState([])
+  useEffect(() => {
+    getApiInstituciones().then((Datos) => setListaInstituciones(Datos)).catch((Error) => {
+      alert(Error.toString())
+    })
+  }, [])
+
+  /* editar institución */
+  const [institucionSeleccionado, setinstitucionSeleccionado] = useState({})
+
+  const editarinstitucion = () => {
+    editApiInstitucion(institucionSeleccionado).then((inst) => {
+      /* cambiar el estudiante */
+      const nuevaLista = listaInstituciones.map((i) => i.idInstitucion == inst.idInstitucion? inst:i)
+      setListaInstituciones(nuevaLista)
+      close()
+    })
+  }
+  
+  const actualizarInstitucion = (e) => {
+    setinstitucionSeleccionado(
+      {...institucionSeleccionado, 
+      [e.target.name]: e.target.value}
+    )    
+  }
+
+
+  const [shows, setShows] = useState(false);
+  const close = () => setShows(false);
+  const handShow = (inst) => {
+    setinstitucionSeleccionado(inst)
+    setShows(true)
+  };
 
   const [cSelected, setCSelected] = useState([]);
   const [rSelected, setRSelected] = useState(null);
@@ -111,54 +150,116 @@ const Buttons = () => {
         <CardBody>
           <FormGroup>
             <Label for="exampleText"></Label>
-            <Accordion>
-              <Accordion.Item eventKey="0">
-                <Accordion.Header>Curitas del saber
-                </Accordion.Header>
-                <Accordion.Body>
-                  
-                  <Button variant="primary" onClick={handleShow1}>
-                    Agregar lista de estudiante
-                  </Button>
-
-                  <Modal show={show1} onHide={handleClose1}>
+            {/* Lista */}
+            <Row>
+              <Col>
+                <Accordion>
+                  {listaInstituciones.map((institucion, indice) =>(
+                    <Accordion.Item eventKey={indice} key={indice}>
+                    <Accordion.Header>
+                      {institucion?.nombre}
+                    </Accordion.Header>
+                    <Accordion.Body>
+                
+                      <Button variant="primary" onClick={handleShow1}>
+                        Agregar lista de estudiante
+                      </Button>
+                      <Modal show={show1} onHide={handleClose1}>
+                        <Modal.Header closeButton>
+                          <Modal.Title>Lista estudiantes</Modal.Title>
+                        </Modal.Header>
+                        <div>
+                        <input placeholder='Buscar'></input>
+                        </div>
+                        <Modal.Body>
+                            <div className="topping">
+                              <input type="checkbox" id="topping" name="topping" value="Paneer" />Andrea Camacho
+                            </div>
+                            <div className="topping">
+                              <input type="checkbox" id="topping" name="topping" value="Paneer" />Juan Andres Jaramillo
+                            </div>
+                            <div className="topping">
+                              <input type="checkbox" id="topping" name="topping" value="Paneer" />Camila Perez
+                            </div>
+                        </Modal.Body>
+                        <Modal.Footer>
+                          <Button variant="secondary" onClick={handleClose1}>
+                            Cancelar
+                          </Button>
+                          <Button variant="primary" onClick={handleClose1}>
+                            Guardar
+                          </Button>
+                        </Modal.Footer>
+                      </Modal>
+                      <li>país: {institucion.idPais}</li>
+                      <li>Dirección:{institucion.direccion}</li>
+                    </Accordion.Body>
+                  </Accordion.Item>
+                  ))}
+                </Accordion>
+              </Col>
+              {/* editar */}
+              <Col className="p-1" xs={1}>
+                  {listaInstituciones.map((institucion, indice) => (
+                    <ButtonGroup className='my-2' aria-label="Basic example" key={indice}>
+                      <Button style={{ backgroundColor: color, color: "black" }} onClick={() => handShow(institucion) }>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil-fill" viewBox="0 0 16 16">
+                          <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+                        </svg>
+                      </Button>
+                      <Button style={{ backgroundColor: color, color: "black" }}>
+                        <input type="checkbox"></input>
+                      </Button>
+                    </ButtonGroup>
+                  ))}
+                  {/* editar institución */}
+                  <Modal
+                    show={shows}
+                    onHide={close}
+                    backdrop="static"
+                    keyboard={false}
+                  >
                     <Modal.Header closeButton>
-                      <Modal.Title>Lista estudiantes</Modal.Title>
+                      <Modal.Title>Editar institución</Modal.Title>
                     </Modal.Header>
-                    <div>
-                    <input placeholder='Buscar'></input>
-                    </div>
                     <Modal.Body>
-                        <div className="topping">
-                          <input type="checkbox" id="topping" name="topping" value="Paneer" />Andrea Camacho
-                        </div>
-                        <div className="topping">
-                          <input type="checkbox" id="topping" name="topping" value="Paneer" />Juan Andres Jaramillo
-                        </div>
-                        <div className="topping">
-                          <input type="checkbox" id="topping" name="topping" value="Paneer" />Camila Perez
-                        </div>
+              
+                      {/* formulario */}
+                      <Form onChange={actualizarInstitucion}>
+                        <FormGroup>
+                          <Label>País</Label>
+                          <Input defaultValue={institucionSeleccionado?.idPais}
+                            type="text"
+                            name='pais'
+                          />
+                        </FormGroup>
+                        <FormGroup>
+                          <Label>Nombre de la institución</Label>
+                          <Input defaultValue={institucionSeleccionado?.nombre}
+                            type="text"
+                            name='nombre'
+                          />
+                        </FormGroup>
+                        <FormGroup>
+                          <Label>Dirección</Label>
+                          <Input defaultValue={institucionSeleccionado?.direccion}
+                            type="text"
+                            name='direccion'
+                          />
+                        </FormGroup>
+                      </Form>
                     </Modal.Body>
                     <Modal.Footer>
-                      <Button variant="secondary" onClick={handleClose1}>
+                      <Button variant="secondary" onClick={close}>
                         Cancelar
                       </Button>
-                      <Button variant="primary" onClick={handleClose1}>
+                      <Button onClick={editarinstitucion}  variant="primary">
                         Guardar
                       </Button>
                     </Modal.Footer>
                   </Modal>
-
-
-
-                  <li>Nombre apellido: Alfredo Camacho</li>
-                  <li>Telefono: 3001345765</li>
-                  <li>Correo: Curitas@IPS.com</li>
-                  <li>Cargo: Coordinador</li>
-                  <li>Dirección: Calle 13 # 23 -51</li>
-                </Accordion.Body>
-              </Accordion.Item>
-            </Accordion>
+                </Col>
+            </Row>
           </FormGroup>
         </CardBody>
         <Col xs="0" md="0">
