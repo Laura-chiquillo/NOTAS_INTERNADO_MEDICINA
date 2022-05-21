@@ -83,5 +83,12 @@ public class CoordinadorInstiServiceImpl implements CoordinadorInstiService{
         coordinadorInstiRepository.deleteById(id);
         
     }
+
+    @Override
+    public void updatePassword(String id, String contraseña) {
+        CoordinadorInsti upPasswordCoordinadorInsti = coordinadorInstiRepository.findById(id).get();
+        upPasswordCoordinadorInsti.setContraseña(contraseña);
+        coordinadorInstiRepository.save(upPasswordCoordinadorInsti);
+    }
     
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import Backend.unbosque.model.Admin;
@@ -50,9 +51,16 @@ public class AdminController {
         return new ResponseEntity<>(adminService.getAdminById(id), HttpStatus.OK);
     }
 
+    @PatchMapping("/editar/contrasena/{id}")
+    public ResponseEntity<Admin> updatePassword(@PathVariable String id, @RequestParam String contraseña) {
+        adminService.updatePassword(id, contraseña);
+        return new ResponseEntity<>(adminService.getAdminById(id), HttpStatus.OK);
+    }
+
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<Admin> deleteAdmin(@PathVariable String id) {
         adminService.deleteAdmin(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import Backend.unbosque.model.CoordinadorInsti;
@@ -46,6 +47,11 @@ public class CoordinadorInstiController {
     @PatchMapping("/editar/{id}")
     public ResponseEntity<CoordinadorInsti> updateCoordinador(@PathVariable String id, @RequestBody CoordinadorInsti coordinadorInsti) {
         coordinadorInstiService.updateCoordinadorInsti(id, coordinadorInsti);
+        return new ResponseEntity<>(coordinadorInstiService.getCoordinadorInstiById(id), HttpStatus.OK);
+    }
+    @PatchMapping("/editar/contrasena/{id}")
+    public ResponseEntity<CoordinadorInsti> updatePassword(@PathVariable String id, @RequestParam String contraseña) {
+        coordinadorInstiService.updatePassword(id, contraseña);
         return new ResponseEntity<>(coordinadorInstiService.getCoordinadorInstiById(id), HttpStatus.OK);
     }
 
