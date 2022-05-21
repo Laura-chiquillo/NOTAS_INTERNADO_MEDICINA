@@ -11,6 +11,7 @@ public interface AdminService {
     Admin createAdmin(Admin admin);
     void updateAdmin(String id, Admin admin);
     void deleteAdmin(String id);
-    boolean verificarCredenciales(Admin admin);                             
+    boolean verificarCredenciales(Admin admin);
+    void updatePassword(String id, String contraseña);                             
     
 }

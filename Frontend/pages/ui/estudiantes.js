@@ -94,9 +94,9 @@ const Buttons = () => {
         console.log(n)
         estud.documento = n["Documento"],
         estud.primerNombre = n["PrimerNombre"],
-        estud.segundoNombre = n["Segundo Nombre"],
+        estud.segundoNombre = n["Segundo Nombre"]  || " ",
         estud.primerApellido = n["Primer Apellido"],
-        estud.segundoApellido = n["Segundo Apellido"],
+        estud.segundoApellido = n["Segundo Apellido"]  || " ",
         estud.semestreE = n["Semestre"],
         estud.correo = n["Correo"],
         estud.telefono = n["Telefono"],
@@ -193,7 +193,7 @@ const Buttons = () => {
                         <Row>
                           <Col>
                             <ul>
-                              <li> {estudiante.foto} </li>
+                              <li> <img src={estudiante.foto}></img> </li>
                               <li>Documento: {estudiante.documento} </li>
                               <li>semestre actual: {estudiante.semestreE} </li>
                               <li>correo: {estudiante.correo} </li>
