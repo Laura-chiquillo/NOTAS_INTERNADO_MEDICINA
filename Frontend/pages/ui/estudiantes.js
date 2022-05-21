@@ -157,6 +157,8 @@ const Buttons = () => {
 
   };
 
+  /* Organizar por filtros */
+  
   return (
     <div>
       {/* Start Inner Div*/}
@@ -215,11 +217,12 @@ const Buttons = () => {
                 <FormGroup>
                   <Label for="exampleSelect"></Label>
                   <Input id="exampleSelect" name="select" type="select">
+
                     <option>Ordenar por</option>
-                    <option>Orden alfabetico</option>
-                    <option>Notas registradas</option>
-                    <option>Notas no registradas</option>
-                    <option>Mes</option>
+                    <option>Nombre de la  A-Z</option>
+                    <option>Nombre de la Z-A</option>
+                    <option>Apellidos de la A-Z</option>
+                    <option>Apellidos de la Z-A</option>
                   </Input>
                 </FormGroup>
 
@@ -322,17 +325,17 @@ const Buttons = () => {
                   <Row>
                     <Pagination>
                       <PaginationItem>
-                        <PaginationLink first onClick={primeraPaginacion} />
+                        <PaginationLink first onClick={primeraPaginacion} style={{ backgroundColor: "rgb(242, 247, 248)", color: color }}/>
                       </PaginationItem>
                       <PaginationItem>
-                        <PaginationLink previous onClick={anteriorPaginacion} />
+                        <PaginationLink previous onClick={anteriorPaginacion} style={{ backgroundColor: "rgb(242, 247, 248)", color: color }} />
                       </PaginationItem>
 
                       <PaginationItem>
-                        <PaginationLink next onClick={siguientePaginacion} />
+                        <PaginationLink next onClick={siguientePaginacion} style={{ backgroundColor: "rgb(242, 247, 248)", color: color }} />
                       </PaginationItem>
                       <PaginationItem>
-                        <PaginationLink last onClick={ultimaPaginacion} />
+                        <PaginationLink last onClick={ultimaPaginacion}  style={{ backgroundColor: "rgb(242, 247, 248)", color: color }}/>
                       </PaginationItem>
                       <PaginationItem></PaginationItem>
                     </Pagination>
