@@ -16,9 +16,7 @@ const Buttons = () => {
   /** Variable que determina la cantidad de paginas de la paginacion */
   const [nPaginacion, setNPaginacion] = useState(0);
 
-  /** Juan David Alberto Quintero Gaona ama mas a Laura Daniela Chiquillo Leon que
-   * Laura Daniela Chiquillo Leon ama mas a Juan David Alberto Quintero Gaona
-   * Ademas esta variable determina el numero de pagina que se esta visualizando
+  /** esta variable determina el numero de pagina que se esta visualizando
    */
   
   const [paginaActual, setPaginaActual] = useState(1);

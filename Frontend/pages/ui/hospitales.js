@@ -1,6 +1,6 @@
 
-import React, { useState, useEffect } from 'react';
-import { Button, ButtonGroup, Card, FormText, FormGroup, Label, Input, CardBody, CardTitle, Row, Col } from 'reactstrap';
+import React, { useState, useEffect} from 'react';
+import { Button, ButtonGroup, Card, FormText, FormGroup, Label, Input, CardBody, CardTitle, Row, Col, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 import Link from 'next/link';
 import { useColors } from '../../hooks/useColor';
 import {Form} from 'react-bootstrap';
@@ -73,6 +73,77 @@ const Buttons = () => {
   const handleClose1 = () => setShow1(false);
   const handleShow1 = () => setShow1(true);
 
+  /* Paginación */
+  const [itemsPagina, setItemsPagina] = useState(5);
+  const [nPaginacion, setNPaginacion] = useState(0);
+  const [paginaActual, setPaginaActual] = useState(1);
+
+  const primeraPaginacion = () => {
+    setPaginaActual(1);
+  }
+
+  const ultimaPaginacion = () => {
+    setPaginaActual(nPaginacion);
+  }
+
+  const anteriorPaginacion = () => {
+    if (paginaActual > 1) {
+      setPaginaActual(paginaActual - 1);
+    }
+  }
+
+  const siguientePaginacion = () => {
+    if (paginaActual < nPaginacion) {
+      setPaginaActual(paginaActual + 1);
+    }
+  }
+  useEffect(() => {
+      setNPaginacion(Math.ceil(listaInstituciones.length / itemsPagina))
+  }, [listaInstituciones])
+
+ /* Organizar por filtros */
+ const nombreAscendente = (nom1,nom2) => {
+  if (nom1.nombre > nom2.nombre) {
+    return 1
+  } return -1
+}
+const nombreDescendente = (nom1,nom2) => {
+  if (nom1.nombre > nom2.nombre) {
+    return -1
+  } return 1
+}
+const paisAscendente = (pais1,pais2) => {
+  if (pais1.idPais > pais2.idPais) {
+    return 1
+  } return -1
+}
+const paisDescendente = (pais1,pais2) => {
+  if (pais1.idPais > pais2.idPais) {
+    return -1
+  } return 1
+}
+
+const noOrdenar =(a,b) => 1
+const [ordenarLista, setOrdenar] = useState(()=> noOrdenar)
+/* seleccionar el orden */
+const seleccionarOrden = (e) => {
+  if (e.target.value == "nombreAscendente") {
+    setOrdenar(()=>nombreAscendente)
+  }
+  if (e.target.value == "nombreDescendente") {
+    setOrdenar(()=> nombreDescendente)
+  }
+  if (e.target.value == "paisAscendente") {
+    setOrdenar(()=> paisAscendente)
+  }
+  if (e.target.value == "paisDescendente") {
+    setOrdenar(()=> paisDescendente)
+  }
+  if (e.target.value == "vacio") {
+    setOrdenar(()=> noOrdenar)
+  }
+}
+
 
   return (
     <div>
@@ -133,12 +204,12 @@ const Buttons = () => {
                 </Form>
                 <FormGroup>
                   <Label for="exampleSelect"></Label>
-                  <Input id="exampleSelect" name="select" type="select">
-                    <option>Ordenar por</option>
-                    <option>Orden alfabetico</option>
-                    <option>Notas registradas</option>
-                    <option>Notas no registradas</option>
-                    <option>Mes</option>
+                  <Input id="exampleSelect" name="select" type="select" onChange={seleccionarOrden}>
+                    <option value="vacio">Ordenar por</option>
+                    <option  value="nombreAscendente">Nombre de la  A-Z</option>
+                    <option value="nombreDescendente">Nombre de la Z-A</option>
+                    <option  value="paisAscendente">país de la  A-Z</option>
+                    <option value="paisDescendente">país de la Z-A</option>
                   </Input>
                 </FormGroup>
 
@@ -151,10 +222,13 @@ const Buttons = () => {
           <FormGroup>
             <Label for="exampleText"></Label>
             {/* Lista */}
-            <Row>
+            <Row> 
               <Col>
                 <Accordion>
-                  {listaInstituciones.map((institucion, indice) =>(
+                  {listaInstituciones
+                   .sort((a,b) => ordenarLista(a,b))
+                   .filter( (est, i) => i >= (paginaActual - 1) * itemsPagina && i < paginaActual * itemsPagina) 
+                  .map((institucion, indice) =>(
                     <Accordion.Item eventKey={indice} key={indice}>
                     <Accordion.Header>
                       {institucion?.nombre}
@@ -196,11 +270,31 @@ const Buttons = () => {
                     </Accordion.Body>
                   </Accordion.Item>
                   ))}
+                   <Row>
+                    <Pagination>
+                      <PaginationItem>
+                        <PaginationLink first onClick={primeraPaginacion} style={{ backgroundColor: "rgb(242, 247, 248)", color: color }}/>
+                      </PaginationItem>
+                      <PaginationItem>
+                        <PaginationLink previous onClick={anteriorPaginacion} style={{ backgroundColor: "rgb(242, 247, 248)", color: color }} />
+                      </PaginationItem>
+
+                      <PaginationItem>
+                        <PaginationLink next onClick={siguientePaginacion} style={{ backgroundColor: "rgb(242, 247, 248)", color: color }} />
+                      </PaginationItem>
+                      <PaginationItem>
+                        <PaginationLink last onClick={ultimaPaginacion}  style={{ backgroundColor: "rgb(242, 247, 248)", color: color }}/>
+                      </PaginationItem>
+                      <PaginationItem></PaginationItem>
+                    </Pagination>
+                  </Row>
                 </Accordion>
               </Col>
               {/* editar */}
               <Col className="p-1" xs={1}>
-                  {listaInstituciones.map((institucion, indice) => (
+                  {listaInstituciones  
+                .filter( (est, i) => i >= (paginaActual - 1) * itemsPagina && i < paginaActual * itemsPagina)
+                .map((institucion, indice) => (
                     <ButtonGroup className='my-2' aria-label="Basic example" key={indice}>
                       <Button style={{ backgroundColor: color, color: "black" }} onClick={() => handShow(institucion) }>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil-fill" viewBox="0 0 16 16">
