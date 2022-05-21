@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, ButtonGroup, Card, FormText, FormGroup, Label, Input, CardBody, CardTitle, Row, Col } from 'reactstrap';
+import { Button, ButtonGroup, Card, FormText, FormGroup, Label, Input, CardBody, CardTitle, Row, Col, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 import Link from 'next/link';
 import { useColors } from '../../hooks/useColor';
 import Accordion from 'react-bootstrap/Accordion';
@@ -10,13 +10,63 @@ import * as XLSX from "xlsx";
 
 const Buttons = () => {
 
+  /** Numrto de items por pagina */
+  const [itemsPagina, setItemsPagina] = useState(5);
+
+  /** Variable que determina la cantidad de paginas de la paginacion */
+  const [nPaginacion, setNPaginacion] = useState(0);
+
+  /** Juan David Alberto Quintero Gaona ama mas a Laura Daniela Chiquillo Leon que
+   * Laura Daniela Chiquillo Leon ama mas a Juan David Alberto Quintero Gaona
+   * Ademas esta variable determina el numero de pagina que se esta visualizando
+   */
+  
+  const [paginaActual, setPaginaActual] = useState(1);
+
   /* crear la variable que contiene la lista de los estudiantes */
   /* se inicia con una lista vacia*/
   const [listEstudiantes, setListaEstudiantes] = useState([])
 
+  /** Funciones para paginar */
+
+  const primeraPaginacion = () => {
+    setPaginaActual(1);
+  }
+
+  const ultimaPaginacion = () => {
+    setPaginaActual(nPaginacion);
+  }
+
+  const anteriorPaginacion = () => {
+    if (paginaActual > 1) {
+      setPaginaActual(paginaActual - 1);
+    }
+  }
+
+  const siguientePaginacion = () => {
+    if (paginaActual < nPaginacion) {
+      setPaginaActual(paginaActual + 1);
+    }
+  }
+
+  /* Cada vez que listaEstuantes se actualize, recalculaara el numero de paginas */
+  useEffect(() => {
+    /** Se determina el numero de paginas a partir de laa cantidad
+     * de estudiantes
+     * Ejemplo: 20 estudiantes, se mostraran 5 por pagina
+     * Resultado: 4 paginas -> 20/5 = 4
+     */
+      setNPaginacion(Math.ceil(listEstudiantes.length / itemsPagina))
+  }, [listEstudiantes])
+
   /* Llamar la función de la api mostrar estudiante*/
   useEffect(() => {
-    getApiEstudiantes().then((Datos) => setListaEstudiantes(Datos)).catch((Error) => {
+    getApiEstudiantes()
+    .then((Datos) => {
+      setListaEstudiantes(Datos)
+
+    })
+    .catch((Error) => {
       alert(Error.toString())
     })
   }, [])
@@ -184,7 +234,9 @@ const Buttons = () => {
               <Col md={11} xs={10}>
                 {/* Mostrar estudiantes */}
                 <Accordion>
-                  {listEstudiantes.map((estudiante, indice) => (
+                  {listEstudiantes
+                  .filter( (est, i) => i >= (paginaActual - 1) * itemsPagina && i < paginaActual * itemsPagina)
+                  .map((estudiante, indice) => (
                     <Accordion.Item eventKey={indice} key={indice}>
                       <Accordion.Header>
                         {estudiante?.primerNombre + " "} {estudiante?.segundoNombre + " "} {estudiante?.primerApellido + " "}{estudiante?.segundoApellido + " "}
@@ -216,7 +268,7 @@ const Buttons = () => {
                                   </Accordion.Item>
                                 </Accordion>
                               </Col>
-                              <Col className="p-1" xs={2}>
+                              <Col className="p-1" md={3}>
                                 <ButtonGroup aria-label="Basic example">
 
                                   <Button style={{ backgroundColor: color, color: "black" }} onClick={handShow2}>
@@ -267,11 +319,31 @@ const Buttons = () => {
                       </Accordion.Body>
                     </Accordion.Item>
                   ))}
+                  <Row>
+                    <Pagination>
+                      <PaginationItem>
+                        <PaginationLink first onClick={primeraPaginacion} />
+                      </PaginationItem>
+                      <PaginationItem>
+                        <PaginationLink previous onClick={anteriorPaginacion} />
+                      </PaginationItem>
+
+                      <PaginationItem>
+                        <PaginationLink next onClick={siguientePaginacion} />
+                      </PaginationItem>
+                      <PaginationItem>
+                        <PaginationLink last onClick={ultimaPaginacion} />
+                      </PaginationItem>
+                      <PaginationItem></PaginationItem>
+                    </Pagination>
+                  </Row>
                 </Accordion>
               </Col>
 
               <Col className="p-1" xs={1}>
-                {listEstudiantes.map((estudiante, indice) => (
+                {listEstudiantes
+                .filter( (est, i) => i >= (paginaActual - 1) * itemsPagina && i < paginaActual * itemsPagina)
+                .map((estudiante, indice) => (
                   <ButtonGroup className='my-2' aria-label="Basic example" key={indice}>
 
                     <Button style={{ backgroundColor: color, color: "black" }} onClick={() => handShow(estudiante) }>
