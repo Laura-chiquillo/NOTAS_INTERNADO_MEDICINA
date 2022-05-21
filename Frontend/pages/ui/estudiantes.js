@@ -158,7 +158,50 @@ const Buttons = () => {
   };
 
   /* Organizar por filtros */
+  const nombreAscendente = (nom1,nom2) => {
+    if (nom1.primerNombre > nom2.primerNombre) {
+      return 1
+    } return -1
+  }
+  const nombreDescendente = (nom1,nom2) => {
+    if (nom1.primerNombre > nom2.primerNombre) {
+      return -1
+    } return 1
+  }
+  const apellidoAscendente = (apellido1,apellido2) => {
+    if (apellido1.primerApellido > apellido2.primerApellido) {
+      return 1
+    } return -1
+  }
+  const apellidoDescendente = (apellido1,apellido2) => {
+    if (apellido1.primerApellido > apellido2.primerApellido) {
+      return -1
+    } return 1
+  }
   
+  const noOrdenar =(a,b) => 1
+  const [ordenarLista, setOrdenar] = useState(()=> noOrdenar)
+  /* seleccionar el orden */
+  const seleccionarOrden = (e) => {
+    if (e.target.value == "nombreAscendente") {
+      setOrdenar(()=>nombreAscendente)
+    }
+    if (e.target.value == "nombreDescendente") {
+      setOrdenar(()=> nombreDescendente)
+    }
+    if (e.target.value == "apellidoAscendente") {
+      setOrdenar(()=> apellidoAscendente)
+    }
+    if (e.target.value == "apellidoDescendente") {
+      setOrdenar(()=> apellidoDescendente)
+    }
+    if (e.target.value == "vacio") {
+      setOrdenar(()=> noOrdenar)
+    }
+  }
+  
+
+
   return (
     <div>
       {/* Start Inner Div*/}
@@ -216,13 +259,13 @@ const Buttons = () => {
                 </Form>
                 <FormGroup>
                   <Label for="exampleSelect"></Label>
-                  <Input id="exampleSelect" name="select" type="select">
+                  <Input id="exampleSelect" name="select" type="select" onChange={seleccionarOrden}>
 
-                    <option>Ordenar por</option>
-                    <option>Nombre de la  A-Z</option>
-                    <option>Nombre de la Z-A</option>
-                    <option>Apellidos de la A-Z</option>
-                    <option>Apellidos de la Z-A</option>
+                    <option value="vacio">Ordenar por</option>
+                    <option value="nombreAscendente">Nombre de la  A-Z</option>
+                    <option value="nombreDescendente">Nombre de la Z-A</option>
+                    <option value="apellidoAscendente">Apellidos de la A-Z</option>
+                    <option value="apellidoDescendente">Apellidos de la Z-A</option>
                   </Input>
                 </FormGroup>
 
@@ -238,6 +281,7 @@ const Buttons = () => {
                 {/* Mostrar estudiantes */}
                 <Accordion>
                   {listEstudiantes
+                  .sort((a,b) => ordenarLista(a,b))
                   .filter( (est, i) => i >= (paginaActual - 1) * itemsPagina && i < paginaActual * itemsPagina)
                   .map((estudiante, indice) => (
                     <Accordion.Item eventKey={indice} key={indice}>
