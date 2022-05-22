@@ -39,6 +39,12 @@ public class AdminController {
         return new ResponseEntity<>(admin, HttpStatus.OK);
     }
 
+    @GetMapping({"/correo/{correo}"})
+    public ResponseEntity<Admin> getAdminByCorreo(@PathVariable(value = "correo") String correo){
+        Admin admin = adminService.getAdminByCorreo(correo);
+        return new ResponseEntity<>(admin, HttpStatus.OK);
+    }
+
     @PostMapping("/nuevo")
     public ResponseEntity<Admin> saveAdmin(@RequestBody Admin admin) {
         Admin ad = adminService.createAdmin(admin);
@@ -51,10 +57,10 @@ public class AdminController {
         return new ResponseEntity<>(adminService.getAdminById(id), HttpStatus.OK);
     }
 
-    @PatchMapping("/editar/contrasena/{id}")
-    public ResponseEntity<Admin> updatePassword(@PathVariable String id, @RequestParam String contraseña) {
-        adminService.updatePassword(id, contraseña);
-        return new ResponseEntity<>(adminService.getAdminById(id), HttpStatus.OK);
+    @PatchMapping("/editar/contrasena/{correo}")
+    public ResponseEntity<Admin> updatePassword(@PathVariable String correo, @RequestParam String contraseña) {
+        adminService.updatePassword(correo, contraseña);
+        return new ResponseEntity<>(adminService.getAdminByCorreo(correo), HttpStatus.OK);
     }
 
     @DeleteMapping("/eliminar/{id}")

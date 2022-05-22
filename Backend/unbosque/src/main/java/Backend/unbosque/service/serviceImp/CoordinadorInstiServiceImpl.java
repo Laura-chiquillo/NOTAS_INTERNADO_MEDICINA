@@ -85,10 +85,16 @@ public class CoordinadorInstiServiceImpl implements CoordinadorInstiService{
     }
 
     @Override
-    public void updatePassword(String id, String contraseña) {
-        CoordinadorInsti upPasswordCoordinadorInsti = coordinadorInstiRepository.findById(id).get();
+    public void updatePassword(String correo, String contraseña) {
+        CoordinadorInsti upPasswordCoordinadorInsti = coordinadorInstiRepository.findByCorreo(correo).get();
         upPasswordCoordinadorInsti.setContraseña(contraseña);
         coordinadorInstiRepository.save(upPasswordCoordinadorInsti);
+    }
+
+    @Override
+    public CoordinadorInsti getCoordinadorInstiByCorreo(String correo) {
+        CoordinadorInsti coordinadorInsti = coordinadorInstiRepository.findByCorreo(correo).get();
+        return coordinadorInsti;
     }
     
 }

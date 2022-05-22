@@ -88,11 +88,17 @@ public class AdminServiceImpl implements AdminService{
     }
 
     @Override
-    public void updatePassword(String id, String contraseña) {
-        Admin upPasswordAdmin = adminRepository.findById(id).get();
+    public void updatePassword(String correo, String contraseña) {
+        Admin upPasswordAdmin = adminRepository.findByCorreo(correo).get();
         upPasswordAdmin.setContraseña(contraseña);
         adminRepository.save(upPasswordAdmin);
         
+    }
+
+    @Override
+    public Admin getAdminByCorreo(String correo) {
+        Admin admin = adminRepository.findByCorreo(correo).get();
+        return admin;
     }
     
 }
