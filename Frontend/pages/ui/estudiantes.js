@@ -10,6 +10,8 @@ import * as XLSX from "xlsx";
 
 const Buttons = () => {
 
+
+  const [prueba, setPrueba] = useState([])
   /** Numrto de items por pagina */
   const [itemsPagina, setItemsPagina] = useState(5);
 
@@ -198,6 +200,26 @@ const Buttons = () => {
     }
   }
   
+    /*Filtro de busqueda por nombre */
+    const [busqueda, setBusqueda] = useState("");
+    const [filtro, setFiltro] = useState([]);
+  
+    const handleChange=e=> {
+      setBusqueda(e.target.value);
+      /*console.log("Busqueda: " + e.target.value);*/
+      filtrar(e.target.value);
+    }
+  
+    const filtrar = (terminoBusqueda) => {
+      const resultadoBusqueda = listEstudiantes.filter((elemento) => {
+        if (elemento.primerNombre.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())) {
+          
+        }{
+          return elemento;
+        }
+      });
+      setListaEstudiantes(resultadoBusqueda);
+    }
 
 
   return (
@@ -253,7 +275,7 @@ const Buttons = () => {
                   <FormText>
                     Agregar estudiantes
                   </FormText>&nbsp;
-                  <input placeholder='Buscar' className='form-control'></input>
+                  <input placeholder='Buscar' className='form-control' value={busqueda} onChange={handleChange}></input>
                 </Form>
                 <FormGroup>
                   <Label for="exampleSelect"></Label>
