@@ -152,8 +152,8 @@ import {
                       </div>
                     </FormGroup>
 
-                <Link href={'/ui/nota'}><Button  color="primary">Guardar</Button></Link>
-                <Link href={'/ui/nota'}><Button  color="primary">Atras</Button></Link>
+                <Link href={'/ui/vistaHospitales'}><Button  color="primary">Guardar</Button></Link>
+                <Link href={'/ui/vistaHospitales'}><Button  color="primary">Atras</Button></Link>
               </Form>
             </CardBody>
           </Card>
