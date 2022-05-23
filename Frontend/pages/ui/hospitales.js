@@ -151,19 +151,8 @@ const Buttons = () => {
 
   const handleChange = e => {
     setBusqueda(e.target.value);
-    filtrar(e.target.value);
   }
-
-  const filtrar = (terminoBusqueda) => {
-    const resultadoBusqueda = listaInstituciones.filter((elemento) => {
-      if (elemento.nombre.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())) {
-        return elemento;
-      }
-    });
-    setListaInstituciones(resultadoBusqueda);
-  }
-
-
+  
   return (
     <div>
       {/* --------------------------------------------------------------------------------*/}
@@ -184,7 +173,7 @@ const Buttons = () => {
             </CardTitle>
             <CardBody className="">
               <div className="button-group">
-                <Form className="d-flex">
+                <Form className="d-flex" onSubmit={(e)=>  e.preventDefault()}>
 
                   <Button className="btn" onClick={handleShow} style={{ backgroundColor: color, color: "black" }}>
                     +
@@ -246,6 +235,7 @@ const Buttons = () => {
               <Col>
                 <Accordion>
                   {listaInstituciones
+                    .filter((elemento)=>elemento.nombre.toString().toLowerCase().includes(busqueda.toLowerCase()))
                     .sort((a, b) => ordenarLista(a, b))
                     .filter((est, i) => i >= (paginaActual - 1) * itemsPagina && i < paginaActual * itemsPagina)
                     .map((institucion, indice) => (
@@ -313,6 +303,8 @@ const Buttons = () => {
               {/* editar */}
               <Col className="p-1" xs={1}>
                 {listaInstituciones
+                  .filter((elemento)=>elemento.nombre.toString().toLowerCase().includes(busqueda.toLowerCase()))
+                  .sort((a, b) => ordenarLista(a, b))
                   .filter((est, i) => i >= (paginaActual - 1) * itemsPagina && i < paginaActual * itemsPagina)
                   .map((institucion, indice) => (
                     <ButtonGroup className='my-2' aria-label="Basic example" key={indice}>

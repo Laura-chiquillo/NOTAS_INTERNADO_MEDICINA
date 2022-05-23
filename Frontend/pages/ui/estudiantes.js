@@ -204,20 +204,9 @@ const Buttons = () => {
 
   /*Filtro de busqueda por nombre */
   const [busqueda, setBusqueda] = useState("");
-  const [filtro, setFiltro] = useState([]);
 
   const handleChange = e => {
     setBusqueda(e.target.value);
-    filtrar(e.target.value);
-  }
-
-  const filtrar = (terminoBusqueda) => {
-    const resultadoBusqueda = listEstudiantes.filter((elemento) => {
-      if (elemento.primerNombre.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())) {
-        return elemento;
-      }
-    });
-    setListaEstudiantes(resultadoBusqueda);
   }
 
 
@@ -239,7 +228,7 @@ const Buttons = () => {
             </CardTitle>
             <CardBody className="">
               <div className="button-group">
-                <Form className="d-flex">
+                <Form className="d-flex" onSubmit={(e)=>  e.preventDefault()}>
 
                   <Button className="btn" onClick={handleShow} style={{ backgroundColor: color, color: "black" }} >
                     +
@@ -301,6 +290,7 @@ const Buttons = () => {
                 {/* Mostrar estudiantes */}
                 <Accordion>
                   {listEstudiantes
+                    .filter((elemento)=>elemento.primerNombre.toString().toLowerCase().includes(busqueda.toLowerCase()))
                     .sort((a, b) => ordenarLista(a, b))
                     .filter((est, i) => i >= (paginaActual - 1) * itemsPagina && i < paginaActual * itemsPagina)
                     .map((estudiante, indice) => (
@@ -409,6 +399,8 @@ const Buttons = () => {
 
               <Col className="p-1" xs={1}>
                 {listEstudiantes
+                  .filter((elemento)=>elemento.primerNombre.toString().toLowerCase().includes(busqueda.toLowerCase()))
+                  .sort((a, b) => ordenarLista(a, b))
                   .filter((est, i) => i >= (paginaActual - 1) * itemsPagina && i < paginaActual * itemsPagina)
                   .map((estudiante, indice) => (
                     <ButtonGroup className='my-2' aria-label="Basic example" key={indice}>
