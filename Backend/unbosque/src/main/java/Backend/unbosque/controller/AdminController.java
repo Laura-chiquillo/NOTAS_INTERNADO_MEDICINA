@@ -55,4 +55,11 @@ public class AdminController {
         adminService.deleteAdmin(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+    @PostMapping("/loginAdmin")
+    public ResponseEntity<String> loginAdmin(@RequestBody Admin admin) {
+        if (adminService.verificarCredenciales(admin)) {
+            return new ResponseEntity<>("soy un admin seguro", HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Soy la verga", HttpStatus.NO_CONTENT);
+    }
 }
