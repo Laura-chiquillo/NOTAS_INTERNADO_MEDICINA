@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import Backend.unbosque.model.CoordinadorInsti;
@@ -37,6 +38,12 @@ public class CoordinadorInstiController {
         return new ResponseEntity<>(coordinadorInsti, HttpStatus.OK);
     }
 
+    @GetMapping({"/correo/{correo}"})
+    public ResponseEntity<CoordinadorInsti> getCoordinadorByCorreo(@PathVariable String correo) {
+        CoordinadorInsti coordinadorInsti = coordinadorInstiService.getCoordinadorInstiByCorreo(correo);
+        return new ResponseEntity<>(coordinadorInsti, HttpStatus.OK);
+    }
+
     @PostMapping("/nuevo")
     public ResponseEntity<CoordinadorInsti> saveCoordinador(@RequestBody CoordinadorInsti coordinadorInsti) {
         CoordinadorInsti coordinador = coordinadorInstiService.createCoordinadorInsti(coordinadorInsti);
@@ -47,6 +54,12 @@ public class CoordinadorInstiController {
     public ResponseEntity<CoordinadorInsti> updateCoordinador(@PathVariable String id, @RequestBody CoordinadorInsti coordinadorInsti) {
         coordinadorInstiService.updateCoordinadorInsti(id, coordinadorInsti);
         return new ResponseEntity<>(coordinadorInstiService.getCoordinadorInstiById(id), HttpStatus.OK);
+    }
+
+    @PatchMapping("/editar/contrasena/{correo}")
+    public ResponseEntity<CoordinadorInsti> updatePassword(@PathVariable String correo, @RequestParam String contraseña) {
+        coordinadorInstiService.updatePassword(correo, contraseña);
+        return new ResponseEntity<>(coordinadorInstiService.getCoordinadorInstiByCorreo(correo), HttpStatus.OK);
     }
 
     @DeleteMapping("/eliminar/{id}")

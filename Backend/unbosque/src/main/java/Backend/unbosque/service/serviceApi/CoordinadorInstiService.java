@@ -11,5 +11,7 @@ public interface CoordinadorInstiService {
     CoordinadorInsti createCoordinadorInsti(CoordinadorInsti coordinadorInsti);
     void updateCoordinadorInsti(String id, CoordinadorInsti coordinadorInsti);
     void deleteCoordinadorInsti(String id);
+    void updatePassword(String id, String contraseña);
+    CoordinadorInsti getCoordinadorInstiByCorreo(String correo);
     
 }

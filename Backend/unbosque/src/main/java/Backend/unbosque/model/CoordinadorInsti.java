@@ -1,6 +1,7 @@
 package Backend.unbosque.model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document("CoordinadorInsti")
@@ -8,6 +9,7 @@ public class CoordinadorInsti {
 
     @Id
     private String idCoordinador;
+    //@DBRef(lazy = true)
     private String idInstitucion;
     private String primerNombre;
     private String segundoNombre;
