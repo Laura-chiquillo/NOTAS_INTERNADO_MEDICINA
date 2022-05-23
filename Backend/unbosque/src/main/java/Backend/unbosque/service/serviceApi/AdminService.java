@@ -3,6 +3,7 @@ package Backend.unbosque.service.serviceApi;
 import java.util.List;
 
 import Backend.unbosque.model.Admin;
+import Backend.unbosque.model.AdminLogin;
 
 public interface AdminService {
 
@@ -11,6 +12,6 @@ public interface AdminService {
     Admin createAdmin(Admin admin);
     void updateAdmin(String id, Admin admin);
     void deleteAdmin(String id);
-    boolean verificarCredenciales(Admin admin);                             
+    boolean verificarCredenciales(AdminLogin adminLogin);                             
     
 }

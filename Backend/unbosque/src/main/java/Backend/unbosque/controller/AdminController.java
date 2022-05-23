@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import Backend.unbosque.model.Admin;
+import Backend.unbosque.model.AdminLogin;
 import Backend.unbosque.service.serviceApi.AdminService;
 
 @RestController
@@ -56,10 +57,10 @@ public class AdminController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     @PostMapping("/loginAdmin")
-    public ResponseEntity<String> loginAdmin(@RequestBody Admin admin) {
-        if (adminService.verificarCredenciales(admin)) {
+    public ResponseEntity<String> loginAdmin(@RequestBody AdminLogin adminLogin) {
+        if (adminService.verificarCredenciales(adminLogin)) {
             return new ResponseEntity<>("soy un admin seguro", HttpStatus.OK);
         }
-        return new ResponseEntity<>("Soy la verga", HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>("No soy un admin", HttpStatus.NO_CONTENT);
     }
 }

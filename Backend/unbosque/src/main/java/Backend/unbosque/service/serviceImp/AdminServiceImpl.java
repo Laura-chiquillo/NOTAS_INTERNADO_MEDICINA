@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import Backend.unbosque.model.Admin;
+import Backend.unbosque.model.AdminLogin;
 import Backend.unbosque.repository.AdminRepository;
 import Backend.unbosque.service.serviceApi.AdminService;
 
@@ -81,8 +82,8 @@ public class AdminServiceImpl implements AdminService{
     }
 
     @Override
-    public boolean verificarCredenciales(Admin admin) {
-        Query findUser = new Query(Criteria.where("correo").is(admin.getCorreo()).and("contraseña").is(admin.getContraseña()));
+    public boolean verificarCredenciales(AdminLogin adminLogin) {
+        Query findUser = new Query(Criteria.where("correo").is(adminLogin.getCorreo()).and("contraseña").is(adminLogin.getContraseña()));
         List<Admin> user = mongoOperations.find(findUser, Admin.class);
         return !user.isEmpty();
     }
