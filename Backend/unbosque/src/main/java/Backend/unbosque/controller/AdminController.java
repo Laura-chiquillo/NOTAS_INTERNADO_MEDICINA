@@ -57,12 +57,12 @@ public class AdminController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     @GetMapping("/loginAdmin")
-    public ResponseEntity<String> loginAdmin(@PathVariable(value="correo") String correo, @PathVariable(value="contraseña") String contraseña) {
+    public ResponseEntity<AdminLogin> loginAdmin(@PathVariable(value="correo") String correo, @PathVariable(value="contraseña") String contraseña) {
         AdminLogin adminLogin = new AdminLogin(correo, contraseña);
         if (adminService.verificarCredenciales(adminLogin)) {
-            return new ResponseEntity<>("soy un admin seguro", HttpStatus.OK);
+            return new ResponseEntity<>(adminLogin, HttpStatus.OK);
         }
-        
-        return new ResponseEntity<>("No soy un admin", HttpStatus.NO_CONTENT);
+
+        return new ResponseEntity<>(adminLogin, HttpStatus.NO_CONTENT);
     }
 }
