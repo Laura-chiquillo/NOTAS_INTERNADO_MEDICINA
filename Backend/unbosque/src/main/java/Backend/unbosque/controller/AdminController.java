@@ -35,12 +35,9 @@ public class AdminController {
     @Autowired 
     private AuthenticationService authService;
 
-    @Autowired
-    private AuthenticationService auth;
-
     @GetMapping("/todos")
     public ResponseEntity<List<Admin>> getAllAdmins(@RequestHeader("authorization") String tk){
-        if(auth.isLoggedAdmin(tk)) {
+        if(authService.isLoggedAdmin(tk)) {
             List<Admin> admins = adminService.getAdmins();
             return new ResponseEntity<>(admins, HttpStatus.OK);
         }

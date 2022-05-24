@@ -1,11 +1,10 @@
 package Backend.unbosque.security;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,13 +16,13 @@ public class AuthenticationServiceImpl implements AuthenticationService{
     private TokenRepository tokenRepository;
 
     public boolean isLoggedAdmin(String tk) {
-        Token token = tokenRepository.findById(tk).get();
-        if (token.getRol().equalsIgnoreCase("Admin")) return true;
+        Optional<Token> token = tokenRepository.findById(tk);
+        if (token.isPresent() && token.get().getRol().equalsIgnoreCase("Admin")) return true;
         return false;
     }
     public boolean isLoggedCoordinador(String tk) {
-        Token token = tokenRepository.findById(tk).get();
-        if (token.getRol().equalsIgnoreCase("Coord")) return true;
+        Optional<Token> token = tokenRepository.findById(tk);
+        if (token.isPresent() && token.get().getRol().equalsIgnoreCase("Coord")) return true;
         return false;
     }
     
@@ -32,7 +31,9 @@ public class AuthenticationServiceImpl implements AuthenticationService{
     }
     @Override
     public void deleteToken(String tk) {
-        Token token = tokenRepository.findById(tk).get();
-        tokenRepository.delete(token);
+        Optional<Token> token = tokenRepository.findById(tk);
+        if (token.isPresent()) {
+            tokenRepository.delete(token.get());
+        }
     }
 }
