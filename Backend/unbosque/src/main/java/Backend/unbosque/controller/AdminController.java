@@ -57,7 +57,7 @@ public class AdminController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     @GetMapping("/loginAdmin")
-    public ResponseEntity<AdminLogin> loginAdmin(@PathVariable(value="correo") String correo, @PathVariable(value="contraseña") String contraseña) {
+    public ResponseEntity<AdminLogin> loginAdmin(@PathVariable(value="correo") String correo, @PathVariable(value="contrasena") String contraseña) {
         AdminLogin adminLogin = new AdminLogin(correo, contraseña);
         if (adminService.verificarCredenciales(adminLogin)) {
             return new ResponseEntity<>(adminLogin, HttpStatus.OK);
