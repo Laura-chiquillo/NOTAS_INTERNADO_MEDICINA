@@ -87,5 +87,19 @@ public class AdminServiceImpl implements AdminService{
         List<Admin> user = mongoOperations.find(findUser, Admin.class);
         return !user.isEmpty();
     }
+
+    @Override
+    public void updatePassword(String correo, String contraseña) {
+        Admin upPasswordAdmin = adminRepository.findByCorreo(correo).get();
+        upPasswordAdmin.setContraseña(contraseña);
+        adminRepository.save(upPasswordAdmin);
+        
+    }
+
+    @Override
+    public Admin getAdminByCorreo(String correo) {
+        Admin admin = adminRepository.findByCorreo(correo).get();
+        return admin;
+    }
     
 }
