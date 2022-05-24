@@ -50,9 +50,8 @@ public class AdminController {
         adminService.deleteAdmin(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-    @GetMapping("/loginAdmin")
-    public ResponseEntity<AdminLogin> loginAdmin(@PathVariable(value="correo") String correo, @PathVariable(value="contrasena") String contraseña) {
-        AdminLogin adminLogin = new AdminLogin(correo, contraseña);
+    @PostMapping("/loginAdmin")
+    public ResponseEntity<AdminLogin> loginAdmin(@RequestBody AdminLogin adminLogin) {
         if (adminService.verificarCredenciales(adminLogin)) {
             return new ResponseEntity<>(adminLogin, HttpStatus.OK);
         }
