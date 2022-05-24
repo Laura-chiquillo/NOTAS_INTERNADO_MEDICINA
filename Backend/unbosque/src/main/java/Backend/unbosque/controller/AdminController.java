@@ -33,12 +33,6 @@ public class AdminController {
         return new ResponseEntity<>(admins, HttpStatus.OK);
     }
 
-    @GetMapping({"/{id}"})
-    public ResponseEntity<Admin> getAdmin(@PathVariable(value = "id") String id){
-        Admin admin = adminService.getAdminById(id);
-        return new ResponseEntity<>(admin, HttpStatus.OK);
-    }
-
     @PostMapping("/nuevo")
     public ResponseEntity<Admin> saveAdmin(@RequestBody Admin admin) {
         Admin ad = adminService.createAdmin(admin);
@@ -64,5 +58,10 @@ public class AdminController {
         }
 
         return new ResponseEntity<>(adminLogin, HttpStatus.NO_CONTENT);
+    }
+    @GetMapping({"/{id}"})
+    public ResponseEntity<Admin> getAdmin(@PathVariable(value = "id") String id){
+        Admin admin = adminService.getAdminById(id);
+        return new ResponseEntity<>(admin, HttpStatus.OK);
     }
 }
