@@ -33,6 +33,7 @@ public class EstudianteServiceImpl implements EstudianteService{
 
     @Override
     public Estudiante createEstudiante(Estudiante estudiante) {
+        estudiante.setEstado(true);
         return estudianteRepository.save(estudiante);
     }
 
@@ -77,8 +78,8 @@ public class EstudianteServiceImpl implements EstudianteService{
             upEstudiante.setTelefono(estudiante.getTelefono());
         }
 
-        if (estudiante.getEstado() != null){
-            upEstudiante.setEstado(estudiante.getEstado());
+        if (!estudiante.isEstado()){
+            upEstudiante.setEstado(estudiante.isEstado());
         }
         
         estudianteRepository.save(upEstudiante);
@@ -88,6 +89,18 @@ public class EstudianteServiceImpl implements EstudianteService{
     public void deleteEstudiante(String id) {
         estudianteRepository.deleteById(id);
         
+    }
+
+    @Override
+    public boolean changeEstado(String id) {
+        boolean cambiado = false;
+        Estudiante estudiante = estudianteRepository.findById(id).get();
+        if (estudiante.isEstado()==true) {
+            estudiante.setEstado(false);
+            estudianteRepository.save(estudiante);
+            cambiado = true;
+        }
+        return cambiado;
     }
     
 }
