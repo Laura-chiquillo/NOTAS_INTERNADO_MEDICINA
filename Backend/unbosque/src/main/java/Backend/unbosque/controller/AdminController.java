@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import Backend.unbosque.model.Admin;
 import Backend.unbosque.model.AdminLogin;
-import Backend.unbosque.model.Token;
+import Backend.unbosque.security.AuthenticationService;
+import Backend.unbosque.security.Token;
 import Backend.unbosque.service.serviceApi.AdminService;
-import Backend.unbosque.utils.Authentication;
 
 @RestController
 @CrossOrigin(origins = {"https://localhost:3000", "http://localhost:3000"})
@@ -32,9 +32,12 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
+    @Autowired 
+    private AuthenticationService authService;
+
     @Autowired
-    private Authentication auth;
-    
+    private AuthenticationService auth;
+
     @GetMapping("/todos")
     public ResponseEntity<List<Admin>> getAllAdmins(@RequestHeader("authorization") String tk){
         if(auth.isLoggedAdmin(tk)) {
@@ -90,6 +93,7 @@ public class AdminController {
             String tk = bytes.toString();
 
             Token token = new Token(tk, id, "Admin");
+            token = authService.createToken(token);
             return new ResponseEntity<>(token, HttpStatus.OK);
         }
         return new ResponseEntity<>(null, HttpStatus.I_AM_A_TEAPOT);

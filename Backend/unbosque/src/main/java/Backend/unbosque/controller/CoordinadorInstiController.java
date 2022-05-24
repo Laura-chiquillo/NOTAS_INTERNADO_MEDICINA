@@ -19,7 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import Backend.unbosque.model.CoordLogin;
 import Backend.unbosque.model.CoordinadorInsti;
-import Backend.unbosque.model.Token;
+import Backend.unbosque.security.AuthenticationService;
+import Backend.unbosque.security.Token;
 import Backend.unbosque.service.serviceApi.CoordinadorInstiService;
 
 @RestController
@@ -29,6 +30,9 @@ public class CoordinadorInstiController {
 
     @Autowired
     private CoordinadorInstiService coordinadorInstiService;
+
+    @Autowired
+    private AuthenticationService authService;
 
     @GetMapping("/todos")
     public ResponseEntity<List<CoordinadorInsti>> getAllCoordinadores() {
@@ -80,6 +84,7 @@ public class CoordinadorInstiController {
             String tk = bytes.toString();
 
             Token token = new Token(tk, id, "Coord");
+            token = authService.createToken(token);
             return new ResponseEntity<>(token, HttpStatus.OK);
         }
         return new ResponseEntity<>(null, HttpStatus.I_AM_A_TEAPOT);
