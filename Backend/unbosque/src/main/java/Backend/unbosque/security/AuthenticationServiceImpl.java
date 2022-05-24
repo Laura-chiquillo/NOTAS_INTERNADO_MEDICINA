@@ -17,19 +17,22 @@ public class AuthenticationServiceImpl implements AuthenticationService{
     private TokenRepository tokenRepository;
 
     public boolean isLoggedAdmin(String tk) {
-        Query findToken = new Query(Criteria.where("token").is(tk)); // WHERE token = tk
-        List<Token> token = mongoOperations.find(findToken, Token.class); // Select * From Token Where...
-        if (!token.isEmpty() && token.get(0).getRol().equalsIgnoreCase("Admin")) return true;
+        Token token = tokenRepository.findById(tk).get();
+        if (token.getRol().equalsIgnoreCase("Admin")) return true;
         return false;
     }
     public boolean isLoggedCoordinador(String tk) {
-        Query findToken = new Query(Criteria.where("token").is(tk)); // WHERE token = tk
-        List<Token> token = mongoOperations.find(findToken, Token.class); // Select * From Token Where...
-        if (!token.isEmpty() && token.get(0).getRol().equalsIgnoreCase("Coord")) return true;
+        Token token = tokenRepository.findById(tk).get();
+        if (token.getRol().equalsIgnoreCase("Coord")) return true;
         return false;
     }
     
     public Token createToken(Token token) {
         return tokenRepository.insert(token);
+    }
+    @Override
+    public void deleteToken(String tk) {
+        Token token = tokenRepository.findById(tk).get();
+        tokenRepository.delete(token);
     }
 }

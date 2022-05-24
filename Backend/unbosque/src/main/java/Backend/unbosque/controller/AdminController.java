@@ -98,6 +98,11 @@ public class AdminController {
         }
         return new ResponseEntity<>(null, HttpStatus.I_AM_A_TEAPOT);
     }
+    @PostMapping("/logoutAdmin")
+    public ResponseEntity<String> logoutAdmin(@RequestHeader("authorization") String tk) {
+        authService.deleteToken(tk);
+        return new ResponseEntity<>("OK", HttpStatus.OK);
+    }
     @GetMapping({"/{id}"})
     public ResponseEntity<Admin> getAdmin(@PathVariable(value = "id") String id){
         Admin admin = adminService.getAdminById(id);
