@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import Backend.unbosque.model.Admin;
 import Backend.unbosque.model.AdminLogin;
@@ -25,6 +26,9 @@ public class AdminServiceImpl implements AdminService{
     @Autowired
     private MongoOperations mongoOperations;
 
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     @Override
     public List<Admin> getAdmins() {
         List<Admin> admins = new ArrayList<>();
@@ -40,6 +44,7 @@ public class AdminServiceImpl implements AdminService{
 
     @Override
     public Admin createAdmin(Admin admin) {
+        admin.setContraseña(passwordEncoder.encode(admin.getContraseña()));
         return adminRepository.insert(admin);
     }
 
@@ -69,7 +74,8 @@ public class AdminServiceImpl implements AdminService{
         }
 
         if(admin.getContraseña() != null){
-            upAdmin.setContraseña(admin.getContraseña());
+            String contEncriptada = passwordEncoder.encode(admin.getContraseña());
+            upAdmin.setContraseña(contEncriptada);
         }
 
         adminRepository.save(upAdmin);
@@ -83,15 +89,17 @@ public class AdminServiceImpl implements AdminService{
 
     @Override
     public String verificarCredenciales(AdminLogin adminLogin) {
-        Query findUser = new Query(Criteria.where("correo").is(adminLogin.getCorreo()).and("contraseña").is(adminLogin.getContraseña()));
-        List<Admin> user = mongoOperations.find(findUser, Admin.class);
-        if (!user.isEmpty()) return user.get(0).getIdAdmin();
+        Admin user = adminRepository.findByCorreo(adminLogin.getCorreo()).get();
+        if (passwordEncoder.matches(adminLogin.getContraseña(), user.getContraseña())) {
+            return user.getIdAdmin();            
+        }
         return "";
     }
 
     @Override
     public void updatePassword(String correo, String contraseña) {
         Admin upPasswordAdmin = adminRepository.findByCorreo(correo).get();
+        String contEncriptada = passwordEncoder.encode(contraseña);
         upPasswordAdmin.setContraseña(contraseña);
         adminRepository.save(upPasswordAdmin);
         

@@ -25,6 +25,9 @@ public class CoordinadorInstiServiceImpl implements CoordinadorInstiService{
     @Autowired
     private MongoOperations mongoOperations;
 
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     @Override
     public List<CoordinadorInsti> getCoordinadorInstis() {
         List<CoordinadorInsti> coordinadorInstis = new ArrayList<>();
@@ -40,6 +43,7 @@ public class CoordinadorInstiServiceImpl implements CoordinadorInstiService{
 
     @Override
     public CoordinadorInsti createCoordinadorInsti(CoordinadorInsti coordinadorInsti) {
+        coordinadorInsti.setContraseña(passwordEncoder.encode(coordinadorInsti.getContraseña()));
         return coordinadorInstiRepository.save(coordinadorInsti);
     }
 
@@ -74,7 +78,7 @@ public class CoordinadorInstiServiceImpl implements CoordinadorInstiService{
         }
 
         if(coordinadorInsti.getContraseña() != null){
-            upCoordinadorInsti.setContraseña(coordinadorInsti.getContraseña());
+            upCoordinadorInsti.setContraseña(passwordEncoder.encode(coordinadorInsti.getContraseña()));
         }
 
         if(coordinadorInsti.getCargo() != null){
@@ -94,7 +98,8 @@ public class CoordinadorInstiServiceImpl implements CoordinadorInstiService{
     @Override
     public void updatePassword(String correo, String contraseña) {
         CoordinadorInsti upPasswordCoordinadorInsti = coordinadorInstiRepository.findByCorreo(correo).get();
-        upPasswordCoordinadorInsti.setContraseña(contraseña);
+        String contEncriptada = passwordEncoder.encode(contraseña);
+        upPasswordCoordinadorInsti.setContraseña(contEncriptada);
         coordinadorInstiRepository.save(upPasswordCoordinadorInsti);
     }
 
@@ -106,9 +111,10 @@ public class CoordinadorInstiServiceImpl implements CoordinadorInstiService{
 
     @Override
     public String verificarCredenciales(CoordLogin coordLogin) {
-        Query findUser = new Query(Criteria.where("correo").is(coordLogin.getCorreo()).and("contraseña").is(coordLogin.getContraseña()));
-        List<CoordinadorInsti> user = mongoOperations.find(findUser, CoordinadorInsti.class);
-        if (!user.isEmpty()) return user.get(0).getIdCoordinador();
+        CoordinadorInsti user = coordinadorInstiRepository.findByCorreo(coordLogin.getCorreo()).get();
+        if (passwordEncoder.matches(coordLogin.getContraseña(), user.getContraseña())) {
+            return user.getIdInstitucion();            
+        }
         return "";
     }
 }
