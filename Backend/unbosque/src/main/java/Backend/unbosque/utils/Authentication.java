@@ -18,13 +18,13 @@ public class Authentication {
     public boolean isLoggedAdmin(String tk) {
         Query findToken = new Query(Criteria.where("token").is(tk)); // WHERE token = tk
         List<Token> token = mongoOperations.find(findToken, Token.class); // Select * From Token Where...
-        if (!token.isEmpty() && token.get(0).getRol()=="Admin") return true;
+        if (!token.isEmpty() && token.get(0).getRol().equalsIgnoreCase("Admin")) return true;
         return false;
     }
     public boolean isLoggedCoordinador(String tk) {
         Query findToken = new Query(Criteria.where("token").is(tk)); // WHERE token = tk
         List<Token> token = mongoOperations.find(findToken, Token.class); // Select * From Token Where...
-        if (!token.isEmpty() && token.get(0).getRol()=="Coord") return true;
+        if (!token.isEmpty() && token.get(0).getRol().equalsIgnoreCase("Coord")) return true;
         return false;
     }
 }
