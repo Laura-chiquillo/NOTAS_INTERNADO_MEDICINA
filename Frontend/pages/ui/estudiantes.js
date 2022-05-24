@@ -7,13 +7,14 @@ import Modal from 'react-bootstrap/Modal';
 import { Form } from 'react-bootstrap';
 import { getApiEstudiantes, editApiEstudiante, agregarApiEstudiante } from '../../api/estudiantes'
 import * as XLSX from "xlsx";
-
+import axios from 'axios'
 const Buttons = () => {
 
   /* crear la variable que contiene la lista de los estudiantes */
   /* se inicia con una lista vacia*/
   const [listEstudiantes, setListaEstudiantes] = useState([])
 
+ 
   /* Llamar la función de la api mostrar estudiante*/
   useEffect(() => {
     getApiEstudiantes().then((Datos) => setListaEstudiantes(Datos)).catch((Error) => {
@@ -86,6 +87,13 @@ const Buttons = () => {
       };
     });
   };
+const [images , setImages]= useState([])
+  useEffect(async()=>{
+    const res = await axios.get('/ui/registroEstudiantes')
+    console.log(res)
+    setImages(res.data)
+    
+},[]);
 
   const guardarDatos = () => {
     readExcel(jsonExcel).then((d) => {
@@ -104,7 +112,7 @@ const Buttons = () => {
         handleClose()
       });
     });
-
+      
   };
 
   return (
@@ -185,15 +193,23 @@ const Buttons = () => {
                 {/* Mostrar estudiantes */}
                 <Accordion>
                   {listEstudiantes.map((estudiante, indice) => (
+                       
                     <Accordion.Item eventKey={indice} key={indice}>
                       <Accordion.Header>
                         {estudiante?.primerNombre + " "} {estudiante?.segundoNombre + " "} {estudiante?.primerApellido + " "}{estudiante?.segundoApellido + " "}
+                     
                       </Accordion.Header>
                       <Accordion.Body>
                         <Row>
                           <Col>
                             <ul>
-                              <li> {estudiante.foto} </li>
+                            <div> 
+                              {estudiante.foto}{(image=>(
+                                
+                                  <img src={image.url} alt=""/>
+                              
+                              ))}
+                              </div>
                               <li>Documento: {estudiante.documento} </li>
                               <li>semestre actual: {estudiante.semestreE} </li>
                               <li>correo: {estudiante.correo} </li>

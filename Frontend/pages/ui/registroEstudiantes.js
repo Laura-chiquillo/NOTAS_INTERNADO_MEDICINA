@@ -14,7 +14,7 @@ import {
   FormText,
 } from 'reactstrap';
 import Link from 'next/link'; 
-
+import axios from 'axios'
 import { getApiEstudiantes, crearApiEstudiante } from '../../api/estudiantes'
 
 
@@ -22,7 +22,7 @@ import { getApiEstudiantes, crearApiEstudiante } from '../../api/estudiantes'
 const registroEstudiantes = () => {
   const router = useRouter()
   const [listEstudiantes, setListaEstudiantes] = useState([])
-
+ 
   /* Llamar la función de la api mostrar estudiante*/
   useEffect(() => {
     getApiEstudiantes().then((Datos) => setListaEstudiantes(Datos)).catch((Error) => {
@@ -43,6 +43,25 @@ const registroEstudiantes = () => {
     )    
   }
 
+const[file,setFile] = useState();
+/*const[title,setTitle] = useState();*/
+  /* Actualizar el setfile*/
+const handleChange = e=>{
+setFile(e.target.files[0])
+}
+const handleSubmit = async(e) =>{
+e.preventDefault();
+ 
+const formData = new FormData();
+formData.append('file',file );
+/* formData.append('title',title );*/
+const res = await axios.post('/ui/registroEstudiantes', formData)
+
+console.log(res)
+} 
+ 
+
+
   
   
   
@@ -57,7 +76,15 @@ const registroEstudiantes = () => {
             Registrar Estudiantes
           </CardTitle>
           <CardBody>
-            <Form onChange={actualizarEditEstudiante}>
+            <Form onChange={actualizarEditEstudiante} onSubmit={handleSubmit}>
+            
+            <FormGroup>
+                            <Label for="exampleFile">Cargar Imagen</Label>
+                            <Input id="exampleFile" name="foto" type="file" onChange={handleChange}/>
+                  <button className="btn btn-success rounded-0 w-100"> 
+                  subir</button>
+              </FormGroup>
+              
               <FormGroup>
                 <Label>Cédula de ciudadanía</Label>
                 <Input
