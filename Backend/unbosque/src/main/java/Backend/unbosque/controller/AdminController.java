@@ -1,5 +1,6 @@
 package Backend.unbosque.controller;
 
+import java.security.SecureRandom;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +13,16 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import Backend.unbosque.model.Admin;
 import Backend.unbosque.model.AdminLogin;
+import Backend.unbosque.model.Token;
 import Backend.unbosque.service.serviceApi.AdminService;
+import Backend.unbosque.utils.Authentication;
 
 @RestController
 @CrossOrigin(origins = {"https://localhost:3000", "http://localhost:3000"})
@@ -27,11 +31,17 @@ public class AdminController {
 
     @Autowired
     private AdminService adminService;
+
+    @Autowired
+    private Authentication auth;
     
     @GetMapping("/todos")
-    public ResponseEntity<List<Admin>> getAllAdmins(){
-        List<Admin> admins = adminService.getAdmins();
-        return new ResponseEntity<>(admins, HttpStatus.OK);
+    public ResponseEntity<List<Admin>> getAllAdmins(@RequestHeader("authorization") String tk){
+        if(auth.isLoggedAdmin(tk)) {
+            List<Admin> admins = adminService.getAdmins();
+            return new ResponseEntity<>(admins, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
 
     @GetMapping({"/correo/{correo}"})
@@ -71,13 +81,18 @@ public class AdminController {
 //       return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
     }
     @PostMapping("/loginAdmin")
-    public ResponseEntity<AdminLogin> loginAdmin(@RequestBody AdminLogin adminLogin) {
-        if (adminService.verificarCredenciales(adminLogin)) {
-            return new ResponseEntity<>(adminLogin, HttpStatus.OK);
+    public ResponseEntity<Token> loginAdmin(@RequestBody AdminLogin adminLogin) {
+        String id = adminService.verificarCredenciales(adminLogin);
+        if (id != "") {
+            SecureRandom random = new SecureRandom();
+            byte bytes[] = new byte[20];
+            random.nextBytes(bytes);
+            String tk = bytes.toString();
+
+            Token token = new Token(tk, id, "Admin");
+            return new ResponseEntity<>(token, HttpStatus.OK);
         }
-        // TODO: Generar Token
-        // TODO: Guardar Token en mongo
-        return new ResponseEntity<>(adminLogin, HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(null, HttpStatus.I_AM_A_TEAPOT);
     }
     @GetMapping({"/{id}"})
     public ResponseEntity<Admin> getAdmin(@PathVariable(value = "id") String id){

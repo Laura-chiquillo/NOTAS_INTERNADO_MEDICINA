@@ -82,10 +82,11 @@ public class AdminServiceImpl implements AdminService{
     }
 
     @Override
-    public boolean verificarCredenciales(AdminLogin adminLogin) {
+    public String verificarCredenciales(AdminLogin adminLogin) {
         Query findUser = new Query(Criteria.where("correo").is(adminLogin.getCorreo()).and("contraseña").is(adminLogin.getContraseña()));
         List<Admin> user = mongoOperations.find(findUser, Admin.class);
-        return !user.isEmpty();
+        if (!user.isEmpty()) return user.get(0).getIdAdmin();
+        return "";
     }
 
     @Override

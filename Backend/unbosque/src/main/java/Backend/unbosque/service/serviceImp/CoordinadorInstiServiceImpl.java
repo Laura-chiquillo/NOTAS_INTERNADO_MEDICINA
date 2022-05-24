@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import Backend.unbosque.model.CoordLogin;
 import Backend.unbosque.model.CoordinadorInsti;
 import Backend.unbosque.repository.CoordinadorInstiRepository;
 import Backend.unbosque.service.serviceApi.CoordinadorInstiService;
@@ -17,6 +21,9 @@ public class CoordinadorInstiServiceImpl implements CoordinadorInstiService{
 
     @Autowired
     private CoordinadorInstiRepository coordinadorInstiRepository;
+
+    @Autowired
+    private MongoOperations mongoOperations;
 
     @Override
     public List<CoordinadorInsti> getCoordinadorInstis() {
@@ -96,5 +103,12 @@ public class CoordinadorInstiServiceImpl implements CoordinadorInstiService{
         CoordinadorInsti coordinadorInsti = coordinadorInstiRepository.findByCorreo(correo).get();
         return coordinadorInsti;
     }
-    
+
+    @Override
+    public String verificarCredenciales(CoordLogin coordLogin) {
+        Query findUser = new Query(Criteria.where("correo").is(coordLogin.getCorreo()).and("contraseña").is(coordLogin.getContraseña()));
+        List<CoordinadorInsti> user = mongoOperations.find(findUser, CoordinadorInsti.class);
+        if (!user.isEmpty()) return user.get(0).getIdCoordinador();
+        return "";
+    }
 }

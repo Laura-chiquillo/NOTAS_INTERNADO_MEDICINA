@@ -1,5 +1,6 @@
 package Backend.unbosque.controller;
 
+import java.security.SecureRandom;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import Backend.unbosque.model.CoordLogin;
 import Backend.unbosque.model.CoordinadorInsti;
+import Backend.unbosque.model.Token;
 import Backend.unbosque.service.serviceApi.CoordinadorInstiService;
 
 @RestController
@@ -66,5 +69,19 @@ public class CoordinadorInstiController {
     public ResponseEntity<CoordinadorInsti> deleteCoordinador(@PathVariable String id) {
         coordinadorInstiService.deleteCoordinadorInsti(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }   
+    }
+    @PostMapping("/loginCoord")
+    public ResponseEntity<Token> loginAdmin(@RequestBody CoordLogin coordLogin) {
+        String id = coordinadorInstiService.verificarCredenciales(coordLogin);
+        if (id != "") {
+            SecureRandom random = new SecureRandom();
+            byte bytes[] = new byte[20];
+            random.nextBytes(bytes);
+            String tk = bytes.toString();
+
+            Token token = new Token(tk, id, "Coord");
+            return new ResponseEntity<>(token, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(null, HttpStatus.I_AM_A_TEAPOT);
+    }
 }
