@@ -62,6 +62,7 @@ public class AdminController {
         if (adminService.verificarCredenciales(adminLogin)) {
             return new ResponseEntity<>("soy un admin seguro", HttpStatus.OK);
         }
+        
         return new ResponseEntity<>("No soy un admin", HttpStatus.NO_CONTENT);
     }
 }
