@@ -27,7 +27,7 @@ public class CoordinadorInstiServiceImpl implements CoordinadorInstiService{
     private MongoOperations mongoOperations;
 
     @Autowired
-    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public List<CoordinadorInsti> getCoordinadorInstis() {

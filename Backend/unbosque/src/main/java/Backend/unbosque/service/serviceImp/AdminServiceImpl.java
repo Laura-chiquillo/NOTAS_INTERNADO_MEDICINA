@@ -27,7 +27,7 @@ public class AdminServiceImpl implements AdminService{
     private MongoOperations mongoOperations;
 
     @Autowired
-    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public List<Admin> getAdmins() {
