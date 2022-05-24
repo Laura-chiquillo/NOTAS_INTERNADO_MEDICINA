@@ -46,16 +46,24 @@ public class AdminController {
     }
 
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<Admin> deleteAdmin(@PathVariable String id) {
-        adminService.deleteAdmin(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<Admin> deleteAdmin(@PathVariable String id/*, @RequestHeaders headers*/) {
+        /* Pseudocodigo de como proteger las rutas
+        token = headers["Authorization"].split(" ")[1];
+        user_id = mongo.getUserIdByToken(token);
+        if (Admin.buscar(id=user_id)) {
+*/
+            adminService.deleteAdmin(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        }
+//       return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
     }
     @PostMapping("/loginAdmin")
     public ResponseEntity<AdminLogin> loginAdmin(@RequestBody AdminLogin adminLogin) {
         if (adminService.verificarCredenciales(adminLogin)) {
             return new ResponseEntity<>(adminLogin, HttpStatus.OK);
         }
-
+        // TODO: Generar Token
+        // TODO: Guardar Token en mongo
         return new ResponseEntity<>(adminLogin, HttpStatus.NO_CONTENT);
     }
     @GetMapping({"/{id}"})

@@ -43,7 +43,7 @@ const nota = () => {
               </FormGroup>
 
               <FormGroup>
-                <table class="table">
+                <table className="table">
                   <thead>
                     <tr>
                       <th>Practica clinica</th>

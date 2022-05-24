@@ -36,13 +36,13 @@ const registroEstudiantes = () => {
               </FormGroup>
               <FormGroup>
                 <Label>Nombres</Label>
-                <div class="input-group">
+                <div className="input-group">
                   <Input
                     type="text"
                     id='Nombre1'
                     name='nombre1'
                   />
-                  <span class="input-group-addon">-</span>
+                  <span className="input-group-addon">-</span>
                   <Input
                     type="text"
                     id='Nombre2'
@@ -52,13 +52,13 @@ const registroEstudiantes = () => {
               </FormGroup>
               <FormGroup>
                 <Label>Apellidos</Label>
-                <div class="input-group">
+                <div className="input-group">
                   <Input
                     type="text"
                     id='Apellido1'
                     name='apellido1'
                   />
-                  <span class="input-group-addon">-</span>
+                  <span className="input-group-addon">-</span>
                   <Input
                     type="text"
                     id='Apellido2'
