@@ -34,15 +34,19 @@ import {
                 <Label>Semestre actual: 11</Label><br></br>
                 <Label>Fecha de inicio actual: 21/02/2022</Label><br></br>
                 <Label>Fecha de finalizacion actual: 21/04/2022</Label><br></br>
-              </FormGroup>
-
-              <FormGroup>
+                <Label>Asignatura</Label>
+                <Input
+                  id="Rotacion"
+                  name="rotacion"
+                  type="text"
+                />
                 <Label>Rotacion</Label>
                 <Input
                   id="Rotacion"
                   name="rotacion"
                   type="text"
                 />
+                
               </FormGroup>
 
                 <FormGroup>
@@ -115,7 +119,12 @@ import {
 
 
                     <FormGroup>
-                      <Label>Observaciones: NOTA: __</Label>
+                      <Label>Observaciones:</Label>
+                      <Input
+                          type="text"
+                          id='observaciones'
+                          name='observaciones'
+                        />
                     </FormGroup>
 
                     <FormGroup>
