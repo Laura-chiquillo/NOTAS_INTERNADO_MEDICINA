@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router'
 import {
@@ -15,12 +16,12 @@ import {
 } from 'reactstrap';
 import Link from 'next/link'; 
 import axios from 'axios'
-import { getApiEstudiantes, crearApiEstudiante } from '../../api/estudiantes'
+import { getApiEstudiantes, crearApiEstudiante,editApiEstudiante } from '../../api/estudiantes'
 
 
 
 const registroEstudiantes = () => {
-  const router = useRouter()
+    const router = useRouter()
   const [listEstudiantes, setListaEstudiantes] = useState([])
  
   /* Llamar la función de la api mostrar estudiante*/
@@ -42,29 +43,29 @@ const registroEstudiantes = () => {
       [e.target.name]: e.target.value}
     )    
   }
-
-const[file,setFile] = useState();
-/*const[title,setTitle] = useState();*/
-  /* Actualizar el setfile*/
-const handleChange = e=>{
-setFile(e.target.files[0])
-}
-const handleSubmit = async(e) =>{
-e.preventDefault();
- 
-const formData = new FormData();
-formData.append('file',file );
-/* formData.append('title',title );*/
-const res = await axios.post('/ui/registroEstudiantes', formData)
-
-console.log(res)
-} 
- 
+  const convertiraBase=(archivos)=>{
+    Array.from(archivos).forEach(archivo=>{
+      var reader = new FileReader();
+      reader.readAsDataURL(archivo);
+      reader.onload= function(){
+        var arrayAuxiliar =[];
+        var base =reader.result;
+          //console.log(base);
+        arrayAuxiliar=base.split(',');
+        console.log(arrayAuxiliar[1]);
+      }
+    })
+  }
 
 
-  
-  
-  
+  const editarEstudiante = () => {
+    editApiEstudiante(estudianteSeleccionado).then((est) => {
+      /* cambiar el estudiante */
+      const nuevaLista = listEstudiantes.map((i) => i.idEstudiante == est.idEstudiante? est:i)
+      setListaEstudiantes(nuevaLista)
+      close()
+    })
+  }
   return (
     <Row>
       <Col>
@@ -76,11 +77,11 @@ console.log(res)
             Registrar Estudiantes
           </CardTitle>
           <CardBody>
-            <Form onChange={actualizarEditEstudiante} onSubmit={handleSubmit}>
+            <Form onChange={actualizarEditEstudiante} >
             
             <FormGroup>
                             <Label for="exampleFile">Cargar Imagen</Label>
-                            <Input id="exampleFile" name="foto" type="file" onChange={handleChange}/>
+                            <Input id="exampleFile" name="foto" type="file" onChange={(e)=>convertiraBase(e.target.files)}/>
                   <button className="btn btn-success rounded-0 w-100"> 
                   subir</button>
               </FormGroup>
@@ -88,7 +89,7 @@ console.log(res)
               <FormGroup>
                 <Label>Cédula de ciudadanía</Label>
                 <Input
-                  type="text"
+                  type="number"
                   id='IPS'
                   name='documento'
                 />
@@ -144,7 +145,7 @@ console.log(res)
               <FormGroup>
                 <Label>Semestre</Label>
                 <Input
-                  type="text"
+                  type="number"
                   id='Semestre'
                   name='semestreE'
                 />
@@ -160,3 +161,7 @@ console.log(res)
 };
 registroEstudiantes.layout = "MenuLayout"
 export default registroEstudiantes;
+
+
+
+

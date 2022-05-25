@@ -7,7 +7,7 @@ import Modal from 'react-bootstrap/Modal';
 import { Form } from 'react-bootstrap';
 import { getApiEstudiantes, editApiEstudiante, agregarApiEstudiante } from '../../api/estudiantes'
 import * as XLSX from "xlsx";
-import axios from 'axios'
+
 const Buttons = () => {
 
   /* crear la variable que contiene la lista de los estudiantes */
@@ -87,13 +87,7 @@ const Buttons = () => {
       };
     });
   };
-const [images , setImages]= useState([])
-  useEffect(async()=>{
-    const res = await axios.get('/ui/registroEstudiantes')
-    console.log(res)
-    setImages(res.data)
-    
-},[]);
+
 
   const guardarDatos = () => {
     readExcel(jsonExcel).then((d) => {
@@ -204,11 +198,8 @@ const [images , setImages]= useState([])
                           <Col>
                             <ul>
                             <div> 
-                              {estudiante.foto}{(image=>(
-                                
-                                  <img src={image.url} alt=""/>
+                              {estudiante.foto}
                               
-                              ))}
                               </div>
                               <li>Documento: {estudiante.documento} </li>
                               <li>semestre actual: {estudiante.semestreE} </li>
