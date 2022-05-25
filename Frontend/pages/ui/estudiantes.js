@@ -198,7 +198,7 @@ const Buttons = () => {
                           <Col>
                             <ul>
                             <div> 
-                              {estudiante.foto}
+                            <img src={estudiante.foto} ></img>
                               
                               </div>
                               <li>Documento: {estudiante.documento} </li>
