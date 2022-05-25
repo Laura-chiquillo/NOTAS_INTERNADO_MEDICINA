@@ -1,15 +1,33 @@
 
 import React, { useState, useEffect } from 'react';
-import { Button, ButtonGroup, Card, FormText, FormGroup, Label, Input, CardBody, CardTitle, Row, Col, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
+import { Button, ButtonGroup, Card, FormText, FormGroup, Label, Input, CardBody, CardTitle, Row, Col, Pagination, PaginationItem, PaginationLink, List } from 'reactstrap';
 import Link from 'next/link';
 import { useColors } from '../../hooks/useColor';
 import { Form } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import Accordion from 'react-bootstrap/Accordion';
 import { getApiInstituciones, editApiInstitucion } from '../../api/instituciones';
+import { getApiEstudiantes} from '../../api/estudiantes'
+import { ListItem } from '@material-ui/core';
 
 
 const Buttons = () => {
+
+  /* crear la variable que contiene la lista de los estudiantes */
+  /* se inicia con una lista vacia*/
+  const [listEstudiantes, setListaEstudiantes] = useState([])
+
+  /* Llamar la función de la api mostrar estudiante*/
+  useEffect(() => {
+    getApiEstudiantes()
+      .then((Datos) => {
+        setListaEstudiantes(Datos)
+
+      })
+      .catch((Error) => {
+        alert(Error.toString())
+      })
+  }, [])
 
   /* mostrar lista */
 
@@ -127,6 +145,7 @@ const Buttons = () => {
 
   const noOrdenar = (a, b) => 1
   const [ordenarLista, setOrdenar] = useState(() => noOrdenar)
+  
   /* seleccionar el orden */
   const seleccionarOrden = (e) => {
     if (e.target.value == "nombreAscendente") {
@@ -151,6 +170,13 @@ const Buttons = () => {
 
   const handleChange = e => {
     setBusqueda(e.target.value);
+  }
+
+  /*Filtro de busqueda estudiante */
+  const [busquedaE, setBusquedaE] = useState("");
+
+  const handleChangeE = e => {
+    setBusquedaE(e.target.value);
   }
   
   return (
@@ -252,19 +278,27 @@ const Buttons = () => {
                             <Modal.Header closeButton>
                               <Modal.Title>Lista estudiantes</Modal.Title>
                             </Modal.Header>
-                            <div>
-                              <input placeholder='Buscar'></input>
-                            </div>
+                            {/*Buscar */}
+                              <input placeholder='Buscar' className='form-control' value={busquedaE} onChange={handleChangeE}></input>
                             <Modal.Body>
-                              <div className="topping">
-                                <input type="checkbox" id="topping" name="topping" value="Paneer" />Andrea Camacho
-                              </div>
-                              <div className="topping">
-                                <input type="checkbox" id="topping" name="topping" value="Paneer" />Juan Andres Jaramillo
-                              </div>
-                              <div className="topping">
-                                <input type="checkbox" id="topping" name="topping" value="Paneer" />Camila Perez
-                              </div>
+
+                                  {/* Mostrar estudiantes */}
+                                  
+                                    {listEstudiantes
+                                      .filter((elemento)=>elemento.primerNombre.toString().toLowerCase().includes(busquedaE.toLowerCase()))
+                                      .sort((a, b) => ordenarLista(a, b))
+                                      .map((estudiante, indice) => (
+
+                                        <ListItem eventKey={indice} key={indice}>
+                                          <Button>
+                                            <input type="checkbox"></input>
+                                          </Button>
+                                          
+                                          {estudiante?.primerNombre + " "} {estudiante?.segundoNombre + " "} {estudiante?.primerApellido + " "}{estudiante?.segundoApellido + " "}
+                                          
+                                        </ListItem>
+                                      ))}
+                                      
                             </Modal.Body>
                             <Modal.Footer>
                               <Button variant="secondary" onClick={handleClose1}>
