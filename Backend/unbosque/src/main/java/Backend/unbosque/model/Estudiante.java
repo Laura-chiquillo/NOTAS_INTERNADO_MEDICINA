@@ -20,11 +20,11 @@ public class Estudiante {
         private String semestreE;
         private String correo;
         private String telefono;
-        private String estado;
+        private boolean estado;
 
         public Estudiante(String idEstudiante, String idAsignatura, String idInstitucion, String foto, String documento,
                 String primerNombre, String segundoNombre, String primerApellido, String segundoApellido,
-                double promedio, String semestreE, String correo, String telefono, String estado) {
+                double promedio, String semestreE, String correo, String telefono, boolean estado) {
             this.idEstudiante = idEstudiante;
             this.idAsignatura = idAsignatura;
             this.idInstitucion = idInstitucion;
@@ -145,11 +145,11 @@ public class Estudiante {
             this.telefono = telefono;
         }
 
-        public String getEstado() {
+        public boolean isEstado() {
             return estado;
         }
 
-        public void setEstado(String estado) {
+        public void setEstado(boolean estado) {
             this.estado = estado;
         }
 
