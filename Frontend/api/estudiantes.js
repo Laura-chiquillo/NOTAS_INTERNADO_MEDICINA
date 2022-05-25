@@ -30,10 +30,8 @@ const editApiEstudiante = async (estudiante) =>{
         return await peticion.json()
     } throw new Error("No se pudo realizar la acción")
 }
-
-/* agregar */
-const agregarApiEstudiante = async (estudiante) =>{
-    console.log(estudiante)
+/* crear estudiante*/
+const crearApiEstudiante = async (estudiante) =>{
     const params = {
         /*  pasar parametro para que sepa cual es, si no se hace esto lo pasa como get */
         method : "POST",
@@ -49,5 +47,4 @@ const agregarApiEstudiante = async (estudiante) =>{
         return await peticion.json()
     } throw new Error("No se pudo realizar la acción")
 }
-
-export {getApiEstudiantes, editApiEstudiante, agregarApiEstudiante}
+export {getApiEstudiantes, editApiEstudiante,crearApiEstudiante}

@@ -138,6 +138,7 @@ const Buttons = () => {
     });
   };
 
+
   const guardarDatos = () => {
     readExcel(jsonExcel).then((d) => {
       const estud = {};
@@ -155,7 +156,7 @@ const Buttons = () => {
         handleClose()
       });
     });
-
+      
   };
 
   /* Organizar por filtros */
