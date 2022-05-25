@@ -81,6 +81,10 @@ public class EstudianteServiceImpl implements EstudianteService{
         if (!estudiante.isEstado()){
             upEstudiante.setEstado(estudiante.isEstado());
         }
+
+        if (estudiante.isEstado()) {
+            upEstudiante.setEstado(estudiante.isEstado());
+        }
         
         estudianteRepository.save(upEstudiante);
     }
@@ -90,17 +94,4 @@ public class EstudianteServiceImpl implements EstudianteService{
         estudianteRepository.deleteById(id);
         
     }
-
-    @Override
-    public boolean changeEstado(String id) {
-        boolean cambiado = false;
-        Estudiante estudiante = estudianteRepository.findById(id).get();
-        if (estudiante.isEstado()==true) {
-            estudiante.setEstado(false);
-            estudianteRepository.save(estudiante);
-            cambiado = true;
-        }
-        return cambiado;
-    }
-    
 }

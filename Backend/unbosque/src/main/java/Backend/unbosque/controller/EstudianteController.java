@@ -54,11 +54,4 @@ public class EstudianteController {
         estudianteService.deleteEstudiante(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
-    @PatchMapping("/estado/{id}")
-    public ResponseEntity<Estudiante> changeEstadoEstudiante(@PathVariable String id) {
-        if(estudianteService.changeEstado(id))
-            return new ResponseEntity<>(HttpStatus.OK);
-        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-    }
 }

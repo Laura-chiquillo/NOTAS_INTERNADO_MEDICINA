@@ -11,7 +11,6 @@ import * as XLSX from "xlsx";
 const Buttons = () => {
 
 
-  const [prueba, setPrueba] = useState([])
   /** Numrto de items por pagina */
   const [itemsPagina, setItemsPagina] = useState(5);
 
@@ -207,6 +206,16 @@ const Buttons = () => {
 
   const handleChange = e => {
     setBusqueda(e.target.value);
+  }
+
+  /*Cambiar estado*/
+  const changeState = (e) => {
+    if (e.estado) {
+      e.estado = false
+    } else if (!e.estado) {
+      e.estado = true
+    }
+    editApiEstudiante(e);
   }
 
 
@@ -411,7 +420,7 @@ const Buttons = () => {
                         </svg>
                       </Button>
 
-                      <Button style={{ backgroundColor: color, color: "black" }}>
+                      <Button style={{ backgroundColor: color, color: "black" }} onClick={() => changeState(estudiante)} >
                         <input type="checkbox"></input>
                       </Button>
                     </ButtonGroup>
