@@ -50,6 +50,10 @@ public class InstitucionServiceImpl implements InstitucionService{
             upInstitucion.setDireccion(institucion.getDireccion());
         }
 
+        if (institucion.getEstudiantes() != null){
+            upInstitucion.setEstudiantes(institucion.getEstudiantes());
+        }
+
         if (institucion.getEstado() != null){
             upInstitucion.setEstado(institucion.getEstado());
         }

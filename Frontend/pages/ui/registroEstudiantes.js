@@ -18,7 +18,7 @@ import Link from 'next/link';
 
 import { getApiEstudiantes, crearApiEstudiante,editApiEstudiante } from '../../api/estudiantes'
 
-
+var arrayAuxiliar = [];
 
 const registroEstudiantes = () => {
     const router = useRouter()
@@ -37,6 +37,8 @@ const registroEstudiantes = () => {
         router.push("/ui/estudiantes") 
 
       })
+      estudianteSeleccionado.foto = arrayAuxiliar[1]; 
+      console.log(estudianteSeleccionado)
    }
    const actualizarEditEstudiante = (e) => {
     setEstudianteSeleccionado(
@@ -55,6 +57,7 @@ const registroEstudiantes = () => {
         arrayAuxiliar=base.split(',');
         console.log(arrayAuxiliar[1]);
       }
+
     })
   }
   
