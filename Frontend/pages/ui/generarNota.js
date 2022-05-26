@@ -51,19 +51,8 @@ import {
 
                 <FormGroup>
 
-<<<<<<< HEAD
-                    <table class="table" border="2">
-                      <thead>
-                        <tr>
-                          <th>*</th>
-                          <th>*</th>
-                          <th>Calificaciones</th>
-                        </tr>
-                      </thead>
-=======
                     <table className="table">
                       
->>>>>>> Daniela
                       <tbody>
                         <tr ng-repeat="item in lista">
                         <td border="2">I</td>
