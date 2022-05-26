@@ -11,5 +11,4 @@ public interface EstudianteService {
     Estudiante createEstudiante(Estudiante estudiante);
     void updateEstudiante(String id, Estudiante estudiante);
     void deleteEstudiante(String id);
-    
 }

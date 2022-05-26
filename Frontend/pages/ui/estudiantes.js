@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, ButtonGroup, Card, FormText, FormGroup, Label, Input, CardBody, CardTitle, Row, Col, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
+import { Button, ButtonGroup, Card, FormText, FormGroup, Label, Input, CardBody, CardTitle, Row, Col } from 'reactstrap';
 import Link from 'next/link';
 import { useColors } from '../../hooks/useColor';
 import Accordion from 'react-bootstrap/Accordion';
@@ -10,65 +10,16 @@ import * as XLSX from "xlsx";
 
 const Buttons = () => {
 
-
-  const [prueba, setPrueba] = useState([])
-  /** Numrto de items por pagina */
-  const [itemsPagina, setItemsPagina] = useState(5);
-
-  /** Variable que determina la cantidad de paginas de la paginacion */
-  const [nPaginacion, setNPaginacion] = useState(0);
-
-  /** esta variable determina el numero de pagina que se esta visualizando
-   */
-
-  const [paginaActual, setPaginaActual] = useState(1);
-
   /* crear la variable que contiene la lista de los estudiantes */
   /* se inicia con una lista vacia*/
   const [listEstudiantes, setListaEstudiantes] = useState([])
 
-  /** Funciones para paginar */
-
-  const primeraPaginacion = () => {
-    setPaginaActual(1);
-  }
-
-  const ultimaPaginacion = () => {
-    setPaginaActual(nPaginacion);
-  }
-
-  const anteriorPaginacion = () => {
-    if (paginaActual > 1) {
-      setPaginaActual(paginaActual - 1);
-    }
-  }
-
-  const siguientePaginacion = () => {
-    if (paginaActual < nPaginacion) {
-      setPaginaActual(paginaActual + 1);
-    }
-  }
-
-  /* Cada vez que listaEstuantes se actualize, recalculaara el numero de paginas */
-  useEffect(() => {
-    /** Se determina el numero de paginas a partir de laa cantidad
-     * de estudiantes
-     * Ejemplo: 20 estudiantes, se mostraran 5 por pagina
-     * Resultado: 4 paginas -> 20/5 = 4
-     */
-    setNPaginacion(Math.ceil(listEstudiantes.length / itemsPagina))
-  }, [listEstudiantes])
-
+ 
   /* Llamar la función de la api mostrar estudiante*/
   useEffect(() => {
-    getApiEstudiantes()
-      .then((Datos) => {
-        setListaEstudiantes(Datos)
-
-      })
-      .catch((Error) => {
-        alert(Error.toString())
-      })
+    getApiEstudiantes().then((Datos) => setListaEstudiantes(Datos)).catch((Error) => {
+      alert(Error.toString())
+    })
   }, [])
 
   /* editar estudiante */
@@ -77,26 +28,24 @@ const Buttons = () => {
   const editarEstudiante = () => {
     editApiEstudiante(estudianteSeleccionado).then((est) => {
       /* cambiar el estudiante */
-      const nuevaLista = listEstudiantes.map((i) => i.idEstudiante == est.idEstudiante ? est : i)
+      const nuevaLista = listEstudiantes.map((i) => i.idEstudiante == est.idEstudiante? est:i)
       setListaEstudiantes(nuevaLista)
       close()
     })
   }
-
+  
   const actualizarEditEstudiante = (e) => {
     setEstudianteSeleccionado(
-      {
-        ...estudianteSeleccionado,
-        [e.target.name]: e.target.value
-      }
-    )
+      {...estudianteSeleccionado, 
+      [e.target.name]: e.target.value}
+    )    
   }
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  /* para la ventana de editar estudiante */
+  /* para la ventana de editar estudiante */ 
   const [shows, setShows] = useState(false);
   const close = () => setShows(false);
   const handShow = (est) => {
@@ -139,6 +88,7 @@ const Buttons = () => {
     });
   };
 
+
   const guardarDatos = () => {
     readExcel(jsonExcel).then((d) => {
       const estud = {};
@@ -152,11 +102,11 @@ const Buttons = () => {
           estud.semestreE = n["Semestre"],
           estud.correo = n["Correo"],
           estud.telefono = n["Telefono"],
-          agregarApiEstudiante(estud)
+          crearApiEstudiante(estud)
         handleClose()
       });
     });
-
+      
   };
 
   /* Organizar por filtros */
@@ -209,6 +159,21 @@ const Buttons = () => {
     setBusqueda(e.target.value);
   }
 
+  /*Cambiar estado*/
+  const changeState = (e) => {
+    if (e.estado) {
+      e.estado = false
+    } else if (!e.estado) {
+      e.estado = true
+    }
+    editApiEstudiante(e);
+  }
+
+  /* Ventana nueva nota */
+  const [show4, setShow4] = useState(false);
+  const handleClose4 = () => setShow4(false);
+  const handleShow4 = () => setShow4(true);
+
 
   return (
     <div>
@@ -228,7 +193,7 @@ const Buttons = () => {
             </CardTitle>
             <CardBody className="">
               <div className="button-group">
-                <Form className="d-flex" onSubmit={(e)=>  e.preventDefault()}>
+                <Form className="d-flex">
 
                   <Button className="btn" onClick={handleShow} style={{ backgroundColor: color, color: "black" }} >
                     +
@@ -244,8 +209,8 @@ const Buttons = () => {
                           <FormGroup>
                             <Label for="exampleFile">Cargar Archivo</Label>
                             <Input id="exampleFile" name="file" type="file" onChange={(e) => {
-                              setJsonExcel(e.target.files[0])
-                            }} />
+          setJsonExcel(e.target.files[0]) 
+        }} />
                           </FormGroup>
                         </Row>
                         <Link href={'/ui/registroEstudiantes'}><Button color="primary">Ingresar Datos Estudiantes</Button></Link>
@@ -263,18 +228,16 @@ const Buttons = () => {
                   <FormText>
                     Agregar estudiantes
                   </FormText>&nbsp;
-                  {/* Buscar */}
-                  <input placeholder='Buscar' className='form-control' value={busqueda} onChange={handleChange}></input>
+                  <input placeholder='Buscar' className='form-control'></input>
                 </Form>
                 <FormGroup>
                   <Label for="exampleSelect"></Label>
-                  <Input id="exampleSelect" name="select" type="select" onChange={seleccionarOrden}>
-
-                    <option value="vacio">Ordenar por</option>
-                    <option value="nombreAscendente">Nombre de la  A-Z</option>
-                    <option value="nombreDescendente">Nombre de la Z-A</option>
-                    <option value="apellidoAscendente">Apellidos de la A-Z</option>
-                    <option value="apellidoDescendente">Apellidos de la Z-A</option>
+                  <Input id="exampleSelect" name="select" type="select">
+                    <option>Ordenar por</option>
+                    <option>Orden alfabetico</option>
+                    <option>Notas registradas</option>
+                    <option>Notas no registradas</option>
+                    <option>Mes</option>
                   </Input>
                 </FormGroup>
 
@@ -289,133 +252,111 @@ const Buttons = () => {
               <Col md={11} xs={10}>
                 {/* Mostrar estudiantes */}
                 <Accordion>
-                  {listEstudiantes
-                    .filter((elemento)=>elemento.primerNombre.toString().toLowerCase().includes(busqueda.toLowerCase()))
-                    .sort((a, b) => ordenarLista(a, b))
-                    .filter((est, i) => i >= (paginaActual - 1) * itemsPagina && i < paginaActual * itemsPagina)
-                    .map((estudiante, indice) => (
-                      <Accordion.Item eventKey={indice} key={indice}>
-                        <Accordion.Header>
-                          {estudiante?.primerNombre + " "} {estudiante?.segundoNombre + " "} {estudiante?.primerApellido + " "}{estudiante?.segundoApellido + " "}
-                        </Accordion.Header>
-                        <Accordion.Body>
-                          <Row>
-                            <Col>
-                              <ul>
-                                <li> <img src={estudiante.foto}></img> </li>
-                                <li>Documento: {estudiante.documento} </li>
-                                <li>semestre actual: {estudiante.semestreE} </li>
-                                <li>correo: {estudiante.correo} </li>
-                                <li>telefono: {estudiante.telefono} </li>
+                  {listEstudiantes.map((estudiante, indice) => (
+                       
+                    <Accordion.Item eventKey={indice} key={indice}>
+                      <Accordion.Header>
+                        {estudiante?.primerNombre + " "} {estudiante?.segundoNombre + " "} {estudiante?.primerApellido + " "}{estudiante?.segundoApellido + " "}
+                     
+                      </Accordion.Header>
+                      <Accordion.Body>
+                        <Row>
+                          <Col>
+                            <ul>
+                            <div> 
+                            <img src={estudiante.foto} ></img>
+                              </div>
+                              <li>Documento: {estudiante.documento} </li>
+                              <li>semestre actual: {estudiante.semestreE} </li>
+                              <li>correo: {estudiante.correo} </li>
+                              <li>telefono: {estudiante.telefono} </li>
 
-                              </ul>
-                            </Col>
-                            <Col>
-                              {/*  Notas */}
-                              <Row>
-                                <Col>
-                                  <Accordion>
-                                    <Accordion.Item eventKey="0">
-                                      <Accordion.Header>
-                                        {estudiante.idAsignatura}
-                                      </Accordion.Header>
-                                      <Accordion.Body>
-                                        <li>Pediatria: 4.8</li>
-                                      </Accordion.Body>
-                                    </Accordion.Item>
-                                  </Accordion>
-                                </Col>
-                                <Col className="p-1" md={3}>
-                                  <ButtonGroup aria-label="Basic example">
+                            </ul>
+                          </Col>
+                          <Col>
+                            {/*  Notas */}
+                            <Row>
+                              <Col>
+                                <Accordion>
+                                  <Accordion.Item eventKey="0">
+                                    <Accordion.Header>
+                                      {estudiante.idAsignatura}
+                                    </Accordion.Header>
+                                    <Accordion.Body>
+                                      <li>Pediatria: 4.8</li>
+                                    </Accordion.Body>
+                                  </Accordion.Item>
+                                </Accordion>
+                              </Col>
+                              <Col className="p-1" xs={2}>
+                                <ButtonGroup aria-label="Basic example">
 
-                                    <Button style={{ backgroundColor: color, color: "black" }} onClick={handShow2}>
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil-fill" viewBox="0 0 16 16">
-                                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
-                                      </svg>
-                                    </Button>
+                                  <Button style={{ backgroundColor: color, color: "black" }} onClick={handShow2}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                      <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+                                    </svg>
+                                  </Button>
 
-                                    <Modal
-                                      show={show2}
-                                      onHide={close2}
-                                      backdrop="static"
-                                      keyboard={false}
-                                    >
-                                      <Modal.Header closeButton>
-                                        <Modal.Title>Editar Nota</Modal.Title>
-                                      </Modal.Header>
-                                      <Modal.Body>
-                                        <Form>
-                                          <FormGroup>
-                                            <Label>Nota</Label>
-                                            <Input
-                                              type="text"
-                                              id='IPS'
-                                              name='ips'
-                                            />
-                                          </FormGroup>
-                                        </Form>
-                                      </Modal.Body>
-                                      <Modal.Footer>
-                                        <Button variant="secondary" onClick={close2}>
-                                          Cancelar
-                                        </Button>
-                                        <Button variant="primary">
-                                          Guardar
-                                        </Button>
-                                      </Modal.Footer>
-                                    </Modal>
+                                  <Modal
+                                    show={show2}
+                                    onHide={close2}
+                                    backdrop="static"
+                                    keyboard={false}
+                                  >
+                                    <Modal.Header closeButton>
+                                      <Modal.Title>Editar Nota</Modal.Title>
+                                    </Modal.Header>
+                                    <Modal.Body>
+                                      <Form>
+                                        <FormGroup>
+                                          <Label>Nota</Label>
+                                          <Input
+                                            type="text"
+                                            id='IPS'
+                                            name='ips'
+                                          />
+                                        </FormGroup>
+                                      </Form>
+                                    </Modal.Body>
+                                    <Modal.Footer>
+                                      <Button variant="secondary" onClick={close2}>
+                                        Cancelar
+                                      </Button>
+                                      <Button variant="primary">
+                                        Guardar
+                                      </Button>
+                                    </Modal.Footer>
+                                  </Modal>
 
-                                    <Button className="btn" onClick={handleShow} style={{ backgroundColor: color, color: "black" }} >
-                                      +
-                                    </Button>
-                                  </ButtonGroup>
-                                </Col>
-                              </Row>
-                            </Col>
-                          </Row>
-                        </Accordion.Body>
-                      </Accordion.Item>
-                    ))}
-                  <Row>
-                    <Pagination>
-                      <PaginationItem>
-                        <PaginationLink first onClick={primeraPaginacion} style={{ backgroundColor: "rgb(242, 247, 248)", color: color }} />
-                      </PaginationItem>
-                      <PaginationItem>
-                        <PaginationLink previous onClick={anteriorPaginacion} style={{ backgroundColor: "rgb(242, 247, 248)", color: color }} />
-                      </PaginationItem>
-
-                      <PaginationItem>
-                        <PaginationLink next onClick={siguientePaginacion} style={{ backgroundColor: "rgb(242, 247, 248)", color: color }} />
-                      </PaginationItem>
-                      <PaginationItem>
-                        <PaginationLink last onClick={ultimaPaginacion} style={{ backgroundColor: "rgb(242, 247, 248)", color: color }} />
-                      </PaginationItem>
-                      <PaginationItem></PaginationItem>
-                    </Pagination>
-                  </Row>
+                                  <Button className="btn" onClick={handleShow} style={{ backgroundColor: color, color: "black" }} >
+                                    +
+                                  </Button>
+                                </ButtonGroup>
+                              </Col>
+                            </Row>
+                          </Col>
+                        </Row>
+                      </Accordion.Body>
+                    </Accordion.Item>
+                  ))}
                 </Accordion>
               </Col>
 
               <Col className="p-1" xs={1}>
-                {listEstudiantes
-                  .filter((elemento)=>elemento.primerNombre.toString().toLowerCase().includes(busqueda.toLowerCase()))
-                  .sort((a, b) => ordenarLista(a, b))
-                  .filter((est, i) => i >= (paginaActual - 1) * itemsPagina && i < paginaActual * itemsPagina)
-                  .map((estudiante, indice) => (
-                    <ButtonGroup className='my-2' aria-label="Basic example" key={indice}>
+                {listEstudiantes.map((estudiante, indice) => (
+                  <ButtonGroup className='my-2' aria-label="Basic example" key={indice}>
 
-                      <Button style={{ backgroundColor: color, color: "black" }} onClick={() => handShow(estudiante)}>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil-fill" viewBox="0 0 16 16">
-                          <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
-                        </svg>
-                      </Button>
+                    <Button style={{ backgroundColor: color, color: "black" }} onClick={() => handShow(estudiante) }>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil-fill" viewBox="0 0 16 16">
+                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+                      </svg>
+                    </Button>
 
-                      <Button style={{ backgroundColor: color, color: "black" }}>
-                        <input type="checkbox"></input>
-                      </Button>
-                    </ButtonGroup>
-                  ))}
+                    <Button style={{ backgroundColor: color, color: "black" }}>
+                      <input type="checkbox"></input>
+                    </Button>
+                  </ButtonGroup>
+                ))}
 
                 {/* editar estudiante */}
                 <Modal
@@ -428,7 +369,7 @@ const Buttons = () => {
                     <Modal.Title>Editar estudiante</Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
-
+                    
                     {/* formulario */}
                     <Form onChange={actualizarEditEstudiante}>
                       <FormGroup>
@@ -493,7 +434,7 @@ const Buttons = () => {
                     <Button variant="secondary" onClick={close}>
                       Cancelar
                     </Button>
-                    <Button onClick={editarEstudiante} variant="primary">
+                    <Button onClick={editarEstudiante}  variant="primary">
                       Guardar
                     </Button>
                   </Modal.Footer>

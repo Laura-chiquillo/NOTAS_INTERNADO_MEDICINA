@@ -2,6 +2,7 @@ package Backend.unbosque.service.serviceApi;
 
 import java.util.List;
 
+import Backend.unbosque.model.CoordLogin;
 import Backend.unbosque.model.CoordinadorInsti;
 
 public interface CoordinadorInstiService {
@@ -13,5 +14,6 @@ public interface CoordinadorInstiService {
     void deleteCoordinadorInsti(String id);
     void updatePassword(String id, String contraseña);
     CoordinadorInsti getCoordinadorInstiByCorreo(String correo);
+    String verificarCredenciales(CoordLogin coordLogin);
     
 }

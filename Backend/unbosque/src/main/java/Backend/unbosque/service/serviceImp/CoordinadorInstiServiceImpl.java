@@ -4,9 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import Backend.unbosque.model.CoordLogin;
 import Backend.unbosque.model.CoordinadorInsti;
 import Backend.unbosque.repository.CoordinadorInstiRepository;
 import Backend.unbosque.service.serviceApi.CoordinadorInstiService;
@@ -17,6 +22,11 @@ public class CoordinadorInstiServiceImpl implements CoordinadorInstiService{
 
     @Autowired
     private CoordinadorInstiRepository coordinadorInstiRepository;
+
+    @Autowired
+    private MongoOperations mongoOperations;
+
+    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(16);
 
     @Override
     public List<CoordinadorInsti> getCoordinadorInstis() {
@@ -33,6 +43,7 @@ public class CoordinadorInstiServiceImpl implements CoordinadorInstiService{
 
     @Override
     public CoordinadorInsti createCoordinadorInsti(CoordinadorInsti coordinadorInsti) {
+        coordinadorInsti.setContraseña(passwordEncoder.encode(coordinadorInsti.getContraseña()));
         return coordinadorInstiRepository.save(coordinadorInsti);
     }
 
@@ -67,7 +78,7 @@ public class CoordinadorInstiServiceImpl implements CoordinadorInstiService{
         }
 
         if(coordinadorInsti.getContraseña() != null){
-            upCoordinadorInsti.setContraseña(coordinadorInsti.getContraseña());
+            upCoordinadorInsti.setContraseña(passwordEncoder.encode(coordinadorInsti.getContraseña()));
         }
 
         if(coordinadorInsti.getCargo() != null){
@@ -87,7 +98,8 @@ public class CoordinadorInstiServiceImpl implements CoordinadorInstiService{
     @Override
     public void updatePassword(String correo, String contraseña) {
         CoordinadorInsti upPasswordCoordinadorInsti = coordinadorInstiRepository.findByCorreo(correo).get();
-        upPasswordCoordinadorInsti.setContraseña(contraseña);
+        String contEncriptada = passwordEncoder.encode(contraseña);
+        upPasswordCoordinadorInsti.setContraseña(contEncriptada);
         coordinadorInstiRepository.save(upPasswordCoordinadorInsti);
     }
 
@@ -96,5 +108,13 @@ public class CoordinadorInstiServiceImpl implements CoordinadorInstiService{
         CoordinadorInsti coordinadorInsti = coordinadorInstiRepository.findByCorreo(correo).get();
         return coordinadorInsti;
     }
-    
+
+    @Override
+    public String verificarCredenciales(CoordLogin coordLogin) {
+        CoordinadorInsti user = coordinadorInstiRepository.findByCorreo(coordLogin.getCorreo()).get();
+        if (passwordEncoder.matches(coordLogin.getContraseña(), user.getContraseña())) {
+            return user.getIdInstitucion();            
+        }
+        return "";
+    }
 }

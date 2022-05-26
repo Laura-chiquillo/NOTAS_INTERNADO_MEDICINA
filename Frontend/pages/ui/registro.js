@@ -1,3 +1,5 @@
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router'
 import {
   Card,
   Row,
@@ -13,8 +15,38 @@ import {
 } from 'reactstrap';
 import Link from 'next/link';
 import { useColors } from '../../hooks/useColor';
+import { getApiInstituciones, crearApiInstitucion } from '../../api/instituciones';
+
 
 const Registro = () => {
+  const router = useRouter()
+  const [listaInstituciones, setListaInstituciones] = useState([])
+ 
+  useEffect(() => {
+    getApiInstituciones().then((Datos) => setListaInstituciones(Datos)).catch((Error) => {
+      alert(Error.toString())
+    })
+  }, [])
+
+  /* nuevo institución */
+  const [institucionSeleccionado, setinstitucionSeleccionado] = useState({})
+
+  const nuevaInstitucion = () => {
+    crearApiInstitucion(institucionSeleccionado).then(() => {
+     router.push("/ui/hospitales")
+    })
+  }
+  
+  const actualizarInstitucion = (e) => {
+    setinstitucionSeleccionado(
+      {...institucionSeleccionado, 
+      [e.target.name]: e.target.value}
+    )    
+  }
+
+
+
+
   const { color } = useColors();
 
   return (
@@ -29,24 +61,24 @@ const Registro = () => {
             Registrar Sitios de Practica
           </CardTitle>
           <CardBody>
-            <Form>
+            <Form onChange={actualizarInstitucion}>
               <FormGroup>
                 <Label>IPS</Label>
                 <Input
                   type="text"
                   id='IPS'
-                  name='ips'
+                  name='nombre'
                 />
               </FormGroup>
               <FormGroup>
                 <Label>Nombres</Label>
-                <div class="input-group">
+                <div className="input-group">
                   <Input
                     type="text"
                     id='Nombre1'
                     name='nombre1'
                   />
-                  <span class="input-group-addon">-</span>
+                  <span className="input-group-addon">-</span>
                   <Input
                     type="text"
                     id='Nombre2'
@@ -56,23 +88,13 @@ const Registro = () => {
               </FormGroup>
               <FormGroup>
                 <Label>Apellidos</Label>
-                <div class="input-group">
+                <div className="input-group">
                   <Input
                     type="text"
                     id='Apellido1'
                     name='apellido1'
                   />
-                  <span class="input-group-addon">-</span>
-                  <Input
-                    type="text"
-                    id='Apellido2'
-                    name='Apellido2'
-                  />
-                </div>
-              </FormGroup>
-              <FormGroup>
-                <Label>Teléfono</Label>
-                <Input
+                  <span className="input-group-addon">-</span>
                   id="Telefono"
                   name="telefono"
                   type="number"
@@ -97,24 +119,19 @@ const Registro = () => {
               <FormGroup>
                 <Label>Dirección</Label>
                 <Input
+                  id="text"
+                  name="direccion"
                   type="text"
-                  id='direcion'
-                  name='direccion'
                 />
               </FormGroup>
-              <Link href={'/ui/hospitales'}>
-                <Button style={{backgroundColor: color, color:"black"}} >Guardar</Button>
-                </Link>
+              
+                <Button onClick={nuevaInstitucion} style={{backgroundColor: color, color:"black"}} >Guardar</Button>
                 <Link href={'/ui/hospitales'}>
                 <Button style={{backgroundColor: color, color:"black"}} >Atras</Button>
-                </Link>
             </Form>
           </CardBody>
-        </Card>
       </Col>
     </Row>
-    
   )
 };
-Registro.layout = "MenuLayout"
 export default Registro;
