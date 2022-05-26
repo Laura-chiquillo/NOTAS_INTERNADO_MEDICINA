@@ -18,7 +18,7 @@ import Link from 'next/link';
 import axios from 'axios'
 import { getApiEstudiantes, crearApiEstudiante,editApiEstudiante } from '../../api/estudiantes'
 
-
+var arrayAuxiliar = [];
 
 const registroEstudiantes = () => {
     const router = useRouter()
@@ -36,6 +36,8 @@ const registroEstudiantes = () => {
       crearApiEstudiante(estudianteSeleccionado).then( () =>{
         router.push("/ui/estudiantes") 
       })
+      estudianteSeleccionado.foto = arrayAuxiliar[1]; 
+      console.log(estudianteSeleccionado)
    }
    const actualizarEditEstudiante = (e) => {
     setEstudianteSeleccionado(
@@ -43,17 +45,19 @@ const registroEstudiantes = () => {
       [e.target.name]: e.target.value}
     )    
   }
+
+
   const convertiraBase=(archivos)=>{
     Array.from(archivos).forEach(archivo=>{
       var reader = new FileReader();
       reader.readAsDataURL(archivo);
       reader.onload= function(){
-        var arrayAuxiliar =[];
         var base =reader.result;
           //console.log(base);
         arrayAuxiliar=base.split(',');
         console.log(arrayAuxiliar[1]);
       }
+
     })
   }
 
@@ -81,9 +85,7 @@ const registroEstudiantes = () => {
             
             <FormGroup>
                             <Label for="exampleFile">Cargar Imagen</Label>
-                            <Input id="exampleFile" name="foto" type="file" onChange={(e)=>convertiraBase(e.target.files)}/>
-                  <button className="btn btn-success rounded-0 w-100"> 
-                  subir</button>
+                            <Input id="exampleFile" type="file" name='foto' onChange={(e)=> convertiraBase(e.target.files)}/>
               </FormGroup>
               
               <FormGroup>

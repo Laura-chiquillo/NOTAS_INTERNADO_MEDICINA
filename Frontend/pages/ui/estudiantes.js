@@ -152,7 +152,7 @@ const Buttons = () => {
           estud.semestreE = n["Semestre"],
           estud.correo = n["Correo"],
           estud.telefono = n["Telefono"],
-          agregarApiEstudiante(estud)
+          crearApiEstudiante(estud)
         handleClose()
       });
     });
