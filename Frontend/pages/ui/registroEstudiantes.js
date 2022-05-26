@@ -15,7 +15,7 @@ import {
   FormText,
 } from 'reactstrap';
 import Link from 'next/link'; 
-import axios from 'axios'
+
 import { getApiEstudiantes, crearApiEstudiante,editApiEstudiante } from '../../api/estudiantes'
 
 var arrayAuxiliar = [];
@@ -35,6 +35,7 @@ const registroEstudiantes = () => {
    const nuevoEstudiante =()=>{
       crearApiEstudiante(estudianteSeleccionado).then( () =>{
         router.push("/ui/estudiantes") 
+
       })
       estudianteSeleccionado.foto = arrayAuxiliar[1]; 
       console.log(estudianteSeleccionado)
@@ -45,8 +46,7 @@ const registroEstudiantes = () => {
       [e.target.name]: e.target.value}
     )    
   }
-
-
+  const arrayAuxiliar=[];
   const convertiraBase=(archivos)=>{
     Array.from(archivos).forEach(archivo=>{
       var reader = new FileReader();
@@ -60,6 +60,7 @@ const registroEstudiantes = () => {
 
     })
   }
+  
 
 
   const editarEstudiante = () => {
@@ -85,7 +86,8 @@ const registroEstudiantes = () => {
             
             <FormGroup>
                             <Label for="exampleFile">Cargar Imagen</Label>
-                            <Input id="exampleFile" type="file" name='foto' onChange={(e)=> convertiraBase(e.target.files)}/>
+                            <Input id="exampleFile" name="foto" type="file" onChange={(e)=>convertiraBase(e.target.files)}/>
+                
               </FormGroup>
               
               <FormGroup>
