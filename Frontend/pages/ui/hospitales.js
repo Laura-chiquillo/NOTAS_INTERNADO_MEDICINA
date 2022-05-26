@@ -285,7 +285,7 @@ const Buttons = () => {
                                   {/* Mostrar estudiantes */}
                                   
                                     {listEstudiantes
-                                      .filter((elemento)=>elemento.primerNombre.toString().toLowerCase().includes(busquedaE.toLowerCase()))
+                                      .filter((elemento)=>elemento.primerApellido.toString().toLowerCase().includes(busquedaE.toLowerCase()))
                                       .sort((a, b) => ordenarLista(a, b))
                                       .map((estudiante, indice) => (
 
@@ -309,7 +309,7 @@ const Buttons = () => {
                               </Button>
                             </Modal.Footer>
                           </Modal>
-                          <li>país: {institucion.idPais}</li>
+                          <li>País: {institucion.idPais}</li>
                           <li>Dirección:{institucion.direccion}</li>
                         </Accordion.Body>
                       </Accordion.Item>
