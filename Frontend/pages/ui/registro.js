@@ -71,6 +71,7 @@ const Registro = () => {
                 />
               </FormGroup>
               <FormGroup>
+<<<<<<< HEAD
                 <Label>Pais</Label>
                 <div class="input-group">
                   <Input
@@ -78,10 +79,67 @@ const Registro = () => {
                     id='Nombre1'
                     name='idPais'
       
+=======
+                <Label>Nombres</Label>
+                <div className="input-group">
+                  <Input
+                    type="text"
+                    id='Nombre1'
+                    name='nombre1'
+                  />
+                  <span className="input-group-addon">-</span>
+                  <Input
+                    type="text"
+                    id='Nombre2'
+                    name='nombre2'
+>>>>>>> Daniela
                   />
                 </div>
               </FormGroup>
               <FormGroup>
+<<<<<<< HEAD
+=======
+                <Label>Apellidos</Label>
+                <div className="input-group">
+                  <Input
+                    type="text"
+                    id='Apellido1'
+                    name='apellido1'
+                  />
+                  <span className="input-group-addon">-</span>
+                  <Input
+                    type="text"
+                    id='Apellido2'
+                    name='Apellido2'
+                  />
+                </div>
+              </FormGroup>
+              <FormGroup>
+                <Label>Teléfono</Label>
+                <Input
+                  id="Telefono"
+                  name="telefono"
+                  type="number"
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="eEmail">Correo</Label>
+                <Input
+                  id="Email"
+                  name="email"
+                  type="email"
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>Cargo</Label>
+                <Input
+                  type="text"
+                  id='Cargo'
+                  name='Cargo'
+                />
+              </FormGroup>
+              <FormGroup>
+>>>>>>> Daniela
                 <Label>Dirección</Label>
                 <Input
                   id="text"

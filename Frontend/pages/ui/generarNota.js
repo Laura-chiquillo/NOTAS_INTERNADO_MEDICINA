@@ -51,6 +51,7 @@ import {
 
                 <FormGroup>
 
+<<<<<<< HEAD
                     <table class="table" border="2">
                       <thead>
                         <tr>
@@ -59,6 +60,10 @@ import {
                           <th>Calificaciones</th>
                         </tr>
                       </thead>
+=======
+                    <table className="table">
+                      
+>>>>>>> Daniela
                       <tbody>
                         <tr ng-repeat="item in lista">
                         <td border="2">I</td>
@@ -129,13 +134,13 @@ import {
 
                     <FormGroup>
                       <Label>Evaluador 1</Label>
-                      <div class="input-group">
+                      <div className="input-group">
                         <Input
                           type="text"
                           id='evaluador1'
                           name='evaluador1'
                         />
-                        <span class="input-group-addon">-</span>
+                        <span className="input-group-addon">-</span>
                         <Input
                           type="text"
                           id='firma1'
@@ -146,13 +151,13 @@ import {
 
                     <FormGroup>
                       <Label>Evaluador 2</Label>
-                      <div class="input-group">
+                      <div className="input-group">
                         <Input
                           type="text"
                           id='evaluador2'
                           name='evaluador2'
                         />
-                        <span class="input-group-addon">-</span>
+                        <span className="input-group-addon">-</span>
                         <Input
                           type="text"
                           id='firma2'
