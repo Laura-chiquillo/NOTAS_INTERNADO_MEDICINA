@@ -34,24 +34,34 @@ import {
                 <Label>Semestre actual: 11</Label><br></br>
                 <Label>Fecha de inicio actual: 21/02/2022</Label><br></br>
                 <Label>Fecha de finalizacion actual: 21/04/2022</Label><br></br>
-              </FormGroup>
-
-              <FormGroup>
+                <Label>Asignatura</Label>
+                <Input
+                  id="Rotacion"
+                  name="rotacion"
+                  type="text"
+                />
                 <Label>Rotacion</Label>
                 <Input
                   id="Rotacion"
                   name="rotacion"
                   type="text"
                 />
+                
               </FormGroup>
 
                 <FormGroup>
 
-                    <table class="table">
-                      
+                    <table class="table" border="2">
+                      <thead>
+                        <tr>
+                          <th>*</th>
+                          <th>*</th>
+                          <th>Calificaciones</th>
+                        </tr>
+                      </thead>
                       <tbody>
                         <tr ng-repeat="item in lista">
-                        <td>I</td>
+                        <td border="2">I</td>
                           <td><b>Historia clinica</b><br></br>
                           Presentacion, calidad y evoluciones<br></br>
                           Justificacion de laboratorio con el diagnostico. epicrisis
@@ -109,7 +119,12 @@ import {
 
 
                     <FormGroup>
-                      <Label>Observaciones: NOTA: __</Label>
+                      <Label>Observaciones:</Label>
+                      <Input
+                          type="text"
+                          id='observaciones'
+                          name='observaciones'
+                        />
                     </FormGroup>
 
                     <FormGroup>
@@ -146,8 +161,8 @@ import {
                       </div>
                     </FormGroup>
 
-                <Link href={'/ui/nota'}><Button  color="primary">Guardar</Button></Link>
-                <Link href={'/ui/nota'}><Button  color="primary">Atras</Button></Link>
+                <Link href={'/ui/vistaHospitales'}><Button  color="primary">Guardar</Button></Link>
+                <Link href={'/ui/vistaHospitales'}><Button  color="primary">Atras</Button></Link>
               </Form>
             </CardBody>
           </Card>

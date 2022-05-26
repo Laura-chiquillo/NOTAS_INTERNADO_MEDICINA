@@ -219,6 +219,11 @@ const Buttons = () => {
     editApiEstudiante(e);
   }
 
+  /* Ventana nueva nota */
+  const [show4, setShow4] = useState(false);
+  const handleClose4 = () => setShow4(false);
+  const handleShow4 = () => setShow4(true);
+
 
   return (
     <div>
@@ -238,7 +243,7 @@ const Buttons = () => {
             </CardTitle>
             <CardBody className="">
               <div className="button-group">
-                <Form className="d-flex" onSubmit={(e)=>  e.preventDefault()}>
+                <Form className="d-flex" onSubmit={(e) => e.preventDefault()}>
 
                   <Button className="btn" onClick={handleShow} style={{ backgroundColor: color, color: "black" }} >
                     +
@@ -300,7 +305,7 @@ const Buttons = () => {
                 {/* Mostrar estudiantes */}
                 <Accordion>
                   {listEstudiantes
-                    .filter((elemento)=>elemento.primerNombre.toString().toLowerCase().includes(busqueda.toLowerCase()))
+                    .filter((elemento) => elemento.primerNombre.toString().toLowerCase().includes(busqueda.toLowerCase()))
                     .sort((a, b) => ordenarLista(a, b))
                     .filter((est, i) => i >= (paginaActual - 1) * itemsPagina && i < paginaActual * itemsPagina)
                     .map((estudiante, indice) => (
@@ -375,9 +380,156 @@ const Buttons = () => {
                                       </Modal.Footer>
                                     </Modal>
 
-                                    <Button className="btn" onClick={handleShow} style={{ backgroundColor: color, color: "black" }} >
+                                    {/* AGREGAR NUEVA NOTA */}
+                                    <Button className="btn" onClick={handleShow4} style={{ backgroundColor: color, color: "black" }} >
                                       +
                                     </Button>
+                                    <Modal
+                                      show={show4}
+                                      size="lg"
+                                      onHide={handleClose4}
+                                      backdrop="static"
+                                      keyboard={false}
+                                    >
+                                      <Modal.Header closeButton>
+                                        <Modal.Title>Nueva nota </Modal.Title>
+                                      </Modal.Header>
+                                      <Modal.Body>
+
+                                        <FormGroup>
+
+                                          <table class="table" border="2">
+                                            <thead>
+                                              <tr>
+                                                <th>*</th>
+                                                <th>*</th>
+                                                <th>Calificaciones</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                              <tr ng-repeat="item in lista">
+                                                <td border="2">I</td>
+                                                <td><b>Historia clinica</b><br></br>
+                                                  Presentacion, calidad y evoluciones<br></br>
+                                                  Justificacion de laboratorio con el diagnostico. epicrisis
+                                                </td>
+                                                <td contentEditable="true"></td>
+                                              </tr>
+
+                                              <tr ng-repeat="item in lista">
+                                                <td>II</td>
+                                                <td><b>Responsabilidad</b><br></br>
+                                                  Asistencia, cumplimiento, colaboracion, trabajo en equipo.<br></br>
+                                                  Trato con el paciente y familiares.
+                                                </td>
+                                                <td contentEditable="true"></td>
+                                                <th></th>
+                                              </tr>
+
+                                              <tr ng-repeat="item in lista">
+                                                <td>III</td>
+                                                <td><b>Practica</b><br></br>
+                                                  Urgencias, consulta externa, hospitalizacion, cirugia, sala de partos y otras.
+                                                </td>
+                                                <td contentEditable="true"></td>
+                                                <th></th>
+                                              </tr>
+
+                                              <tr ng-repeat="item in lista">
+                                                <td>IV</td>
+                                                <td><b>Conocimientos y actualizaciones cientificas</b><br></br>
+                                                  Seminarios, paneles, exposiciones, club de revistas, conferencias.<br></br>
+                                                  Conocimientos teoricos.
+                                                </td>
+                                                <td contentEditable="true"></td>
+                                                <th></th>
+                                              </tr>
+
+                                              <tr ng-repeat="item in lista">
+                                                <td>V</td>
+                                                <td><b>Calificacion</b></td>
+                                                <td contentEditable="true"></td>
+                                                <th></th>
+                                              </tr>
+
+                                              <tr ng-repeat="item in lista">
+                                                <td>VI</td>
+                                                <td><b>Servicios por los cuales roto</b></td>
+                                                <td contentEditable="true"></td>
+                                                <th></th>
+                                              </tr>
+
+                                            </tbody>
+
+                                          </table>
+                                        </FormGroup>
+                                        <FormGroup>
+                                          <Label>Institución:</Label>
+                                          <Input
+                                            type="text"
+                                            id='observaciones'
+                                            name='observaciones'
+                                          />
+                                        </FormGroup>
+                                        <Label>Rotacion</Label>
+                                        <Input
+                                          id="Rotacion"
+                                          name="rotacion"
+                                          type="text"
+                                        />
+                                        <FormGroup>
+                                          <Label>Observaciones:</Label>
+                                          <Input
+                                            type="text"
+                                            id='observaciones'
+                                            name='observaciones'
+                                          />
+                                        </FormGroup>
+
+                                        <FormGroup>
+                                          <Label>Evaluador 1</Label>
+                                          <div class="input-group">
+                                            <Input
+                                              type="text"
+                                              id='evaluador1'
+                                              name='evaluador1'
+                                            />
+                                            <span class="input-group-addon">-</span>
+                                            <Input
+                                              type="text"
+                                              id='firma1'
+                                              name='firma1'
+                                            />
+                                          </div>
+                                        </FormGroup>
+
+                                        <FormGroup>
+                                          <Label>Evaluador 2</Label>
+                                          <div class="input-group">
+                                            <Input
+                                              type="text"
+                                              id='evaluador2'
+                                              name='evaluador2'
+                                            />
+                                            <span class="input-group-addon">-</span>
+                                            <Input
+                                              type="text"
+                                              id='firma2'
+                                              name='firma2'
+                                            />
+                                          </div>
+                                        </FormGroup>
+
+                                      </Modal.Body>
+                                      <Modal.Footer>
+                                        <Button variant="secondary" onClick={handleClose4}>
+                                          Cancelar
+                                        </Button>
+                                        <Button onClick={handleClose4} variant="primary">
+                                          Guardar
+                                        </Button>
+                                      </Modal.Footer>
+                                    </Modal>
                                   </ButtonGroup>
                                 </Col>
                               </Row>
@@ -409,7 +561,7 @@ const Buttons = () => {
 
               <Col className="p-1" xs={1}>
                 {listEstudiantes
-                  .filter((elemento)=>elemento.primerNombre.toString().toLowerCase().includes(busqueda.toLowerCase()))
+                  .filter((elemento) => elemento.primerNombre.toString().toLowerCase().includes(busqueda.toLowerCase()))
                   .sort((a, b) => ordenarLista(a, b))
                   .filter((est, i) => i >= (paginaActual - 1) * itemsPagina && i < paginaActual * itemsPagina)
                   .map((estudiante, indice) => (
