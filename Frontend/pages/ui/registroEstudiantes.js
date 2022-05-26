@@ -46,7 +46,7 @@ const registroEstudiantes = () => {
       [e.target.name]: e.target.value}
     )    
   }
-  const arrayAuxiliar=[];
+  /*const arrayAuxiliar=[];
   const convertiraBase=(archivos)=>{
     Array.from(archivos).forEach(archivo=>{
       var reader = new FileReader();
@@ -54,14 +54,14 @@ const registroEstudiantes = () => {
       reader.onload= function(){
         var base =reader.result;
           //console.log(base);
-        arrayAuxiliar=base.split(',');
+          
         console.log(arrayAuxiliar[1]);
       }
 
     })
   }
   
-
+*/
 
   const editarEstudiante = () => {
     editApiEstudiante(estudianteSeleccionado).then((est) => {

@@ -42,10 +42,12 @@ const Forms = () => {
   }
 
   return (
-    <div >
+    
+    <div className="color-overlay d-flex 
+    justify-content-center align-items-center">
 
 
-      <Row className="justify-content-md-center">
+      
         <Col xs="0" md="7">
           {/* --------------------------------------------------------------------------------*/}
           {/* Card-1*/}
@@ -53,9 +55,10 @@ const Forms = () => {
 
           <Card>
 
-            <CardBody>
-              <Form>
-                <FormGroup>
+            
+              <Form className='rounded p-4 p-sm-3'>
+                <FormGroup 
+                >
                   <Label for="exampleEmail">Correo Electrónico</Label>
                   <Input
                     id="exampleEmail"
@@ -64,7 +67,7 @@ const Forms = () => {
                     type="email"
                   />
                 </FormGroup>
-                <FormGroup>
+                <FormGroup className="mb-3">
                   <Label for="examplePassword">Contraseña</Label>
                   <Input
                     id="examplePassword"
@@ -98,14 +101,14 @@ const Forms = () => {
                       </FormGroup>
                     </Form>
                   </Modal.Body>
-                  <Modal.Footer>
+                  <FormGroup>
                     <Button variant="secondary" onClick={handleClose}>
                       Cancelar
                     </Button>
                     <Button variant="primary" onClick={abrirModal}>
                       Continuar
                     </Button>
-                  </Modal.Footer>
+                    </FormGroup>
                 </Modal>
 
                 {/* confirmar codigo */}
@@ -172,10 +175,10 @@ const Forms = () => {
                 </Modal>
 
               </Form>
-            </CardBody>
+           
           </Card>
         </Col>
-      </Row>
+     
 
     </div>
 
