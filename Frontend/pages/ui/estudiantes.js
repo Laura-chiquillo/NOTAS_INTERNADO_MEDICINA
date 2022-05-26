@@ -385,6 +385,7 @@ const Buttons = () => {
                                     </Button>
                                     <Modal
                                       show={show4}
+                                      size="lg"
                                       onHide={handleClose4}
                                       backdrop="static"
                                       keyboard={false}
@@ -469,7 +470,12 @@ const Buttons = () => {
                                             name='observaciones'
                                           />
                                         </FormGroup>
-
+                                        <Label>Rotacion</Label>
+                                        <Input
+                                          id="Rotacion"
+                                          name="rotacion"
+                                          type="text"
+                                        />
                                         <FormGroup>
                                           <Label>Observaciones:</Label>
                                           <Input
