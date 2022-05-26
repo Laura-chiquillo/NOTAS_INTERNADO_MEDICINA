@@ -333,7 +333,7 @@ const Buttons = () => {
                                   </Button>
                                 </ButtonGroup>
                               </Col>
-                            </Row>
+                            </Row> 
                           </Col>
                         </Row>
                       </Accordion.Body>
