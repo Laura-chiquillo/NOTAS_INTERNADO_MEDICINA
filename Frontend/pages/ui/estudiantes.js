@@ -304,7 +304,7 @@ const Buttons = () => {
                 {/* Mostrar estudiantes */}
                 <Accordion>
                   {listEstudiantes
-                    .filter((elemento) => elemento.primerNombre.toString().toLowerCase().includes(busqueda.toLowerCase()))
+                    .filter((elemento) => elemento.primerApellido.toString().toLowerCase().includes(busqueda.toLowerCase()))
                     .sort((a, b) => ordenarLista(a, b))
                     .filter((est, i) => i >= (paginaActual - 1) * itemsPagina && i < paginaActual * itemsPagina)
                     .map((estudiante, indice) => (
@@ -679,9 +679,6 @@ const Buttons = () => {
                 <Link href={'/ui/ListaEstudiantes'}>
                   <Button style={{ backgroundColor: color, color: "black" }} size="lg">Ver informes</Button>
                 </Link>
-                <Button className="btn" color="secondary" size="lg">
-                  Descargar lista
-                </Button>
               </div>
             </CardBody>
           </Card>

@@ -285,8 +285,7 @@ const Buttons = () => {
                                   {/* Mostrar estudiantes */}
                                   
                                     {listEstudiantes
-                                      .filter((elemento)=>elemento.primerNombre.toString().toLowerCase().includes(busquedaE.toLowerCase()))
-                                      .sort((a, b) => ordenarLista(a, b))
+                                      .filter((elemento)=>elemento.primerApellido.toString().toLowerCase().includes(busquedaE.toLowerCase()))
                                       .map((estudiante, indice) => (
 
                                         <ListItem eventKey={indice} key={indice}>

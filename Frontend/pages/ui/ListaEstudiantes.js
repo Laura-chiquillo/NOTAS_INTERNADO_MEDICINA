@@ -102,13 +102,18 @@ class ListaEstudiantes extends React.Component {
             <CardBody className="">
               <div className="button-group">
                 <Link href={'/ui/graficas'}>
-                <Button className="btn" color="primary" size="lg">
+                <Button className="btn" color="secondary" size="lg">
                   Ver Graficas
                 </Button>
                 </Link>
                 <Button className="btn" color="secondary" size="lg">
                  Descargar lista
                 </Button>
+                <Link href={'/ui/estudiantes'}>
+                <Button className="btn" color="primary" size="lg">
+                  Atrás
+                </Button>
+                </Link>
               </div>
             </CardBody>
           </Card>
