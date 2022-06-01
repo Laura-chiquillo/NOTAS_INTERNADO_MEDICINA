@@ -38,8 +38,19 @@ public class RotacionServiceImpl implements RotacionService{
 
     @Override
     public void updateRotacion(String id, Rotacion rotacion) {
-        // TODO Auto-generated method stub
         Rotacion upRotacion = rotacionRepository.findById(id).get();
+
+        if (rotacion.getEstudiante() != null) {
+            upRotacion.getEstudiante().setIdEstudiante(rotacion.getEstudiante().getIdEstudiante());
+        }
+
+        if (rotacion.getInstitucion() != null) {
+            upRotacion.getInstitucion().setIdInstitucion((rotacion.getInstitucion().getIdInstitucion()));
+        }
+
+        if (rotacion.getAsignatura() != null) {
+            upRotacion.getAsignatura().setIdAsignatura(((rotacion.getAsignatura().getIdAsignatura())));
+        }
 
         if (rotacion.getNota() != 0){
             upRotacion.setNota(rotacion.getNota());

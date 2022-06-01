@@ -80,4 +80,11 @@ public class Admin {
         public void setContraseña(String contraseña) {
             this.contraseña = contraseña;
         }
+
+        @Override
+        public String toString() {
+            return "Admin [contraseña=" + contraseña + ", correo=" + correo + ", idAdmin=" + idAdmin
+                    + ", primerApellido=" + primerApellido + ", primerNombre=" + primerNombre + ", segundoApellido="
+                    + segundoApellido + ", segundoNombre=" + segundoNombre + "]";
+        }  
 }

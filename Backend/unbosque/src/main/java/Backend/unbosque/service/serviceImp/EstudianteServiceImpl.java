@@ -39,8 +39,11 @@ public class EstudianteServiceImpl implements EstudianteService{
 
     @Override
     public void updateEstudiante(String id, Estudiante estudiante) {
-        // TODO Auto-generated method stub
         Estudiante upEstudiante =estudianteRepository.findById(id).get();
+
+        if (estudiante.getInstitucion() != null) {
+            upEstudiante.setInstitucion(estudiante.getInstitucion());
+        }
 
         if(estudiante.getFoto() != null){
             upEstudiante.setFoto(estudiante.getFoto());

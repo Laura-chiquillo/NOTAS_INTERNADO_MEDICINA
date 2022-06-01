@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoOperations;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -22,9 +19,6 @@ public class AdminServiceImpl implements AdminService{
 
     @Autowired
     private AdminRepository adminRepository;
-
-    @Autowired
-    private MongoOperations mongoOperations;
 
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(16);
 
@@ -49,7 +43,6 @@ public class AdminServiceImpl implements AdminService{
 
     @Override
     public void updateAdmin(String id, Admin admin) {
-        // TODO Auto-generated method stub
         Admin upAdmin = adminRepository.findById(id).get();
 
         if(admin.getPrimerNombre() != null){

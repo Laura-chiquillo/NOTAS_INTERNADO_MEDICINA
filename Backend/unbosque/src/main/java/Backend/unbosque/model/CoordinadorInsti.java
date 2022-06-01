@@ -9,7 +9,7 @@ public class CoordinadorInsti {
 
     @Id
     private String idCoordinador;
-    //@DBRef(lazy = true)
+    @DBRef(lazy = true)
     private String idInstitucion;
     private String primerNombre;
     private String segundoNombre;
@@ -115,4 +115,11 @@ public class CoordinadorInsti {
         this.cargo = cargo;
     }
 
+    @Override
+    public String toString() {
+        return "CoordinadorInsti [cargo=" + cargo + ", contraseña=" + contraseña + ", correo=" + correo
+                + ", idCoordinador=" + idCoordinador + ", idInstitucion=" + idInstitucion + ", primerApellido="
+                + primerApellido + ", primerNombre=" + primerNombre + ", segundoApellido=" + segundoApellido
+                + ", segundoNombre=" + segundoNombre + ", telefono=" + telefono + "]";
+    }
 }
