@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoOperations;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,9 +19,6 @@ public class CoordinadorInstiServiceImpl implements CoordinadorInstiService{
 
     @Autowired
     private CoordinadorInstiRepository coordinadorInstiRepository;
-
-    @Autowired
-    private MongoOperations mongoOperations;
 
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(16);
 
@@ -49,7 +43,6 @@ public class CoordinadorInstiServiceImpl implements CoordinadorInstiService{
 
     @Override
     public void updateCoordinadorInsti(String id, CoordinadorInsti coordinadorInsti) {
-        // TODO Auto-generated method stub
 
         CoordinadorInsti upCoordinadorInsti = coordinadorInstiRepository.findById(id).get();
 

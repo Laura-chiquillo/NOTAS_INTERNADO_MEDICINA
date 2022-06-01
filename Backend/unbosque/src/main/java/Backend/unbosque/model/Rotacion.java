@@ -1,6 +1,7 @@
 package Backend.unbosque.model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document("Rotaciones")
@@ -8,16 +9,25 @@ public class Rotacion {
 
         @Id
         private String idRotacion;
-        private String idEstudiante;
+        @DBRef
+        private Estudiante estudiante;
+        @DBRef
+        private Institucion institucion;
+        @DBRef
+        private Asignatura asignatura;
+        private String idSubAsignatura;
         private double nota;
         private String mes;
         private String fechaInicio;
-        private String fechaCierre;
-        
-        public Rotacion(String idRotacion, String idEstudiante, double nota, String mes, String fechaInicio,
-                String fechaCierre) {
+        private String fechaCierre; 
+
+        public Rotacion(String idRotacion, Estudiante estudiante, Institucion institucion, Asignatura asignatura,
+                String idSubAsignatura, double nota, String mes, String fechaInicio, String fechaCierre) {
             this.idRotacion = idRotacion;
-            this.idEstudiante = idEstudiante;
+            this.estudiante = estudiante;
+            this.institucion = institucion;
+            this.asignatura = asignatura;
+            this.idSubAsignatura = idSubAsignatura;
             this.nota = nota;
             this.mes = mes;
             this.fechaInicio = fechaInicio;
@@ -32,12 +42,36 @@ public class Rotacion {
             this.idRotacion = idRotacion;
         }
 
-        public String getIdEstudiante() {
-            return idEstudiante;
+        public Estudiante getEstudiante() {
+            return estudiante;
         }
 
-        public void setIdEstudiante(String idEstudiante) {
-            this.idEstudiante = idEstudiante;
+        public void setEstudiante(Estudiante estudiante) {
+            this.estudiante = estudiante;
+        }
+
+        public Institucion getInstitucion() {
+            return institucion;
+        }
+
+        public void setInstitucion(Institucion institucion) {
+            this.institucion = institucion;
+        }
+
+        public Asignatura getAsignatura() {
+            return asignatura;
+        }
+
+        public void setAsignatura(Asignatura asignatura) {
+            this.asignatura = asignatura;
+        }
+
+        public String getIdSubAsignatura() {
+            return idSubAsignatura;
+        }
+
+        public void setIdSubAsignatura(String idSubAsignatura) {
+            this.idSubAsignatura = idSubAsignatura;
         }
 
         public double getNota() {
@@ -70,5 +104,12 @@ public class Rotacion {
 
         public void setFechaCierre(String fechaCierre) {
             this.fechaCierre = fechaCierre;
-        }       
+        }
+
+        @Override
+        public String toString() {
+            return "Rotacion [asignatura=" + asignatura + ", estudiante=" + estudiante + ", fechaCierre=" + fechaCierre
+                    + ", fechaInicio=" + fechaInicio + ", idRotacion=" + idRotacion + ", idSubAsignatura="
+                    + idSubAsignatura + ", institucion=" + institucion + ", mes=" + mes + ", nota=" + nota + "]";
+        }    
 }

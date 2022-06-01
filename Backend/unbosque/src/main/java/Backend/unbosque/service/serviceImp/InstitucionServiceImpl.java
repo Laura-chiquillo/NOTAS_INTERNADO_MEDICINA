@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +18,9 @@ public class InstitucionServiceImpl implements InstitucionService{
 
     @Autowired
     private InstitucionRepository institucionRepository;
+
+    @Autowired
+    private MongoOperations mongoOperations;
 
     @Override
     public List<Institucion> getInstitucion() {
@@ -38,9 +42,17 @@ public class InstitucionServiceImpl implements InstitucionService{
 
     @Override
     public void updateInstitucion(String id, Institucion institucion) {
-        // TODO Auto-generated method stub
-        
         Institucion upInstitucion = institucionRepository.findById(id).get();
+
+        if (!institucion.getEstudiantes().isEmpty()) {
+            for (int i = 0; i < institucion.getEstudiantes().size(); i++) {
+            
+            }
+        }
+
+        if (institucion.getCiudad() != null) {
+            upInstitucion.getCiudad().setIdCiudad(institucion.getCiudad().getIdCiudad());
+        }
 
         if (institucion.getNombre() != null){
             upInstitucion.setNombre(institucion.getNombre());
@@ -48,10 +60,6 @@ public class InstitucionServiceImpl implements InstitucionService{
 
         if (institucion.getDireccion() != null){
             upInstitucion.setDireccion(institucion.getDireccion());
-        }
-
-        if (institucion.getEstudiantes() != null){
-            upInstitucion.setEstudiantes(institucion.getEstudiantes());
         }
 
         if (institucion.getEstado() != null){
@@ -66,5 +74,4 @@ public class InstitucionServiceImpl implements InstitucionService{
         institucionRepository.deleteById(id);
         
     }
-    
 }
