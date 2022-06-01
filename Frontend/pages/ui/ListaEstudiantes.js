@@ -109,7 +109,7 @@ class ListaEstudiantes extends React.Component {
                       Ver Graficas
                     </Button>
                   </Link>
-                  {/* Descargar PDF */}
+                  {/* Descargar PDF y excel */}
                   <ButtonGroup>
                     <DropdownButton as={ButtonGroup} title="Descargar lista" id="bg-nested-dropdown">
                       <Dropdown.Item eventKey="1">PDF</Dropdown.Item>
