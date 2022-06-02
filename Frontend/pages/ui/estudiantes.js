@@ -7,6 +7,9 @@ import Modal from 'react-bootstrap/Modal';
 import { Form } from 'react-bootstrap';
 import { getApiEstudiantes, editApiEstudiante, agregarApiEstudiante } from '../../api/estudiantes'
 import * as XLSX from "xlsx";
+import {getApiInstituciones} from '../../api/instituciones'
+import { getApiMateria } from '../../api/notas'
+
 
 const Buttons = () => {
 
@@ -223,6 +226,31 @@ const Buttons = () => {
   const handleClose4 = () => setShow4(false);
   const handleShow4 = () => setShow4(true);
 
+  /* Lista de institución */
+  const [listInstituciones, setListInstituciones] = useState([]);
+  useEffect(() => {
+    getApiInstituciones()
+      .then((Datos) => {
+        setListInstituciones(Datos)
+
+      })
+      .catch((Error) => {
+        alert(Error.toString())
+      })
+  }, [])
+
+
+  /* Lista de materias */
+  const [listMaterias, setListMaterias] = useState([]);
+  useEffect(() => {
+    getApiMateria()
+      .then((Datos) => {
+        setListMaterias(Datos)
+      })
+      .catch((Error) => {
+        alert(Error.toString())
+      })
+  }, [])                 
 
   return (
     <div>
@@ -463,12 +491,26 @@ const Buttons = () => {
                                           </table>
                                         </FormGroup>
                                         <FormGroup>
-                                          <Label>Institución:</Label>
-                                          <Input
-                                            type="text"
-                                            id='observaciones'
-                                            name='observaciones'
-                                          />
+                                          <Label for="exampleSelect">Institución</Label>
+                                          <Input id="exampleSelect" name="select" type="select" onChange={seleccionarOrden}>
+                                            {
+                                              listInstituciones
+                                              .map((institucion, index) => (
+                                                <option value="vacio">{institucion?.nombre}</option>
+                                              ))
+                                            }
+                                          </Input>
+                                        </FormGroup>
+                                        <FormGroup>
+                                          <Label for="exampleSelect">Materia</Label>
+                                          <Input id="exampleSelect" name="select" type="select" onChange={seleccionarOrden}>
+                                            {
+                                              listMaterias
+                                              .map((materia, index) => (
+                                                <option value="vacio">{materia?.descripcion}</option>
+                                              ))
+                                            }
+                                          </Input>
                                         </FormGroup>
                                         <Label>Rotacion</Label>
                                         <Input

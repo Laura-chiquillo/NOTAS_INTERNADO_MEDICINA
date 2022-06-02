@@ -95,10 +95,12 @@ const Registro = () => {
                     name='apellido1'
                   />
                   <span className="input-group-addon">-</span>
+                  <Input
                   id="Telefono"
                   name="telefono"
                   type="number"
                 />
+                </div>
               </FormGroup>
               <FormGroup>
                 <Label for="eEmail">Correo</Label>
@@ -128,8 +130,10 @@ const Registro = () => {
                 <Button onClick={nuevaInstitucion} style={{backgroundColor: color, color:"black"}} >Guardar</Button>
                 <Link href={'/ui/hospitales'}>
                 <Button style={{backgroundColor: color, color:"black"}} >Atras</Button>
+                </Link>
             </Form>
           </CardBody>
+
       </Col>
     </Row>
   )
