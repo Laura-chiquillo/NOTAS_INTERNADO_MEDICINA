@@ -3,9 +3,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import {
   Table,
   Button,
-  DropdownButton,
-  ButtonGroup,
-  Dropdown,
   Container,
   Modal,
   ModalHeader,
@@ -16,7 +13,15 @@ import {
   Row, Col, CardTitle, CardBody,
 } from "reactstrap";
 import Link from "next/link";
+import { useDownloadExcel } from 'react-export-table-to-excel';
 import MenuNotas from "./MenuNotas";
+import { 
+  DropdownButton,
+  ButtonGroup,
+  Dropdown} from 'react-bootstrap';
+
+
+
 
 const data = [
   { No: 1, Cedula: "9120928122", Nombres: "Naruto", Apellido: "Naruto", Promedio: "4.4", SitioPractica: "Los Cobos", Nota: "4.4", Mes: "Febrero" },
@@ -47,7 +52,10 @@ class ListaEstudiantes extends React.Component {
     },
   };
 
-
+  constructor (props) {
+    super(props);
+    this.tabla = React.createRef();
+  }
 
   render() {
 
@@ -61,7 +69,7 @@ class ListaEstudiantes extends React.Component {
           <br />
           <br />
 
-          <Table>
+          <Table ref={this.tabla}>
             <thead>
               <tr>
                 <th>ID</th>
@@ -105,22 +113,22 @@ class ListaEstudiantes extends React.Component {
               <CardBody className="">
                 <div className="button-group">
                   <Link href={'/ui/graficas'}>
-                    <Button className="btn" color="secondary" size="lg">
+                    <Button className="btn" color="secondary" >
                       Ver Graficas
                     </Button>
                   </Link>
-                  {/* Descargar PDF y excel */}
-                  <ButtonGroup>
-                    <DropdownButton as={ButtonGroup} title="Descargar lista" id="bg-nested-dropdown">
-                      <Dropdown.Item eventKey="1">PDF</Dropdown.Item>
-                      <Dropdown.Item eventKey="2">EXCEL</Dropdown.Item>
-                    </DropdownButton>
-                  </ButtonGroup>
                   <Link href={'/ui/estudiantes'}>
-                    <Button className="btn" color="primary" size="lg">
+                    <Button className="btn" color="primary" >
                       Atrás
                     </Button>
                   </Link>
+                  {/* Descargar PDF y excel */}
+                  <ButtonGroup >
+                    <DropdownButton as={ButtonGroup} title="Descargar lista" className="btn btn-lg p-0" id="bg-nested-dropdown">
+                      <Dropdown.Item eventKey="1"> PDF</Dropdown.Item>
+                      <Dropdown.Item eventKey="2">EXCEL</Dropdown.Item>
+                    </DropdownButton>
+                  </ButtonGroup>
                 </div>
               </CardBody>
             </Card>

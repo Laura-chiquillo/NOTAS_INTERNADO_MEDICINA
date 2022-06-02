@@ -425,7 +425,7 @@ const Buttons = () => {
 
                                         <FormGroup>
 
-                                          <table class="table" border="2">
+                                          <table className="table" border="2">
                                             <thead>
                                               <tr>
                                                 <th>*</th>
@@ -496,7 +496,7 @@ const Buttons = () => {
                                             {
                                               listInstituciones
                                               .map((institucion, index) => (
-                                                <option value="vacio">{institucion?.nombre}</option>
+                                                <option key={index} value="vacio">{institucion?.nombre}</option>
                                               ))
                                             }
                                           </Input>
@@ -507,7 +507,7 @@ const Buttons = () => {
                                             {
                                               listMaterias
                                               .map((materia, index) => (
-                                                <option value="vacio">{materia?.descripcion}</option>
+                                                <option key={index} value="vacio">{materia?.descripcion}</option>
                                               ))
                                             }
                                           </Input>
@@ -529,13 +529,13 @@ const Buttons = () => {
 
                                         <FormGroup>
                                           <Label>Evaluador 1</Label>
-                                          <div class="input-group">
+                                          <div className="input-group">
                                             <Input
                                               type="text"
                                               id='evaluador1'
                                               name='evaluador1'
                                             />
-                                            <span class="input-group-addon">-</span>
+                                            <span className="input-group-addon">-</span>
                                             <Input
                                               type="text"
                                               id='firma1'
@@ -546,13 +546,13 @@ const Buttons = () => {
 
                                         <FormGroup>
                                           <Label>Evaluador 2</Label>
-                                          <div class="input-group">
+                                          <div className="input-group">
                                             <Input
                                               type="text"
                                               id='evaluador2'
                                               name='evaluador2'
                                             />
-                                            <span class="input-group-addon">-</span>
+                                            <span className="input-group-addon">-</span>
                                             <Input
                                               type="text"
                                               id='firma2'

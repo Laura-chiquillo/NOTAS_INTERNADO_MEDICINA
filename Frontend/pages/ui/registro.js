@@ -133,9 +133,10 @@ const Registro = () => {
                 </Link>
             </Form>
           </CardBody>
-
+        </Card>
       </Col>
     </Row>
   )
 };
+Registro.layout = "MenuLayout";
 export default Registro;
