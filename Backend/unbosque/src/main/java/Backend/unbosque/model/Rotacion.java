@@ -15,7 +15,7 @@ public class Rotacion {
         private String fechaCierre;
         
         public Rotacion(String idRotacion, String idEstudiante, double nota, String mes, String fechaInicio,
-                String fechaCierre) {
+              String fechaCierre) {
             this.idRotacion = idRotacion;
             this.idEstudiante = idEstudiante;
             this.nota = nota;
