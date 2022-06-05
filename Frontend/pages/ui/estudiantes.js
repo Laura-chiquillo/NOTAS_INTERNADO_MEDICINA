@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Button, ButtonGroup, Card, FormText, FormGroup, Label, Input, CardBody, CardTitle, Row, Col, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 import Link from 'next/link';
 import { useColors } from '../../hooks/useColor';
@@ -272,6 +272,12 @@ const Buttons = () => {
       alert("Informe creado")
     })
   }
+  /* Limpiar tablero de firma */
+  const sigCanvas =  useRef({});
+  const limpiar = () => sigCanvas.current.clear()
+
+  const sigCanvas2 =  useRef({});
+  const limpiar2 = () => sigCanvas2.current.clear()
 
   return (
     <div>
@@ -593,10 +599,13 @@ const Buttons = () => {
                                         <FormGroup>
                                             {/* Firma */}
                                             <Label>Firma</Label>
-                                            <SignatureCanvas canvasProps={{
+                                            <SignatureCanvas 
+                                            ref={sigCanvas}
+                                            canvasProps={{                                              
                                               style:{
                                                 width: "100%", height:50,
                                                 "border":"0.5px solid #000000"} }} />
+                                            <Button onClick={limpiar}>Limpiar</Button>
                                         </FormGroup>
                                         <FormGroup>
                                           <Label>Evaluador 2</Label>
@@ -617,10 +626,13 @@ const Buttons = () => {
                                         <FormGroup>
                                             {/* Firma */}
                                             <Label>Firma</Label>
-                                            <SignatureCanvas canvasProps={{
+                                            <SignatureCanvas 
+                                            ref={sigCanvas2}
+                                            canvasProps={{                                              
                                               style:{
                                                 width: "100%", height:50,
                                                 "border":"0.5px solid #000000"} }} />
+                                            <Button onClick={limpiar2}>Limpiar</Button>
                                         </FormGroup>
                                       </Modal.Body>
                                       <Modal.Footer>
