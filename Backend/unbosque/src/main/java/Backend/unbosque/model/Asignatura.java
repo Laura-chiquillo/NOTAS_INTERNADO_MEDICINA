@@ -13,17 +13,15 @@ public class Asignatura {
     private int creditoMes;
     private int tiempoMes;
     private int creditosTotales;
-    private double definitiva;
-    
+
     public Asignatura(String idAsignatura, String semestreA, String descripcion, int creditoMes, int tiempoMes,
-            int creditosTotales, double definitiva) {
+            int creditosTotales) {
         this.idAsignatura = idAsignatura;
         this.semestreA = semestreA;
         this.descripcion = descripcion;
         this.creditoMes = creditoMes;
         this.tiempoMes = tiempoMes;
         this.creditosTotales = creditosTotales;
-        this.definitiva = definitiva;
     }
 
     public String getIdAsignatura() {
@@ -74,11 +72,10 @@ public class Asignatura {
         this.creditosTotales = creditosTotales;
     }
 
-    public double getDefinitiva() {
-        return definitiva;
+    @Override
+    public String toString() {
+        return "Asignatura [creditoMes=" + creditoMes + ", creditosTotales=" + creditosTotales + ", descripcion="
+                + descripcion + ", idAsignatura=" + idAsignatura + ", semestreA=" + semestreA + ", tiempoMes="
+                + tiempoMes + "]";
     }
-
-    public void setDefinitiva(double definitiva) {
-        this.definitiva = definitiva;
-    }   
 }

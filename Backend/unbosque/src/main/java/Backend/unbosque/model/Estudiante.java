@@ -8,8 +8,7 @@ public class Estudiante {
 
         @Id
         private String idEstudiante;
-        private String idAsignatura;
-        private String idInstitucion;
+        private String institucion;
         private String foto;
         private String documento;
         private String primerNombre;
@@ -22,12 +21,11 @@ public class Estudiante {
         private String telefono;
         private boolean estado;
 
-        public Estudiante(String idEstudiante, String idAsignatura, String idInstitucion, String foto, String documento,
-                String primerNombre, String segundoNombre, String primerApellido, String segundoApellido,
-                double promedio, String semestreE, String correo, String telefono, boolean estado) {
+        public Estudiante(String idEstudiante, String institucion, String foto, String documento, String primerNombre,
+                String segundoNombre, String primerApellido, String segundoApellido, double promedio, String semestreE,
+                String correo, String telefono, boolean estado) {
             this.idEstudiante = idEstudiante;
-            this.idAsignatura = idAsignatura;
-            this.idInstitucion = idInstitucion;
+            this.institucion = institucion;
             this.foto = foto;
             this.documento = documento;
             this.primerNombre = primerNombre;
@@ -49,20 +47,12 @@ public class Estudiante {
             this.idEstudiante = idEstudiante;
         }
 
-        public String getIdAsignatura() {
-            return idAsignatura;
+        public String getInstitucion() {
+            return institucion;
         }
 
-        public void setIdAsignatura(String idAsignatura) {
-            this.idAsignatura = idAsignatura;
-        }
-
-        public String getIdInstitucion() {
-            return idInstitucion;
-        }
-
-        public void setIdInstitucion(String idInstitucion) {
-            this.idInstitucion = idInstitucion;
+        public void setInstitucion(String institucion) {
+            this.institucion = institucion;
         }
 
         public String getFoto() {
@@ -156,11 +146,9 @@ public class Estudiante {
         @Override
         public String toString() {
             return "Estudiante [correo=" + correo + ", documento=" + documento + ", estado=" + estado + ", foto=" + foto
-                    + ", idAsignatura=" + idAsignatura + ", idEstudiante=" + idEstudiante + ", idInstitucion="
-                    + idInstitucion + ", primerApellido=" + primerApellido + ", primerNombre=" + primerNombre
-                    + ", promedio=" + promedio + ", segundoApellido=" + segundoApellido + ", segundoNombre="
-                    + segundoNombre + ", semestreE=" + semestreE + ", telefono=" + telefono + "]";
-        }     
-
-        
+                    + ", idEstudiante=" + idEstudiante + ", institucion=" + institucion + ", primerApellido="
+                    + primerApellido + ", primerNombre=" + primerNombre + ", promedio=" + promedio
+                    + ", segundoApellido=" + segundoApellido + ", segundoNombre=" + segundoNombre + ", semestreE="
+                    + semestreE + ", telefono=" + telefono + "]";
+        }
 }

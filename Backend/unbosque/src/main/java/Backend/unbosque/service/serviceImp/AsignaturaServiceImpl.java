@@ -36,16 +36,8 @@ public class AsignaturaServiceImpl implements AsignaturaService{
         return asignaturaRepository.insert(asignatura);
     }
 
-    //private String semestreA;
-    //private String descripcion;
-    //private int creditoMes;
-    //private int tiempoMes;
-    //private int creditosTotales;
-    //private double definitiva
-
     @Override
     public void updateAsignatura(String id, Asignatura asignatura) {
-    
         Asignatura upAsignatura = asignaturaRepository.findById(id).get();
 
         if (asignatura.getSemestreA() != null){
@@ -66,10 +58,6 @@ public class AsignaturaServiceImpl implements AsignaturaService{
 
         if (asignatura.getCreditosTotales() != 0){
             upAsignatura.setCreditosTotales(asignatura.getCreditosTotales());
-        }
-
-        if (asignatura.getDefinitiva() != 0.0){
-            upAsignatura.setDefinitiva(asignatura.getDefinitiva());
         }
 
         asignaturaRepository.save(upAsignatura);
