@@ -7,9 +7,9 @@ import Modal from 'react-bootstrap/Modal';
 import { Form } from 'react-bootstrap';
 import { getApiEstudiantes, editApiEstudiante, agregarApiEstudiante } from '../../api/estudiantes'
 import * as XLSX from "xlsx";
-import {getApiInstituciones} from '../../api/instituciones'
-import { getApiMateria,getApiSubMateria } from '../../api/notas'
-
+import { getApiInstituciones } from '../../api/instituciones'
+import { getApiMateria, getApiSubMateria } from '../../api/notas'
+import SignatureCanvas from "react-signature-canvas";
 
 const Buttons = () => {
 
@@ -250,8 +250,8 @@ const Buttons = () => {
       .catch((Error) => {
         alert(Error.toString())
       })
-  }, [])    
-  
+  }, [])
+
   /* Lista de submaterias */
   const [listSubmaterias, setListSubmaterias] = useState([]);
   useEffect(() => {
@@ -507,9 +507,9 @@ const Buttons = () => {
                                           <Input id="exampleSelect" name="select" type="select" onChange={seleccionarOrden}>
                                             {
                                               listInstituciones
-                                              .map((institucion, index) => (
-                                                <option key={index} value="vacio">{institucion?.nombre}</option>
-                                              ))
+                                                .map((institucion, index) => (
+                                                  <option key={index} value="vacio">{institucion?.nombre}</option>
+                                                ))
                                             }
                                           </Input>
                                         </FormGroup>
@@ -519,9 +519,9 @@ const Buttons = () => {
                                           <Input id="exampleSelect" name="select" type="select">
                                             {
                                               listMaterias
-                                              .map((materia, index) => (
-                                                <option key={index} value="vacio">{materia?.descripcion}</option>
-                                              ))
+                                                .map((materia, index) => (
+                                                  <option key={index} value="vacio">{materia?.descripcion}</option>
+                                                ))
                                             }
                                           </Input>
                                         </FormGroup>
@@ -532,9 +532,9 @@ const Buttons = () => {
                                           <Input id="exampleSelect" name="select" type="select">
                                             {
                                               listSubmaterias
-                                              .map((submateria, index) => (
-                                                <option key={index} value="vacio">{submateria?.descripcion}</option>
-                                              ))
+                                                .map((submateria, index) => (
+                                                  <option key={index} value="vacio">{submateria?.descripcion}</option>
+                                                ))
                                             }
                                           </Input>
                                         </FormGroup>
@@ -548,7 +548,7 @@ const Buttons = () => {
                                               type="Date"
                                               id='evaluador1'
                                               name='evaluador1'
-                                              />
+                                            />
                                             <span className="input-group-addon">-</span>
                                             <Input
                                               type="Date"
@@ -577,12 +577,19 @@ const Buttons = () => {
                                             <span className="input-group-addon">-</span>
                                             <Input
                                               type="text"
-                                              id='firma1'
-                                              name='firma1'
+                                              id='firma2'
+                                              name='firma2'
                                             />
                                           </div>
                                         </FormGroup>
-
+                                        <FormGroup>
+                                            {/* Firma */}
+                                            <Label>Firma</Label>
+                                            <SignatureCanvas canvasProps={{
+                                              style:{
+                                                width: "100%", height:50,
+                                                "border":"0.5px solid #000000"} }} />
+                                        </FormGroup>
                                         <FormGroup>
                                           <Label>Evaluador 2</Label>
                                           <div className="input-group">
@@ -599,7 +606,14 @@ const Buttons = () => {
                                             />
                                           </div>
                                         </FormGroup>
-
+                                        <FormGroup>
+                                            {/* Firma */}
+                                            <Label>Firma</Label>
+                                            <SignatureCanvas canvasProps={{
+                                              style:{
+                                                width: "100%", height:50,
+                                                "border":"0.5px solid #000000"} }} />
+                                        </FormGroup>
                                       </Modal.Body>
                                       <Modal.Footer>
                                         <Button variant="secondary" onClick={handleClose4}>
