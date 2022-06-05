@@ -1,9 +1,6 @@
 package Backend.unbosque.model;
 
-import java.util.List;
-
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document("Asignatura")
@@ -11,18 +8,15 @@ public class Asignatura {
 
     @Id
     private String idAsignatura;
-    @DBRef
-    private List<SubAsignatura> subAsignaturas;
     private String semestreA;
     private String descripcion;
     private int creditoMes;
     private int tiempoMes;
     private int creditosTotales;
 
-    public Asignatura(String idAsignatura, List<SubAsignatura> subAsignaturas, String semestreA, String descripcion,
-            int creditoMes, int tiempoMes, int creditosTotales) {
+    public Asignatura(String idAsignatura, String semestreA, String descripcion, int creditoMes, int tiempoMes,
+            int creditosTotales) {
         this.idAsignatura = idAsignatura;
-        this.subAsignaturas = subAsignaturas;
         this.semestreA = semestreA;
         this.descripcion = descripcion;
         this.creditoMes = creditoMes;
@@ -36,14 +30,6 @@ public class Asignatura {
 
     public void setIdAsignatura(String idAsignatura) {
         this.idAsignatura = idAsignatura;
-    }
-
-    public List<SubAsignatura> getSubAsignaturas() {
-        return subAsignaturas;
-    }
-
-    public void setSubAsignaturas(List<SubAsignatura> subAsignaturas) {
-        this.subAsignaturas = subAsignaturas;
     }
 
     public String getSemestreA() {
@@ -89,7 +75,7 @@ public class Asignatura {
     @Override
     public String toString() {
         return "Asignatura [creditoMes=" + creditoMes + ", creditosTotales=" + creditosTotales + ", descripcion="
-                + descripcion + ", idAsignatura=" + idAsignatura + ", semestreA=" + semestreA + ", subAsignaturas="
-                + subAsignaturas + ", tiempoMes=" + tiempoMes + "]";
-    }    
+                + descripcion + ", idAsignatura=" + idAsignatura + ", semestreA=" + semestreA + ", tiempoMes="
+                + tiempoMes + "]";
+    }
 }
