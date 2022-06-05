@@ -13,7 +13,6 @@ import {
   Row, Col, CardTitle, CardBody,
 } from "reactstrap";
 import Link from "next/link";
-import { useDownloadExcel } from 'react-export-table-to-excel';
 import MenuNotas from "./MenuNotas";
 import { 
   DropdownButton,
