@@ -14,21 +14,28 @@ public class Rotacion {
         @DBRef
         private Institucion institucion;
         @DBRef
-        private Asignatura asignatura;
-        private String idSubAsignatura;
-        private double nota;
+        private SubAsignatura subAsignatura;
+        private double notaHistoriaClinica;
+        private double notaResponsabilidad;
+        private double notaPractica;
+        private double notaCyAC;
+        private double notaRotacion;
         private String mes;
         private String fechaInicio;
         private String fechaCierre; 
 
-        public Rotacion(String idRotacion, Estudiante estudiante, Institucion institucion, Asignatura asignatura,
-                String idSubAsignatura, double nota, String mes, String fechaInicio, String fechaCierre) {
+        public Rotacion(String idRotacion, Estudiante estudiante, Institucion institucion, SubAsignatura subAsignatura,
+                double notaHistoriaClinica, double notaResponsabilidad, double notaPractica, double notaCyAC,
+                double notaRotacion, String mes, String fechaInicio, String fechaCierre) {
             this.idRotacion = idRotacion;
             this.estudiante = estudiante;
             this.institucion = institucion;
-            this.asignatura = asignatura;
-            this.idSubAsignatura = idSubAsignatura;
-            this.nota = nota;
+            this.subAsignatura = subAsignatura;
+            this.notaHistoriaClinica = notaHistoriaClinica;
+            this.notaResponsabilidad = notaResponsabilidad;
+            this.notaPractica = notaPractica;
+            this.notaCyAC = notaCyAC;
+            this.notaRotacion = notaRotacion;
             this.mes = mes;
             this.fechaInicio = fechaInicio;
             this.fechaCierre = fechaCierre;
@@ -58,28 +65,52 @@ public class Rotacion {
             this.institucion = institucion;
         }
 
-        public Asignatura getAsignatura() {
-            return asignatura;
+        public SubAsignatura getSubAsignatura() {
+            return subAsignatura;
         }
 
-        public void setAsignatura(Asignatura asignatura) {
-            this.asignatura = asignatura;
+        public void setSubAsignatura(SubAsignatura subAsignatura) {
+            this.subAsignatura = subAsignatura;
         }
 
-        public String getIdSubAsignatura() {
-            return idSubAsignatura;
+        public double getNotaHistoriaClinica() {
+            return notaHistoriaClinica;
         }
 
-        public void setIdSubAsignatura(String idSubAsignatura) {
-            this.idSubAsignatura = idSubAsignatura;
+        public void setNotaHistoriaClinica(double notaHistoriaClinica) {
+            this.notaHistoriaClinica = notaHistoriaClinica;
         }
 
-        public double getNota() {
-            return nota;
+        public double getNotaResponsabilidad() {
+            return notaResponsabilidad;
         }
 
-        public void setNota(double nota) {
-            this.nota = nota;
+        public void setNotaResponsabilidad(double notaResponsabilidad) {
+            this.notaResponsabilidad = notaResponsabilidad;
+        }
+
+        public double getNotaPractica() {
+            return notaPractica;
+        }
+
+        public void setNotaPractica(double notaPractica) {
+            this.notaPractica = notaPractica;
+        }
+
+        public double getNotaCyAC() {
+            return notaCyAC;
+        }
+
+        public void setNotaCyAC(double notaCyAC) {
+            this.notaCyAC = notaCyAC;
+        }
+
+        public double getNotaRotacion() {
+            return notaRotacion;
+        }
+
+        public void setNotaRotacion(double notaRotacion) {
+            this.notaRotacion = notaRotacion;
         }
 
         public String getMes() {
@@ -108,8 +139,10 @@ public class Rotacion {
 
         @Override
         public String toString() {
-            return "Rotacion [asignatura=" + asignatura + ", estudiante=" + estudiante + ", fechaCierre=" + fechaCierre
-                    + ", fechaInicio=" + fechaInicio + ", idRotacion=" + idRotacion + ", idSubAsignatura="
-                    + idSubAsignatura + ", institucion=" + institucion + ", mes=" + mes + ", nota=" + nota + "]";
-        }    
+            return "Rotacion [estudiante=" + estudiante + ", fechaCierre=" + fechaCierre + ", fechaInicio="
+                    + fechaInicio + ", idRotacion=" + idRotacion + ", institucion=" + institucion + ", mes=" + mes
+                    + ", notaCyAC=" + notaCyAC + ", notaHistoriaClinica=" + notaHistoriaClinica + ", notaPractica="
+                    + notaPractica + ", notaResponsabilidad=" + notaResponsabilidad + ", notaRotacion=" + notaRotacion
+                    + ", subAsignatura=" + subAsignatura + "]";
+        }
 }
