@@ -10,6 +10,18 @@ const getApiMateria= async () => {
    } throw new Error("Error del servidor") 
 
 }
+/*Mostrar subMaterias */
+const getApiSubMateria= async () => {
 
-export {getApiMateria}
+    const peticion = await fetch (`${URL}subAsignatura/todos`)
+
+   if (peticion.ok) {
+       return await peticion.json()
+   } throw new Error("Error del servidor") 
+
+}
+/* Guardar informe de notas */
+
+
+export {getApiMateria, getApiSubMateria}
 

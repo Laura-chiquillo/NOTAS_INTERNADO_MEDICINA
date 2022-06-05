@@ -8,7 +8,7 @@ import { Form } from 'react-bootstrap';
 import { getApiEstudiantes, editApiEstudiante, agregarApiEstudiante } from '../../api/estudiantes'
 import * as XLSX from "xlsx";
 import {getApiInstituciones} from '../../api/instituciones'
-import { getApiMateria } from '../../api/notas'
+import { getApiMateria,getApiSubMateria } from '../../api/notas'
 
 
 const Buttons = () => {
@@ -250,7 +250,19 @@ const Buttons = () => {
       .catch((Error) => {
         alert(Error.toString())
       })
-  }, [])                 
+  }, [])    
+  
+  /* Lista de submaterias */
+  const [listSubmaterias, setListSubmaterias] = useState([]);
+  useEffect(() => {
+    getApiSubMateria()
+      .then((Datos) => {
+        setListSubmaterias(Datos)
+      })
+      .catch((Error) => {
+        alert(Error.toString())
+      })
+  }, [])
 
   return (
     <div>
@@ -501,9 +513,10 @@ const Buttons = () => {
                                             }
                                           </Input>
                                         </FormGroup>
+                                        {/* MATERIAS */}
                                         <FormGroup>
                                           <Label for="exampleSelect">Materia</Label>
-                                          <Input id="exampleSelect" name="select" type="select" onChange={seleccionarOrden}>
+                                          <Input id="exampleSelect" name="select" type="select">
                                             {
                                               listMaterias
                                               .map((materia, index) => (
@@ -512,14 +525,40 @@ const Buttons = () => {
                                             }
                                           </Input>
                                         </FormGroup>
-                                        <Label>Rotacion</Label>
-                                        <Input
-                                          id="Rotacion"
-                                          name="rotacion"
-                                          type="text"
-                                        />
+
+                                        {/* SUB ASIGNATURAS */}
                                         <FormGroup>
-                                          <Label>Observaciones:</Label>
+                                          <Label for="exampleSelect">Rotación</Label>
+                                          <Input id="exampleSelect" name="select" type="select">
+                                            {
+                                              listSubmaterias
+                                              .map((submateria, index) => (
+                                                <option key={index} value="vacio">{submateria?.descripcion}</option>
+                                              ))
+                                            }
+                                          </Input>
+                                        </FormGroup>
+                                        <FormGroup>
+                                          <Row>
+                                            <Col><Label>Fecha de inicio</Label></Col>
+                                            <Col><Label>Fecha de fin</Label></Col>
+                                          </Row>
+                                          <div className="input-group">
+                                            <Input
+                                              type="Date"
+                                              id='evaluador1'
+                                              name='evaluador1'
+                                              />
+                                            <span className="input-group-addon">-</span>
+                                            <Input
+                                              type="Date"
+                                              id='firma1'
+                                              name='firma1'
+                                            />
+                                          </div>
+                                        </FormGroup>
+                                        <FormGroup>
+                                          <Label>Observaciones</Label>
                                           <Input
                                             type="text"
                                             id='observaciones'
