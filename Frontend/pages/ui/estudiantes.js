@@ -5,7 +5,7 @@ import { useColors } from '../../hooks/useColor';
 import Accordion from 'react-bootstrap/Accordion';
 import Modal from 'react-bootstrap/Modal';
 import { Form } from 'react-bootstrap';
-import { getApiEstudiantes, editApiEstudiante, agregarApiEstudiante } from '../../api/estudiantes'
+import { getApiEstudiantes, editApiEstudiante, crearApiEstudiante } from '../../api/estudiantes'
 import * as XLSX from "xlsx";
 
 const Buttons = () => {
@@ -144,14 +144,14 @@ const Buttons = () => {
       const subirDatos = d.map((n) => {
         console.log(n)
         estud.documento = n["Documento"],
-          estud.primerNombre = n["PrimerNombre"],
+          estud.primerNombre = n["Primer Nombre"],
           estud.segundoNombre = n["Segundo Nombre"] || " ",
           estud.primerApellido = n["Primer Apellido"],
           estud.segundoApellido = n["Segundo Apellido"] || " ",
           estud.semestreE = n["Semestre"],
           estud.correo = n["Correo"],
           estud.telefono = n["Telefono"],
-          agregarApiEstudiante(estud)
+          crearApiEstudiante(estud)
         handleClose()
       });
     });
@@ -304,7 +304,7 @@ const Buttons = () => {
                 {/* Mostrar estudiantes */}
                 <Accordion>
                   {listEstudiantes
-                    .filter((elemento) => elemento.primerNombre.toString().toLowerCase().includes(busqueda.toLowerCase()))
+                    .filter((elemento) => elemento.primerApellido.toString().toLowerCase().includes(busqueda.toLowerCase()))
                     .sort((a, b) => ordenarLista(a, b))
                     .filter((est, i) => i >= (paginaActual - 1) * itemsPagina && i < paginaActual * itemsPagina)
                     .map((estudiante, indice) => (
