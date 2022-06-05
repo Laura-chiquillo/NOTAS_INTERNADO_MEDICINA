@@ -46,7 +46,6 @@ const Buttons = () => {
 
   const editarinstitucion = () => {
     editApiInstitucion(institucionSeleccionado).then((inst) => {
-      /* cambiar el estudiante */
       const nuevaLista = listaInstituciones.map((i) => i.idInstitucion == inst.idInstitucion ? inst : i)
       setListaInstituciones(nuevaLista)
       close()

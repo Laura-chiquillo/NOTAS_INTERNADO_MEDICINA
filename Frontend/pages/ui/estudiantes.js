@@ -8,7 +8,7 @@ import { Form } from 'react-bootstrap';
 import { getApiEstudiantes, editApiEstudiante, agregarApiEstudiante } from '../../api/estudiantes'
 import * as XLSX from "xlsx";
 import { getApiInstituciones } from '../../api/instituciones'
-import { getApiMateria, getApiSubMateria } from '../../api/notas'
+import { getApiMateria, getApiSubMateria, getApiCrearRotacion } from '../../api/notas'
 import SignatureCanvas from "react-signature-canvas";
 
 const Buttons = () => {
@@ -264,6 +264,15 @@ const Buttons = () => {
       })
   }, [])
 
+  /* Lista de rotación*/
+  const [listRotacion, setListRotacion] = useState([])
+  
+  const crearInforme = () => {
+    getApiCrearRotacion(listRotacion).then( () => {
+      alert("Informe creado")
+    })
+  }
+
   return (
     <div>
       {/* Start Inner Div*/}
@@ -436,7 +445,6 @@ const Buttons = () => {
                                       <Modal.Body>
 
                                         <FormGroup>
-
                                           <table className="table" border="2">
                                             <thead>
                                               <tr>

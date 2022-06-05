@@ -21,7 +21,20 @@ const getApiSubMateria= async () => {
 
 }
 /* Guardar informe de notas */
+const getApiCrearRotacion = async (rotacion) =>{
+    const params = {
+        method : "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(rotacion)
+    }
+    const peticion = await fetch (`${URL}rotacion/nuevo`, params)
+    if (peticion.ok) {
+        return await peticion.json()
+    } throw new Error("No se pudo realizar la acción")
+}
 
 
-export {getApiMateria, getApiSubMateria}
+export {getApiMateria, getApiSubMateria, getApiCrearRotacion}
 
