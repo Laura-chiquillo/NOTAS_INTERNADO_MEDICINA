@@ -2,7 +2,7 @@ import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import { Row } from 'react-bootstrap';
-import {Button} from 'reactstrap';
+import { Button } from 'reactstrap';
 import { useColors } from '../../hooks/useColor';
 import Link from "next/link";
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement);
@@ -73,23 +73,25 @@ const Badges = () => {
   return (
     <>
       {/*se crea una etiqueta para poder meter mas etiquetas adentro y poder retornarlo*/}
-      <Row style={{textAlign:'center'}}>
+
+      <Row style={{ textAlign: 'center' }}>
         <h1>
-        Graficas
+          Graficas
         </h1>
       </Row>
       <Row>
         <Doughnut data={data} style={{ maxHeight: 500, maxWidth: 500 }} />
         <Bar options={options} data={datas} style={{ maxHeight: 500, maxWidth: 500 }} />
       </Row>
-        <Button className="btn" style={{backgroundColor: color, color:"black"}} size="lg">
-          Descargar
-        </Button>
+        <Row>
+      <div>
         <Link href={'/ui/ListaEstudiantes'}>
-                  <Button style={{ backgroundColor: color, color: "black" }} size="lg">
-                      Atras
-                      </Button>
-                </Link>
+          <Button style={{ backgroundColor: color, color: "black" }} size="lg">
+            Atrás
+          </Button>
+        </Link>
+      </div>
+        </Row>
     </>
   );
 }

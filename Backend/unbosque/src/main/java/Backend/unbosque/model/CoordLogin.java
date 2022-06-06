@@ -25,4 +25,9 @@ public class CoordLogin {
         public void setContraseña(String contraseña) {
             this.contraseña = contraseña;
         }
+
+        @Override
+        public String toString() {
+            return "CoordLogin [contraseña=" + contraseña + ", correo=" + correo + "]";
+        }   
 }

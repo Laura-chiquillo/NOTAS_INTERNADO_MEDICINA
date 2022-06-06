@@ -25,4 +25,9 @@ public class AdminLogin {
         public void setContraseña(String contraseña) {
             this.contraseña = contraseña;
         }
+
+        @Override
+        public String toString() {
+            return "AdminLogin [contraseña=" + contraseña + ", correo=" + correo + "]";
+        }
 }
