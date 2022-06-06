@@ -44,10 +44,10 @@ public class InstitucionServiceImpl implements InstitucionService{
     public void updateInstitucion(String id, Institucion institucion) {
         Institucion upInstitucion = institucionRepository.findById(id).get();
 
-        if (!institucion.getEstudiantes().isEmpty()) {
-            for (int i = 0; i < institucion.getEstudiantes().size(); i++) {
-            
-            }
+        if (!institucion.getEstudiantes().isEmpty() && upInstitucion.getEstudiantes().isEmpty()) {
+            upInstitucion.setEstudiantes(institucion.getEstudiantes());
+        }else if(!institucion.getEstudiantes().isEmpty() && !upInstitucion.getEstudiantes().isEmpty()){
+            upInstitucion.getEstudiantes().addAll(institucion.getEstudiantes());
         }
 
         if (institucion.getCiudad() != null) {

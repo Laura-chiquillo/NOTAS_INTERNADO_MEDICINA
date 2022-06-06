@@ -72,32 +72,12 @@ public class RotacionServiceImpl implements RotacionService{
             upRotacion.setNotaRotacion(rotacion.getNotaRotacion());
         }
 
-        if (rotacion.getMes() != null){
-            upRotacion.setMes(rotacion.getMes());
-        }
-
         if (rotacion.getFechaInicio() != null){
             upRotacion.setFechaInicio(rotacion.getFechaInicio());
         }
 
         if (rotacion.getFechaCierre() != null){
             upRotacion.setFechaCierre(rotacion.getFechaCierre());
-        }
-
-        if (rotacion.getEvaluador1() != null) {
-            upRotacion.setEvaluador1(rotacion.getEvaluador1());
-        }
-
-        if (rotacion.getEvaluador2() != null) {
-            upRotacion.setEvaluador2(rotacion.getEvaluador2());
-        }
-
-        if (rotacion.getFirma1().isEmpty()) {
-            upRotacion.setFirma1(rotacion.getFirma1());
-        }
-
-        if (rotacion.getFirma2().isEmpty()) {
-            upRotacion.setFirma2(rotacion.getFirma2());
         }
 
         rotacionRepository.save(upRotacion);
