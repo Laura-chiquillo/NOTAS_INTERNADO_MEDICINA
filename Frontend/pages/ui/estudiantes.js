@@ -529,7 +529,7 @@ const Buttons = () => {
                                         </FormGroup>
                                         {/* MATERIAS */}
                                         <FormGroup>
-                                          <Label for="exampleSelect">Materia</Label>
+                                          <Label for="exampleSelect">Asignatura</Label>
                                           <Input id="exampleSelect" name="select" type="select">
                                             {
                                               listMaterias
