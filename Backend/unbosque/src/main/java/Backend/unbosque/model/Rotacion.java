@@ -1,5 +1,7 @@
 package Backend.unbosque.model;
 
+import java.time.LocalDate;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -14,6 +16,8 @@ public class Rotacion {
         @DBRef
         private Institucion institucion;
         @DBRef
+        private Asignatura asignatura;
+        @DBRef
         private SubAsignatura subAsignatura;
         private double notaHistoriaClinica;
         private double notaResponsabilidad;
@@ -21,6 +25,7 @@ public class Rotacion {
         private double notaCyAC;
         private double notaRotacion;
         private String mes;
+<<<<<<< HEAD
         private String fechaInicio;
         private String fechaCierre;
         
@@ -28,9 +33,19 @@ public class Rotacion {
                 double notaHistoriaClinica, double notaResponsabilidad, double notaPractica, double notaCyAC,
                 double notaRotacion, String mes, String fechaInicio, String fechaCierre) {
 
+=======
+        private LocalDate fechaInicio;
+        private LocalDate fechaCierre;  
+
+        public Rotacion(String idRotacion, Estudiante estudiante, Institucion institucion, Asignatura asignatura,
+                SubAsignatura subAsignatura, double notaHistoriaClinica, double notaResponsabilidad,
+                double notaPractica, double notaCyAC, double notaRotacion, String mes, LocalDate fechaInicio,
+                LocalDate fechaCierre) {
+>>>>>>> Laura
             this.idRotacion = idRotacion;
             this.estudiante = estudiante;
             this.institucion = institucion;
+            this.asignatura = asignatura;
             this.subAsignatura = subAsignatura;
             this.notaHistoriaClinica = notaHistoriaClinica;
             this.notaResponsabilidad = notaResponsabilidad;
@@ -122,28 +137,36 @@ public class Rotacion {
             this.mes = mes;
         }
 
-        public String getFechaInicio() {
+        public LocalDate getFechaInicio() {
             return fechaInicio;
         }
 
-        public void setFechaInicio(String fechaInicio) {
+        public void setFechaInicio(LocalDate fechaInicio) {
             this.fechaInicio = fechaInicio;
         }
 
-        public String getFechaCierre() {
+        public LocalDate getFechaCierre() {
             return fechaCierre;
         }
 
-        public void setFechaCierre(String fechaCierre) {
+        public void setFechaCierre(LocalDate fechaCierre) {
             this.fechaCierre = fechaCierre;
+        }
+
+        public Asignatura getAsignatura() {
+            return asignatura;
+        }
+
+        public void setAsignatura(Asignatura asignatura) {
+            this.asignatura = asignatura;
         }
 
         @Override
         public String toString() {
-            return "Rotacion [estudiante=" + estudiante + ", fechaCierre=" + fechaCierre + ", fechaInicio="
-                    + fechaInicio + ", idRotacion=" + idRotacion + ", institucion=" + institucion + ", mes=" + mes
-                    + ", notaCyAC=" + notaCyAC + ", notaHistoriaClinica=" + notaHistoriaClinica + ", notaPractica="
-                    + notaPractica + ", notaResponsabilidad=" + notaResponsabilidad + ", notaRotacion=" + notaRotacion
-                    + ", subAsignatura=" + subAsignatura + "]";
+            return "Rotacion [asignatura=" + asignatura + ", estudiante=" + estudiante + ", fechaCierre=" + fechaCierre
+                    + ", fechaInicio=" + fechaInicio + ", idRotacion=" + idRotacion + ", institucion=" + institucion
+                    + ", mes=" + mes + ", notaCyAC=" + notaCyAC + ", notaHistoriaClinica=" + notaHistoriaClinica
+                    + ", notaPractica=" + notaPractica + ", notaResponsabilidad=" + notaResponsabilidad
+                    + ", notaRotacion=" + notaRotacion + ", subAsignatura=" + subAsignatura + "]";
         }
 }
