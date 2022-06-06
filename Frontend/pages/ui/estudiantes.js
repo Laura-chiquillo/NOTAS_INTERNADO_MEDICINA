@@ -221,10 +221,33 @@ const Buttons = () => {
     editApiEstudiante(e);
   }
 
+  /* 
+  * -------------------------------------------------
+  *Crear de rotación
+  * -------------------------------------------------
+  */
+  const [nuevaRotacion, setNuevaRotacion] = useState({})
+  
+  const crearInforme = () => {
+    getApiCrearRotacion(nuevaRotacion).then( () => {
+      alert("Informe creado")
+      handleClose4()
+    })
+  }
+
   /* Ventana nueva nota */
   const [show4, setShow4] = useState(false);
-  const handleClose4 = () => setShow4(false);
-  const handleShow4 = () => setShow4(true);
+  const handleClose4 = () => {
+    /* reinicie todo */
+    setNuevaRotacion({})
+    setShow4(false);
+  }
+  const handleShow4 = (idEstudiante) => {
+    /* selecciona el estudiante y lo guarda dentro de rotación */
+    setNuevaRotacion({estudiante:{idEstudiante}})
+    setShow4(true);
+  }
+
 
   /* Lista de institución */
   const [listInstituciones, setListInstituciones] = useState([]);
@@ -264,14 +287,6 @@ const Buttons = () => {
       })
   }, [])
 
-  /* Lista de rotación*/
-  const [listRotacion, setListRotacion] = useState([])
-  
-  const crearInforme = () => {
-    getApiCrearRotacion(listRotacion).then( () => {
-      alert("Informe creado")
-    })
-  }
   /* Limpiar tablero de firma */
   const sigCanvas =  useRef({});
   const limpiar = () => sigCanvas.current.clear()
@@ -435,7 +450,7 @@ const Buttons = () => {
                                     </Modal>
 
                                     {/* AGREGAR NUEVA NOTA */}
-                                    <Button className="btn" onClick={handleShow4} style={{ backgroundColor: color, color: "black" }} >
+                                    <Button className="btn" onClick={() => handleShow4(estudiante.idEstudiante)} style={{ backgroundColor: color, color: "black" }} >
                                       +
                                     </Button>
                                     <Modal
@@ -449,7 +464,6 @@ const Buttons = () => {
                                         <Modal.Title>Nueva nota </Modal.Title>
                                       </Modal.Header>
                                       <Modal.Body>
-
                                         <FormGroup>
                                           <table className="table" border="2">
                                             <thead>
@@ -466,7 +480,18 @@ const Buttons = () => {
                                                   Presentacion, calidad y evoluciones<br></br>
                                                   Justificacion de laboratorio con el diagnostico. epicrisis
                                                 </td>
-                                                <td contentEditable="true"></td>
+                                                <td contentEditable="true" onInput={(e) => {
+                                                    try {
+                                                      let nota = e.currentTarget.textContent
+                                                      let nota2 = parseFloat(nota)
+                                                      setNuevaRotacion({
+                                                        ...nuevaRotacion,
+                                                        notaHistoriaClinica: nota2
+                                                      })
+                                                    } catch (error) {
+                                                      console.log(error)
+                                                    }
+                                                }}></td>
                                               </tr>
 
                                               <tr ng-repeat="item in lista">
@@ -475,7 +500,18 @@ const Buttons = () => {
                                                   Asistencia, cumplimiento, colaboracion, trabajo en equipo.<br></br>
                                                   Trato con el paciente y familiares.
                                                 </td>
-                                                <td contentEditable="true"></td>
+                                                <td contentEditable="true" onInput={(e) => {
+                                                    try {
+                                                      let nota = e.currentTarget.textContent
+                                                      let nota2 = parseFloat(nota)
+                                                      setNuevaRotacion({
+                                                        ...nuevaRotacion,
+                                                        notaResponsabilidad: nota2
+                                                      })
+                                                    } catch (error) {
+                                                      console.log(error)
+                                                    }
+                                                }}></td>
                                                 <th></th>
                                               </tr>
 
@@ -484,7 +520,18 @@ const Buttons = () => {
                                                 <td><b>Practica</b><br></br>
                                                   Urgencias, consulta externa, hospitalizacion, cirugia, sala de partos y otras.
                                                 </td>
-                                                <td contentEditable="true"></td>
+                                                <td contentEditable="true" onInput={(e) => {
+                                                    try {
+                                                      let nota = e.currentTarget.textContent
+                                                      let nota2 = parseFloat(nota)
+                                                      setNuevaRotacion({
+                                                        ...nuevaRotacion,
+                                                        notaPractica: nota2
+                                                      })
+                                                    } catch (error) {
+                                                      console.log(error)
+                                                    }
+                                                }}></td>
                                                 <th></th>
                                               </tr>
 
@@ -494,14 +541,36 @@ const Buttons = () => {
                                                   Seminarios, paneles, exposiciones, club de revistas, conferencias.<br></br>
                                                   Conocimientos teoricos.
                                                 </td>
-                                                <td contentEditable="true"></td>
+                                                <td contentEditable="true" onInput={(e) => {
+                                                    try {
+                                                      let nota = e.currentTarget.textContent
+                                                      let nota2 = parseFloat(nota)
+                                                      setNuevaRotacion({
+                                                        ...nuevaRotacion,
+                                                        notaCyAC: nota2
+                                                      })
+                                                    } catch (error) {
+                                                      console.log(error)
+                                                    }
+                                                }}></td>
                                                 <th></th>
                                               </tr>
 
                                               <tr ng-repeat="item in lista">
                                                 <td>V</td>
                                                 <td><b>Calificacion</b></td>
-                                                <td contentEditable="true"></td>
+                                                <td contentEditable="true" onInput={(e) => {
+                                                    try {
+                                                      let nota = e.currentTarget.textContent
+                                                      let nota2 = parseFloat(nota)
+                                                      setNuevaRotacion({
+                                                        ...nuevaRotacion,
+                                                        notaRotacion: nota2
+                                                      })
+                                                    } catch (error) {
+                                                      console.log(error)
+                                                    }
+                                                }}></td>
                                                 <th></th>
                                               </tr>
 
@@ -518,11 +587,14 @@ const Buttons = () => {
                                         </FormGroup>
                                         <FormGroup>
                                           <Label for="exampleSelect">Institución</Label>
-                                          <Input id="exampleSelect" name="select" type="select" onChange={seleccionarOrden}>
+                                          <Input id="exampleSelect" name="select" type="select" onChange={(e) => setNuevaRotacion({
+                                            ...nuevaRotacion,
+                                            institucion: {idInstitucion:e.target.value}
+                                          })}>
                                             {
                                               listInstituciones
                                                 .map((institucion, index) => (
-                                                  <option key={index} value="vacio">{institucion?.nombre}</option>
+                                                  <option key={index} value={institucion.idInstitucion}>{institucion?.nombre}</option>
                                                 ))
                                             }
                                           </Input>
@@ -530,11 +602,14 @@ const Buttons = () => {
                                         {/* MATERIAS */}
                                         <FormGroup>
                                           <Label for="exampleSelect">Asignatura</Label>
-                                          <Input id="exampleSelect" name="select" type="select">
+                                          <Input id="exampleSelect" name="select" type="select" onChange={(e) => setNuevaRotacion({
+                                            ...nuevaRotacion,
+                                            asignatura: {idAsignatura:e.target.value}
+                                          })} >
                                             {
                                               listMaterias
                                                 .map((materia, index) => (
-                                                  <option key={index} value="vacio">{materia?.descripcion}</option>
+                                                  <option key={index} value={materia.idAsignatura}>{materia?.descripcion}</option>
                                                 ))
                                             }
                                           </Input>
@@ -543,11 +618,14 @@ const Buttons = () => {
                                         {/* SUB ASIGNATURAS */}
                                         <FormGroup>
                                           <Label for="exampleSelect">Rotación</Label>
-                                          <Input id="exampleSelect" name="select" type="select">
+                                          <Input id="exampleSelect" name="select" type="select" onChange={(e) => setNuevaRotacion({
+                                            ...nuevaRotacion,
+                                            subAsignatura: {idSubAsignatura:e.target.value}
+                                          })}>
                                             {
                                               listSubmaterias
                                                 .map((submateria, index) => (
-                                                  <option key={index} value="vacio">{submateria?.descripcion}</option>
+                                                  <option key={index} value={submateria.idSubAsignatura}>{submateria?.descripcion}</option>
                                                 ))
                                             }
                                           </Input>
@@ -560,14 +638,22 @@ const Buttons = () => {
                                           <div className="input-group">
                                             <Input
                                               type="Date"
-                                              id='evaluador1'
-                                              name='evaluador1'
+                                              id='inicio'
+                                              name='inicio'
+                                              onChange={(e) => setNuevaRotacion({
+                                                ...nuevaRotacion,
+                                                fechaInicio:e.target.value
+                                              })}
                                             />
                                             <span className="input-group-addon">-</span>
                                             <Input
                                               type="Date"
-                                              id='firma1'
-                                              name='firma1'
+                                              id='fin'
+                                              name='fin'
+                                              onChange={(e) => setNuevaRotacion({
+                                                ...nuevaRotacion,
+                                                fechaCierre:e.target.value
+                                              })}
                                             />
                                           </div>
                                         </FormGroup>
@@ -639,7 +725,7 @@ const Buttons = () => {
                                         <Button variant="secondary" onClick={handleClose4}>
                                           Cancelar
                                         </Button>
-                                        <Button onClick={handleClose4} variant="primary">
+                                        <Button onClick={crearInforme} variant="primary">
                                           Guardar
                                         </Button>
                                       </Modal.Footer>
