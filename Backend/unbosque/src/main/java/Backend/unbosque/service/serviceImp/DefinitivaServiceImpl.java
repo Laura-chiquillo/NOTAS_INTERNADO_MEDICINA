@@ -40,16 +40,10 @@ public class DefinitivaServiceImpl implements DefinitivaService{
     public void updateDefinitiva(String id, Definitiva definitiva) {
         Definitiva upDefinitiva = definitivaRepository.findById(id).get();
 
-        if (definitiva.getNota1() != 0) {
-            upDefinitiva.setNota1(definitiva.getNota1());
-        }
-
-        if (definitiva.getNota2() != 0) {
-            upDefinitiva.setNota2(definitiva.getNota2());
-        }
-
-        if (definitiva.getNota3() != 0) {
-            upDefinitiva.setNota3(definitiva.getNota3());
+        if (!definitiva.getNotas().isEmpty() && upDefinitiva.getNotas().isEmpty()) {
+            upDefinitiva.setNotas(definitiva.getNotas());
+        }else if (!definitiva.getNotas().isEmpty() && !upDefinitiva.getNotas().isEmpty()) {
+            upDefinitiva.getNotas().addAll(definitiva.getNotas());
         }
     
         if (definitiva.getNotaDefinitiva() != 0) {
