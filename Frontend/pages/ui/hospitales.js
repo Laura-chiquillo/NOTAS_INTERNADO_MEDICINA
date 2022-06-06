@@ -6,7 +6,7 @@ import { useColors } from '../../hooks/useColor';
 import { Form } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import Accordion from 'react-bootstrap/Accordion';
-import { getApiInstituciones, editApiInstitucion } from '../../api/instituciones';
+import { getApiInstituciones, editApiInstitucion , eliminarApiInstitucion} from '../../api/instituciones';
 import { getApiEstudiantes} from '../../api/estudiantes'
 import { ListItem } from '@material-ui/core';
 
@@ -32,18 +32,20 @@ const Buttons = () => {
   /* mostrar lista */
 
   const [listaInstituciones, setListaInstituciones] = useState([])
+  const [actualizarListaInstituciones, setActualizarListaInstituciones] = useState(false)
+  
   useEffect(() => {
     getApiInstituciones().then((Datos) => setListaInstituciones(Datos)).catch((Error) => {
       alert(Error.toString())
     })
-  }, [])
+    /* se ejecuta cada vez que se elimine una institución */
+  }, [actualizarListaInstituciones])
 
   /* editar institución */
   const [institucionSeleccionado, setinstitucionSeleccionado] = useState({})
 
   const editarinstitucion = () => {
     editApiInstitucion(institucionSeleccionado).then((inst) => {
-      /* cambiar el estudiante */
       const nuevaLista = listaInstituciones.map((i) => i.idInstitucion == inst.idInstitucion ? inst : i)
       setListaInstituciones(nuevaLista)
       close()
@@ -178,7 +180,35 @@ const Buttons = () => {
   const handleChangeE = e => {
     setBusquedaE(e.target.value);
   }
-  
+  /* Eliminar institución */
+  const [eliminarInst, setEliminarInst] = useState([]);
+  /* se ingresan los que se van a eliminar */
+  const eliminarInstituciones = () => {
+    eliminarInst.map((i) => {
+      
+      /* llama el back para eliminar la institución */
+      eliminarApiInstitucion(i).then((inst) => {
+         setEliminarInst(inst)
+       })
+    })
+    /* vacia los seleccionados */
+    setEliminarInst([])
+    /* Fuerza la actuaización*/
+    setActualizarListaInstituciones((!actualizarListaInstituciones))
+  }
+  /* seleccionar instituciones para eliminar */
+  const agregarSeleccionado = (event, institucion) => {
+    console.log(institucion) 
+    const isSelected = event.target.checked;
+    if (isSelected) {   
+    setEliminarInst(eliminarInst.concat(institucion)
+    )
+    } else {
+      setEliminarInst(eliminarInst.filter(i => i.idInstitucion !== institucion.idInstitucion))
+    }    
+  }
+
+
   return (
     <div>
       {/* --------------------------------------------------------------------------------*/}
@@ -234,8 +264,11 @@ const Buttons = () => {
                   </FormText>&nbsp;
                   {/*Buscar */}
                   <input placeholder='Buscar' className='form-control' value={busqueda} onChange={handleChange}></input>
-
-                  <Button className="btn btn-success btn-sm" color="danger">Eliminar</Button>
+                  {/* Eliminar */}
+                  <Button className="btn btn-success btn-sm" color="danger" onClick={() => {
+                    {/* ventana de aceptar o cancelar, && -> si es verdadero se ejecuta la función */}
+                    confirm("¿Esta seguro de eliminar la(s) insitucion(es) seleccionada(s)?") && eliminarInstituciones()
+                  }}>Eliminar</Button>
                 </Form>
                 <FormGroup>
                   <Label for="exampleSelect"></Label>
@@ -285,8 +318,7 @@ const Buttons = () => {
                                   {/* Mostrar estudiantes */}
                                   
                                     {listEstudiantes
-                                      .filter((elemento)=>elemento.primerNombre.toString().toLowerCase().includes(busquedaE.toLowerCase()))
-                                      .sort((a, b) => ordenarLista(a, b))
+                                      .filter((elemento)=>elemento.primerApellido.toString().toLowerCase().includes(busquedaE.toLowerCase()))
                                       .map((estudiante, indice) => (
 
                                         <ListItem eventKey={indice} key={indice}>
@@ -348,7 +380,7 @@ const Buttons = () => {
                         </svg>
                       </Button>
                       <Button style={{ backgroundColor: color, color: "black" }}>
-                        <input type="checkbox"></input>
+                            <input type="checkbox" onChange={(event) => {agregarSeleccionado(event, institucion)}} ></input>
                       </Button>
                     </ButtonGroup>
                   ))}

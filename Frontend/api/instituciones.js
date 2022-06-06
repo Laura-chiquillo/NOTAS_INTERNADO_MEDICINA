@@ -25,7 +25,7 @@ const editApiInstitucion = async (institucion) =>{
         return await peticion.json()
     } throw new Error("No se pudo realizar la acción")
 }
-/* crear estudiante*/
+/* crear institución*/
 const crearApiInstitucion = async (institucion) =>{
     const params = {
         /*  pasar parametro para que sepa cual es, si no se hace esto lo pasa como get */
@@ -42,4 +42,19 @@ const crearApiInstitucion = async (institucion) =>{
         return await peticion.json()
     } throw new Error("No se pudo realizar la acción")
 }
-export {getApiInstituciones, editApiInstitucion,crearApiInstitucion}
+
+/* Eliminar institución */
+const eliminarApiInstitucion = async (institucion) =>{
+    const params = {
+        method : "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(institucion)
+    }
+    const peticion = await fetch (`${URL}institucion/eliminar/${institucion.idInstitucion}`, params)
+    if (!peticion.ok){
+        throw new Error("No se pudo realizar la acción")
+    } 
+}
+export {getApiInstituciones, editApiInstitucion,crearApiInstitucion,eliminarApiInstitucion}

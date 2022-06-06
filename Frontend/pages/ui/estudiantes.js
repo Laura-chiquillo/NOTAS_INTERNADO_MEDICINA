@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Button, ButtonGroup, Card, FormText, FormGroup, Label, Input, CardBody, CardTitle, Row, Col, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 import Link from 'next/link';
 import { useColors } from '../../hooks/useColor';
@@ -7,6 +7,9 @@ import Modal from 'react-bootstrap/Modal';
 import { Form } from 'react-bootstrap';
 import { getApiEstudiantes, editApiEstudiante, crearApiEstudiante } from '../../api/estudiantes'
 import * as XLSX from "xlsx";
+import { getApiInstituciones } from '../../api/instituciones'
+import { getApiMateria, getApiSubMateria, getApiCrearRotacion } from '../../api/notas'
+import SignatureCanvas from "react-signature-canvas";
 
 const Buttons = () => {
 
@@ -223,6 +226,58 @@ const Buttons = () => {
   const handleClose4 = () => setShow4(false);
   const handleShow4 = () => setShow4(true);
 
+  /* Lista de institución */
+  const [listInstituciones, setListInstituciones] = useState([]);
+  useEffect(() => {
+    getApiInstituciones()
+      .then((Datos) => {
+        setListInstituciones(Datos)
+
+      })
+      .catch((Error) => {
+        alert(Error.toString())
+      })
+  }, [])
+
+
+  /* Lista de materias */
+  const [listMaterias, setListMaterias] = useState([]);
+  useEffect(() => {
+    getApiMateria()
+      .then((Datos) => {
+        setListMaterias(Datos)
+      })
+      .catch((Error) => {
+        alert(Error.toString())
+      })
+  }, [])
+
+  /* Lista de submaterias */
+  const [listSubmaterias, setListSubmaterias] = useState([]);
+  useEffect(() => {
+    getApiSubMateria()
+      .then((Datos) => {
+        setListSubmaterias(Datos)
+      })
+      .catch((Error) => {
+        alert(Error.toString())
+      })
+  }, [])
+
+  /* Lista de rotación*/
+  const [listRotacion, setListRotacion] = useState([])
+  
+  const crearInforme = () => {
+    getApiCrearRotacion(listRotacion).then( () => {
+      alert("Informe creado")
+    })
+  }
+  /* Limpiar tablero de firma */
+  const sigCanvas =  useRef({});
+  const limpiar = () => sigCanvas.current.clear()
+
+  const sigCanvas2 =  useRef({});
+  const limpiar2 = () => sigCanvas2.current.clear()
 
   return (
     <div>
@@ -395,8 +450,7 @@ const Buttons = () => {
                                       <Modal.Body>
 
                                         <FormGroup>
-
-                                          <table class="table" border="2">
+                                          <table className="table" border="2">
                                             <thead>
                                               <tr>
                                                 <th>*</th>
@@ -462,21 +516,62 @@ const Buttons = () => {
                                           </table>
                                         </FormGroup>
                                         <FormGroup>
-                                          <Label>Institución:</Label>
-                                          <Input
-                                            type="text"
-                                            id='observaciones'
-                                            name='observaciones'
-                                          />
+                                          <Label for="exampleSelect">Institución</Label>
+                                          <Input id="exampleSelect" name="select" type="select" onChange={seleccionarOrden}>
+                                            {
+                                              listInstituciones
+                                                .map((institucion, index) => (
+                                                  <option key={index} value="vacio">{institucion?.nombre}</option>
+                                                ))
+                                            }
+                                          </Input>
                                         </FormGroup>
-                                        <Label>Rotacion</Label>
-                                        <Input
-                                          id="Rotacion"
-                                          name="rotacion"
-                                          type="text"
-                                        />
+                                        {/* MATERIAS */}
                                         <FormGroup>
-                                          <Label>Observaciones:</Label>
+                                          <Label for="exampleSelect">Materia</Label>
+                                          <Input id="exampleSelect" name="select" type="select">
+                                            {
+                                              listMaterias
+                                                .map((materia, index) => (
+                                                  <option key={index} value="vacio">{materia?.descripcion}</option>
+                                                ))
+                                            }
+                                          </Input>
+                                        </FormGroup>
+
+                                        {/* SUB ASIGNATURAS */}
+                                        <FormGroup>
+                                          <Label for="exampleSelect">Rotación</Label>
+                                          <Input id="exampleSelect" name="select" type="select">
+                                            {
+                                              listSubmaterias
+                                                .map((submateria, index) => (
+                                                  <option key={index} value="vacio">{submateria?.descripcion}</option>
+                                                ))
+                                            }
+                                          </Input>
+                                        </FormGroup>
+                                        <FormGroup>
+                                          <Row>
+                                            <Col><Label>Fecha de inicio</Label></Col>
+                                            <Col><Label>Fecha de fin</Label></Col>
+                                          </Row>
+                                          <div className="input-group">
+                                            <Input
+                                              type="Date"
+                                              id='evaluador1'
+                                              name='evaluador1'
+                                            />
+                                            <span className="input-group-addon">-</span>
+                                            <Input
+                                              type="Date"
+                                              id='firma1'
+                                              name='firma1'
+                                            />
+                                          </div>
+                                        </FormGroup>
+                                        <FormGroup>
+                                          <Label>Observaciones</Label>
                                           <Input
                                             type="text"
                                             id='observaciones'
@@ -486,30 +581,13 @@ const Buttons = () => {
 
                                         <FormGroup>
                                           <Label>Evaluador 1</Label>
-                                          <div class="input-group">
+                                          <div className="input-group">
                                             <Input
                                               type="text"
                                               id='evaluador1'
                                               name='evaluador1'
                                             />
-                                            <span class="input-group-addon">-</span>
-                                            <Input
-                                              type="text"
-                                              id='firma1'
-                                              name='firma1'
-                                            />
-                                          </div>
-                                        </FormGroup>
-
-                                        <FormGroup>
-                                          <Label>Evaluador 2</Label>
-                                          <div class="input-group">
-                                            <Input
-                                              type="text"
-                                              id='evaluador2'
-                                              name='evaluador2'
-                                            />
-                                            <span class="input-group-addon">-</span>
+                                            <span className="input-group-addon">-</span>
                                             <Input
                                               type="text"
                                               id='firma2'
@@ -517,7 +595,44 @@ const Buttons = () => {
                                             />
                                           </div>
                                         </FormGroup>
-
+                                        <FormGroup>
+                                            {/* Firma */}
+                                            <Label>Firma</Label>
+                                            <SignatureCanvas 
+                                            ref={sigCanvas}
+                                            canvasProps={{                                              
+                                              style:{
+                                                width: "100%", height:50,
+                                                "border":"0.5px solid #000000"} }} />
+                                            <Button onClick={limpiar}>Limpiar</Button>
+                                        </FormGroup>
+                                        <FormGroup>
+                                          <Label>Evaluador 2</Label>
+                                          <div className="input-group">
+                                            <Input
+                                              type="text"
+                                              id='evaluador2'
+                                              name='evaluador2'
+                                            />
+                                            <span className="input-group-addon">-</span>
+                                            <Input
+                                              type="text"
+                                              id='firma2'
+                                              name='firma2'
+                                            />
+                                          </div>
+                                        </FormGroup>
+                                        <FormGroup>
+                                            {/* Firma */}
+                                            <Label>Firma</Label>
+                                            <SignatureCanvas 
+                                            ref={sigCanvas2}
+                                            canvasProps={{                                              
+                                              style:{
+                                                width: "100%", height:50,
+                                                "border":"0.5px solid #000000"} }} />
+                                            <Button onClick={limpiar2}>Limpiar</Button>
+                                        </FormGroup>
                                       </Modal.Body>
                                       <Modal.Footer>
                                         <Button variant="secondary" onClick={handleClose4}>
@@ -678,9 +793,6 @@ const Buttons = () => {
                 <Link href={'/ui/ListaEstudiantes'}>
                   <Button style={{ backgroundColor: color, color: "black" }} size="lg">Ver informes</Button>
                 </Link>
-                <Button className="btn" color="secondary" size="lg">
-                  Descargar lista
-                </Button>
               </div>
             </CardBody>
           </Card>
