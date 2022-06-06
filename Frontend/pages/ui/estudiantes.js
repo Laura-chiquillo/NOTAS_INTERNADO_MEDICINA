@@ -229,7 +229,63 @@ const Buttons = () => {
   const [nuevaRotacion, setNuevaRotacion] = useState({})
   
   const crearInforme = () => {
-    getApiCrearRotacion(nuevaRotacion).then( () => {
+    /* validar datos vacios */
+    if("institucion" in  nuevaRotacion==false==false){
+      alert("Debe ingresar la institucion")
+      return 
+    }
+
+    if("asignatura" in  nuevaRotacion==false){
+      alert("Debe ingresar la asignatura")
+      return 
+    }
+    if("subAsignatura" in  nuevaRotacion==false){
+      alert("Debe ingresar la rotación")
+      return 
+    }
+    if("notaHistoriaClinica" in  nuevaRotacion==false){
+      alert("Debe ingresar la nota Historia Clinica")
+      return 
+    }
+    if("notaResponsabilidad" in  nuevaRotacion==false){
+      alert("Debe ingresar la nota Responsabilidad")
+      return 
+    }    
+    if("notaPractica" in  nuevaRotacion==false){
+      alert("Debe ingresar la nota Practica")
+      return 
+    } 
+    if("notaCyAC" in  nuevaRotacion==false){
+      alert("Debe ingresar la nota Conocimientos y actualizaciones cientificas")
+      return 
+    } 
+    if("notaRotacion" in  nuevaRotacion==false){
+      alert("Debe ingresar la nota Calificacion")
+      return 
+    }
+    if("fechaInicio" in  nuevaRotacion==false){
+      alert("Debe ingresar la fecha Inicio")
+      return 
+    }
+    if("fechaCierre" in  nuevaRotacion==false){
+      alert("Debe ingresar la fecha Cierre")
+      return 
+    }
+    if("evaluador1" in  nuevaRotacion==false){
+      alert("Debe ingresar el evaluador")
+      return 
+    }
+    if("firma1" in  nuevaRotacion==false){
+      alert("Debe ingresar la firma")
+      return 
+    }
+
+    /* Guarda toda la información */
+    getApiCrearRotacion({
+      ...nuevaRotacion,
+      firma1: window.btoa(getSigCanvasDataUrl()),
+      firma2: window.btoa(getSigCanvas2DataUrl())
+    }).then( () => {
       alert("Informe creado")
       handleClose4()
     })
@@ -288,12 +344,23 @@ const Buttons = () => {
   }, [])
 
   /* Limpiar tablero de firma */
-  const sigCanvas =  useRef({});
+  const sigCanvas =  useRef(null);
   const limpiar = () => sigCanvas.current.clear()
 
-  const sigCanvas2 =  useRef({});
-  const limpiar2 = () => sigCanvas2.current.clear()
+  const getSigCanvasDataUrl = () => {
+    const canvas = sigCanvas.current;
+    const image = canvas.toDataURL("image/png");
+    return image;
+  }
 
+  const sigCanvas2 =  useRef(null);
+  const limpiar2 = () => sigCanvas2.current.clear()
+  
+  const getSigCanvas2DataUrl = () => {
+    const canvas2 = sigCanvas2.current;
+    const image = canvas2.toDataURL("image/png");
+    return image;
+  }
   return (
     <div>
       {/* Start Inner Div*/}
@@ -663,6 +730,10 @@ const Buttons = () => {
                                             type="text"
                                             id='observaciones'
                                             name='observaciones'
+                                            onChange={(e) => setNuevaRotacion({
+                                              ...nuevaRotacion,
+                                              observaciones:e.target.value
+                                            })}
                                           />
                                         </FormGroup>
 
@@ -673,15 +744,14 @@ const Buttons = () => {
                                               type="text"
                                               id='evaluador1'
                                               name='evaluador1'
-                                            />
-                                            <span className="input-group-addon">-</span>
-                                            <Input
-                                              type="text"
-                                              id='firma2'
-                                              name='firma2'
+                                              onChange={(e) => setNuevaRotacion({
+                                                ...nuevaRotacion,
+                                                evaluador1:e.target.value
+                                              })}
                                             />
                                           </div>
                                         </FormGroup>
+                                       
                                         <FormGroup>
                                             {/* Firma */}
                                             <Label>Firma</Label>
@@ -693,6 +763,7 @@ const Buttons = () => {
                                                 "border":"0.5px solid #000000"} }} />
                                             <Button onClick={limpiar}>Limpiar</Button>
                                         </FormGroup>
+
                                         <FormGroup>
                                           <Label>Evaluador 2</Label>
                                           <div className="input-group">
@@ -700,12 +771,10 @@ const Buttons = () => {
                                               type="text"
                                               id='evaluador2'
                                               name='evaluador2'
-                                            />
-                                            <span className="input-group-addon">-</span>
-                                            <Input
-                                              type="text"
-                                              id='firma2'
-                                              name='firma2'
+                                              onChange={(e) => setNuevaRotacion({
+                                                ...nuevaRotacion,
+                                                evaluador2:e.target.value
+                                              })}
                                             />
                                           </div>
                                         </FormGroup>

@@ -30,15 +30,15 @@ public class Rotacion {
         private LocalDate fechaCierre;
         private String observaciones;
         private String evaluador1;
-        private List<String> firma1;
-        private List<String> firma2;
+        private String firma1;
+        private String firma2;
         private String evaluador2;  
 
         public Rotacion(String idRotacion, Estudiante estudiante, Institucion institucion, Asignatura asignatura,
                 SubAsignatura subAsignatura, double notaHistoriaClinica, double notaResponsabilidad,
                 double notaPractica, double notaCyAC, double notaRotacion, String mes, LocalDate fechaInicio,
-                LocalDate fechaCierre, String observaciones, String evaluador1, List<String> firma1,
-                List<String> firma2, String evaluador2) {
+                LocalDate fechaCierre, String observaciones, String evaluador1, String firma1,
+                String firma2, String evaluador2) {
             this.idRotacion = idRotacion;
             this.estudiante = estudiante;
             this.institucion = institucion;
@@ -59,149 +59,151 @@ public class Rotacion {
             this.evaluador2 = evaluador2;
         }
 
-        public String getIdRotacion() {
-            return idRotacion;
-        }
 
-        public void setIdRotacion(String idRotacion) {
-            this.idRotacion = idRotacion;
-        }
+    public String getIdRotacion() {
+        return this.idRotacion;
+    }
 
-        public Estudiante getEstudiante() {
-            return estudiante;
-        }
+    public void setIdRotacion(String idRotacion) {
+        this.idRotacion = idRotacion;
+    }
 
-        public void setEstudiante(Estudiante estudiante) {
-            this.estudiante = estudiante;
-        }
+    public Estudiante getEstudiante() {
+        return this.estudiante;
+    }
 
-        public Institucion getInstitucion() {
-            return institucion;
-        }
+    public void setEstudiante(Estudiante estudiante) {
+        this.estudiante = estudiante;
+    }
 
-        public void setInstitucion(Institucion institucion) {
-            this.institucion = institucion;
-        }
+    public Institucion getInstitucion() {
+        return this.institucion;
+    }
 
-        public SubAsignatura getSubAsignatura() {
-            return subAsignatura;
-        }
+    public void setInstitucion(Institucion institucion) {
+        this.institucion = institucion;
+    }
 
-        public void setSubAsignatura(SubAsignatura subAsignatura) {
-            this.subAsignatura = subAsignatura;
-        }
+    public Asignatura getAsignatura() {
+        return this.asignatura;
+    }
 
-        public double getNotaHistoriaClinica() {
-            return notaHistoriaClinica;
-        }
+    public void setAsignatura(Asignatura asignatura) {
+        this.asignatura = asignatura;
+    }
 
-        public void setNotaHistoriaClinica(double notaHistoriaClinica) {
-            this.notaHistoriaClinica = notaHistoriaClinica;
-        }
+    public SubAsignatura getSubAsignatura() {
+        return this.subAsignatura;
+    }
 
-        public double getNotaResponsabilidad() {
-            return notaResponsabilidad;
-        }
+    public void setSubAsignatura(SubAsignatura subAsignatura) {
+        this.subAsignatura = subAsignatura;
+    }
 
-        public void setNotaResponsabilidad(double notaResponsabilidad) {
-            this.notaResponsabilidad = notaResponsabilidad;
-        }
+    public double getNotaHistoriaClinica() {
+        return this.notaHistoriaClinica;
+    }
 
-        public double getNotaPractica() {
-            return notaPractica;
-        }
+    public void setNotaHistoriaClinica(double notaHistoriaClinica) {
+        this.notaHistoriaClinica = notaHistoriaClinica;
+    }
 
-        public void setNotaPractica(double notaPractica) {
-            this.notaPractica = notaPractica;
-        }
+    public double getNotaResponsabilidad() {
+        return this.notaResponsabilidad;
+    }
 
-        public double getNotaCyAC() {
-            return notaCyAC;
-        }
+    public void setNotaResponsabilidad(double notaResponsabilidad) {
+        this.notaResponsabilidad = notaResponsabilidad;
+    }
 
-        public void setNotaCyAC(double notaCyAC) {
-            this.notaCyAC = notaCyAC;
-        }
+    public double getNotaPractica() {
+        return this.notaPractica;
+    }
 
-        public double getNotaRotacion() {
-            return notaRotacion;
-        }
+    public void setNotaPractica(double notaPractica) {
+        this.notaPractica = notaPractica;
+    }
 
-        public void setNotaRotacion(double notaRotacion) {
-            this.notaRotacion = notaRotacion;
-        }
+    public double getNotaCyAC() {
+        return this.notaCyAC;
+    }
 
-        public String getMes() {
-            return mes;
-        }
+    public void setNotaCyAC(double notaCyAC) {
+        this.notaCyAC = notaCyAC;
+    }
 
-        public void setMes(String mes) {
-            this.mes = mes;
-        }
+    public double getNotaRotacion() {
+        return this.notaRotacion;
+    }
 
-        public LocalDate getFechaInicio() {
-            return fechaInicio;
-        }
+    public void setNotaRotacion(double notaRotacion) {
+        this.notaRotacion = notaRotacion;
+    }
 
-        public void setFechaInicio(LocalDate fechaInicio) {
-            this.fechaInicio = fechaInicio;
-        }
+    public String getMes() {
+        return this.mes;
+    }
 
-        public LocalDate getFechaCierre() {
-            return fechaCierre;
-        }
+    public void setMes(String mes) {
+        this.mes = mes;
+    }
 
-        public void setFechaCierre(LocalDate fechaCierre) {
-            this.fechaCierre = fechaCierre;
-        }
+    public LocalDate getFechaInicio() {
+        return this.fechaInicio;
+    }
 
-        public Asignatura getAsignatura() {
-            return asignatura;
-        }
+    public void setFechaInicio(LocalDate fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
 
-        public void setAsignatura(Asignatura asignatura) {
-            this.asignatura = asignatura;
-        }
+    public LocalDate getFechaCierre() {
+        return this.fechaCierre;
+    }
 
-        public String getObservaciones() {
-            return observaciones;
-        }
+    public void setFechaCierre(LocalDate fechaCierre) {
+        this.fechaCierre = fechaCierre;
+    }
 
-        public void setObservaciones(String observaciones) {
-            this.observaciones = observaciones;
-        }
+    public String getObservaciones() {
+        return this.observaciones;
+    }
 
-        public String getEvaluador1() {
-            return evaluador1;
-        }
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
+    }
 
-        public void setEvaluador1(String evaluador1) {
-            this.evaluador1 = evaluador1;
-        }
+    public String getEvaluador1() {
+        return this.evaluador1;
+    }
 
-        public List<String> getFirma1() {
-            return firma1;
-        }
+    public void setEvaluador1(String evaluador1) {
+        this.evaluador1 = evaluador1;
+    }
 
-        public void setFirma1(List<String> firma1) {
-            this.firma1 = firma1;
-        }
+    public String getFirma1() {
+        return this.firma1;
+    }
 
-        public List<String> getFirma2() {
-            return firma2;
-        }
+    public void setFirma1(String firma1) {
+        this.firma1 = firma1;
+    }
 
-        public void setFirma2(List<String> firma2) {
-            this.firma2 = firma2;
-        }
+    public String getFirma2() {
+        return this.firma2;
+    }
 
-        public String getEvaluador2() {
-            return evaluador2;
-        }
+    public void setFirma2(String firma2) {
+        this.firma2 = firma2;
+    }
 
-        public void setEvaluador2(String evaluador2) {
-            this.evaluador2 = evaluador2;
-        }
+    public String getEvaluador2() {
+        return this.evaluador2;
+    }
+
+    public void setEvaluador2(String evaluador2) {
+        this.evaluador2 = evaluador2;
+    }
+        
 
         @Override
         public String toString() {
