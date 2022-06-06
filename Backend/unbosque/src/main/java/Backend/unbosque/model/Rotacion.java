@@ -22,18 +22,12 @@ public class Rotacion {
         private double notaRotacion;
         private String mes;
         private String fechaInicio;
-<<<<<<< HEAD
         private String fechaCierre;
         
-        public Rotacion(String idRotacion, String idEstudiante, double nota, String mes, String fechaInicio,
-              String fechaCierre) {
-=======
-        private String fechaCierre; 
-
-        public Rotacion(String idRotacion, Estudiante estudiante, Institucion institucion, SubAsignatura subAsignatura,
+              public Rotacion(String idRotacion, Estudiante estudiante, Institucion institucion, SubAsignatura subAsignatura,
                 double notaHistoriaClinica, double notaResponsabilidad, double notaPractica, double notaCyAC,
                 double notaRotacion, String mes, String fechaInicio, String fechaCierre) {
->>>>>>> sebastian
+
             this.idRotacion = idRotacion;
             this.estudiante = estudiante;
             this.institucion = institucion;

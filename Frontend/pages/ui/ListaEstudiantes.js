@@ -1,4 +1,5 @@
-import React from "react";
+
+import React, { useEffect, useState } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
   Table,
@@ -9,56 +10,65 @@ import {
   ModalBody,
   FormGroup,
   Card,
+  Label,
+  FormControl,
+  Input,
   ModalFooter,
   Row, Col,CardTitle, CardBody,
 } from "reactstrap";
+import { Form } from 'react-bootstrap';
 import Link from "next/link";
 import MenuNotas from "./MenuNotas";
+import { getApiRotacion } from '../../api/rotacion'
 
-const data = [
-  { No: 1, Cedula: "9120928122", Nombres: "Naruto", Apellido:  "Naruto" , Promedio: "4.4", SitioPractica: "Los Cobos", Nota: "4.4",Mes:"Febrero" },
-  { No: 2, Cedula: "9120928122", Nombres: "Alejandro", Apellido:  "Ruiz" , Promedio: "4.4", SitioPractica: "Los Cobos", Nota: "4.4",Mes:"Febrero" },
-  { No: 3, Cedula: "9120928122", Nombres: "Alejandro", Apellido:  "Ruiz" , Promedio: "4.4", SitioPractica: "Los Cobos", Nota: "4.4",Mes:"Febrero" },
-  { No: 4, Cedula: "9120928122", Nombres: "Alejandro", Apellido:  "Ruiz" , Promedio: "4.4", SitioPractica: "Los Cobos", Nota: "4.4",Mes:"Febrero" },
-  { No: 5, Cedula: "9120928122", Nombres: "Alejandro", Apellido:  "Ruiz" , Promedio: "4.4", SitioPractica: "Los Cobos", Nota: "4.4",Mes:"Febrero" },
-
-];
+const ListaEstudiantes = () => {
 
 
-class ListaEstudiantes extends React.Component {
-  
-  state = {
-    data: data,
-    modalActualizar: false,
-    modalInsertar: false,
-    form: {
-      id: "",
-      Cedula: "",
-      Nombres: "",
-      Apellido: "",
-      Promedio: "",
-      SitioPractica: "",
-      Nota: "",
-      Mes: "",
-      
-    },
-  };
+
+
+  const [listRotacion, setListaRotacion] = useState([])
 
   
 
-  render() {
-    
-    return (
+  /* Llamar la función de la api mostrar estudiante*/
+  useEffect(() => {
+    getApiRotacion()
+      .then((Datos) => {
+        setListaRotacion(Datos)
+
+      })
+      .catch((Error) => {
+        alert(Error.toString())
+      })
+  }, [])
+
+  /* editar estudiante */
+  const [estudianteSeleccionado, setEstudianteSeleccionado] = useState({})
+
+ 
+
+  const actualizarEditEstudiante = (e) => {
+    setEstudianteSeleccionado(
+      {
+        ...estudianteSeleccionado,
+        [e.target.name]: e.target.value
+      }
+    )
+  }
+
+
+
+     return (
       
-      <>
+     
         <Container>
-        <MenuNotas></MenuNotas>
+    
         <br />
           
           <br />
           <br />
           
-          <Table>
+          <Table  >
             <thead>
               <tr>
                 <th>ID</th>
@@ -73,16 +83,15 @@ class ListaEstudiantes extends React.Component {
             </thead>
 
             <tbody>
-              {this.state.data.map((dato) => (
-                <tr key={dato.No}>
-                  <td>{dato.No}</td>
-                  <td>{dato.Cedula}</td>
-                  <td>{dato.Nombres}</td>
-                  <td>{dato.Apellido}</td>
-                  <td>{dato.Promedio}</td>
-                  <td>{dato.SitioPractica}</td>
-                  <td>{dato.Nota}</td>
-                  <td>{dato.Mes}</td>
+              {listRotacion.map((estudiante,indice) => (
+                <tr eventKey={indice} key={indice}>
+                  <td>{estudiante.documento}</td>
+                  <td>{estudiante?.primerNombre + " "}{estudiante?.segundoNombre + " "}</td>
+                  <td>{estudiante.primerApellido + " "}{estudiante?.segundoApellido + " "}</td>
+                  <td>{estudiante.promedio}</td>
+                  <td>{estudiante.institucion}</td>
+                  <td>{estudiante.nota}</td>
+                  <td>{estudiante.mes}</td>
                   <td>
                    
                   </td>
@@ -116,10 +125,9 @@ class ListaEstudiantes extends React.Component {
         </Container>
 
 
-      </>
-      
+    
     );
   }
-}
+
 ListaEstudiantes.layout = "MenuLayout"
 export default ListaEstudiantes;

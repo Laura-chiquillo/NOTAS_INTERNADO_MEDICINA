@@ -316,7 +316,6 @@ const Buttons = () => {
                           <Row>
                             <Col>
                               <ul>
-                                <li> <img src={estudiante.foto}></img> </li>
                                 <li>Documento: {estudiante.documento} </li>
                                 <li>semestre actual: {estudiante.semestreE} </li>
                                 <li>correo: {estudiante.correo} </li>
