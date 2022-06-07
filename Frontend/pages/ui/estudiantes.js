@@ -677,7 +677,7 @@ const Buttons = () => {
                                             ...nuevaRotacion,
                                             subAsignatura: {idSubAsignatura:e.target.value}
                                           })}>
-                                            <option value="0">Seleccione una subasignatura</option>
+                                            <option value="0">Seleccione una Rotación</option>
                                             {
                                               listSubmaterias
                                                 .map((submateria, index) => (
