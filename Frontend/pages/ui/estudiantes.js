@@ -230,17 +230,8 @@ const Buttons = () => {
   
   const crearInforme = () => {
     /* validar datos vacios */
-    if("institucion" in  nuevaRotacion==false==false){
-      alert("Debe ingresar la institucion")
-      return 
-    }
-
     if("asignatura" in  nuevaRotacion==false){
       alert("Debe ingresar la asignatura")
-      return 
-    }
-    if("subAsignatura" in  nuevaRotacion==false){
-      alert("Debe ingresar la rotación")
       return 
     }
     if("notaHistoriaClinica" in  nuevaRotacion==false){
@@ -275,11 +266,7 @@ const Buttons = () => {
       alert("Debe ingresar el evaluador")
       return 
     }
-    if("firma1" in  nuevaRotacion==false){
-      alert("Debe ingresar la firma")
-      return 
-    }
-
+    
     /* Guarda toda la información */
     getApiCrearRotacion({
       ...nuevaRotacion,
@@ -658,6 +645,7 @@ const Buttons = () => {
                                             ...nuevaRotacion,
                                             institucion: {idInstitucion:e.target.value}
                                           })}>
+                                            <option value="0">Seleccione una institucion</option>
                                             {
                                               listInstituciones
                                                 .map((institucion, index) => (
@@ -673,6 +661,7 @@ const Buttons = () => {
                                             ...nuevaRotacion,
                                             asignatura: {idAsignatura:e.target.value}
                                           })} >
+                                            <option value="0">Seleccione una asignatura</option>
                                             {
                                               listMaterias
                                                 .map((materia, index) => (
@@ -689,6 +678,7 @@ const Buttons = () => {
                                             ...nuevaRotacion,
                                             subAsignatura: {idSubAsignatura:e.target.value}
                                           })}>
+                                            <option value="0">Seleccione una subasignatura</option>
                                             {
                                               listSubmaterias
                                                 .map((submateria, index) => (
