@@ -26,15 +26,6 @@ public class Rotacion {
         private double notaCyAC;
         private double notaRotacion;
         private String mes;
-<<<<<<< HEAD
-        private String fechaInicio;
-        private String fechaCierre;
-        
-              public Rotacion(String idRotacion, Estudiante estudiante, Institucion institucion, SubAsignatura subAsignatura,
-                double notaHistoriaClinica, double notaResponsabilidad, double notaPractica, double notaCyAC,
-                double notaRotacion, String mes, String fechaInicio, String fechaCierre) {
-
-=======
         private LocalDate fechaInicio;
         private LocalDate fechaCierre;
         private String observaciones;
@@ -46,13 +37,9 @@ public class Rotacion {
         public Rotacion(String idRotacion, Estudiante estudiante, Institucion institucion, Asignatura asignatura,
                 SubAsignatura subAsignatura, double notaHistoriaClinica, double notaResponsabilidad,
                 double notaPractica, double notaCyAC, double notaRotacion, String mes, LocalDate fechaInicio,
-<<<<<<< HEAD
-                LocalDate fechaCierre) {
->>>>>>> Laura
-=======
-                LocalDate fechaCierre, String observaciones, String evaluador1, String firma1,
+                 LocalDate fechaCierre, String observaciones, String evaluador1, String firma1,
                 String firma2, String evaluador2) {
->>>>>>> main
+
             this.idRotacion = idRotacion;
             this.estudiante = estudiante;
             this.institucion = institucion;
