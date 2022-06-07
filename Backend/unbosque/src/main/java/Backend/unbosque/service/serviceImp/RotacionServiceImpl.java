@@ -38,11 +38,38 @@ public class RotacionServiceImpl implements RotacionService{
 
     @Override
     public void updateRotacion(String id, Rotacion rotacion) {
-        // TODO Auto-generated method stub
         Rotacion upRotacion = rotacionRepository.findById(id).get();
 
-        if (rotacion.getNota() != 0){
-            upRotacion.setNota(rotacion.getNota());
+        if (rotacion.getEstudiante() != null) {
+            upRotacion.getEstudiante().setIdEstudiante(rotacion.getEstudiante().getIdEstudiante());
+        }
+
+        if (rotacion.getInstitucion() != null) {
+            upRotacion.getInstitucion().setIdInstitucion((rotacion.getInstitucion().getIdInstitucion()));
+        }
+
+        if (rotacion.getSubAsignatura() != null) {
+            upRotacion.getSubAsignatura().setIdSubAsignatura((rotacion.getSubAsignatura().getIdSubAsignatura()));
+        }
+
+        if (rotacion.getNotaHistoriaClinica() != 0) {
+            upRotacion.setNotaHistoriaClinica(rotacion.getNotaHistoriaClinica());
+        }
+
+        if (rotacion.getNotaResponsabilidad() != 0) {
+            upRotacion.setNotaResponsabilidad(rotacion.getNotaResponsabilidad());
+        }
+
+        if (rotacion.getNotaPractica() != 0) {
+            upRotacion.setNotaPractica(rotacion.getNotaPractica());
+        }
+
+        if (rotacion.getNotaCyAC() != 0) {
+            upRotacion.setNotaCyAC(rotacion.getNotaCyAC());
+        }
+
+        if (rotacion.getNotaRotacion() != 0){
+            upRotacion.setNotaRotacion(rotacion.getNotaRotacion());
         }
 
         if (rotacion.getMes() != null){
@@ -55,6 +82,22 @@ public class RotacionServiceImpl implements RotacionService{
 
         if (rotacion.getFechaCierre() != null){
             upRotacion.setFechaCierre(rotacion.getFechaCierre());
+        }
+
+        if (rotacion.getEvaluador1() != null) {
+            upRotacion.setEvaluador1(rotacion.getEvaluador1());
+        }
+
+        if (rotacion.getEvaluador2() != null) {
+            upRotacion.setEvaluador2(rotacion.getEvaluador2());
+        }
+
+        if (rotacion.getFirma1().isEmpty()) {
+            upRotacion.setFirma1(rotacion.getFirma1());
+        }
+
+        if (rotacion.getFirma2().isEmpty()) {
+            upRotacion.setFirma2(rotacion.getFirma2());
         }
 
         rotacionRepository.save(upRotacion);

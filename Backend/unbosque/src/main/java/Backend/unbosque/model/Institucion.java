@@ -11,20 +11,21 @@ public class Institucion {
 
         @Id
         private String idInstitucion;
-        private String idPais;
+        @DBRef
+        private List<Estudiante> estudiantes;
+        @DBRef
+        private Ciudad ciudad;
         private String nombre;
         private String direccion;
-        @DBRef(lazy = true)
-        private List<Estudiante> estudiantes;
         private String estado;
 
-        public Institucion(String idInstitucion, String idPais, String nombre, String direccion,
-                List<Estudiante> estudiantes, String estado) {
+        public Institucion(String idInstitucion, List<Estudiante> estudiantes, Ciudad ciudad, String nombre,
+                String direccion, String estado) {
             this.idInstitucion = idInstitucion;
-            this.idPais = idPais;
+            this.estudiantes = estudiantes;
+            this.ciudad = ciudad;
             this.nombre = nombre;
             this.direccion = direccion;
-            this.estudiantes = estudiantes;
             this.estado = estado;
         }
 
@@ -36,12 +37,20 @@ public class Institucion {
             this.idInstitucion = idInstitucion;
         }
 
-        public String getIdPais() {
-            return idPais;
+        public List<Estudiante> getEstudiantes() {
+            return estudiantes;
         }
 
-        public void setIdPais(String idPais) {
-            this.idPais = idPais;
+        public void setEstudiantes(List<Estudiante> estudiantes) {
+            this.estudiantes = estudiantes;
+        }
+
+        public Ciudad getCiudad() {
+            return ciudad;
+        }
+
+        public void setCiudad(Ciudad ciudad) {
+            this.ciudad = ciudad;
         }
 
         public String getNombre() {
@@ -60,19 +69,17 @@ public class Institucion {
             this.direccion = direccion;
         }
 
-        public List<Estudiante> getEstudiantes() {
-            return estudiantes;
-        }
-
-        public void setEstudiantes(List<Estudiante> estudiantes) {
-            this.estudiantes = estudiantes;
-        }
-
         public String getEstado() {
             return estado;
         }
 
         public void setEstado(String estado) {
             this.estado = estado;
-        }    
+        }
+
+        @Override
+        public String toString() {
+            return "Institucion [ciudad=" + ciudad + ", direccion=" + direccion + ", estado=" + estado
+                    + ", estudiantes=" + estudiantes + ", idInstitucion=" + idInstitucion + ", nombre=" + nombre + "]";
+        }   
 }
