@@ -57,7 +57,7 @@ const InfoHospital = () => {
                     </thead>
                     <tbody>
                         {
-                          institucion.estudiantes.map((estudiante) => (
+                          institucion.estudiantes?.map((estudiante) => (
                         <tr>
                           <td>
                               <p>{estudiante?.primerNombre + " "} {estudiante?.segundoNombre + " "} {estudiante?.primerApellido + " "}{estudiante?.segundoApellido + " "}</p>
