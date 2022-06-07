@@ -1,98 +1,152 @@
-import React from "react";
+
+import React, { useEffect, useState } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
+import Nav from 'react-bootstrap/Nav'
 import {
   Table,
   Button,
   Container,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  FormGroup,
   Card,
-  ModalFooter,
-  Row, Col, CardTitle, CardBody,
+   FormGroup,
+  Input,
+  Label,
+ Col, CardTitle, CardBody,
 } from "reactstrap";
+import { Form } from 'react-bootstrap';
 import Link from "next/link";
-import MenuNotas from "./MenuNotas";
-import { 
-  DropdownButton,
-  ButtonGroup,
-  Dropdown} from 'react-bootstrap';
+
+import { getApiRotacion} from '../../api/notas'
+
+const ListaEstudiantes = () => {
 
 
+  const [ListaRotacion, setListaRotacion] = useState([])
 
+ 
 
-const data = [
-  { No: 1, Cedula: "9120928122", Nombres: "Naruto", Apellido: "Naruto", Promedio: "4.4", SitioPractica: "Los Cobos", Nota: "4.4", Mes: "Febrero" },
-  { No: 2, Cedula: "9120928122", Nombres: "Alejandro", Apellido: "Ruiz", Promedio: "4.4", SitioPractica: "Los Cobos", Nota: "4.4", Mes: "Febrero" },
-  { No: 3, Cedula: "9120928122", Nombres: "Alejandro", Apellido: "Ruiz", Promedio: "4.4", SitioPractica: "Los Cobos", Nota: "4.4", Mes: "Febrero" },
-  { No: 4, Cedula: "9120928122", Nombres: "Alejandro", Apellido: "Ruiz", Promedio: "4.4", SitioPractica: "Los Cobos", Nota: "4.4", Mes: "Febrero" },
-  { No: 5, Cedula: "9120928122", Nombres: "Alejandro", Apellido: "Ruiz", Promedio: "4.4", SitioPractica: "Los Cobos", Nota: "4.4", Mes: "Febrero" },
+  /* Llamar la función de la api mostrar rotacion*/
+  useEffect(() => {
+    getApiRotacion()
+      .then((datos ) => {
+        setListaRotacion(datos)
 
-];
+      })
+      .catch((Error) => {
+        alert(Error.toString())
+      })
+  }, [])
 
-
-class ListaEstudiantes extends React.Component {
-
-  state = {
-    data: data,
-    modalActualizar: false,
-    modalInsertar: false,
-    form: {
-      id: "",
-      Cedula: "",
-      Nombres: "",
-      Apellido: "",
-      Promedio: "",
-      SitioPractica: "",
-      Nota: "",
-      Mes: "",
-
-    },
-  };
-
-  constructor (props) {
-    super(props);
-    this.tabla = React.createRef();
+   /* Organizar por filtros */
+   const nombreAscendente = (nom1, nom2) => {
+    if (nom1.primerNombre > nom2.primerNombre) {
+      return 1
+    } return -1
+  }
+  const nombreDescendente = (nom1, nom2) => {
+    if (nom1.primerNombre > nom2.primerNombre) {
+      return -1
+    } return 1
+  }
+  const apellidoAscendente = (apellido1, apellido2) => {
+    if (apellido1.primerApellido > apellido2.primerApellido) {
+      return 1
+    } return -1
+  }
+  const apellidoDescendente = (apellido1, apellido2) => {
+    if (apellido1.primerApellido > apellido2.primerApellido) {
+      return -1
+    } return 1
   }
 
-  render() {
+  const noOrdenar = (a, b) => 1
+  const [ordenarLista, setOrdenar] = useState(() => noOrdenar)
+  /* seleccionar el orden */
+  const seleccionarOrden = (e) => {
+    if (e.target.value == "nombreAscendente") {
+      setOrdenar(() => nombreAscendente)
+    }
+    if (e.target.value == "nombreDescendente") {
+      setOrdenar(() => nombreDescendente)
+    }
+    if (e.target.value == "apellidoAscendente") {
+      setOrdenar(() => apellidoAscendente)
+    }
+    if (e.target.value == "apellidoDescendente") {
+      setOrdenar(() => apellidoDescendente)
+    }
+    if (e.target.value == "vacio") {
+      setOrdenar(() => noOrdenar)
+    }
+  }
+
+  /*Filtro de busqueda por nombre */
+  const [busqueda, setBusqueda] = useState("");
+
+  const handleChange = e => {
+    setBusqueda(e.target.value);
+  }
 
     return (
 
       <>
+      
         <Container>
-          <MenuNotas></MenuNotas>
+       
           <br />
+          <br />        
+          
+          
+  
+       {/* Buscar */}
+       <input placeholder='Buscar' className='form-control'  value={busqueda} onChange={handleChange}></input>
+               
+                <FormGroup>
+                  <Label for="exampleSelect"></Label>
+                  <Input id="exampleSelect" name="select" type="select"onChange={seleccionarOrden}>
 
-          <br />
-          <br />
+                    <option value="vacio">Ordenar por</option>
+                    <option value="nombreAscendente">Nombre de la  A-Z</option>
+                    <option value="nombreDescendente">Nombre de la Z-A</option>
+                    <option value="apellidoAscendente">Apellidos de la A-Z</option>
+                    <option value="apellidoDescendente">Apellidos de la Z-A</option>
+                  </Input>
+                </FormGroup>
+                
 
-          <Table ref={this.tabla}>
+
+          <Table >
+            
             <thead>
+              
               <tr>
-                <th>ID</th>
-                <th>Cedula</th>
+                <th>No</th>
+                <th>Documento</th>
                 <th>Nombres</th>
-                <th>Apellido</th>
+                <th>Apellidos</th>
                 <th>Promedio</th>
                 <th>Sitio de Practica</th>
                 <th>Nota</th>
-                <th>Mes</th>
-              </tr>
+                <th>Fecha Inicio</th>
+                <th>Fecha Cierre</th>
+                              </tr>
             </thead>
 
             <tbody>
-              {this.state.data.map((dato) => (
-                <tr key={dato.No}>
-                  <td>{dato.No}</td>
-                  <td>{dato.Cedula}</td>
-                  <td>{dato.Nombres}</td>
-                  <td>{dato.Apellido}</td>
-                  <td>{dato.Promedio}</td>
-                  <td>{dato.SitioPractica}</td>
-                  <td>{dato.Nota}</td>
-                  <td>{dato.Mes}</td>
+              {ListaRotacion
+                 .filter((elemento) => elemento.estudiante.primerNombre.toString().toLowerCase().includes(busqueda.toLowerCase()))
+                 .sort((a, b) => ordenarLista(a, b))
+                 .map((estudiantes, indice) => (
+                <tr eventKey={indice} key={indice}>
+                   <td>{indice}</td>
+                  <td>{estudiantes.estudiante.documento}</td>
+                  <td>{estudiantes?.estudiante.primerNombre + " "}{estudiantes?.estudiante.segundoNombre + " "}</td>
+                  <td>{estudiantes.estudiante.primerApellido + " "}{estudiantes?.estudiante.segundoApellido + " "}</td>
+                  <td>{estudiantes.estudiante.promedio}</td>
+                  <td>{estudiantes.institucion.nombre}</td>            
+                  <td>{estudiantes.notaRotacion}</td>
+                  <td>{estudiantes.fechaInicio}</td>
+                  <td>{estudiantes.fechaCierre}</td>
+                 
                   <td>
 
                   </td>
@@ -117,12 +171,7 @@ class ListaEstudiantes extends React.Component {
                     </Button>
                   </Link>
                   {/* Descargar PDF y excel */}
-                  <ButtonGroup >
-                    <DropdownButton as={ButtonGroup} title="Descargar lista" className="btn btn-lg p-0" id="bg-nested-dropdown">
-                      <Dropdown.Item eventKey="1"> PDF</Dropdown.Item>
-                      <Dropdown.Item eventKey="2">EXCEL</Dropdown.Item>
-                    </DropdownButton>
-                  </ButtonGroup>
+                  
                 </div>
               </CardBody>
             </Card>
@@ -130,10 +179,11 @@ class ListaEstudiantes extends React.Component {
         </Container>
 
 
+    
       </>
 
     );
   }
-}
+
 ListaEstudiantes.layout = "MenuLayout"
 export default ListaEstudiantes;

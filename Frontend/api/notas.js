@@ -36,5 +36,16 @@ const getApiCrearRotacion = async (rotacion) =>{
 }
 
 
-export {getApiMateria, getApiSubMateria, getApiCrearRotacion}
+const getApiRotacion = async () => {
+
+    const peticion = await fetch (`${URL}rotacion/todos`)
+
+   if (peticion.ok) {
+       return await peticion.json()
+   } throw new Error("Error del servidor") 
+
+}
+
+
+export {getApiMateria, getApiSubMateria, getApiCrearRotacion,getApiRotacion}
 
