@@ -11,9 +11,6 @@ import Backend.unbosque.repository.AdminRepository;
 @EnableMongoRepositories
 public class UnbosqueApplication {
 
-	@Autowired
-	AdminRepository admin;
-
 	public static void main(String[] args) {
 		SpringApplication.run(UnbosqueApplication.class, args);
 	
