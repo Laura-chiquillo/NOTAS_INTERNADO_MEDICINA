@@ -8,4 +8,8 @@ const getApiCoordinador = async (c) => {
     } throw new Error("Error del servidor") 
 }
 
+const apiCambiarContraseña = async () => {
+    
+}
+
 export {getApiCoordinador}

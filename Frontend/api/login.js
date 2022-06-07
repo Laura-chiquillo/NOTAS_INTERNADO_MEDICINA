@@ -14,7 +14,13 @@ const apiLoginAdmin = async (adminLogin) => {
     const peticion = await fetch (`${URL}admin/loginAdmin`, params)
     if (peticion.ok) {
         /* json para obtener los datos */
-        return await peticion.json()
+        const data = await peticion.json() 
+        if (typeof window !== "undefined") {
+
+            localStorage.setItem("token", data.token)
+            
+            }
+        return data
     } throw new Error("No se pudo realizar la acción")
 }
 

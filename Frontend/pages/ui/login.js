@@ -18,6 +18,7 @@ import Modal from 'react-bootstrap/Modal';
 import { apiLoginAdmin, apiLoginCoordinador } from '../../api/login';
 import { getApiAdmin } from '../../api/admin';
 import { getApiCoordinador } from '../../api/coordinador';
+import { useRouter } from 'next/router'
 
 const Forms = () => {
 
@@ -46,6 +47,8 @@ const Forms = () => {
 
   const [userSeleccionado, setUserSeleccionado] = useState({})
 
+  const router = useRouter()
+
   const actualizarUser = (e) => {
     setUserSeleccionado(
       {
@@ -69,7 +72,10 @@ const Forms = () => {
     getApiAdmin(userSeleccionado.correo).then((fulfilled) => {
       console.log("Admin")
       console.log(userSeleccionado)
-      apiLoginAdmin(userSeleccionado)
+      apiLoginAdmin(userSeleccionado).then(() => {
+        router.push('/ui/estudiantes')
+      })
+      return
     }).catch((error) => {
       console.log(error)
     })
@@ -78,7 +84,10 @@ const Forms = () => {
     getApiCoordinador(userSeleccionado.correo).then((fulfilled) => {
       console.log("Coordinador")
       console.log(userSeleccionado)
-      apiLoginCoordinador(userSeleccionado)
+      apiLoginCoordinador(userSeleccionado).then(() => {
+        router.push('/ui/vistaHospitales')
+      })
+      return
     }).catch((error) => {
       console.log(error)
     })
@@ -118,8 +127,7 @@ const Forms = () => {
                     
                   />
                 </FormGroup>
-                <Link href={'/ui/estudiantes'}><Button onClick={login}>Ingresar</Button></Link>
-                <Link href={'/ui/vistaHospitales'}><Button>Ingresar como hospital (boton temporal xd)</Button></Link>
+                <Button onClick={login}>Ingresar</Button>
 
                 {/* Contraseña */}
                 <Button variant="primary" onClick={handleShow}>
@@ -161,61 +169,17 @@ const Forms = () => {
                   <Modal.Body>
                     <Form>
                       <FormGroup>
-                        <Label>Ingrese el codigo</Label>
-                        <Input
-                          type="text"
-                          id='IPS'
-                          name='ips'
-                        />
+                        <Label>La nueva contraseña ha sido enviada a su correo</Label>
                       </FormGroup>
                     </Form>
                   </Modal.Body>
                   <Modal.Footer>
                     <Button variant="secondary" onClick={handleCloses}>
-                      Cancelar
-                    </Button>
-                    <Button variant="primary" onClick={abrirModal2}>
-                      Continuar
+                      Terminar
                     </Button>
                   </Modal.Footer>
                 </Modal>
-
-                 {/* confirmar cambio de contraseña */}
-                 <Modal show={shows2} onHide={handleCloses2}>
-                  <Modal.Header closeButton>
-                    <Modal.Title>Cambiar contraseña</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
-
-                    <Form>
-                      <FormGroup>
-                        <Label> Contraseña</Label>
-                        <Input
-                          type="text"
-                          id='IPS'
-                          name='ips'
-                        />
-                      </FormGroup>
-                      <FormGroup>
-                        <Label> Confirmar contraseña</Label>
-                        <Input
-                          type="text"
-                          id='IPS'
-                          name='ips'
-                        />
-                      </FormGroup>
-                    </Form>
-                  </Modal.Body>
-                  <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloses2}>
-                      Cancelar
-                    </Button>
-                    <Button variant="primary" onClick={handleCloses2}>
-                      Guardar
-                    </Button>
-                  </Modal.Footer>
-                </Modal>
-
+                
               </Form>
             </CardBody>
           </Card>
