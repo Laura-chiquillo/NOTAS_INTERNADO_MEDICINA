@@ -15,5 +15,6 @@ public interface CoordinadorInstiService {
     void updatePassword(String id, String contraseña);
     CoordinadorInsti getCoordinadorInstiByCorreo(String correo);
     String verificarCredenciales(CoordLogin coordLogin);
+    String cambiarContraseña(String correo);
     
 }
