@@ -15,6 +15,9 @@ import {
 import Link from 'next/link';
 import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
+import { apiLoginAdmin, apiLoginCoordinador } from '../../api/login';
+import { getApiAdmin } from '../../api/admin';
+import { getApiCoordinador } from '../../api/coordinador';
 
 const Forms = () => {
 
@@ -41,6 +44,46 @@ const Forms = () => {
     handleShows2()
   }
 
+  const [userSeleccionado, setUserSeleccionado] = useState({})
+
+  const actualizarUser = (e) => {
+    setUserSeleccionado(
+      {
+        ...userSeleccionado,
+        [e.target.name]: e.target.value
+      }
+    )
+  }
+  
+  const login = () => { 
+
+    if("correo" in userSeleccionado==false){
+      alert("¡Ingrese un correo!")
+      return
+    }
+    if("contraseña" in userSeleccionado==false){
+      alert("¡Ingrese una contraseña!")
+      return
+    }
+
+    getApiAdmin(userSeleccionado.correo).then((fulfilled) => {
+      console.log("Admin")
+      console.log(userSeleccionado)
+      apiLoginAdmin(userSeleccionado)
+    }).catch((error) => {
+      console.log(error)
+    })
+    
+
+    getApiCoordinador(userSeleccionado.correo).then((fulfilled) => {
+      console.log("Coordinador")
+      console.log(userSeleccionado)
+      apiLoginCoordinador(userSeleccionado)
+    }).catch((error) => {
+      console.log(error)
+    })
+  }
+
   return (
     <div >
 
@@ -54,26 +97,28 @@ const Forms = () => {
           <Card>
 
             <CardBody>
-              <Form>
+              <Form onChange={actualizarUser}>
                 <FormGroup>
                   <Label for="exampleEmail">Correo Electrónico</Label>
                   <Input
                     id="exampleEmail"
-                    name="email"
+                    name="correo"
                     placeholder="Introducir correo"
                     type="email"
+                    required
                   />
                 </FormGroup>
                 <FormGroup>
                   <Label for="examplePassword">Contraseña</Label>
                   <Input
                     id="examplePassword"
-                    name="password"
+                    name="contraseña"
                     placeholder="Introducir contraseña"
                     type="password"
+                    
                   />
                 </FormGroup>
-                <Link href={'/ui/estudiantes'}><Button>Ingresar</Button></Link>
+                <Link href={'/ui/estudiantes'}><Button onClick={login}>Ingresar</Button></Link>
                 <Link href={'/ui/vistaHospitales'}><Button>Ingresar como hospital (boton temporal xd)</Button></Link>
 
                 {/* Contraseña */}
