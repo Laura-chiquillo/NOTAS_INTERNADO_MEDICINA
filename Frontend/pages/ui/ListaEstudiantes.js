@@ -11,7 +11,7 @@ import {
   Input,
   Label,
   Row,
- Col, CardTitle, CardBody, Pagination, PaginationItem, PaginationLink ,
+ Col, CardTitle, CardBody, Pagination, PaginationItem, PaginationLink  
 } from "reactstrap";
 import { useColors } from '../../hooks/useColor';
 import { Spinner } from 'react-bootstrap';
@@ -176,8 +176,11 @@ const ListaEstudiantes = () => {
                   </Input>
                 </FormGroup>
                 
-
-                <p align="center">INFORMACIÓN ROTACIÓN.</p>
+                <CardTitle tag="h6" className="border-bottom p-3 mb-0" align="center">
+            <i className="bi bi-card-text me-2" > </i>
+            INFORMACIÓN ROTACIÓN
+          </CardTitle>
+                
           <Table >
             
             <thead>

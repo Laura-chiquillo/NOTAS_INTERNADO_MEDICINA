@@ -48,15 +48,15 @@ const Forms = () => {
 
 
       
-        <Col xs="0" md="7">
+        <Col xs="0" md="5"  >
           {/* --------------------------------------------------------------------------------*/}
           {/* Card-1*/}
           {/* --------------------------------------------------------------------------------*/}
 
-          <Card>
+          <Card >
 
             
-              <Form className='rounded p-4 p-sm-3'>
+              <Form className='rounded p-4 p-sm-3 '>
                 <FormGroup 
                 >
                   <Label for="exampleEmail">Correo Electrónico</Label>

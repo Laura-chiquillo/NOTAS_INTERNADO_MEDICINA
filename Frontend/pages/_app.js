@@ -18,12 +18,12 @@ function MyApp({ Component, pageProps }) {
     <>
       <ColorWrapper>
         <Head>
-          <title>Monster Free Next Js Dashboard Template</title>
+          <title> UNB MEDICINA</title>
           <meta
             name="description"
             content="Monster Free Next Js Dashboard Template"
           />
-          <link rel="icon" href="/favicon.ico" />
+           <link rel="icon" href="/favicon.ico" />
         </Head>
         <Layout>
           <Component {...pageProps}/>
