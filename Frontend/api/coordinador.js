@@ -43,4 +43,12 @@ const apiCambiarContraseña = async (correo) => {
     } throw new Error("No se pudo realizar la acción")
 }
 
-export {getApiCoordinador, crearApiCoordinador, apiCambiarContraseña}
+const getApiCoordinadorById = async (id) => {
+    const peticion = await fetch (`${URL}coordinadorIPS/${id}`)
+
+    if (peticion.ok) {
+        return await peticion.json()
+    } throw new Error("Error del servidor") 
+}
+
+export {getApiCoordinador, crearApiCoordinador, apiCambiarContraseña, getApiCoordinadorById}
