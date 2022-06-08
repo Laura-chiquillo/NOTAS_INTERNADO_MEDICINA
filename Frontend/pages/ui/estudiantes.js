@@ -407,7 +407,7 @@ const Buttons = () => {
                         <Row>
                           <FormGroup>
                             <Label for="exampleFile">Cargar Archivo</Label>
-                            <Input id="exampleFile" name="file" type="file" onChange={(e) => {
+                            <Input accept=".xls,.xlsx" id="exampleFile" name="file" type="file" onChange={(e) => {
                               setJsonExcel(e.target.files[0])
                             }} />
                           </FormGroup>

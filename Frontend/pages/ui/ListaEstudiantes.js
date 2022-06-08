@@ -33,7 +33,7 @@ const ListaEstudiantes = () => {
   const [cargando, setCargando] = useState(true)
 
   /** Numrto de items por pagina */
-  const [itemsPagina, setItemsPagina] = useState(5);
+  const [itemsPagina, setItemsPagina] = useState(3);
 
   /** Variable que determina la cantidad de paginas de la paginacion */
   const [nPaginacion, setNPaginacion] = useState(0);
@@ -196,13 +196,15 @@ const ListaEstudiantes = () => {
           <thead>
 
             <tr>
-              <th>No</th>
               <th>Documento</th>
               <th>Nombres</th>
               <th>Apellidos</th>
               <th>Promedio</th>
               <th>Sitio de Practica</th>
+              <th>Asignatura</th>
+              <th>Practica</th>
               <th>Nota</th>
+              <th>Evaluador</th>
               <th>Fecha Inicio</th>
               <th>Fecha Cierre</th>
             </tr>
@@ -215,12 +217,13 @@ const ListaEstudiantes = () => {
               .filter((est, i) => i >= (paginaActual - 1) * itemsPagina && i < paginaActual * itemsPagina)
               .map((estudiantes, indice) => (
                 <tr eventKey={indice} key={indice}>
-                  <td>{indice}</td>
                   <td>{estudiantes.estudiante.documento}</td>
                   <td>{estudiantes?.estudiante.primerNombre + " "}{estudiantes?.estudiante.segundoNombre + " "}</td>
                   <td>{estudiantes.estudiante.primerApellido + " "}{estudiantes?.estudiante.segundoApellido + " "}</td>
                   <td>{estudiantes.estudiante.promedio}</td>
                   <td>{estudiantes.institucion.nombre}</td>
+                  <td>{estudiantes.asignatura.descripcion}</td>
+                  <td>{estudiantes.subAsignatura.descripcion}</td>
                   <td>{estudiantes.notaRotacion}</td>
                   <td>{estudiantes.evaluador1}</td>
                   <td>{estudiantes.fechaInicio}</td>
