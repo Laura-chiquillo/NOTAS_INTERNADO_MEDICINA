@@ -20,6 +20,21 @@ public class CoordinadorInsti {
     private String contraseña;
     private String cargo;
 
+    public CoordinadorInsti(String idCoordinador, Institucion institucion, String primerNombre, String segundoNombre,
+            String primerApellido, String segundoApellido, String telefono, String correo, String contraseña,
+            String cargo) {
+        this.idCoordinador = idCoordinador;
+        this.institucion = institucion;
+        this.primerNombre = primerNombre;
+        this.segundoNombre = segundoNombre;
+        this.primerApellido = primerApellido;
+        this.segundoApellido = segundoApellido;
+        this.telefono = telefono;
+        this.correo = correo;
+        this.contraseña = contraseña;
+        this.cargo = cargo;
+    }
+
     public String getIdCoordinador() {
         return idCoordinador;
     }
@@ -90,5 +105,21 @@ public class CoordinadorInsti {
 
     public void setCargo(String cargo) {
         this.cargo = cargo;
+    }
+
+    public Institucion getInstitucion() {
+        return institucion;
+    }
+
+    public void setInstitucion(Institucion institucion) {
+        this.institucion = institucion;
+    }
+
+    @Override
+    public String toString() {
+        return "CoordinadorInsti [cargo=" + cargo + ", contraseña=" + contraseña + ", correo=" + correo
+                + ", idCoordinador=" + idCoordinador + ", institucion=" + institucion + ", primerApellido="
+                + primerApellido + ", primerNombre=" + primerNombre + ", segundoApellido=" + segundoApellido
+                + ", segundoNombre=" + segundoNombre + ", telefono=" + telefono + "]";
     }
 }
