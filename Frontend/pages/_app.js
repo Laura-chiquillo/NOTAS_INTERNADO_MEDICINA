@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }) {
   const Layout = layouts[Component.layout] || (({children}) => <>{children}</>)
 
   return (
-    <div style={{height:"100vh",backgroundImage:'url("/unbosque.jpg")',backgroundRepeat:"no-repeat",backgroundSize:"cover"}} >
+    <div>
       <ColorWrapper>
         <Head>
           <title>Universidad El Bosque - Internado Notas</title>
