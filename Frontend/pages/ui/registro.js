@@ -36,7 +36,7 @@ const Registro = () => {
     crearApiInstitucion(institucionSeleccionado).then((institucion) => {
       setcoordinadorSeleccionado(
         {...coordinadorSeleccionado, 
-          idInstitucion: institucion.idInstitucion}
+          institucion: institucion.idInstitucion}
       ) 
       nuevoCoordinador().then(()=> {
         router.push("/ui/hospitales")
@@ -114,10 +114,10 @@ const Registro = () => {
                     name='primerApellido'
                   />
                   <span className="input-group-addon">-</span>
-                  <Label>Telefono</Label>
+                  <Label></Label>
                   <Input
-                  id="Telefono"
-                  name="telefono"
+                  id="Apellido2"
+                  name="segundoApellido"
                   type="text"
                 />
                 </div>
@@ -125,9 +125,9 @@ const Registro = () => {
               <FormGroup>
                 <Label>Teléfono</Label>
                 <Input
-                  type="number"
-                  id='Cargo'
-                  name='Cargo'
+                  type="tel"
+                  id='Telefono'
+                  name='telefono'
                 />
               </FormGroup>
               <FormGroup>
