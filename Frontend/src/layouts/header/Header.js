@@ -49,9 +49,6 @@ const Header = ({ showMobmenu }) => {
       <div className="d-flex align-items-center">
         <NavbarBrand href="/" className="d-lg-none">
         </NavbarBrand>
-        <Button color="primary" className="d-lg-none" onClick={showMobmenu}>
-          <i className="bi bi-list"></i>
-        </Button>
       </div>
       <div className="hstack gap-2">
         <Button

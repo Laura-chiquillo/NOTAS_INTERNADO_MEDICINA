@@ -1,4 +1,3 @@
-
 import {
   Card,
   Row,
@@ -57,14 +56,14 @@ const Forms = () => {
       }
     )
   }
-  
-  const login = () => { 
 
-    if("correo" in userSeleccionado==false){
+  const login = () => {
+
+    if ("correo" in userSeleccionado == false) {
       alert("¡Ingrese un correo!")
       return
     }
-    if("contraseña" in userSeleccionado==false){
+    if ("contraseña" in userSeleccionado == false) {
       alert("¡Ingrese una contraseña!")
       return
     }
@@ -79,7 +78,7 @@ const Forms = () => {
     }).catch((error) => {
       console.log(error)
     })
-    
+
 
     getApiCoordinador(userSeleccionado.correo).then((fulfilled) => {
       console.log("Coordinador")
@@ -94,98 +93,98 @@ const Forms = () => {
   }
 
   return (
-    <div >
+    <div style={{ height: "100vh", backgroundImage: 'url("/unbosque.jpg")', backgroundRepeat: "no-repeat", backgroundSize: "cover" }}>
+      <div style={{ transform: "translateY( 50%)" }}>
+        <Row className="justify-content-md-center">
+          <Col xs="0" md="5">
+            {/* --------------------------------------------------------------------------------*/}
+            {/* Card-1*/}
+            {/* --------------------------------------------------------------------------------*/}
 
+            <Card >
 
-      <Row className="justify-content-md-center">
-        <Col xs="0" md="7">
-          {/* --------------------------------------------------------------------------------*/}
-          {/* Card-1*/}
-          {/* --------------------------------------------------------------------------------*/}
+              <CardBody>
+                <Form className='rounded p-4 p-sm-3 ' onChange={actualizarUser}>
+                  <FormGroup>
+                    <Label for="exampleEmail">Correo Electrónico</Label>
+                    <Input
+                      id="exampleEmail"
+                      name="correo"
+                      placeholder="Introducir correo"
+                      type="email"
+                      required
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <Label for="examplePassword">Contraseña</Label>
+                    <Input
+                      id="examplePassword"
+                      name="contraseña"
+                      placeholder="Introducir contraseña"
+                      type="password"
 
-          <Card>
+                    />
+                  </FormGroup>
+                  <Button onClick={login}>Ingresar</Button>
 
-            <CardBody>
-              <Form onChange={actualizarUser}>
-                <FormGroup>
-                  <Label for="exampleEmail">Correo Electrónico</Label>
-                  <Input
-                    id="exampleEmail"
-                    name="correo"
-                    placeholder="Introducir correo"
-                    type="email"
-                    required
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <Label for="examplePassword">Contraseña</Label>
-                  <Input
-                    id="examplePassword"
-                    name="contraseña"
-                    placeholder="Introducir contraseña"
-                    type="password"
-                    
-                  />
-                </FormGroup>
-                <Button onClick={login}>Ingresar</Button>
+                  {/* Contraseña */}
+                  <Button variant="primary" onClick={handleShow}>
+                    ¿Olvidaste tu contraseña?
+                  </Button>
 
-                {/* Contraseña */}
-                <Button variant="primary" onClick={handleShow}>
-                  ¿Olvidaste tu contraseña?
-                </Button>
+                  <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                      <Modal.Title>Cambiar contraseña</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <Form>
+                        <FormGroup>
+                          <Label>Ingrese su correo electronico</Label>
+                          <Input
+                            id="exampleEmail"
+                            name="email"
+                            placeholder="Introducir correo"
+                            type="email"
+                          />
+                        </FormGroup>
+                      </Form>
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button variant="secondary" onClick={handleClose}>
+                        Cancelar
+                      </Button>
+                      <Button variant="primary" onClick={abrirModal}>
+                        Continuar
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>
 
-                <Modal show={show} onHide={handleClose}>
-                  <Modal.Header closeButton>
-                    <Modal.Title>Cambiar contraseña</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
-                    <Form>
-                      <FormGroup>
-                        <Label>Ingrese su correo electronico</Label>
-                        <Input
-                          id="exampleEmail"
-                          name="email"
-                          placeholder="Introducir correo"
-                          type="email"
-                        />
-                      </FormGroup>
-                    </Form>
-                  </Modal.Body>
-                  <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                      Cancelar
-                    </Button>
-                    <Button variant="primary" onClick={abrirModal}>
-                      Continuar
-                    </Button>
-                  </Modal.Footer>
-                </Modal>
+                  {/* confirmar codigo */}
+                  <Modal show={shows} onHide={handleCloses}>
+                    <Modal.Header closeButton>
+                      <Modal.Title>Cambiar contraseña</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <Form>
+                        <FormGroup>
+                          <Label>La nueva contraseña ha sido enviada a su correo</Label>
+                        </FormGroup>
+                      </Form>
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button variant="secondary" onClick={handleCloses}>
+                        Terminar
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>
 
-                {/* confirmar codigo */}
-                <Modal show={shows} onHide={handleCloses}>
-                  <Modal.Header closeButton>
-                    <Modal.Title>Cambiar contraseña</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
-                    <Form>
-                      <FormGroup>
-                        <Label>La nueva contraseña ha sido enviada a su correo</Label>
-                      </FormGroup>
-                    </Form>
-                  </Modal.Body>
-                  <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloses}>
-                      Terminar
-                    </Button>
-                  </Modal.Footer>
-                </Modal>
-                
-              </Form>
-            </CardBody>
-          </Card>
-        </Col>
-      </Row>
+                </Form>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
 
+      </div>
     </div>
 
 

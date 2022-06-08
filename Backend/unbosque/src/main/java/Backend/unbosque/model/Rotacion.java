@@ -36,6 +36,8 @@ public class Rotacion {
                 SubAsignatura subAsignatura, double notaHistoriaClinica, double notaResponsabilidad,
                 double notaPractica, double notaCyAC, double notaRotacion, LocalDate fechaInicio, LocalDate fechaCierre,
                 String observaciones, String evaluador1, String firma1, String firma2, String evaluador2) {
+
+
             this.idRotacion = idRotacion;
             this.estudiante = estudiante;
             this.institucion = institucion;
