@@ -18,6 +18,7 @@ const apiLoginAdmin = async (adminLogin) => {
         if (typeof window !== "undefined") {
 
             localStorage.setItem("token", data.token)
+            localStorage.setItem("rol", data.rol)
             
             }
         return data
@@ -25,7 +26,7 @@ const apiLoginAdmin = async (adminLogin) => {
 }
 
 /*Login coordinador*/
-const apiLoginCoordinador = async (coordinadorLogin) => {
+const apiLoginCoordinador = async (coordLogin) => {
     const params = {
         /*  pasar parametro para que sepa cual es, si no se hace esto lo pasa como get */
         method : "POST",
@@ -33,12 +34,18 @@ const apiLoginCoordinador = async (coordinadorLogin) => {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(coordinadorLogin)
+        body: JSON.stringify(coordLogin)
     }
     const peticion = await fetch (`${URL}coordinadorIPS/loginCoord`, params)
     if (peticion.ok) {
-        /* json para obtener los datos */
-        return await peticion.json()
+        const data = await peticion.json() 
+        if (typeof window !== "undefined") {
+
+            localStorage.setItem("token", data.token)
+            localStorage.setItem("rol", data.rol)
+            
+            }
+        return data
     } throw new Error("No se pudo realizar la acción")
 }
 

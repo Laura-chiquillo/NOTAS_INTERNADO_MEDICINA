@@ -38,9 +38,9 @@ public class DefinitivaController {
     }
     
     @PostMapping("/nuevo")
-    public ResponseEntity<Definitiva> updateDefinitiva(@PathVariable String id, @RequestBody Definitiva definitiva) {
-        definitivaService.updateDefinitiva(id, definitiva);
-        return new ResponseEntity<>(definitivaService.getDefinitivaById(id), HttpStatus.OK);
+    public ResponseEntity<Definitiva> updateDefinitiva(@RequestBody Definitiva definitiva) {
+        Definitiva def = definitivaService.createDefinitiva(definitiva);
+        return new ResponseEntity<>(def, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/eliminar/{id}")

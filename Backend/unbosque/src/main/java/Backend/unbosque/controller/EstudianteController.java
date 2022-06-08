@@ -31,12 +31,10 @@ public class EstudianteController {
     private AuthenticationService authService;
 
     @GetMapping({"/todos"})
-    public ResponseEntity<List<Estudiante>> getAllEstudiantes(@RequestHeader ("Authorization") String tk) {
-        if(authService.isLoggedAdmin(tk)) {
-            List<Estudiante> estudiantes = estudianteService.getEstudiantes();
-            return new ResponseEntity<>(estudiantes, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+    public ResponseEntity<List<Estudiante>> getAllEstudiantes() {
+        List<Estudiante> estudiantes = estudianteService.getEstudiantes();
+        return new ResponseEntity<>(estudiantes, HttpStatus.OK);
+
     }
 
     @GetMapping({"/{id}"})
