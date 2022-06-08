@@ -10,6 +10,7 @@ import {
   Input,
   Label,
   Col, CardTitle, CardBody,
+  Pagination, PaginationItem, PaginationLink,Row
 } from "reactstrap";
 import Link from "next/link";
 import {
@@ -30,6 +31,53 @@ const ListaEstudiantes = () => {
   const { color } = useColors();
   const [ListaRotacion, setListaRotacion] = useState([])
   const [cargando, setCargando] = useState(true)
+
+  /** Numrto de items por pagina */
+  const [itemsPagina, setItemsPagina] = useState(5);
+
+  /** Variable que determina la cantidad de paginas de la paginacion */
+  const [nPaginacion, setNPaginacion] = useState(0);
+
+  /** esta variable determina el numero de pagina que se esta visualizando
+   */
+
+  const [paginaActual, setPaginaActual] = useState(1);
+
+  
+  /* se inicia con una lista vacia*/
+  
+
+  /** Funciones para paginar */
+
+  const primeraPaginacion = () => {
+    setPaginaActual(1);
+  }
+
+  const ultimaPaginacion = () => {
+    setPaginaActual(nPaginacion);
+  }
+
+  const anteriorPaginacion = () => {
+    if (paginaActual > 1) {
+      setPaginaActual(paginaActual - 1);
+    }
+  }
+
+  const siguientePaginacion = () => {
+    if (paginaActual < nPaginacion) {
+      setPaginaActual(paginaActual + 1);
+    }
+  }
+
+  /* Cada vez que listaEstuantes se actualize, recalculaara el numero de paginas */
+  useEffect(() => {
+    /** Se determina el numero de paginas a partir de laa cantidad
+     * de estudiantes
+     * Ejemplo: 20 estudiantes, se mostraran 5 por pagina
+     * Resultado: 4 paginas -> 20/5 = 4
+     */
+    setNPaginacion(Math.ceil(ListaRotacion.length / itemsPagina))
+  }, [ListaRotacion])
   /* Llamar la función de la api mostrar rotacion*/
   useEffect(() => {
     getApiRotacion()
@@ -164,6 +212,7 @@ const ListaEstudiantes = () => {
             {ListaRotacion
               .filter((elemento) => elemento.estudiante.primerNombre.toString().toLowerCase().includes(busqueda.toLowerCase()))
               .sort((a, b) => ordenarLista(a, b))
+              .filter((est, i) => i >= (paginaActual - 1) * itemsPagina && i < paginaActual * itemsPagina)
               .map((estudiantes, indice) => (
                 <tr eventKey={indice} key={indice}>
                   <td>{indice}</td>
@@ -178,12 +227,27 @@ const ListaEstudiantes = () => {
                   <td>{estudiantes.fechaCierre}</td>
                   <td>
                   </td>
-                  
                  <td>
-
                   </td>
                 </tr>
               ))}
+                <Row>
+                  <Pagination>
+                        <PaginationItem>
+                          <PaginationLink first onClick={primeraPaginacion} style={{ backgroundColor: "rgb(242, 247, 248)", color: color }} />
+                        </PaginationItem>
+                        <PaginationItem>
+                          <PaginationLink previous onClick={anteriorPaginacion} style={{ backgroundColor: "rgb(242, 247, 248)", color: color }} />
+                        </PaginationItem>
+                        <PaginationItem>
+                          <PaginationLink next onClick={siguientePaginacion} style={{ backgroundColor: "rgb(242, 247, 248)", color: color }} />
+                        </PaginationItem>
+                        <PaginationItem>
+                          <PaginationLink last onClick={ultimaPaginacion} style={{ backgroundColor: "rgb(242, 247, 248)", color: color }} />
+                        </PaginationItem>
+                        <PaginationItem></PaginationItem>
+                      </Pagination>
+                </Row>
           </tbody>
 
         </Table>
