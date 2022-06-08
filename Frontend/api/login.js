@@ -43,6 +43,7 @@ const apiLoginCoordinador = async (coordLogin) => {
 
             localStorage.setItem("token", data.token)
             localStorage.setItem("rol", data.rol)
+            localStorage.setItem("idUsuario", data.idUsuario)
             
             }
         return data

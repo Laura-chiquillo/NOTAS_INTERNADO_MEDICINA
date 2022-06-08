@@ -7,14 +7,11 @@ import { Form } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import Accordion from 'react-bootstrap/Accordion';
 import { getApiInstituciones, editApiInstitucion , eliminarApiInstitucion} from '../../api/instituciones';
-import { getApiEstudiantes} from '../../api/estudiantes'
+import { editApiEstudiante, getApiEstudiantes} from '../../api/estudiantes'
 import { ListItem } from '@material-ui/core';
 
 
 const Buttons = () => {
-
-  /* Agregar lista de estudiantes */
-  const [addEstudiante, setAddEstudiante] = useState([]);
 
   /* Agregar UN estudiante a la institucion */
   const agregarEstudianteInstitucion = (estudiante) => {
@@ -25,6 +22,7 @@ const Buttons = () => {
       }
 
       listaEstudiantes.push(estudiante)
+      
       return ({
         ...prev, 
         estudiantes: listaEstudiantes.map((est)=>({idEstudiante:est.idEstudiante}))
@@ -46,6 +44,12 @@ const Buttons = () => {
     })
   }
 
+  /* Cambiar el atributo "Institucion=null" 
+  de los estudiantes por el nombre de la institucion*/
+
+  const atributoInstEstudiante = (estudiante) =>{
+  }
+
   /* seleccionar estudiante para agregar */
   const agregarEstudianteSeleccionado = (event, estudiante) => {
     const isSelected = event.target.checked;
@@ -55,8 +59,6 @@ const Buttons = () => {
       quitarEstudianteInstitucion(estudiante)
     }
   }
-
-
 
   /* crear la variable que contiene la lista de los estudiantes */
   /* se inicia con una lista vacia*/
@@ -505,7 +507,7 @@ const Buttons = () => {
                 <Link href={'/ui/infohospital'}>
                   <Button style={{ backgroundColor: color, color: "black" }} size="lg">Ver informes</Button>
                 </Link>
-              </div>
+              </div>  
             </CardBody>
           </Card>
         </Col>
