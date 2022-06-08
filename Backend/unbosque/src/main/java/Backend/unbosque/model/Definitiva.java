@@ -1,5 +1,7 @@
 package Backend.unbosque.model;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -10,22 +12,18 @@ public class Definitiva {
     @Id
     private String idDefinitiva;
     @DBRef
-    private Estudiante iEstudiante;
+    private Estudiante estudiante;
     @DBRef
-    private Asignatura idAsignatura;
-    private Double nota1;
-    private Double nota2;
-    private Double nota3;
+    private Asignatura asignatura;
+    private List<Double> notas;
     private Double notaDefinitiva;
 
-    public Definitiva(String idDefinitiva, Estudiante iEstudiante, Asignatura idAsignatura, Double nota1, Double nota2,
-            Double nota3, Double notaDefinitiva) {
+    public Definitiva(String idDefinitiva, Estudiante estudiante, Asignatura asignatura, List<Double> notas,
+            Double notaDefinitiva) {
         this.idDefinitiva = idDefinitiva;
-        this.iEstudiante = iEstudiante;
-        this.idAsignatura = idAsignatura;
-        this.nota1 = nota1;
-        this.nota2 = nota2;
-        this.nota3 = nota3;
+        this.estudiante = estudiante;
+        this.asignatura = asignatura;
+        this.notas = notas;
         this.notaDefinitiva = notaDefinitiva;
     }
 
@@ -36,45 +34,29 @@ public class Definitiva {
     public void setIdDefinitiva(String idDefinitiva) {
         this.idDefinitiva = idDefinitiva;
     }
-
-    public Estudiante getiEstudiante() {
-        return iEstudiante;
+    
+    public Estudiante getEstudiante() {
+        return estudiante;
     }
 
-    public void setiEstudiante(Estudiante iEstudiante) {
-        this.iEstudiante = iEstudiante;
+    public void setEstudiante(Estudiante estudiante) {
+        this.estudiante = estudiante;
     }
 
-    public Asignatura getIdAsignatura() {
-        return idAsignatura;
+    public Asignatura getAsignatura() {
+        return asignatura;
     }
 
-    public void setIdAsignatura(Asignatura idAsignatura) {
-        this.idAsignatura = idAsignatura;
+    public void setAsignatura(Asignatura asignatura) {
+        this.asignatura = asignatura;
     }
 
-    public Double getNota1() {
-        return nota1;
+    public List<Double> getNotas() {
+        return notas;
     }
 
-    public void setNota1(Double nota1) {
-        this.nota1 = nota1;
-    }
-
-    public Double getNota2() {
-        return nota2;
-    }
-
-    public void setNota2(Double nota2) {
-        this.nota2 = nota2;
-    }
-
-    public Double getNota3() {
-        return nota3;
-    }
-
-    public void setNota3(Double nota3) {
-        this.nota3 = nota3;
+    public void setNotas(List<Double> notas) {
+        this.notas = notas;
     }
 
     public Double getNotaDefinitiva() {
@@ -87,8 +69,7 @@ public class Definitiva {
 
     @Override
     public String toString() {
-        return "Definitiva [iEstudiante=" + iEstudiante + ", idAsignatura=" + idAsignatura + ", idDefinitiva="
-                + idDefinitiva + ", nota1=" + nota1 + ", nota2=" + nota2 + ", nota3=" + nota3 + ", notaDefinitiva="
-                + notaDefinitiva + "]";
-    }    
+        return "Definitiva [asignatura=" + asignatura + ", estudiante=" + estudiante + ", idDefinitiva=" + idDefinitiva
+                + ", notaDefinitiva=" + notaDefinitiva + ", notas=" + notas + "]";
+    }
 }

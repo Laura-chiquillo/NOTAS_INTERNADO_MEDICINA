@@ -1,7 +1,6 @@
 package Backend.unbosque.model;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -25,7 +24,6 @@ public class Rotacion {
         private double notaPractica;
         private double notaCyAC;
         private double notaRotacion;
-        private String mes;
         private LocalDate fechaInicio;
         private LocalDate fechaCierre;
         private String observaciones;
@@ -34,11 +32,10 @@ public class Rotacion {
         private String firma2;
         private String evaluador2;  
 
-        public Rotacion(String idRotacion, Estudiante estudiante, Institucion institucion, Asignatura asignatura,
+    public Rotacion(String idRotacion, Estudiante estudiante, Institucion institucion, Asignatura asignatura,
                 SubAsignatura subAsignatura, double notaHistoriaClinica, double notaResponsabilidad,
-                double notaPractica, double notaCyAC, double notaRotacion, String mes, LocalDate fechaInicio,
-                LocalDate fechaCierre, String observaciones, String evaluador1, String firma1,
-                String firma2, String evaluador2) {
+                double notaPractica, double notaCyAC, double notaRotacion, LocalDate fechaInicio, LocalDate fechaCierre,
+                String observaciones, String evaluador1, String firma1, String firma2, String evaluador2) {
             this.idRotacion = idRotacion;
             this.estudiante = estudiante;
             this.institucion = institucion;
@@ -49,7 +46,6 @@ public class Rotacion {
             this.notaPractica = notaPractica;
             this.notaCyAC = notaCyAC;
             this.notaRotacion = notaRotacion;
-            this.mes = mes;
             this.fechaInicio = fechaInicio;
             this.fechaCierre = fechaCierre;
             this.observaciones = observaciones;
@@ -58,7 +54,6 @@ public class Rotacion {
             this.firma2 = firma2;
             this.evaluador2 = evaluador2;
         }
-
 
     public String getIdRotacion() {
         return this.idRotacion;
@@ -140,14 +135,6 @@ public class Rotacion {
         this.notaRotacion = notaRotacion;
     }
 
-    public String getMes() {
-        return this.mes;
-    }
-
-    public void setMes(String mes) {
-        this.mes = mes;
-    }
-
     public LocalDate getFechaInicio() {
         return this.fechaInicio;
     }
@@ -203,16 +190,14 @@ public class Rotacion {
     public void setEvaluador2(String evaluador2) {
         this.evaluador2 = evaluador2;
     }
-        
 
-        @Override
-        public String toString() {
-            return "Rotacion [asignatura=" + asignatura + ", estudiante=" + estudiante + ", evaluador1=" + evaluador1
-                    + ", evaluador2=" + evaluador2 + ", fechaCierre=" + fechaCierre + ", fechaInicio=" + fechaInicio
-                    + ", firma1=" + firma1 + ", firma2=" + firma2 + ", idRotacion=" + idRotacion + ", institucion="
-                    + institucion + ", mes=" + mes + ", notaCyAC=" + notaCyAC + ", notaHistoriaClinica="
-                    + notaHistoriaClinica + ", notaPractica=" + notaPractica + ", notaResponsabilidad="
-                    + notaResponsabilidad + ", notaRotacion=" + notaRotacion + ", observaciones=" + observaciones
-                    + ", subAsignatura=" + subAsignatura + "]";
-        }   
+    @Override
+    public String toString() {
+        return "Rotacion [asignatura=" + asignatura + ", estudiante=" + estudiante + ", evaluador1=" + evaluador1
+                + ", evaluador2=" + evaluador2 + ", fechaCierre=" + fechaCierre + ", fechaInicio=" + fechaInicio
+                + ", firma1=" + firma1 + ", firma2=" + firma2 + ", idRotacion=" + idRotacion + ", institucion="
+                + institucion + ", notaCyAC=" + notaCyAC + ", notaHistoriaClinica=" + notaHistoriaClinica
+                + ", notaPractica=" + notaPractica + ", notaResponsabilidad=" + notaResponsabilidad + ", notaRotacion="
+                + notaRotacion + ", observaciones=" + observaciones + ", subAsignatura=" + subAsignatura + "]";
+    }
 }

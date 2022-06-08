@@ -5,6 +5,12 @@ import {URL} from "./constantes"
 /* async -> la funcion tiene que esperar para poder seguir ejecutando */ 
 const getApiEstudiantes = async () => {
     /* await -> la instrucción es la que tiene que esperar */
+    /*let token = ''
+    if (typeof window !== "undefined") {
+
+        token = localStorage.getItem("token")
+        
+    }*/
    const peticion = await fetch (`${URL}estudiante/todos`)
    /* los 3 = es comparativo */
    if (peticion.ok) {
