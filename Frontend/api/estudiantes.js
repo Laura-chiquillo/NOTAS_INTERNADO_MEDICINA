@@ -24,7 +24,8 @@ const getApiEstudiantesInst = async () => {
     if (typeof window !== "undefined" && localStorage.getItem ("rol")=="Coord") {
 
         return await getApiCoordinadorById(localStorage.getItem("idUsuario")).then(async (coordinador)=>{
-            const peticion = await fetch (`${URL}institucion/estudiantes/${coordinador.idInstitucion}`)
+            console.log(coordinador)
+            const peticion = await fetch (`${URL}institucion/estudiantes/${coordinador.institucion.idInstitucion}`)
 
             if (peticion.ok) {
                 return await peticion.json()

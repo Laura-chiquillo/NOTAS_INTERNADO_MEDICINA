@@ -44,12 +44,6 @@ const Buttons = () => {
     })
   }
 
-  /* Cambiar el atributo "Institucion=null" 
-  de los estudiantes por el nombre de la institucion*/
-
-  const atributoInstEstudiante = (estudiante) =>{
-  }
-
   /* seleccionar estudiante para agregar */
   const agregarEstudianteSeleccionado = (event, estudiante) => {
     const isSelected = event.target.checked;
@@ -140,6 +134,7 @@ const Buttons = () => {
 
   const [show1, setShow1] = useState(false);
   const handleClose1 = () => {
+    console.log(institucionSeleccionado)
     editApiInstitucion(institucionSeleccionado).then(()=>{
       setShow1(false)
     })
