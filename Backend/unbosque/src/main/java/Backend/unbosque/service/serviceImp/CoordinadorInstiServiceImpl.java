@@ -43,15 +43,17 @@ public class CoordinadorInstiServiceImpl implements CoordinadorInstiService{
 
     @Override
     public CoordinadorInsti createCoordinadorInsti(CoordinadorInsti coordinadorInsti) {
-        String cont = coordinadorInsti.getContraseña();
+        String cont = RandomStringUtils.randomAlphanumeric(12);
         coordinadorInsti.setContraseña(passwordEncoder.encode(cont));
         coordinadorInstiRepository.save(coordinadorInsti);
         String texto = "Hola, "+ coordinadorInsti.getPrimerNombre() + "\n" + "Tu usuario es: " 
                         + coordinadorInsti.getCorreo()+ "\n" + "Tu contraseña es: " + cont;
         Email email = new Email(coordinadorInsti.getCorreo(), texto, "Bienvenido a NIM");
         emailService.sendSimpleMail(email);
-        return coordinadorInsti;
+        return coordinadorInstiRepository.save(coordinadorInsti);
     }
+
+
 
     @Override
     public void updateCoordinadorInsti(String id, CoordinadorInsti coordinadorInsti) {
@@ -137,6 +139,8 @@ public class CoordinadorInstiServiceImpl implements CoordinadorInstiService{
         emailService.sendSimpleMail(email);
         return "Todo kul";
     }
+
+   
 
     
 }

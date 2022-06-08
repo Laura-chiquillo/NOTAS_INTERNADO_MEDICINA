@@ -16,7 +16,7 @@ import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { apiLoginAdmin, apiLoginCoordinador } from '../../api/login';
 import { getApiAdmin } from '../../api/admin';
-import { getApiCoordinador } from '../../api/coordinador';
+import { getApiCoordinador, apiCambiarContraseña } from '../../api/coordinador';
 import { useRouter } from 'next/router'
 
 const Forms = () => {
@@ -45,6 +45,7 @@ const Forms = () => {
   }
 
   const [userSeleccionado, setUserSeleccionado] = useState({})
+  const [correoSeleccionado, setCorreoSeleccionado] = useState("")
 
   const router = useRouter()
 
@@ -52,6 +53,15 @@ const Forms = () => {
     setUserSeleccionado(
       {
         ...userSeleccionado,
+        [e.target.name]: e.target.value
+      }
+    )
+  }
+
+  const actualizarCorreo = (e) => {
+    setCorreoSeleccionado(
+      {
+        ...correoSeleccionado,
         [e.target.name]: e.target.value
       }
     )
@@ -90,6 +100,20 @@ const Forms = () => {
     }).catch((error) => {
       console.log(error)
     })
+  }
+
+  const nuevaContraseña = () => {
+
+    if("correo" in correoSeleccionado==false){
+      alert("¡Ingrese un correo!")
+      return
+    }
+
+    console.log(correoSeleccionado)
+    apiCambiarContraseña(correoSeleccionado ["correo"])
+    .then(() => {
+      abrirModal()
+    }) 
   }
 
   return (
@@ -137,12 +161,12 @@ const Forms = () => {
                       <Modal.Title>Cambiar contraseña</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                      <Form>
+                      <Form onChange={actualizarCorreo}>
                         <FormGroup>
                           <Label>Ingrese su correo electronico</Label>
                           <Input
                             id="exampleEmail"
-                            name="email"
+                            name="correo"
                             placeholder="Introducir correo"
                             type="email"
                           />
@@ -153,7 +177,7 @@ const Forms = () => {
                       <Button variant="secondary" onClick={handleClose}>
                         Cancelar
                       </Button>
-                      <Button variant="primary" onClick={abrirModal}>
+                      <Button variant="primary" onClick={nuevaContraseña}>
                         Continuar
                       </Button>
                     </Modal.Footer>
