@@ -34,11 +34,8 @@ const Registro = () => {
 
   const nuevaInstitucion = () => {
     crearApiInstitucion(institucionSeleccionado).then((institucion) => {
-      setcoordinadorSeleccionado(
-        {...coordinadorSeleccionado, 
-          institucion: institucion.idInstitucion}
-      ) 
-      nuevoCoordinador().then(()=> {
+
+      nuevoCoordinador(institucion.idInstitucion).then(()=> {
         router.push("/ui/hospitales")
       })
     })
@@ -54,8 +51,10 @@ const Registro = () => {
   /* nuevo coordinador */
   const [coordinadorSeleccionado, setcoordinadorSeleccionado] = useState({})
   
-  const nuevoCoordinador = async() => {
-    return await crearApiCoordinador(coordinadorSeleccionado)
+  const nuevoCoordinador = async(idInstitucion) => {
+    const coord = {...coordinadorSeleccionado, institucion:{"$ref": "Institucion", "$id": 'ObjectId("'+idInstitucion+'")', idInstitucion}}
+    console.log(coord)
+    return await crearApiCoordinador(coord)
 
   }
   
