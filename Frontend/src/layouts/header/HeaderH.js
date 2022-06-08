@@ -85,7 +85,7 @@ const HeaderH = ({ showMobmenu }) => {
             </div>
           </DropdownToggle>
           <DropdownMenu>
-            <DropdownItem header><a onClick={handleLogout}>cerrar sesión</a></DropdownItem>
+            <DropdownItem header><a onClick={handleLogout}>Cerrar sesión</a></DropdownItem>
           </DropdownMenu>
         </Dropdown>
       </Collapse>
