@@ -298,12 +298,12 @@ const Buttons = () => {
     setNuevaRotacion({})
     setShow4(false);
   }
+
   const handleShow4 = (idEstudiante) => {
     /* selecciona el estudiante y lo guarda dentro de rotación */
     setNuevaRotacion({estudiante:{idEstudiante}})
     setShow4(true);
   }
-
 
   /* Lista de institución */
   const [listInstituciones, setListInstituciones] = useState([]);

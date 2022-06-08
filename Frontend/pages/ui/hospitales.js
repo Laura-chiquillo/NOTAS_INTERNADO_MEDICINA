@@ -13,6 +13,51 @@ import { ListItem } from '@material-ui/core';
 
 const Buttons = () => {
 
+  /* Agregar lista de estudiantes */
+  const [addEstudiante, setAddEstudiante] = useState([]);
+
+  /* Agregar UN estudiante a la institucion */
+  const agregarEstudianteInstitucion = (estudiante) => {
+    setinstitucionSeleccionado ((prev)=>{
+      let listaEstudiantes = []
+      if(prev.estudiantes != null){
+        listaEstudiantes = [...prev.estudiantes]
+      }
+
+      listaEstudiantes.push(estudiante)
+      return ({
+        ...prev, 
+        estudiantes: listaEstudiantes.map((est)=>({idEstudiante:est.idEstudiante}))
+      })
+    })
+
+  }
+  /* Quitar UN estudiante de la institucion */
+  const quitarEstudianteInstitucion =(estudiante) =>{
+    setinstitucionSeleccionado((prev)=>{
+      let listaEstudiantes = []
+      if(prev.estudiantes != null){
+        listaEstudiantes = [...prev.estudiantes]
+      }
+      return ({
+        ...prev,
+        estudiantes: listaEstudiantes.filter((est)=> est.idEstudiante !== estudiante.idEstudiante)
+      })
+    })
+  }
+
+  /* seleccionar estudiante para agregar */
+  const agregarEstudianteSeleccionado = (event, estudiante) => {
+    const isSelected = event.target.checked;
+    if (isSelected) {   
+      agregarEstudianteInstitucion(estudiante)
+    } else {
+      quitarEstudianteInstitucion(estudiante)
+    }
+  }
+
+
+
   /* crear la variable que contiene la lista de los estudiantes */
   /* se inicia con una lista vacia*/
   const [listEstudiantes, setListaEstudiantes] = useState([])
@@ -92,8 +137,15 @@ const Buttons = () => {
 
 
   const [show1, setShow1] = useState(false);
-  const handleClose1 = () => setShow1(false);
-  const handleShow1 = () => setShow1(true);
+  const handleClose1 = () => {
+    editApiInstitucion(institucionSeleccionado).then(()=>{
+      setShow1(false)
+    })
+  };
+  const handleShow1 = (institucion) => {
+    setinstitucionSeleccionado(institucion)
+    setShow1(true)
+  };
 
   /* Paginación */
   const [itemsPagina, setItemsPagina] = useState(5);
@@ -180,33 +232,33 @@ const Buttons = () => {
   const handleChangeE = e => {
     setBusquedaE(e.target.value);
   }
-  /* Eliminar institución */
-  const [eliminarInst, setEliminarInst] = useState([]);
-  /* se ingresan los que se van a eliminar */
-  const eliminarInstituciones = () => {
-    eliminarInst.map((i) => {
-      
-      /* llama el back para eliminar la institución */
-      eliminarApiInstitucion(i).then((inst) => {
-         setEliminarInst(inst)
-       })
-    })
-    /* vacia los seleccionados */
-    setEliminarInst([])
-    /* Fuerza la actuaización*/
-    setActualizarListaInstituciones((!actualizarListaInstituciones))
-  }
-  /* seleccionar instituciones para eliminar */
-  const agregarSeleccionado = (event, institucion) => {
-    console.log(institucion) 
-    const isSelected = event.target.checked;
-    if (isSelected) {   
-    setEliminarInst(eliminarInst.concat(institucion)
-    )
-    } else {
-      setEliminarInst(eliminarInst.filter(i => i.idInstitucion !== institucion.idInstitucion))
-    }    
-  }
+    /* Eliminar institución */
+    const [eliminarInst, setEliminarInst] = useState([]);
+    /* se ingresan los que se van a eliminar */
+    const eliminarInstituciones = () => {
+      eliminarInst.map((i) => {
+        
+        /* llama el back para eliminar la institución */
+        eliminarApiInstitucion(i).then((inst) => {
+          setEliminarInst(inst)
+        })
+      })
+      /* vacia los seleccionados */
+      setEliminarInst([])
+      /* Fuerza la actuaización*/
+      setActualizarListaInstituciones((!actualizarListaInstituciones))
+    }
+    /* seleccionar instituciones para eliminar */
+    const agregarSeleccionado = (event, institucion) => {
+      console.log(institucion) 
+      const isSelected = event.target.checked;
+      if (isSelected) {   
+      setEliminarInst(eliminarInst.concat(institucion)
+      )
+      } else {
+        setEliminarInst(eliminarInst.filter(i => i.idInstitucion !== institucion.idInstitucion))
+      }    
+    }
 
 
   return (
@@ -304,7 +356,7 @@ const Buttons = () => {
                         </Accordion.Header>
                         <Accordion.Body>
 
-                          <Button variant="primary" onClick={handleShow1}>
+                          <Button variant="primary" onClick={()=>handleShow1(institucion)}>
                             Agregar lista de estudiante
                           </Button>
                           <Modal show={show1} onHide={handleClose1}>
@@ -323,24 +375,30 @@ const Buttons = () => {
                                       .map((estudiante, indice) => (
 
                                         <ListItem eventKey={indice} key={indice}>
-                                          <Button>
-                                            <input type="checkbox"></input>
+
+                                          <Button style={{ backgroundColor: color, color: "black" }}>
+                                            <input type="checkbox" onChange={(event) => {agregarEstudianteSeleccionado(event, estudiante)}} ></input>
                                           </Button>
                                           
                                           {estudiante?.primerNombre + " "} {estudiante?.segundoNombre + " "} {estudiante?.primerApellido + " "}{estudiante?.segundoApellido + " "}
                                           
                                         </ListItem>
                                       ))}
+
+                                    <Modal.Footer>
+
+                                      <Button variant="secondary" onClick={handleClose1}>
+                                        Cancelar
+                                      </Button>
+
+                                      <Button variant="primary" onClick={handleClose1}>
+                                        Guardar
+                                      </Button>
+
+                                    </Modal.Footer>
                                       
                             </Modal.Body>
-                            <Modal.Footer>
-                              <Button variant="secondary" onClick={handleClose1}>
-                                Cancelar
-                              </Button>
-                              <Button variant="primary" onClick={handleClose1}>
-                                Guardar
-                              </Button>
-                            </Modal.Footer>
+                            
                           </Modal>
                           <li>País: {institucion.idPais}</li>
                           <li>Dirección:{institucion.direccion}</li>
