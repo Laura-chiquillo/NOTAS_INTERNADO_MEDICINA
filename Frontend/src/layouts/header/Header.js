@@ -33,14 +33,6 @@ const Header = ({ showMobmenu }) => {
   const handleLogout = () => {
     if (typeof window !== "undefined") {
       const rol = localStorage.getItem('rol')
-      if (rol == "Coord") {
-        apiLogoutCoord.then(() => {
-          if (typeof window !== "undefined") {
-            localStorage.removeItem("token")
-            localStorage.removeItem("rol")
-          }
-        })
-      }
       if (rol == "Admin") {
         apiLogoutAdmin().then(() => {
           if (typeof window !== "undefined") {

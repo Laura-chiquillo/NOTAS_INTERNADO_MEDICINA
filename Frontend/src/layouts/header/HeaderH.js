@@ -16,8 +16,12 @@ import {
 } from "reactstrap";
 import user1 from "../../assets/images/users/user1.jpg";
 import { useColors } from "../../../hooks/useColor";
+import { useRouter } from "next/router";
+import { apiLogoutCoord } from "../../../api/logout";
 
 const HeaderH = ({ showMobmenu }) => {
+  const router = useRouter()
+
   const [isOpen, setIsOpen] = React.useState(false);
   const [dropdownOpen, setDropdownOpen] = React.useState(false);
   const { color } = useColors();
@@ -26,6 +30,21 @@ const HeaderH = ({ showMobmenu }) => {
   const Handletoggle = () => {
     setIsOpen(!isOpen);
   };
+
+  const handleLogout = () => {
+    if (typeof window !== "undefined") {
+      const rol = localStorage.getItem('rol')
+      if (rol == "Coord") {
+        apiLogoutCoord().then(() => {
+          if (typeof window !== "undefined") {
+            localStorage.removeItem("token")
+            localStorage.removeItem("rol")
+          }
+        })
+      }
+    }
+    router.push('/ui/login')
+  }
 
   return (
     <Navbar dark expand="md" style={{backgroundColor: color}}>
@@ -66,7 +85,7 @@ const HeaderH = ({ showMobmenu }) => {
             </div>
           </DropdownToggle>
           <DropdownMenu>
-            <DropdownItem header><Link href="/ui/login">cerrar sesión</Link></DropdownItem>
+            <DropdownItem header><a onClick={handleLogout}>cerrar sesión</a></DropdownItem>
           </DropdownMenu>
         </Dropdown>
       </Collapse>

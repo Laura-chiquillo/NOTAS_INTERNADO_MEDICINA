@@ -41,14 +41,6 @@ public class EstudianteServiceImpl implements EstudianteService{
     public void updateEstudiante(String id, Estudiante estudiante) {
         Estudiante upEstudiante =estudianteRepository.findById(id).get();
 
-        if (estudiante.getInstitucion() != null) {
-            upEstudiante.setInstitucion(estudiante.getInstitucion());
-        }
-
-        if(estudiante.getFoto() != null){
-            upEstudiante.setFoto(estudiante.getFoto());
-        }
-
         if (estudiante.getPrimerNombre() != null){
             upEstudiante.setPrimerNombre(estudiante.getPrimerNombre());
         }
