@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
 import Cookies from 'universal-cookie';
+import { apiLogout } from '../../api/logout';
 
 const cookies = new Cookies();
 
 class Menu extends Component {
     cerrarSesion=()=>{
-        cookies.remove('id', {path: "/"});
-        cookies.remove('apellido_paterno', {path: "/"});
-        cookies.remove('apellido_materno', {path: "/"});
-        cookies.remove('nombre', {path: "/"});
-        cookies.remove('username', {path: "/"});
-        window.location.href='./';
+        apiLogout().then(() => {
+            cookies.remove('id', {path: "/"});
+            cookies.remove('apellido_paterno', {path: "/"});
+            cookies.remove('apellido_materno', {path: "/"});
+            cookies.remove('nombre', {path: "/"});
+            cookies.remove('username', {path: "/"});
+            window.location.href='./';
+            if (typeof window !== "undefined") {
+    
+                localStorage.removeItem("token")
+                
+            }
+        })
     }
 
     componentDidMount() {
