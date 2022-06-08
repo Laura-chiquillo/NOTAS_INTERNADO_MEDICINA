@@ -15,7 +15,8 @@ import Link from "next/link";
 import {
   DropdownButton,
   ButtonGroup,
-  Dropdown
+  Dropdown,
+  Spinner 
 } from 'react-bootstrap';
 import { getApiRotacion } from '../../api/notas'
 import { useColors } from '../../hooks/useColor';
@@ -28,12 +29,13 @@ const ListaEstudiantes = () => {
 
   const { color } = useColors();
   const [ListaRotacion, setListaRotacion] = useState([])
+  const [cargando, setCargando] = useState(true)
   /* Llamar la función de la api mostrar rotacion*/
   useEffect(() => {
     getApiRotacion()
       .then((datos) => {
         setListaRotacion(datos)
-
+        setCargando(false)
       })
       .catch((Error) => {
         alert(Error.toString())
@@ -110,6 +112,9 @@ const ListaEstudiantes = () => {
     pdf(table, opt)
   }
 
+  if (cargando) {
+    return <div><Spinner animation="border" /></div>
+  }
   return (
 
     <>

@@ -352,6 +352,7 @@ const Buttons = () => {
 
   /* Lista de Definitiva */
   const [listDefinitiva, setListDefinitiva] = useState([]);
+  
   useEffect(() => {
     getApiDefinitiva()
       .then((Datos) => {
@@ -362,7 +363,17 @@ const Buttons = () => {
       })
   }, [])
 
-  
+  const getInfoNotasEstudiante = (idEstudiante) => {
+    /* Busca el estudiante y (filtra) devuelve un array */
+    const definitivaEstudiante = listDefinitiva.filter(def=>def.estudiante.idEstudiante == idEstudiante)
+    /* solo devuelva los datos que se necesitan */
+    return definitivaEstudiante.map(def=>({
+      definitivaNotas: def.notaDefinitiva,
+      infoAsignatura: def.asignatura.descripcion
+    }))
+  }
+
+
   return (
     <div>
       {/* Start Inner Div*/}
@@ -467,14 +478,17 @@ const Buttons = () => {
                               <Row>
                                 <Col>
                                   <Accordion>
-                                    <Accordion.Item eventKey="0">
+                                    {
+                                      getInfoNotasEstudiante(estudiante.idEstudiante).map((definitiva, indice) => (
+                                    <Accordion.Item eventKey={indice}>
                                       <Accordion.Header>
-                                        {estudiante.idAsignatura}
+                                      {definitiva.infoAsignatura}
                                       </Accordion.Header>
                                       <Accordion.Body>
-                                        <li>Pediatria: 4.8</li>
+                                        <li> {definitiva.definitivaNotas}</li>
                                       </Accordion.Body>
                                     </Accordion.Item>
+                                      ))}
                                   </Accordion>
                                 </Col>
                                 <Col className="p-1" md={3}>
@@ -637,14 +651,6 @@ const Buttons = () => {
                                                 }}></td>
                                                 <th></th>
                                               </tr>
-
-                                              <tr ng-repeat="item in lista">
-                                                <td>VI</td>
-                                                <td><b>Servicios por los cuales roto</b></td>
-                                                <td contentEditable="true"></td>
-                                                <th></th>
-                                              </tr>
-
                                             </tbody>
 
                                           </table>
