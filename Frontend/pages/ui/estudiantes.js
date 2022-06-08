@@ -8,7 +8,7 @@ import { Form } from 'react-bootstrap';
 import { getApiEstudiantes, editApiEstudiante, crearApiEstudiante } from '../../api/estudiantes'
 import * as XLSX from "xlsx";
 import { getApiInstituciones } from '../../api/instituciones'
-import { getApiMateria, getApiSubMateria, getApiCrearRotacion } from '../../api/notas'
+import { getApiMateria, getApiSubMateria, getApiCrearRotacion, getApiDefinitiva } from '../../api/notas'
 import SignatureCanvas from "react-signature-canvas";
 
 const Buttons = () => {
@@ -230,17 +230,8 @@ const Buttons = () => {
   
   const crearInforme = () => {
     /* validar datos vacios */
-    if("institucion" in  nuevaRotacion==false==false){
-      alert("Debe ingresar la institucion")
-      return 
-    }
-
     if("asignatura" in  nuevaRotacion==false){
       alert("Debe ingresar la asignatura")
-      return 
-    }
-    if("subAsignatura" in  nuevaRotacion==false){
-      alert("Debe ingresar la rotación")
       return 
     }
     if("notaHistoriaClinica" in  nuevaRotacion==false){
@@ -275,11 +266,7 @@ const Buttons = () => {
       alert("Debe ingresar el evaluador")
       return 
     }
-    if("firma1" in  nuevaRotacion==false){
-      alert("Debe ingresar la firma")
-      return 
-    }
-
+    
     /* Guarda toda la información */
     getApiCrearRotacion({
       ...nuevaRotacion,
@@ -361,6 +348,32 @@ const Buttons = () => {
     const image = canvas2.toDataURL("image/png");
     return image;
   }
+
+
+  /* Lista de Definitiva */
+  const [listDefinitiva, setListDefinitiva] = useState([]);
+  
+  useEffect(() => {
+    getApiDefinitiva()
+      .then((Datos) => {
+        setListDefinitiva(Datos)
+      })
+      .catch((Error) => {
+        alert(Error.toString())
+      })
+  }, [])
+
+  const getInfoNotasEstudiante = (idEstudiante) => {
+    /* Busca el estudiante y (filtra) devuelve un array */
+    const definitivaEstudiante = listDefinitiva.filter(def=>def.estudiante.idEstudiante == idEstudiante)
+    /* solo devuelva los datos que se necesitan */
+    return definitivaEstudiante.map(def=>({
+      definitivaNotas: def.notaDefinitiva,
+      infoAsignatura: def.asignatura.descripcion
+    }))
+  }
+
+
   return (
     <div>
       {/* Start Inner Div*/}
@@ -453,7 +466,6 @@ const Buttons = () => {
                           <Row>
                             <Col>
                               <ul>
-                                <li> <img src={estudiante.foto}></img> </li>
                                 <li>Documento: {estudiante.documento} </li>
                                 <li>semestre actual: {estudiante.semestreE} </li>
                                 <li>correo: {estudiante.correo} </li>
@@ -466,24 +478,23 @@ const Buttons = () => {
                               <Row>
                                 <Col>
                                   <Accordion>
-                                    <Accordion.Item eventKey="0">
+                                    {
+                                      getInfoNotasEstudiante(estudiante.idEstudiante).map((definitiva, indice) => (
+                                    <Accordion.Item eventKey={indice}>
                                       <Accordion.Header>
-                                        {estudiante.idAsignatura}
+                                      {definitiva.infoAsignatura}
                                       </Accordion.Header>
                                       <Accordion.Body>
-                                        <li>Pediatria: 4.8</li>
+                                        <li> {definitiva.definitivaNotas}</li>
                                       </Accordion.Body>
                                     </Accordion.Item>
+                                      ))}
                                   </Accordion>
                                 </Col>
                                 <Col className="p-1" md={3}>
                                   <ButtonGroup aria-label="Basic example">
 
-                                    <Button style={{ backgroundColor: color, color: "black" }} onClick={handShow2}>
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil-fill" viewBox="0 0 16 16">
-                                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
-                                      </svg>
-                                    </Button>
+                                   
 
                                     <Modal
                                       show={show2}
@@ -640,14 +651,6 @@ const Buttons = () => {
                                                 }}></td>
                                                 <th></th>
                                               </tr>
-
-                                              <tr ng-repeat="item in lista">
-                                                <td>VI</td>
-                                                <td><b>Servicios por los cuales roto</b></td>
-                                                <td contentEditable="true"></td>
-                                                <th></th>
-                                              </tr>
-
                                             </tbody>
 
                                           </table>
@@ -658,6 +661,7 @@ const Buttons = () => {
                                             ...nuevaRotacion,
                                             institucion: {idInstitucion:e.target.value}
                                           })}>
+                                            <option value="0">Seleccione una institucion</option>
                                             {
                                               listInstituciones
                                                 .map((institucion, index) => (
@@ -673,6 +677,7 @@ const Buttons = () => {
                                             ...nuevaRotacion,
                                             asignatura: {idAsignatura:e.target.value}
                                           })} >
+                                            <option value="0">Seleccione una asignatura</option>
                                             {
                                               listMaterias
                                                 .map((materia, index) => (
@@ -689,6 +694,7 @@ const Buttons = () => {
                                             ...nuevaRotacion,
                                             subAsignatura: {idSubAsignatura:e.target.value}
                                           })}>
+                                            <option value="0">Seleccione una Rotación</option>
                                             {
                                               listSubmaterias
                                                 .map((submateria, index) => (

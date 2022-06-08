@@ -118,9 +118,17 @@ const Registro = () => {
                   <Input
                   id="Telefono"
                   name="telefono"
-                  type="number"
+                  type="text"
                 />
                 </div>
+              </FormGroup>
+              <FormGroup>
+                <Label>Teléfono</Label>
+                <Input
+                  type="number"
+                  id='Cargo'
+                  name='Cargo'
+                />
               </FormGroup>
               <FormGroup>
                 <Label for="eEmail">Correo</Label>

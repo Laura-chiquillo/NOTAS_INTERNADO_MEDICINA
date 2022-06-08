@@ -1,18 +1,27 @@
 
-import React, { useState } from 'react';
-import { Button, ButtonGroup, Card, FormText, FormGroup, Label, Input, CardBody, CardTitle, Row, Col } from 'reactstrap';
+import React, { useState, useEffect } from 'react';
+import { Button, Card, FormGroup, Label, CardBody, CardTitle, Row, Col } from 'reactstrap';
 import Link from 'next/link';
 import { useColors } from '../../hooks/useColor';
 import Accordion from 'react-bootstrap/Accordion';
-import Modal from 'react-bootstrap/Modal';
-import { Form } from 'reactstrap';
+import { getApiInstituciones } from '../../api/instituciones';
 
 const InfoHospital = () => {
 
   const { color } = useColors();
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+
+  /* Lista Hospitales */
+  const [instituciones, setInstituciones] = useState([]);
+
+  useEffect(() => {
+    getApiInstituciones().then(data => {
+      setInstituciones(data);
+      console.log(data);
+    })
+      .catch((Error) => {
+        alert(Error.toString())
+      })
+  }, [])
 
   return (
     <div>
@@ -28,89 +37,53 @@ const InfoHospital = () => {
           <FormGroup>
             <Label for="exampleText"></Label>
             <Accordion>
-              <Accordion.Item eventKey="0">
-                <Accordion.Header>Curitas del saber
+              {
+                instituciones.map((institucion, index) => (
+                <Accordion.Item eventKey={index} key={index}>
+                <Accordion.Header>
+                  {institucion?.nombre}
                 </Accordion.Header>
                 <Accordion.Body>
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>Estudiante</th>
-                      <th>Nota</th>
-                      <th>Fecha inicial rotacion</th>
-                      <th>Fecha final rotacion</th>
-                      <th>Rotacion</th>
-                      <th>Semestre actual</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr ng-repeat="item in lista">
-                        <td>
-                        <Link href={'/ui/nota'}>Ricardo Arjona</Link>
-                        
-                        </td>
-                        <td>
-                        No reportada
-                        </td>
-                        <td>
-                          ???
-                        </td>
-                        <td>
-                          ???
-                        </td>
-                        <td>
-                          ???
-                        </td>
-                        <td>
-                          11
-                        </td>
-                    </tr>
-                    <tr ng-repeat="item in lista">
-                        <td >
-                        <Link href={'/ui/nota'}>Jenifer Acosta</Link>
-                        </td>
-                        <td>
-                        Reportada
-                        </td>
-                        <td>
-                          ???
-                        </td>
-                        <td>
-                          ???
-                        </td>
-                        <td>
-                          ???
-                        </td>
-                        <td>
-                          11
-                        </td>
-                    </tr>
-                    <tr ng-repeat="item in lista">
-                        <td >
-                        <Link href={'/ui/nota'}>Juan Andres Camacho</Link>
-                        </td>
-                        <td>
-                        No reportada
-                        </td>
-                        <td>
-                          ???
-                        </td>
-                        <td>
-                          ???
-                        </td>
-                        <td>
-                          ???
-                        </td>
-                        <td>
-                          11
-                        </td>
-                    </tr>
-                  </tbody>
-                  
-                </table>
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Estudiante</th>
+                        <th>Documento</th>
+                        <th>teléfono</th>
+                        <th>Correo</th>
+                        <th>Semestre actual</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {
+                          institucion.estudiantes?.map((estudiante) => (
+                        <tr>
+                          <td>
+                              <p>{estudiante?.primerNombre + " "} {estudiante?.segundoNombre + " "} {estudiante?.primerApellido + " "}{estudiante?.segundoApellido + " "}</p>
+                          </td>
+                          <td>
+                              <p>{estudiante?.documento}</p>
+                          </td>
+                          <td>
+                              <p>{estudiante?.telefono}</p>
+                          </td>
+                          <td>
+                              <p>{estudiante?.correo}</p>
+                          </td>
+                          <td>
+                              <p>{estudiante?.semestreE}</p>
+                          </td>
+                        </tr>
+                          ))}
+                    </tbody>
+
+                  </table>
                 </Accordion.Body>
               </Accordion.Item>
+                ))
+              }
+              
             </Accordion>
           </FormGroup>
         </CardBody>
@@ -123,10 +96,10 @@ const InfoHospital = () => {
             </CardTitle>
             <CardBody className="">
               <div className="button-group">
-              <Link href={'/ui/hospitales'}>
+                <Link href={'/ui/hospitales'}>
                   <Button style={{ backgroundColor: color, color: "black" }} size="lg">
-                      Atras
-                      </Button>
+                    Atras
+                  </Button>
                 </Link>
               </div>
             </CardBody>
