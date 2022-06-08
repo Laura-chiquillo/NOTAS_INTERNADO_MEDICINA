@@ -9,8 +9,8 @@ public class CoordinadorInsti {
 
     @Id
     private String idCoordinador;
-    @DBRef(lazy = true)
-    private String idInstitucion;
+    @DBRef
+    private Institucion institucion;
     private String primerNombre;
     private String segundoNombre;
     private String primerApellido;
@@ -19,21 +19,6 @@ public class CoordinadorInsti {
     private String correo;
     private String contraseña;
     private String cargo;
-    
-    public CoordinadorInsti(String idCoordinador, String idInstitucion, String primerNombre, String segundoNombre,
-            String primerApellido, String segundoApellido, String telefono, String correo, String contraseña,
-            String cargo) {
-        this.idCoordinador = idCoordinador;
-        this.idInstitucion = idInstitucion;
-        this.primerNombre = primerNombre;
-        this.segundoNombre = segundoNombre;
-        this.primerApellido = primerApellido;
-        this.segundoApellido = segundoApellido;
-        this.telefono = telefono;
-        this.correo = correo;
-        this.contraseña = contraseña;
-        this.cargo = cargo;
-    }
 
     public String getIdCoordinador() {
         return idCoordinador;
@@ -41,14 +26,6 @@ public class CoordinadorInsti {
 
     public void setIdCoordinador(String idCoordinador) {
         this.idCoordinador = idCoordinador;
-    }
-
-    public String getIdInstitucion() {
-        return idInstitucion;
-    }
-
-    public void setIdInstitucion(String idInstitucion) {
-        this.idInstitucion = idInstitucion;
     }
 
     public String getPrimerNombre() {
@@ -113,13 +90,5 @@ public class CoordinadorInsti {
 
     public void setCargo(String cargo) {
         this.cargo = cargo;
-    }
-
-    @Override
-    public String toString() {
-        return "CoordinadorInsti [cargo=" + cargo + ", contraseña=" + contraseña + ", correo=" + correo
-                + ", idCoordinador=" + idCoordinador + ", idInstitucion=" + idInstitucion + ", primerApellido="
-                + primerApellido + ", primerNombre=" + primerNombre + ", segundoApellido=" + segundoApellido
-                + ", segundoNombre=" + segundoNombre + ", telefono=" + telefono + "]";
     }
 }

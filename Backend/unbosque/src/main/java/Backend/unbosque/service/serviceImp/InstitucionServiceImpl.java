@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import Backend.unbosque.model.Estudiante;
 import Backend.unbosque.model.Institucion;
 import Backend.unbosque.repository.InstitucionRepository;
 import Backend.unbosque.service.serviceApi.InstitucionService;
@@ -73,5 +74,10 @@ public class InstitucionServiceImpl implements InstitucionService{
     public void deleteInstitucion(String id) {
         institucionRepository.deleteById(id);
         
+    }
+
+    @Override
+    public List<Estudiante> getEstudiantesByInstitucion(String id) {
+        return institucionRepository.findById(id).get().getEstudiantes();
     }
 }
