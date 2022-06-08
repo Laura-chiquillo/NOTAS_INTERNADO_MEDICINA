@@ -151,4 +151,12 @@ public class Estudiante {
                     + ", segundoApellido=" + segundoApellido + ", segundoNombre=" + segundoNombre + ", semestreE="
                     + semestreE + ", telefono=" + telefono + "]";
         }
+
+        @Override
+        public boolean equals(Object est){
+            if(est instanceof Estudiante){
+                return this.idEstudiante.equals(((Estudiante) est).idEstudiante);
+            }
+            return false;
+        }
 }

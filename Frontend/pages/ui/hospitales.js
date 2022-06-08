@@ -15,21 +15,30 @@ const Buttons = () => {
 
   /* Agregar UN estudiante a la institucion */
   const agregarEstudianteInstitucion = (estudiante) => {
-    setinstitucionSeleccionado ((prev)=>{
+    setinstitucionSeleccionado ((prev)=>{ 
+      console.log(prev.estudiantes)
       let listaEstudiantes = []
       if(prev.estudiantes != null){
         listaEstudiantes = [...prev.estudiantes]
-      }
+      } 
 
-      listaEstudiantes.push(estudiante)
+        listaEstudiantes.push(estudiante)
       
-      return ({
+      let listaFinal ={
         ...prev, 
         estudiantes: listaEstudiantes.map((est)=>({idEstudiante:est.idEstudiante}))
-      })
+      }
+
+      const listaFinalFinal = {...prev,
+        estudiantes: [...new Map(listaFinal.estudiantes.map((item, key)=>[item[key],item])).values()]
+      } 
+
+      return listaFinalFinal
+
     })
 
   }
+
   /* Quitar UN estudiante de la institucion */
   const quitarEstudianteInstitucion =(estudiante) =>{
     setinstitucionSeleccionado((prev)=>{
@@ -110,22 +119,7 @@ const Buttons = () => {
     setShows(true)
   };
 
-  const [cSelected, setCSelected] = useState([]);
-  const [rSelected, setRSelected] = useState(null);
   const { color } = useColors();
-  const onRadioBtnClick = (vSelected) => {
-    setRSelected(vSelected);
-  };
-
-  const onCheckboxBtnClick = (selected) => {
-    const index = cSelected.indexOf(selected);
-    if (index < 0) {
-      cSelected.push(selected);
-    } else {
-      cSelected.splice(index, 1);
-    }
-    setCSelected([...cSelected]);
-  };
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -134,11 +128,11 @@ const Buttons = () => {
 
   const [show1, setShow1] = useState(false);
   const handleClose1 = () => {
-    console.log(institucionSeleccionado)
     editApiInstitucion(institucionSeleccionado).then(()=>{
       setShow1(false)
     })
   };
+
   const handleShow1 = (institucion) => {
     setinstitucionSeleccionado(institucion)
     setShow1(true)
