@@ -167,7 +167,6 @@ const ListaEstudiantes = () => {
                   <td>{estudiantes.estudiante.primerApellido + " "}{estudiantes?.estudiante.segundoApellido + " "}</td>
                   <td>{estudiantes.estudiante.promedio}</td>
                   <td>{estudiantes.institucion.nombre}</td>
-                  <td>{estudiantes.subAsignatura.idSubAsignatura}</td>
                   <td>{estudiantes.notaRotacion}</td>
                   <td>{estudiantes.fechaInicio}</td>
                   <td>{estudiantes.fechaCierre}</td>
