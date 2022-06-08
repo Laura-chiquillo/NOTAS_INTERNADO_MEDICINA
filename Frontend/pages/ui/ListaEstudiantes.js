@@ -10,9 +10,11 @@ import {
    FormGroup,
   Input,
   Label,
- Col, CardTitle, CardBody,
+  Row,
+ Col, CardTitle, CardBody, Pagination, PaginationItem, PaginationLink ,
 } from "reactstrap";
-import { Form } from 'react-bootstrap';
+import { useColors } from '../../hooks/useColor';
+import { Spinner } from 'react-bootstrap';
 import Link from "next/link";
 
 import { getApiRotacion} from '../../api/notas'
@@ -21,8 +23,66 @@ const ListaEstudiantes = () => {
 
 
   const [ListaRotacion, setListaRotacion] = useState([])
-
+  const [cargando, setCargando] = useState(true)
+  /* Llamar la función de la api mostrar rotacion*/
+  useEffect(() => {
+    getApiRotacion()
+      .then((datos) => {
+        setListaRotacion(datos)
+        setCargando(false)
+      })
+      .catch((Error) => {
+        alert(Error.toString())
+      })
+  }, [])
  
+
+        /** Numrto de items por pagina */
+  const [itemsPagina, setItemsPagina] = useState(5);
+
+  /** Variable que determina la cantidad de paginas de la paginacion */
+  const [nPaginacion, setNPaginacion] = useState(0);
+
+  /** esta variable determina el numero de pagina que se esta visualizando
+   */
+
+  const [paginaActual, setPaginaActual] = useState(1);
+
+    /** Funciones para paginar */
+
+    const primeraPaginacion = () => {
+      setPaginaActual(1);
+    }
+  
+    const ultimaPaginacion = () => {
+      setPaginaActual(nPaginacion);
+    }
+  
+    const anteriorPaginacion = () => {
+      if (paginaActual > 1) {
+        setPaginaActual(paginaActual - 1);
+      }
+    }
+  
+    const siguientePaginacion = () => {
+      if (paginaActual < nPaginacion) {
+        setPaginaActual(paginaActual + 1);
+      }
+    }
+  
+    /* Cada vez que listaEstuantes se actualize, recalculaara el numero de paginas */
+    useEffect(() => {
+      /** Se determina el numero de paginas a partir de laa cantidad
+       * de estudiantes
+       * Ejemplo: 20 estudiantes, se mostraran 5 por pagina
+       * Resultado: 4 paginas -> 20/5 = 4
+       */
+      setNPaginacion(Math.ceil(ListaRotacion.length / itemsPagina))
+    }, [ListaRotacion])
+  
+
+
+  
 
   /* Llamar la función de la api mostrar rotacion*/
   useEffect(() => {
@@ -86,6 +146,10 @@ const ListaEstudiantes = () => {
     setBusqueda(e.target.value);
   }
 
+  const { color } = useColors();
+  if (cargando) {
+    return <div><Spinner animation="border" /></div>
+  }
     return (
 
       <>
@@ -113,11 +177,11 @@ const ListaEstudiantes = () => {
                 </FormGroup>
                 
 
-
+                <p align="center">INFORMACIÓN ROTACIÓN.</p>
           <Table >
             
             <thead>
-              
+          
               <tr>
                 <th>No</th>
                 <th>Documento</th>
@@ -125,7 +189,10 @@ const ListaEstudiantes = () => {
                 <th>Apellidos</th>
                 <th>Promedio</th>
                 <th>Sitio de Practica</th>
+                <th>asignatura</th>
+                <th>Practica</th>
                 <th>Nota</th>
+                <th>Evaluador </th>
                 <th>Fecha Inicio</th>
                 <th>Fecha Cierre</th>
                               </tr>
@@ -135,6 +202,7 @@ const ListaEstudiantes = () => {
               {ListaRotacion
                  .filter((elemento) => elemento.estudiante.primerNombre.toString().toLowerCase().includes(busqueda.toLowerCase()))
                  .sort((a, b) => ordenarLista(a, b))
+                 .filter((est, i) => i >= (paginaActual - 1) * itemsPagina && i < paginaActual * itemsPagina)
                  .map((estudiantes, indice) => (
                 <tr eventKey={indice} key={indice}>
                    <td>{indice}</td>
@@ -142,19 +210,45 @@ const ListaEstudiantes = () => {
                   <td>{estudiantes?.estudiante.primerNombre + " "}{estudiantes?.estudiante.segundoNombre + " "}</td>
                   <td>{estudiantes.estudiante.primerApellido + " "}{estudiantes?.estudiante.segundoApellido + " "}</td>
                   <td>{estudiantes.estudiante.promedio}</td>
-                  <td>{estudiantes.institucion.nombre}</td>            
+                  <td>{estudiantes.institucion.nombre}</td>
+                  <td>{estudiantes.asignatura.descripcion}</td> 
+                  <td>{estudiantes.subAsignatura.descripcion}</td>          
                   <td>{estudiantes.notaRotacion}</td>
+                  <td>{estudiantes.evaluador1}</td>
                   <td>{estudiantes.fechaInicio}</td>
                   <td>{estudiantes.fechaCierre}</td>
-                 
                   <td>
+                  </td>
+                  
+                 <td>
 
                   </td>
                 </tr>
               ))}
+              
+              <Row>
+                    <Pagination>
+                      <PaginationItem>
+                        <PaginationLink first onClick={primeraPaginacion} style={{ backgroundColor: "rgb(242, 247, 248)", color: color }} />
+                      </PaginationItem>
+                      <PaginationItem>
+                        <PaginationLink previous onClick={anteriorPaginacion} style={{ backgroundColor: "rgb(242, 247, 248)", color: color }} />
+                      </PaginationItem>
+
+                      <PaginationItem>
+                        <PaginationLink next onClick={siguientePaginacion} style={{ backgroundColor: "rgb(242, 247, 248)", color: color }} />
+                      </PaginationItem>
+                      <PaginationItem>
+                        <PaginationLink last onClick={ultimaPaginacion} style={{ backgroundColor: "rgb(242, 247, 248)", color: color }} />
+                      </PaginationItem>
+                      <PaginationItem></PaginationItem>
+                    </Pagination>
+                  </Row>
+                
             </tbody>
 
           </Table>
+          
 
           <Col xs="0" md="0">
             {/* --------------------------------------------------------------------------------*/}
