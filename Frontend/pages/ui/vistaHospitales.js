@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useColors } from '../../hooks/useColor';
 import Accordion from 'react-bootstrap/Accordion';
 import { Form } from 'react-bootstrap';
-import { getApiEstudiantes, editApiEstudiante, crearApiEstudiante } from '../../api/estudiantes'
+import { getApiEstudiantes, editApiEstudiante, crearApiEstudiante, getApiEstudiantesInst } from '../../api/estudiantes'
 
 const Buttons = () => {
 
@@ -58,7 +58,7 @@ const Buttons = () => {
 
   /* Llamar la función de la api mostrar estudiante*/
   useEffect(() => {
-    getApiEstudiantes()
+    getApiEstudiantesInst()
       .then((Datos) => {
         setListaEstudiantes(Datos)
 

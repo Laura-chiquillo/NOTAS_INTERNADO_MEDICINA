@@ -20,4 +20,4 @@ const apiCambiarContraseña = async () => {
     
 }
 
-export {getApiCoordinador}
+export {getApiCoordinador, getApiCoordinadorById}

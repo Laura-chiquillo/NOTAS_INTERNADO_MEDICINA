@@ -1,6 +1,6 @@
 /* importar constante de la url */ 
 import {URL} from "./constantes"
-import { getApiCoordinador } from "./coordinador"
+import { getApiCoordinadorById } from "./coordinador"
 
 /* funcion que llama a el backend para la lista de estudiantes */
 /* async -> la funcion tiene que esperar para poder seguir ejecutando */ 
@@ -23,18 +23,15 @@ const getApiEstudiantes = async () => {
 const getApiEstudiantesInst = async () => {
     if (typeof window !== "undefined" && localStorage.getItem ("rol")=="Coord") {
 
-        const coordinador = await getApiCoordinadorById(localStorage.getItem("idUsuario"))
-        const peticion = await fetch (`${URL}estudiante/todos`,{
-        body: {
+        return await getApiCoordinadorById(localStorage.getItem("idUsuario")).then(async (coordinador)=>{
+            const peticion = await fetch (`${URL}institucion/estudiantes/${coordinador.idInstitucion}`)
 
-           idInstitucion: coordinador.idInstitucion
-
-        }
-   })
-   if (peticion.ok) {
-       return await peticion.json()
-   } throw new Error("Error del servidor") 
-    }
+            if (peticion.ok) {
+                return await peticion.json()
+            } throw new Error("Error del servidor") 
+                }
+        )}
+        
     
 }
 

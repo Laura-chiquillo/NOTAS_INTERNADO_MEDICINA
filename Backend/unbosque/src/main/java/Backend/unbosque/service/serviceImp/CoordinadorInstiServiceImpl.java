@@ -118,7 +118,7 @@ public class CoordinadorInstiServiceImpl implements CoordinadorInstiService{
     public String verificarCredenciales(CoordLogin coordLogin) {
         CoordinadorInsti user = coordinadorInstiRepository.findByCorreo(coordLogin.getCorreo()).get();
         if (passwordEncoder.matches(coordLogin.getContraseña(), user.getContraseña())) {
-            /*return user.getIdInstitucion();  */          
+            return user.getIdCoordinador();            
         }
         return "";
     }
