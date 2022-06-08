@@ -125,7 +125,7 @@ const Buttons = () => {
         const bufferArray = e.target.result;
 
         const wb = XLSX.read(bufferArray, { type: "buffer" });
-        /*La posición 0 es la primera hoja del excel*/
+        /La posición 0 es la primera hoja del excel/
         const wsname = wb.SheetNames[0];
 
         const ws = wb.Sheets[wsname];
@@ -211,7 +211,7 @@ const Buttons = () => {
     setBusqueda(e.target.value);
   }
 
-  /*Cambiar estado*/
+  /Cambiar estado/
   const changeState = (e) => {
     if (e.estado) {
       e.estado = false
