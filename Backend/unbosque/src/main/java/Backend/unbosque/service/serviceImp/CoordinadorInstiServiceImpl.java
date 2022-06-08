@@ -58,6 +58,10 @@ public class CoordinadorInstiServiceImpl implements CoordinadorInstiService{
 
         CoordinadorInsti upCoordinadorInsti = coordinadorInstiRepository.findById(id).get();
 
+        if (coordinadorInsti.getInstitucion() != null) {
+            upCoordinadorInsti.getInstitucion().setIdInstitucion(coordinadorInsti.getInstitucion().getIdInstitucion());
+        }
+
         if (coordinadorInsti.getPrimerNombre() != null){
             upCoordinadorInsti.setPrimerNombre(coordinadorInsti.getPrimerNombre());
         }
