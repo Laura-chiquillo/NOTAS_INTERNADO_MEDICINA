@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import Backend.unbosque.model.Estudiante;
 import Backend.unbosque.model.Institucion;
 import Backend.unbosque.service.serviceApi.InstitucionService;
 
@@ -36,6 +37,12 @@ public class InstitucionController {
     public ResponseEntity<Institucion> getInstitucion(@PathVariable String id){
         Institucion institucion = institucionService.getInstitucionById(id);
         return new ResponseEntity<>(institucion, HttpStatus.OK);
+    }
+
+    @GetMapping("/estudiantes/{id}")
+    public ResponseEntity<List<Estudiante>> getEstudiantes(@PathVariable String id) {
+        List<Estudiante> estudiantes = institucionService.getEstudiantesByInstitucion(id);
+        return new ResponseEntity<>(estudiantes, HttpStatus.OK);
     }
 
     @PostMapping("/nuevo")
