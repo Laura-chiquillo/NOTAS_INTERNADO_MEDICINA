@@ -102,10 +102,10 @@ const Forms = () => {
           {/* Card-1*/}
           {/* --------------------------------------------------------------------------------*/}
 
-          <Card>
+          <Card >
 
             <CardBody>
-              <Form onChange={actualizarUser}>
+              <Form className='rounded p-4 p-sm-3 ' onChange={actualizarUser}>
                 <FormGroup>
                   <Label for="exampleEmail">Correo Electrónico</Label>
                   <Input

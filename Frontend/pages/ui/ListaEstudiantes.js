@@ -99,7 +99,7 @@ const ListaEstudiantes = () => {
     var workbook = utils.table_to_book(tabla);
     writeFile(workbook, "Informe.xlsb");
   }
-
+  
   /*PDF*/
   const savePdf = async () => {
     const pdf = (await import('html2pdf.js')).default
@@ -173,10 +173,13 @@ const ListaEstudiantes = () => {
                   <td>{estudiantes.estudiante.promedio}</td>
                   <td>{estudiantes.institucion.nombre}</td>
                   <td>{estudiantes.notaRotacion}</td>
+                  <td>{estudiantes.evaluador1}</td>
                   <td>{estudiantes.fechaInicio}</td>
                   <td>{estudiantes.fechaCierre}</td>
-
                   <td>
+                  </td>
+                  
+                 <td>
 
                   </td>
                 </tr>
@@ -206,8 +209,6 @@ const ListaEstudiantes = () => {
                     Atrás
                   </Button>
                 </Link>
-                {/* Descargar PDF y excel */}
-
               </div>
             </CardBody>
           </Card>

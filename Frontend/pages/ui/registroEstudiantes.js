@@ -83,12 +83,7 @@ const registroEstudiantes = () => {
           </CardTitle>
           <CardBody>
             <Form onChange={actualizarEditEstudiante} >
-            
-            <FormGroup>
-                            <Label for="exampleFile">Cargar Imagen</Label>
-                            <Input id="exampleFile" name="foto" type="file" onChange={(e)=>convertiraBase(e.target.files)}/>
-                
-              </FormGroup>
+         
               
               <FormGroup>
                 <Label>Cédula de ciudadanía</Label>

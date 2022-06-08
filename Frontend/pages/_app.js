@@ -22,7 +22,7 @@ function MyApp({ Component, pageProps }) {
           <meta
             name="description"
           />
-          <link rel="icon" href="/favicon.ico" />
+           <link rel="icon" href="/favicon.ico" />
         </Head>
         <Layout>
           <Component {...pageProps}/>
