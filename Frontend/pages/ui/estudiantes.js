@@ -364,6 +364,7 @@ const Buttons = () => {
   }, [])
 
   const getInfoNotasEstudiante = (idEstudiante) => {
+    if(!listDefinitiva) return []
     /* Busca el estudiante y (filtra) devuelve un array */
     const definitivaEstudiante = listDefinitiva.filter(def=>def.estudiante.idEstudiante == idEstudiante)
     /* solo devuelva los datos que se necesitan */
