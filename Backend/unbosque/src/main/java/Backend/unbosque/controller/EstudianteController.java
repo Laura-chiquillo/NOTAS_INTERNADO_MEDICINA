@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import Backend.unbosque.model.Estudiante;
@@ -31,12 +30,10 @@ public class EstudianteController {
     private AuthenticationService authService;
 
     @GetMapping({"/todos"})
-    public ResponseEntity<List<Estudiante>> getAllEstudiantes(@RequestHeader ("Authorization") String tk) {
-        if(authService.isLoggedAdmin(tk)) {
-            List<Estudiante> estudiantes = estudianteService.getEstudiantes();
-            return new ResponseEntity<>(estudiantes, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+    public ResponseEntity<List<Estudiante>> getAllEstudiantes() {
+        List<Estudiante> estudiantes = estudianteService.getEstudiantes();
+        return new ResponseEntity<>(estudiantes, HttpStatus.OK);
+
     }
 
     @GetMapping({"/{id}"})

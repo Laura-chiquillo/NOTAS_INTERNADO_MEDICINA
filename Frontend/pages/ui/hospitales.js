@@ -7,11 +7,61 @@ import { Form } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import Accordion from 'react-bootstrap/Accordion';
 import { getApiInstituciones, editApiInstitucion , eliminarApiInstitucion} from '../../api/instituciones';
-import { getApiEstudiantes} from '../../api/estudiantes'
+import { editApiEstudiante, getApiEstudiantes} from '../../api/estudiantes'
 import { ListItem } from '@material-ui/core';
 
 
 const Buttons = () => {
+
+  /* Agregar UN estudiante a la institucion */
+  const agregarEstudianteInstitucion = (estudiante) => {
+    setinstitucionSeleccionado ((prev)=>{ 
+      console.log(prev.estudiantes)
+      let listaEstudiantes = []
+      if(prev.estudiantes != null){
+        listaEstudiantes = [...prev.estudiantes]
+      } 
+
+        listaEstudiantes.push(estudiante)
+      
+      let listaFinal ={
+        ...prev, 
+        estudiantes: listaEstudiantes.map((est)=>({idEstudiante:est.idEstudiante}))
+      }
+
+      const listaFinalFinal = {...prev,
+        estudiantes: [...new Map(listaFinal.estudiantes.map((item, key)=>[item[key],item])).values()]
+      } 
+
+      return listaFinalFinal
+
+    })
+
+  }
+
+  /* Quitar UN estudiante de la institucion */
+  const quitarEstudianteInstitucion =(estudiante) =>{
+    setinstitucionSeleccionado((prev)=>{
+      let listaEstudiantes = []
+      if(prev.estudiantes != null){
+        listaEstudiantes = [...prev.estudiantes]
+      }
+      return ({
+        ...prev,
+        estudiantes: listaEstudiantes.filter((est)=> est.idEstudiante !== estudiante.idEstudiante)
+      })
+    })
+  }
+
+  /* seleccionar estudiante para agregar */
+  const agregarEstudianteSeleccionado = (event, estudiante) => {
+    const isSelected = event.target.checked;
+    if (isSelected) {   
+      agregarEstudianteInstitucion(estudiante)
+    } else {
+      quitarEstudianteInstitucion(estudiante)
+    }
+  }
 
   /* crear la variable que contiene la lista de los estudiantes */
   /* se inicia con una lista vacia*/
@@ -69,22 +119,7 @@ const Buttons = () => {
     setShows(true)
   };
 
-  const [cSelected, setCSelected] = useState([]);
-  const [rSelected, setRSelected] = useState(null);
   const { color } = useColors();
-  const onRadioBtnClick = (vSelected) => {
-    setRSelected(vSelected);
-  };
-
-  const onCheckboxBtnClick = (selected) => {
-    const index = cSelected.indexOf(selected);
-    if (index < 0) {
-      cSelected.push(selected);
-    } else {
-      cSelected.splice(index, 1);
-    }
-    setCSelected([...cSelected]);
-  };
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -92,8 +127,16 @@ const Buttons = () => {
 
 
   const [show1, setShow1] = useState(false);
-  const handleClose1 = () => setShow1(false);
-  const handleShow1 = () => setShow1(true);
+  const handleClose1 = () => {
+    editApiInstitucion(institucionSeleccionado).then(()=>{
+      setShow1(false)
+    })
+  };
+
+  const handleShow1 = (institucion) => {
+    setinstitucionSeleccionado(institucion)
+    setShow1(true)
+  };
 
   /* Paginación */
   const [itemsPagina, setItemsPagina] = useState(5);
@@ -165,33 +208,33 @@ const Buttons = () => {
   const handleChangeE = e => {
     setBusquedaE(e.target.value);
   }
-  /* Eliminar institución */
-  const [eliminarInst, setEliminarInst] = useState([]);
-  /* se ingresan los que se van a eliminar */
-  const eliminarInstituciones = () => {
-    eliminarInst.map((i) => {
-      
-      /* llama el back para eliminar la institución */
-      eliminarApiInstitucion(i).then((inst) => {
-         setEliminarInst(inst)
-       })
-    })
-    /* vacia los seleccionados */
-    setEliminarInst([])
-    /* Fuerza la actuaización*/
-    setActualizarListaInstituciones((!actualizarListaInstituciones))
-  }
-  /* seleccionar instituciones para eliminar */
-  const agregarSeleccionado = (event, institucion) => {
-    console.log(institucion) 
-    const isSelected = event.target.checked;
-    if (isSelected) {   
-    setEliminarInst(eliminarInst.concat(institucion)
-    )
-    } else {
-      setEliminarInst(eliminarInst.filter(i => i.idInstitucion !== institucion.idInstitucion))
-    }    
-  }
+    /* Eliminar institución */
+    const [eliminarInst, setEliminarInst] = useState([]);
+    /* se ingresan los que se van a eliminar */
+    const eliminarInstituciones = () => {
+      eliminarInst.map((i) => {
+        
+        /* llama el back para eliminar la institución */
+        eliminarApiInstitucion(i).then((inst) => {
+          setEliminarInst(inst)
+        })
+      })
+      /* vacia los seleccionados */
+      setEliminarInst([])
+      /* Fuerza la actuaización*/
+      setActualizarListaInstituciones((!actualizarListaInstituciones))
+    }
+    /* seleccionar instituciones para eliminar */
+    const agregarSeleccionado = (event, institucion) => {
+      console.log(institucion) 
+      const isSelected = event.target.checked;
+      if (isSelected) {   
+      setEliminarInst(eliminarInst.concat(institucion)
+      )
+      } else {
+        setEliminarInst(eliminarInst.filter(i => i.idInstitucion !== institucion.idInstitucion))
+      }    
+    }
 
 
   return (
@@ -263,7 +306,7 @@ const Buttons = () => {
                         </Accordion.Header>
                         <Accordion.Body>
 
-                          <Button variant="primary" onClick={handleShow1}>
+                          <Button variant="primary" onClick={()=>handleShow1(institucion)}>
                             Agregar lista de estudiante
                           </Button>
                           <Modal show={show1} onHide={handleClose1}>
@@ -278,27 +321,34 @@ const Buttons = () => {
                                   
                                     {listEstudiantes
                                       .filter((elemento)=>elemento.primerApellido.toString().toLowerCase().includes(busquedaE.toLowerCase()))
+                                      .sort((a, b) => ordenarLista(a, b))
                                       .map((estudiante, indice) => (
 
                                         <ListItem eventKey={indice} key={indice}>
-                                          <Button>
-                                            <input type="checkbox"></input>
+
+                                          <Button style={{ backgroundColor: color, color: "black" }}>
+                                            <input type="checkbox" onChange={(event) => {agregarEstudianteSeleccionado(event, estudiante)}} ></input>
                                           </Button>
                                           
                                           {estudiante?.primerNombre + " "} {estudiante?.segundoNombre + " "} {estudiante?.primerApellido + " "}{estudiante?.segundoApellido + " "}
                                           
                                         </ListItem>
                                       ))}
+
+                                    <Modal.Footer>
+
+                                      <Button variant="secondary" onClick={handleClose1}>
+                                        Cancelar
+                                      </Button>
+
+                                      <Button variant="primary" onClick={handleClose1}>
+                                        Guardar
+                                      </Button>
+
+                                    </Modal.Footer>
                                       
                             </Modal.Body>
-                            <Modal.Footer>
-                              <Button variant="secondary" onClick={handleClose1}>
-                                Cancelar
-                              </Button>
-                              <Button variant="primary" onClick={handleClose1}>
-                                Guardar
-                              </Button>
-                            </Modal.Footer>
+                            
                           </Modal>
                           <li>Dirección:{institucion.direccion}</li>
                         </Accordion.Body>
@@ -398,7 +448,7 @@ const Buttons = () => {
                 <Link href={'/ui/infohospital'}>
                   <Button style={{ backgroundColor: color, color: "black" }} size="lg">Ver informes</Button>
                 </Link>
-              </div>
+              </div>  
             </CardBody>
           </Card>
         </Col>

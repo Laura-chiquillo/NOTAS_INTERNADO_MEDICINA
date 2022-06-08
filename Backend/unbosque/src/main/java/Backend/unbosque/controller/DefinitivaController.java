@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,7 +39,13 @@ public class DefinitivaController {
     }
     
     @PostMapping("/nuevo")
-    public ResponseEntity<Definitiva> updateDefinitiva(@PathVariable String id, @RequestBody Definitiva definitiva) {
+    public ResponseEntity<Definitiva> updateDefinitiva(@RequestBody Definitiva definitiva) {
+        Definitiva def = definitivaService.createDefinitiva(definitiva);
+        return new ResponseEntity<>(def, HttpStatus.CREATED);
+    }
+
+    @PatchMapping("/editar/{id}")
+    public ResponseEntity<Definitiva> updateDefinitiva(@PathVariable String id, @RequestBody Definitiva definitiva){
         definitivaService.updateDefinitiva(id, definitiva);
         return new ResponseEntity<>(definitivaService.getDefinitivaById(id), HttpStatus.OK);
     }

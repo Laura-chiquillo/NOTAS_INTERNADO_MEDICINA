@@ -151,6 +151,7 @@ const registroEstudiantes = () => {
               </FormGroup>
               
         <Button onClick={nuevoEstudiante} color="primary">Guardar</Button>
+        <Link href={'/ui/estudiantes'}><Button color="primary">Cancelar</Button></Link>
             </Form>
           </CardBody>
         </Card>

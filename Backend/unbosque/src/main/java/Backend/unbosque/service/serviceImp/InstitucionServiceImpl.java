@@ -1,13 +1,20 @@
 package Backend.unbosque.service.serviceImp;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import Backend.unbosque.model.Estudiante;
 import Backend.unbosque.model.Institucion;
 import Backend.unbosque.repository.InstitucionRepository;
 import Backend.unbosque.service.serviceApi.InstitucionService;
@@ -40,14 +47,21 @@ public class InstitucionServiceImpl implements InstitucionService{
         return institucionRepository.save(institucion);
     }
 
+    public static <T> Predicate<T> distinctByKey(Function<? super T, Object> keyExtractor) {   
+    Map<Object, Boolean> map = new ConcurrentHashMap<>();
+    return t -> map.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == null;
+    }
+
     @Override
     public void updateInstitucion(String id, Institucion institucion) {
         Institucion upInstitucion = institucionRepository.findById(id).get();
 
-        if (!institucion.getEstudiantes().isEmpty() && upInstitucion.getEstudiantes().isEmpty()) {
+        if (!institucion.getEstudiantes().isEmpty() && ((upInstitucion.getEstudiantes()==null) || upInstitucion.getEstudiantes().isEmpty())) {
             upInstitucion.setEstudiantes(institucion.getEstudiantes());
-        }else if(!institucion.getEstudiantes().isEmpty() && !upInstitucion.getEstudiantes().isEmpty()){
+        }else if(!institucion.getEstudiantes().isEmpty() && !upInstitucion.getEstudiantes().isEmpty()){ 
             upInstitucion.getEstudiantes().addAll(institucion.getEstudiantes());
+            List<Estudiante> listaSinRepetidos = upInstitucion.getEstudiantes().stream().filter(distinctByKey(est -> est.getIdEstudiante())).collect(Collectors.toList());
+            upInstitucion.setEstudiantes(listaSinRepetidos);
         }
 
         if (institucion.getCiudad() != null) {
@@ -73,5 +87,10 @@ public class InstitucionServiceImpl implements InstitucionService{
     public void deleteInstitucion(String id) {
         institucionRepository.deleteById(id);
         
+    }
+
+    @Override
+    public List<Estudiante> getEstudiantesByInstitucion(String id) {
+        return institucionRepository.findById(id).get().getEstudiantes();
     }
 }
