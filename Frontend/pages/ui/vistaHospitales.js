@@ -138,9 +138,9 @@ const Buttons = () => {
   
   const crearInforme = () => {
     /* validar datos vacios */
-    if("institucion" in  nuevaRotacion==false==false){
-      alert("Debe ingresar la institucion")
-      return 
+    if(("institucion" in  nuevaRotacion)==false || nuevaRotacion["institucion"]==null ){
+      nuevaRotacion["institucion"] = {"$ref": "Institucion", "$id": 'ObjectId("'+idInstitucion+'")', idInstitucion}
+      
     }
 
     if("asignatura" in  nuevaRotacion==false){
@@ -183,11 +183,7 @@ const Buttons = () => {
       alert("Debe ingresar el evaluador")
       return 
     }
-    if("firma1" in  nuevaRotacion==false){
-      alert("Debe ingresar la firma")
-      return 
-    }
-
+    console.log(nuevaRotacion["institucion"])
     /* Guarda toda la información */
     getApiCrearRotacion({
       ...nuevaRotacion,
@@ -487,14 +483,14 @@ const Buttons = () => {
                                         <FormGroup>
                                           <Label for="exampleSelect">Institución</Label>
 
-                                          <Input disabled="true" id="exampleSelect" name="select" type="select"  onChange={(e) => setNuevaRotacion({
+                                          <Input disabled="true" id="exampleSelect" name="institucion" type="select"  onChange={(e) => setNuevaRotacion({
                                             ...nuevaRotacion,
-                                            institucion: {idInstitucion:e.target.value}
+                                            institucion:{"$ref": "Institucion", "$id": 'ObjectId("'+idInstitucion+'")', idInstitucion}
                                           })}>
                                             {
                                               listInstituciones
                                                 .map((institucion, index) => (
-                                                  <option key={index} value={institucion.idInstitucion} selected = {institucion.idInstitucion == idInstitucion}>{institucion?.nombre}</option>
+                                                  <option key={index} value={institucion.idInstitucion} selected={institucion.idInstitucion==idInstitucion}>{institucion?.nombre}</option>
                                                 ))
                                             }
                                           </Input>
