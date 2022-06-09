@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import Backend.unbosque.model.Estudiante;
+import Backend.unbosque.security.AuthenticationService;
 import Backend.unbosque.service.serviceApi.EstudianteService;
 
 @RestController
@@ -25,10 +26,14 @@ public class EstudianteController {
     @Autowired
     private EstudianteService estudianteService;
 
+    @Autowired 
+    private AuthenticationService authService;
+
     @GetMapping({"/todos"})
     public ResponseEntity<List<Estudiante>> getAllEstudiantes() {
         List<Estudiante> estudiantes = estudianteService.getEstudiantes();
         return new ResponseEntity<>(estudiantes, HttpStatus.OK);
+
     }
 
     @GetMapping({"/{id}"})

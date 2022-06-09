@@ -15,22 +15,21 @@ function MyApp({ Component, pageProps }) {
   const Layout = layouts[Component.layout] || (({children}) => <>{children}</>)
 
   return (
-    <>
+    <div>
       <ColorWrapper>
         <Head>
-          <title>Monster Free Next Js Dashboard Template</title>
+          <title>Universidad El Bosque - Internado Notas</title>
           <meta
             name="description"
-            content="Monster Free Next Js Dashboard Template"
           />
-          <link rel="icon" href="/favicon.ico" />
+           <link rel="icon" href="/favicon.ico" />
         </Head>
         <Layout>
           <Component {...pageProps}/>
         </Layout>
       </ColorWrapper>
 
-    </>
+    </div>
   );
 }
 

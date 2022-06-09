@@ -1,10 +1,17 @@
 /* importar constante de la url */ 
 import {URL} from "./constantes"
+import { getApiCoordinadorById } from "./coordinador"
 
 /* funcion que llama a el backend para la lista de estudiantes */
 /* async -> la funcion tiene que esperar para poder seguir ejecutando */ 
 const getApiEstudiantes = async () => {
     /* await -> la instrucción es la que tiene que esperar */
+    /*let token = ''
+    if (typeof window !== "undefined") {
+
+        token = localStorage.getItem("token")
+        
+    }*/
    const peticion = await fetch (`${URL}estudiante/todos`)
    /* los 3 = es comparativo */
    if (peticion.ok) {
@@ -12,6 +19,23 @@ const getApiEstudiantes = async () => {
        return await peticion.json()
    } throw new Error("Error del servidor") 
 }
+
+const getApiEstudiantesInst = async () => {
+    if (typeof window !== "undefined" && localStorage.getItem ("rol")=="Coord") {
+
+        return await getApiCoordinadorById(localStorage.getItem("idUsuario")).then(async (coordinador)=>{
+            console.log(coordinador)
+            const peticion = await fetch (`${URL}institucion/estudiantes/${coordinador.institucion.idInstitucion}`)
+
+            if (peticion.ok) {
+                return await peticion.json()
+            } throw new Error("Error del servidor") 
+                }
+        )}
+        
+    
+}
+
 
 /* editar */
 const editApiEstudiante = async (estudiante) =>{
@@ -47,4 +71,4 @@ const crearApiEstudiante = async (estudiante) =>{
         return await peticion.json()
     } throw new Error("No se pudo realizar la acción")
 }
-export {getApiEstudiantes, editApiEstudiante,crearApiEstudiante}
+export {getApiEstudiantes, editApiEstudiante,crearApiEstudiante, getApiEstudiantesInst}

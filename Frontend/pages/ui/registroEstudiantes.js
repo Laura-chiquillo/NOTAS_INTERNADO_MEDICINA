@@ -46,7 +46,7 @@ const registroEstudiantes = () => {
       [e.target.name]: e.target.value}
     )    
   }
-  const arrayAuxiliar=[];
+  /*const arrayAuxiliar=[];
   const convertiraBase=(archivos)=>{
     Array.from(archivos).forEach(archivo=>{
       var reader = new FileReader();
@@ -54,14 +54,14 @@ const registroEstudiantes = () => {
       reader.onload= function(){
         var base =reader.result;
           //console.log(base);
-        arrayAuxiliar=base.split(',');
+          
         console.log(arrayAuxiliar[1]);
       }
 
     })
   }
   
-
+*/
 
   const editarEstudiante = () => {
     editApiEstudiante(estudianteSeleccionado).then((est) => {
@@ -83,12 +83,7 @@ const registroEstudiantes = () => {
           </CardTitle>
           <CardBody>
             <Form onChange={actualizarEditEstudiante} >
-            
-            <FormGroup>
-                            <Label for="exampleFile">Cargar Imagen</Label>
-                            <Input id="exampleFile" name="foto" type="file" onChange={(e)=>convertiraBase(e.target.files)}/>
-                
-              </FormGroup>
+         
               
               <FormGroup>
                 <Label>Cédula de ciudadanía</Label>
@@ -156,6 +151,7 @@ const registroEstudiantes = () => {
               </FormGroup>
               
         <Button onClick={nuevoEstudiante} color="primary">Guardar</Button>
+        <Link href={'/ui/estudiantes'}><Button color="primary">Cancelar</Button></Link>
             </Form>
           </CardBody>
         </Card>

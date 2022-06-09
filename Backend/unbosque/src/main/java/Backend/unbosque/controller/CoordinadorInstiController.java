@@ -95,4 +95,11 @@ public class CoordinadorInstiController {
         authService.deleteToken(tk);
         return new ResponseEntity<>("OK", HttpStatus.OK);
     }
+
+    @PostMapping("/olvideContraseña/{correo}")
+    public ResponseEntity<String> olvideContraseña (@PathVariable String correo){
+        coordinadorInstiService.cambiarContraseña(correo);
+        return new ResponseEntity<>("OK", HttpStatus.OK);
+    }
+
 }

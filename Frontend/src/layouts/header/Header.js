@@ -16,8 +16,12 @@ import {
 } from "reactstrap";
 import user1 from "../../assets/images/users/user1.jpg";
 import { useColors } from "../../../hooks/useColor";
+import { useRouter } from 'next/router'
+import { apiLogoutAdmin } from '../../../api/logout';
 
 const Header = ({ showMobmenu }) => {
+  const router = useRouter()
+
   const [isOpen, setIsOpen] = React.useState(false);
   const [dropdownOpen, setDropdownOpen] = React.useState(false);
   const { color } = useColors();
@@ -26,15 +30,25 @@ const Header = ({ showMobmenu }) => {
   const Handletoggle = () => {
     setIsOpen(!isOpen);
   };
-
+  const handleLogout = () => {
+    if (typeof window !== "undefined") {
+      const rol = localStorage.getItem('rol')
+      if (rol == "Admin") {
+        apiLogoutAdmin().then(() => {
+          if (typeof window !== "undefined") {
+            localStorage.removeItem("token")
+            localStorage.removeItem("rol")
+          }
+        })
+      }
+    }
+  router.push('/ui/login')
+  }
   return (
     <Navbar dark expand="md" style={{backgroundColor: color}}>
       <div className="d-flex align-items-center">
         <NavbarBrand href="/" className="d-lg-none">
         </NavbarBrand>
-        <Button color="primary" className="d-lg-none" onClick={showMobmenu}>
-          <i className="bi bi-list"></i>
-        </Button>
       </div>
       <div className="hstack gap-2">
         <Button
@@ -78,7 +92,7 @@ const Header = ({ showMobmenu }) => {
           </DropdownToggle>
           <DropdownMenu>
             <DropdownItem header><Link href="/ui/perfil">Perfil</Link></DropdownItem>
-            <DropdownItem header><Link href="/ui/login">cerrar sesión</Link></DropdownItem>
+            <DropdownItem header><a onClick={handleLogout}>Cerrar sesión</a></DropdownItem>
           </DropdownMenu>
         </Dropdown>
       </Collapse>
