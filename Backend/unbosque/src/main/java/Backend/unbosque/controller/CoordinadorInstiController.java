@@ -25,7 +25,7 @@ import Backend.unbosque.security.Token;
 import Backend.unbosque.service.serviceApi.CoordinadorInstiService;
 
 @RestController
-@CrossOrigin(origins = {"https://localhost:3000", "http://localhost:3000"})
+@CrossOrigin(origins = {"https://localhost:3000", "http://localhost:3000", "https://nim-grupo2.vercel.app"})
 @RequestMapping({"/coordinadorIPS"})
 public class CoordinadorInstiController {
 

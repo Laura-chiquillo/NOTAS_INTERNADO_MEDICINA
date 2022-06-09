@@ -19,7 +19,7 @@ import Backend.unbosque.model.Definitiva;
 import Backend.unbosque.service.serviceApi.DefinitivaService;
 
 @RestController
-@CrossOrigin(origins = {"https://localhost:3000", "http://localhost:3000"})
+@CrossOrigin(origins = {"https://localhost:3000", "http://localhost:3000", "https://nim-grupo2.vercel.app"})
 @RequestMapping({"/definitiva"})
 public class DefinitivaController {
 

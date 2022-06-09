@@ -19,7 +19,7 @@ import Backend.unbosque.model.SubAsignatura;
 import Backend.unbosque.service.serviceApi.SubAsignaturaService;
 
 @RestController
-@CrossOrigin(origins = {"https://localhost:3000", "http://localhost:3000"})
+@CrossOrigin(origins = {"https://localhost:3000", "http://localhost:3000", "https://nim-grupo2.vercel.app"})
 @RequestMapping({"/subAsignatura"})
 public class SubAsignaturaController {
 
