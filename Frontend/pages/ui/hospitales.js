@@ -21,19 +21,13 @@ const Buttons = () => {
       if(prev.estudiantes != null){
         listaEstudiantes = [...prev.estudiantes]
       } 
-
+        console.log(estudiante)
         listaEstudiantes.push(estudiante)
       
-      let listaFinal ={
+      return {
         ...prev, 
         estudiantes: listaEstudiantes.map((est)=>({idEstudiante:est.idEstudiante}))
       }
-
-      const listaFinalFinal = {...prev,
-        estudiantes: [...new Map(listaFinal.estudiantes.map((item, key)=>[item[key],item])).values()]
-      } 
-
-      return listaFinalFinal
 
     })
 
@@ -127,9 +121,11 @@ const Buttons = () => {
 
 
   const [show1, setShow1] = useState(false);
-  const handleClose1 = () => {
+  const handleClose1 = () => setShow1(false);
+  const handleAgregarEst = () => {
     editApiInstitucion(institucionSeleccionado).then(()=>{
-      setShow1(false)
+      setShow1(false) 
+      setinstitucionSeleccionado({...institucionSeleccionado,estudiantes:[]})
     })
   };
 
@@ -382,7 +378,7 @@ const Buttons = () => {
                                         Cancelar
                                       </Button>
 
-                                      <Button variant="primary" onClick={handleClose1}>
+                                      <Button variant="primary" onClick={handleAgregarEst}>
                                         Guardar
                                       </Button>
 
