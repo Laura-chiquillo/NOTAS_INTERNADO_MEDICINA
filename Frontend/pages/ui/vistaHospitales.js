@@ -8,6 +8,7 @@ import Modal from 'react-bootstrap/Modal';
 import SignatureCanvas from "react-signature-canvas";
 import { getApiMateria, getApiSubMateria, getApiCrearRotacion } from '../../api/notas'
 import { getApiInstituciones } from '../../api/instituciones'
+import { getApiCoordinadorById } from '../../api/coordinador';
 
 const Buttons = () => {
 
@@ -26,6 +27,8 @@ const Buttons = () => {
   /* crear la variable que contiene la lista de los estudiantes */
   /* se inicia con una lista vacia*/
   const [listEstudiantes, setListaEstudiantes] = useState([])
+
+  const [idInstitucion, setIdInstitucion] = useState("")
 
   /** Funciones para paginar */
 
@@ -126,8 +129,6 @@ const Buttons = () => {
     setBusqueda(e.target.value);
   }
 
-  
-
   /* 
   * -------------------------------------------------
   *Crear de rotación
@@ -223,6 +224,22 @@ const Buttons = () => {
       .catch((Error) => {
         alert(Error.toString())
       })
+  }, [])
+
+  
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const idCoordinador = localStorage.getItem("idUsuario")
+      getApiCoordinadorById(idCoordinador)
+      .then((Datos) => {
+        setIdInstitucion(Datos.institucion.idInstitucion)
+
+      })
+      .catch((Error) => {
+        alert(Error.toString())
+      })
+    }
+    
   }, [])
 
 
@@ -462,31 +479,26 @@ const Buttons = () => {
                                                 }}></td>
                                                 <th></th>
                                               </tr>
-
-                                              <tr ng-repeat="item in lista">
-                                                <td>VI</td>
-                                                <td><b>Servicios por los cuales roto</b></td>
-                                                <td contentEditable="true"></td>
-                                                <th></th>
-                                              </tr>
-
+                                              
                                             </tbody>
 
                                           </table>
                                         </FormGroup>
                                         <FormGroup>
                                           <Label for="exampleSelect">Institución</Label>
-                                          <Input id="exampleSelect" name="select" type="select" onChange={(e) => setNuevaRotacion({
+
+                                          <Input disabled="true" id="exampleSelect" name="select" type="select"  onChange={(e) => setNuevaRotacion({
                                             ...nuevaRotacion,
                                             institucion: {idInstitucion:e.target.value}
                                           })}>
                                             {
                                               listInstituciones
                                                 .map((institucion, index) => (
-                                                  <option key={index} value={institucion.idInstitucion}>{institucion?.nombre}</option>
+                                                  <option key={index} value={institucion.idInstitucion} selected = {institucion.idInstitucion == idInstitucion}>{institucion?.nombre}</option>
                                                 ))
                                             }
                                           </Input>
+
                                         </FormGroup>
                                         {/* MATERIAS */}
                                         <FormGroup>
@@ -653,20 +665,6 @@ const Buttons = () => {
           </FormGroup>
         </CardBody>
 
-        <Col xs="0" md="0">
-          {/* --------------------------------------------------------------------------------*/}
-          {/* Card-3*/}
-          {/* --------------------------------------------------------------------------------*/}
-          <Card>
-            <CardTitle tag="h1" className="border-bottom p-0 mb-0">
-            </CardTitle>
-            <CardBody className="">
-              <div className="button-group">
-                  <Button style={{ backgroundColor: color, color: "black" }} size="lg">Descargar Lista</Button>
-              </div>
-            </CardBody>
-          </Card>
-        </Col>
       </Row>
       {/* --------------------------------------------------------------------------------*/}
       {/* Row*/}
