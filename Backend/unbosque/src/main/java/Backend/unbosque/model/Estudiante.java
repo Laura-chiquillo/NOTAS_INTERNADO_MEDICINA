@@ -8,8 +8,6 @@ public class Estudiante {
 
         @Id
         private String idEstudiante;
-        private String institucion;
-        private String foto;
         private String documento;
         private String primerNombre;
         private String segundoNombre;
@@ -21,12 +19,10 @@ public class Estudiante {
         private String telefono;
         private boolean estado;
 
-        public Estudiante(String idEstudiante, String institucion, String foto, String documento, String primerNombre,
-                String segundoNombre, String primerApellido, String segundoApellido, double promedio, String semestreE,
-                String correo, String telefono, boolean estado) {
+        public Estudiante(String idEstudiante, String documento, String primerNombre, String segundoNombre,
+                String primerApellido, String segundoApellido, double promedio, String semestreE, String correo,
+                String telefono, boolean estado) {
             this.idEstudiante = idEstudiante;
-            this.institucion = institucion;
-            this.foto = foto;
             this.documento = documento;
             this.primerNombre = primerNombre;
             this.segundoNombre = segundoNombre;
@@ -45,22 +41,6 @@ public class Estudiante {
 
         public void setIdEstudiante(String idEstudiante) {
             this.idEstudiante = idEstudiante;
-        }
-
-        public String getInstitucion() {
-            return institucion;
-        }
-
-        public void setInstitucion(String institucion) {
-            this.institucion = institucion;
-        }
-
-        public String getFoto() {
-            return foto;
-        }
-
-        public void setFoto(String foto) {
-            this.foto = foto;
         }
 
         public String getDocumento() {
@@ -145,12 +125,12 @@ public class Estudiante {
 
         @Override
         public String toString() {
-            return "Estudiante [correo=" + correo + ", documento=" + documento + ", estado=" + estado + ", foto=" + foto
-                    + ", idEstudiante=" + idEstudiante + ", institucion=" + institucion + ", primerApellido="
-                    + primerApellido + ", primerNombre=" + primerNombre + ", promedio=" + promedio
-                    + ", segundoApellido=" + segundoApellido + ", segundoNombre=" + segundoNombre + ", semestreE="
-                    + semestreE + ", telefono=" + telefono + "]";
-        }
+            return "Estudiante [correo=" + correo + ", documento=" + documento + ", estado=" + estado
+                    + ", idEstudiante=" + idEstudiante + ", primerApellido=" + primerApellido + ", primerNombre="
+                    + primerNombre + ", promedio=" + promedio + ", segundoApellido=" + segundoApellido
+                    + ", segundoNombre=" + segundoNombre + ", semestreE=" + semestreE + ", telefono=" + telefono + "]";
+        }     
+
 
         @Override
         public boolean equals(Object est){

@@ -173,16 +173,7 @@ const Buttons = () => {
       return -1
     } return 1
   }
-  const paisAscendente = (pais1, pais2) => {
-    if (pais1.idPais > pais2.idPais) {
-      return 1
-    } return -1
-  }
-  const paisDescendente = (pais1, pais2) => {
-    if (pais1.idPais > pais2.idPais) {
-      return -1
-    } return 1
-  }
+  
 
   const noOrdenar = (a, b) => 1
   const [ordenarLista, setOrdenar] = useState(() => noOrdenar)
@@ -194,12 +185,6 @@ const Buttons = () => {
     }
     if (e.target.value == "nombreDescendente") {
       setOrdenar(() => nombreDescendente)
-    }
-    if (e.target.value == "paisAscendente") {
-      setOrdenar(() => paisAscendente)
-    }
-    if (e.target.value == "paisDescendente") {
-      setOrdenar(() => paisDescendente)
     }
     if (e.target.value == "vacio") {
       setOrdenar(() => noOrdenar)
@@ -269,35 +254,11 @@ const Buttons = () => {
             <CardBody className="">
               <div className="button-group">
                 <Form className="d-flex" onSubmit={(e)=>  e.preventDefault()}>
-
-                  <Button className="btn" onClick={handleShow} style={{ backgroundColor: color, color: "black" }}>
+                <Link href={'/ui/registro'}>
+                  <Button className="btn" onClick={""} style={{ backgroundColor: color, color: "black" }}>
                     +
-                  </Button>
-                  <Modal show={show} onHide={handleClose} animation={false}>
-                    <Modal.Header closeButton>
-                      <Modal.Title>Insertar Sitios de Practica</Modal.Title>
-                    </Modal.Header>
-                    <Card>
-                      <CardBody>
-
-                        <Row>
-                          <FormGroup>
-                            <Label for="exampleFile">Cargar Archivo</Label>
-                            <Input id="exampleFile" name="file" type="file" />
-                          </FormGroup>
-                        </Row>
-                        <Link href={'/ui/registro'}><Button color="primary">Ingresar Datos de Sitios de Practica</Button></Link>
-                      </CardBody>
-                    </Card>
-                    <Modal.Footer>
-                      <Button variant="secondary" onClick={handleClose}>
-                        Cerrar
-                      </Button>
-                      <Button variant="primary" onClick={handleClose}>
-                        Guardar
-                      </Button>
-                    </Modal.Footer>
-                  </Modal>
+                  </Button> 
+                  </Link>              
                   <FormText>
                     Ingresar sitios de Práctica
                   </FormText>&nbsp;
@@ -315,8 +276,6 @@ const Buttons = () => {
                     <option value="vacio">Ordenar por</option>
                     <option value="nombreAscendente">Nombre de la  A-Z</option>
                     <option value="nombreDescendente">Nombre de la Z-A</option>
-                    <option value="paisAscendente">país de la  A-Z</option>
-                    <option value="paisDescendente">país de la Z-A</option>
                   </Input>
                 </FormGroup>
 
@@ -387,7 +346,6 @@ const Buttons = () => {
                             </Modal.Body>
                             
                           </Modal>
-                          <li>País: {institucion.idPais}</li>
                           <li>Dirección:{institucion.direccion}</li>
                         </Accordion.Body>
                       </Accordion.Item>
@@ -444,13 +402,7 @@ const Buttons = () => {
 
                     {/* formulario */}
                     <Form onChange={actualizarInstitucion}>
-                      <FormGroup>
-                        <Label>País</Label>
-                        <Input defaultValue={institucionSeleccionado?.idPais}
-                          type="text"
-                          name='pais'
-                        />
-                      </FormGroup>
+                      
                       <FormGroup>
                         <Label>Nombre de la institución</Label>
                         <Input defaultValue={institucionSeleccionado?.nombre}

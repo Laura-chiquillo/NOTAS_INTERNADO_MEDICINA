@@ -17,4 +17,6 @@ public interface CoordinadorInstiService {
     String verificarCredenciales(CoordLogin coordLogin);
     String cambiarContraseña(String correo);
     
+
+    
 }

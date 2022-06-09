@@ -16,6 +16,7 @@ import {
 import Link from 'next/link';
 import { useColors } from '../../hooks/useColor';
 import { getApiInstituciones, crearApiInstitucion } from '../../api/instituciones';
+import { getApiCoordinador, crearApiCoordinador} from '../../api/coordinador';
 
 
 const Registro = () => {
@@ -32,8 +33,11 @@ const Registro = () => {
   const [institucionSeleccionado, setinstitucionSeleccionado] = useState({})
 
   const nuevaInstitucion = () => {
-    crearApiInstitucion(institucionSeleccionado).then(() => {
-     router.push("/ui/hospitales")
+    crearApiInstitucion(institucionSeleccionado).then((institucion) => {
+
+      nuevoCoordinador(institucion.idInstitucion).then(()=> {
+        router.push("/ui/hospitales")
+      })
     })
   }
   
@@ -44,8 +48,22 @@ const Registro = () => {
     )    
   }
 
+  /* nuevo coordinador */
+  const [coordinadorSeleccionado, setcoordinadorSeleccionado] = useState({})
+  
+  const nuevoCoordinador = async(idInstitucion) => {
+    const coord = {...coordinadorSeleccionado, institucion:{"$ref": "Institucion", "$id": 'ObjectId("'+idInstitucion+'")', idInstitucion}}
+    console.log(coord)
+    return await crearApiCoordinador(coord)
 
-
+  }
+  
+  const actualizarCoordinador = (e) => {
+    setcoordinadorSeleccionado(
+      {...coordinadorSeleccionado, 
+      [e.target.name]: e.target.value}
+    )    
+  }
 
   const { color } = useColors();
 
@@ -61,7 +79,7 @@ const Registro = () => {
             Registrar Sitios de Practica
           </CardTitle>
           <CardBody>
-            <Form onChange={actualizarInstitucion}>
+            <Form onChange={(e) => {actualizarInstitucion(e); actualizarCoordinador(e)}}>
               <FormGroup>
                 <Label>IPS</Label>
                 <Input
@@ -76,13 +94,13 @@ const Registro = () => {
                   <Input
                     type="text"
                     id='Nombre1'
-                    name='nombre1'
+                    name='primerNombre'
                   />
                   <span className="input-group-addon">-</span>
                   <Input
                     type="text"
                     id='Nombre2'
-                    name='nombre2'
+                    name='segundoNombre'
                   />
                 </div>
               </FormGroup>
@@ -92,21 +110,30 @@ const Registro = () => {
                   <Input
                     type="text"
                     id='Apellido1'
-                    name='apellido1'
+                    name='primerApellido'
                   />
                   <span className="input-group-addon">-</span>
+                  <Label></Label>
                   <Input
-                  id="Telefono"
-                  name="telefono"
-                  type="number"
+                  id="Apellido2"
+                  name="segundoApellido"
+                  type="text"
                 />
                 </div>
+              </FormGroup>
+              <FormGroup>
+                <Label>Teléfono</Label>
+                <Input
+                  type="tel"
+                  id='Telefono'
+                  name='telefono'
+                />
               </FormGroup>
               <FormGroup>
                 <Label for="eEmail">Correo</Label>
                 <Input
                   id="Email"
-                  name="email"
+                  name="correo"
                   type="email"
                 />
               </FormGroup>
@@ -115,7 +142,7 @@ const Registro = () => {
                 <Input
                   type="text"
                   id='Cargo'
-                  name='Cargo'
+                  name='cargo'
                 />
               </FormGroup>
               <FormGroup>
@@ -127,7 +154,7 @@ const Registro = () => {
                 />
               </FormGroup>
               
-                <Button onClick={nuevaInstitucion} style={{backgroundColor: color, color:"black"}} >Guardar</Button>
+                <Button onClick={()=> {nuevaInstitucion()}} style={{backgroundColor: color, color:"black"}} >Guardar</Button>
                 <Link href={'/ui/hospitales'}>
                 <Button style={{backgroundColor: color, color:"black"}} >Atrás</Button>
                 </Link>
