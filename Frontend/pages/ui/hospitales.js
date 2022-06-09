@@ -299,7 +299,7 @@ const Buttons = () => {
                     </Modal.Footer>
                   </Modal>
                   <FormText>
-                    Ingresar sitios de Practica
+                    Ingresar sitios de Práctica
                   </FormText>&nbsp;
                   {/*Buscar */}
                   <input placeholder='Buscar' className='form-control' value={busqueda} onChange={handleChange}></input>

@@ -348,7 +348,7 @@ const Buttons = () => {
                                 <li>Documento: {estudiante.documento} </li>
                                 <li>semestre actual: {estudiante.semestreE} </li>
                                 <li>correo: {estudiante.correo} </li>
-                                <li>telefono: {estudiante.telefono} </li>
+                                <li>teléfono: {estudiante.telefono} </li>
                               </ul>
                               
                               {/* AGREGAR NUEVA NOTA */}
