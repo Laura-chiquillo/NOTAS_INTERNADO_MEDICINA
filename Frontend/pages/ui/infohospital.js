@@ -98,7 +98,7 @@ const InfoHospital = () => {
               <div className="button-group">
                 <Link href={'/ui/hospitales'}>
                   <Button style={{ backgroundColor: color, color: "black" }} size="lg">
-                    Atras
+                    Atrás
                   </Button>
                 </Link>
               </div>
